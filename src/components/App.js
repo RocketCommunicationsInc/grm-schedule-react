@@ -3,11 +3,13 @@ import { useState } from 'react';
 import GlobalStatusBar from './GlobalStatusBar/GlobalStatusBar';
 import ContactsHeader from './ContactsHeader/ContactsHeader';
 import ContactsToolBar from './ContactsToolbar/ContactsToolbar';
+import ContactsList from './ContactsList/ContactsList';
 import ContactsTimeline from './ContactsTimeline/ContactsTimeline';
 import './App.scss';
 
 const App = () => {
   const [zoom, setZoom] = useState('8');
+  const [view, setView] = useState('List');
 
   return (
     <>
@@ -16,9 +18,13 @@ const App = () => {
         <div className='App-main__container'>
           <ContactsHeader />
 
-          <ContactsToolBar setZoom={setZoom} zoom={zoom} />
+          <ContactsToolBar {...{ view, setView, setZoom, zoom }} />
 
-          <ContactsTimeline zoom={zoom} />
+          {view === 'List' ? (
+            <ContactsList />
+          ) : (
+            <ContactsTimeline zoom={zoom} />
+          )}
         </div>
       </main>
     </>

@@ -10,7 +10,7 @@ const labels = [
   { count: 0, label: 'Failed' },
 ];
 
-const ContactsToolbar = ({ setZoom, zoom }) => {
+const ContactsToolbar = ({ view, setView, setZoom, zoom }) => {
   const handleZoom = (e) => setZoom(e.target.value);
   const handleZoomIn = () => setZoom((prev) => String(parseInt(prev) + 1));
   const handleZoomOut = () => setZoom((prev) => String(parseInt(prev) - 1));
@@ -46,9 +46,10 @@ const ContactsToolbar = ({ setZoom, zoom }) => {
         </div>
 
         <RuxSegmentedButton
+          onRuxchange={(e) => setView(e.detail)}
           data={[
-            { label: 'List', selected: false },
-            { label: 'Timeline', selected: true },
+            { label: 'List', selected: view === 'List' },
+            { label: 'Timeline', selected: view === 'Timeline' },
           ]}
         />
       </div>
