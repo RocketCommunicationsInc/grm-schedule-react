@@ -1,0 +1,15 @@
+.App-main {
+  height: calc(100vh - 96px);
+  padding: var(--spacing-4) var(--spacing-6);
+
+  &__container {
+    height: 100%;
+    background-color: var(--color-background-surface-default);
+    box-shadow: var(--container-color-border) 0 0 0 1px;
+  }
+
+  &__header {
+    background-color: var(--color-background-surface-header);
+    padding: var(--spacing-4);
+  }
+}

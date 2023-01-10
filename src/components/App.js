@@ -1,16 +1,28 @@
+import { useState } from 'react';
+
+import GlobalStatusBar from './GlobalStatusBar/GlobalStatusBar';
+import ContactsToolBar from './ContactsToolbar/ContactsToolbar';
+import ContactsTimeline from './ContactsTimeline/ContactsTimeline';
 import './App.scss';
 
 const App = () => {
+  const [zoom, setZoom] = useState('8');
+
   return (
-    <div>
-      <h1>GRM Schedule App</h1>
-      <p>
-        Lorem ipsum dolor sit amet consectetur adipisicing elit. Sunt similique
-        animi earum nihil facilis quasi voluptatum, aut hic, suscipit voluptates
-        nesciunt. Pariatur veniam recusandae repudiandae in maiores veritatis
-        consequatur. Reiciendis.
-      </p>
-    </div>
+    <>
+      <GlobalStatusBar />
+      <main className='App-main'>
+        <div className='App-main__container'>
+          <header className='App-main__header'>
+            <h2>Contacts</h2>
+          </header>
+
+          <ContactsToolBar setZoom={setZoom} zoom={zoom} />
+
+          <ContactsTimeline zoom={zoom} />
+        </div>
+      </main>
+    </>
   );
 };
 

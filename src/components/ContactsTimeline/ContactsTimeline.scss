@@ -1,0 +1,26 @@
+.Contacts-timeline {
+  &__label {
+    display: flex;
+    align-items: center;
+    gap: var(--spacing-2);
+
+    rux-button::part(container) {
+      padding: 0;
+    }
+  }
+
+  &__title {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .sub-track::part(container),
+  .sub-track::part(track-header) {
+    background-color: var(--color-background-surface-header);
+  }
+
+  .sub-label {
+    padding-left: var(--spacing-12);
+  }
+}
