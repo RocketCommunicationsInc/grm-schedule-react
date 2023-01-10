@@ -10,7 +10,7 @@ import {
 } from '@astrouxds/react';
 import './GlobalStatusBar.scss';
 
-import { useAppContext } from '../../providers/AppProvider';
+import { useAppContext } from 'providers/AppProvider';
 
 const GlobalStatusBar = () => {
   const { state } = useAppContext();
