@@ -1,6 +1,7 @@
 import { useState } from 'react';
 
 import GlobalStatusBar from './GlobalStatusBar/GlobalStatusBar';
+import ContactsHeader from './ContactsHeader/ContactsHeader';
 import ContactsToolBar from './ContactsToolbar/ContactsToolbar';
 import ContactsTimeline from './ContactsTimeline/ContactsTimeline';
 import './App.scss';
@@ -13,9 +14,7 @@ const App = () => {
       <GlobalStatusBar />
       <main className='App-main'>
         <div className='App-main__container'>
-          <header className='App-main__header'>
-            <h2>Contacts</h2>
-          </header>
+          <ContactsHeader />
 
           <ContactsToolBar setZoom={setZoom} zoom={zoom} />
 
