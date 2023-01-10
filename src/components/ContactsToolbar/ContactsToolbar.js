@@ -1,16 +1,11 @@
+import { useMemo } from 'react';
 import { RuxButton, RuxSegmentedButton, RuxSlider } from '@astrouxds/react';
 
+import { setLabels } from 'utils/labels';
 import './ContactsToolbar.scss';
 
-const labels = [
-  { count: 61, label: 'Contacts' },
-  { count: 52, label: 'Upcoming' },
-  { count: 7, label: 'Executing' },
-  { count: 8, label: 'Complete' },
-  { count: 0, label: 'Failed' },
-];
-
-const ContactsToolbar = ({ view, setView, setZoom, zoom }) => {
+const ContactsToolbar = ({ contacts, view, setView, setZoom, zoom }) => {
+  const labels = useMemo(() => setLabels(contacts), [contacts]);
   const handleZoom = (e) => setZoom(e.target.value);
   const handleZoomIn = () => setZoom((prev) => String(parseInt(prev) + 1));
   const handleZoomOut = () => setZoom((prev) => String(parseInt(prev) - 1));
@@ -27,23 +22,25 @@ const ContactsToolbar = ({ view, setView, setZoom, zoom }) => {
       </div>
 
       <div className='Contacts-toolbar__container'>
-        <div className='Contacts-toolbar__zoom'>
-          <RuxButton
-            icon='remove'
-            iconOnly
-            borderless
-            disabled={parseInt(zoom) <= 4}
-            onClick={handleZoomOut}
-          />
-          <RuxSlider onRuxchange={handleZoom} min={4} max={12} value={zoom} />
-          <RuxButton
-            icon='add'
-            iconOnly
-            borderless
-            disabled={parseInt(zoom) >= 12}
-            onClick={handleZoomIn}
-          />
-        </div>
+        {view === 'Timeline' && (
+          <div className='Contacts-toolbar__zoom'>
+            <RuxButton
+              icon='remove'
+              iconOnly
+              borderless
+              disabled={parseInt(zoom) <= 4}
+              onClick={handleZoomOut}
+            />
+            <RuxSlider onRuxchange={handleZoom} min={4} max={12} value={zoom} />
+            <RuxButton
+              icon='add'
+              iconOnly
+              borderless
+              disabled={parseInt(zoom) >= 12}
+              onClick={handleZoomIn}
+            />
+          </div>
+        )}
 
         <RuxSegmentedButton
           onRuxchange={(e) => setView(e.detail)}
