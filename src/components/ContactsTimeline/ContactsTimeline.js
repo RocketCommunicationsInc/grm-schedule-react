@@ -1,4 +1,4 @@
-import { Fragment, useMemo } from 'react';
+import { Fragment } from 'react';
 import {
   RuxButton,
   RuxRuler,
@@ -7,32 +7,15 @@ import {
   RuxTrack,
 } from '@astrouxds/react';
 
-import contacts from 'data/contacts.json';
 import { groupByToMap, setGroup } from 'utils/grouping';
 import { useTracks } from './useTracks';
 import { usePlayhead } from './usePlayhead';
 import './ContactsTimeline.scss';
 
 const setSubLabel = (event) => event.contactEquipment.split(' ')[1];
-const regions = setGroup(groupByToMap(contacts, (e) => e.contactGround));
 
-const ContactsTimeline = ({ zoom }) => {
-  const { data, end, start } = useMemo(() => {
-    const ends = regions.flatMap(([_, c]) => [
-      ...c.map(({ contactEndTimestamp }) => contactEndTimestamp),
-    ]);
-    const starts = regions.flatMap(([_, c]) => [
-      ...c.map(({ contactBeginTimestamp }) => contactBeginTimestamp),
-    ]);
-
-    return {
-      data: regions,
-      end: new Date(Math.max(...ends) * 1000),
-      start: new Date(Math.min(...starts) * 1000),
-    };
-  }, []);
-
-  const [tracks, setTracks] = useTracks(data);
+const ContactsTimeline = ({ regions, start, end, zoom }) => {
+  const [tracks, setTracks] = useTracks(regions);
 
   return (
     <RuxTimeline
@@ -43,7 +26,7 @@ const ContactsTimeline = ({ zoom }) => {
       interval='hour'
       zoom={zoom}
     >
-      {data.map(([label, events]) => {
+      {regions.map(([label, events]) => {
         const subRegions = setGroup(groupByToMap(events, setSubLabel));
         const expanded = tracks[label];
 
