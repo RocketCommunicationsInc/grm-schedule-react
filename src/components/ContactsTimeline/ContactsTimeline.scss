@@ -1,4 +1,6 @@
 .Contacts-timeline {
+  border-top: 2px solid var(--color-background-base-default);
+
   &__label {
     display: flex;
     align-items: center;
