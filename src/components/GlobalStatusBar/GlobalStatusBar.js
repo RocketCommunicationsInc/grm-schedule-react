@@ -19,7 +19,7 @@ const GlobalStatusBar = () => {
     <RuxGlobalStatusBar
       className='Global-status-bar'
       app-domain='GRM'
-      app-name='Dashboard'
+      app-name='Schedule'
       username='J. Smith'
     >
       <div slot='left-side'>
