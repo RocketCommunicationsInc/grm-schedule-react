@@ -1,0 +1,10 @@
+.Global-status-bar {
+  rux-icon::part(icon) {
+    padding-bottom: 1.75rem;
+  }
+
+  &__status-indicators {
+    align-items: center;
+    display: flex;
+  }
+}

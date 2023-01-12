@@ -5,6 +5,7 @@ import { groupByToMap, setGroup } from 'utils/grouping';
 import { getDayOfYear } from 'utils/date';
 import GlobalStatusBar from './GlobalStatusBar/GlobalStatusBar';
 import ContactsHeader from './ContactsHeader/ContactsHeader';
+import ContactsHeader from './ContactsHeader/ContactsHeader';
 import ContactsToolBar from './ContactsToolbar/ContactsToolbar';
 import ContactsList from './ContactsList/ContactsList';
 import ContactsTimeline from './ContactsTimeline/ContactsTimeline';
