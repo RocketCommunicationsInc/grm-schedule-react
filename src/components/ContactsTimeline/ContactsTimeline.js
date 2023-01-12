@@ -8,25 +8,27 @@ import {
 } from '@astrouxds/react';
 
 import { groupByToMap, setGroup } from 'utils/grouping';
+import { useAppContext } from 'providers/AppProvider';
 import { useTracks } from './useTracks';
 import { usePlayhead } from './usePlayhead';
 import './ContactsTimeline.scss';
 
 const setSubLabel = (event) => event.contactEquipment.split(' ')[1];
 
-const ContactsTimeline = ({ regions, start, end, zoom }) => {
-  const [tracks, setTracks] = useTracks(regions);
+const ContactsTimeline = ({ zoom }) => {
+  const { state } = useAppContext();
+  const [tracks, setTracks] = useTracks(state.regions);
 
   return (
     <RuxTimeline
       className='Contacts-timeline'
-      start={start.toISOString()}
-      end={end.toISOString()}
-      playhead={usePlayhead(start)}
+      start={state.start.toISOString()}
+      end={state.end.toISOString()}
+      playhead={usePlayhead(state.start)}
       interval='hour'
       zoom={zoom}
     >
-      {regions.map(([label, events]) => {
+      {state.regions.map(([label, events]) => {
         const subRegions = setGroup(groupByToMap(events, setSubLabel));
         const expanded = tracks[label];
 

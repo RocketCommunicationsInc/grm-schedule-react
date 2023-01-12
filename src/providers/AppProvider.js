@@ -20,6 +20,10 @@ const AppProvider = ({ children }) => {
     };
   }, []);
 
+  useEffect(() => {
+    dispatch({ type: 'SET_DATA' });
+  }, []);
+
   return (
     <AppContext.Provider value={{ state, dispatch }}>
       {children}

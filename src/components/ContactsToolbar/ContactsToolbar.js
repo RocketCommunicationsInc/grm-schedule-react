@@ -1,13 +1,13 @@
-import { useMemo } from 'react';
 import { RuxButton, RuxSegmentedButton, RuxSlider } from '@astrouxds/react';
 
 import { setLabels } from 'utils/labels';
 import { getDayOfYear } from 'utils/date';
+import { useAppContext } from 'providers/AppProvider';
 import './ContactsToolbar.scss';
 
-const ContactsToolbar = (props) => {
-  const { contacts, view, setView, setZoom, zoom, start, end } = props;
-  const labels = useMemo(() => setLabels(contacts), [contacts]);
+const ContactsToolbar = ({ view, setView, setZoom, zoom }) => {
+  const { state } = useAppContext();
+  const labels = setLabels(state.contacts);
   const handleZoom = (e) => setZoom(e.target.value);
   const handleZoomIn = () => setZoom((prev) => String(parseInt(prev) + 1));
   const handleZoomOut = () => setZoom((prev) => String(parseInt(prev) - 1));
@@ -16,22 +16,22 @@ const ContactsToolbar = (props) => {
     <div className='Contacts-toolbar'>
       <div className='Contacts-toolbar__container flex-start gap-3'>
         <div className='Contacts-toolbar__time-box'>
-          <span>{start.getFullYear()}</span>
-          <span>{getDayOfYear(start)}</span>
+          <span>{state.start.getFullYear()}</span>
+          <span>{getDayOfYear(state.start)}</span>
           <span>
-            {String(start.getHours()).padStart(2, '0')}
+            {String(state.start.getHours()).padStart(2, '0')}
             {':'}
-            {String(start.getMinutes()).padStart(2, '0')}
+            {String(state.start.getMinutes()).padStart(2, '0')}
           </span>
         </div>
         <p>to</p>
         <div className='Contacts-toolbar__time-box'>
-          <span>{end.getFullYear()}</span>
-          <span>{getDayOfYear(end)}</span>
+          <span>{state.end.getFullYear()}</span>
+          <span>{getDayOfYear(state.end)}</span>
           <span>
-            {String(end.getHours()).padStart(2, '0')}
+            {String(state.end.getHours()).padStart(2, '0')}
             {':'}
-            {String(end.getMinutes()).padStart(2, '0')}
+            {String(state.end.getMinutes()).padStart(2, '0')}
           </span>
         </div>
       </div>

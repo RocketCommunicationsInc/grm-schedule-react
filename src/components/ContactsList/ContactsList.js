@@ -8,6 +8,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 
+import { useAppContext } from 'providers/AppProvider';
 import './ContactsList.scss';
 
 const columnHelper = createColumnHelper();
@@ -96,11 +97,12 @@ const setColWidth = (index) => {
   throw new Error('Unhandled col width: ' + index);
 };
 
-const ContactsList = ({ contacts }) => {
+const ContactsList = () => {
+  const { state } = useAppContext();
   const columns = useMemo(() => columnDefs, []);
 
   const { getHeaderGroups, getRowModel } = useReactTable({
-    data: contacts,
+    data: state.contacts,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
