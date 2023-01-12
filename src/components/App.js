@@ -1,7 +1,8 @@
 import { useMemo, useState } from 'react';
 
-import { groupByToMap, setGroup } from 'utils/grouping';
 import data from 'data/contacts.json';
+import { groupByToMap, setGroup } from 'utils/grouping';
+import { getDayOfYear } from 'utils/date';
 import GlobalStatusBar from './GlobalStatusBar/GlobalStatusBar';
 import ContactsHeader from './ContactsHeader/ContactsHeader';
 import ContactsToolBar from './ContactsToolbar/ContactsToolbar';
@@ -18,7 +19,14 @@ const App = () => {
     const starts = data.map((c) => c.contactBeginTimestamp);
 
     return {
-      contacts: [...data],
+      contacts: data.map((contact) => ({
+        ...contact,
+        contactResolutionStatus: contact.contactResolutionStatus,
+        contactState: contact.contactState,
+        contactDOY: getDayOfYear(contact.contactBeginTimestamp * 1000),
+        contactAOS: contact.contactBeginTimestamp,
+        contactLOS: contact.contactEndTimestamp,
+      })),
       regions: setGroup(groupByToMap([...data], (e) => e.contactGround)),
       start: new Date(Math.min(...starts) * 1000),
       end: new Date(Math.max(...ends) * 1000),
@@ -29,7 +37,7 @@ const App = () => {
     <>
       <GlobalStatusBar />
       <main className='App-main'>
-        <div className='App-main__container'>
+        <section className='App-main__container'>
           <ContactsHeader />
 
           <ContactsToolBar {...{ view, setView, setZoom, zoom, ...appData }} />
@@ -39,7 +47,7 @@ const App = () => {
           ) : (
             <ContactsTimeline {...appData} zoom={zoom} />
           )}
-        </div>
+        </section>
       </main>
     </>
   );

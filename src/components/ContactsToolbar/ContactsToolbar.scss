@@ -8,6 +8,18 @@
     display: flex;
     gap: var(--spacing-4);
     align-items: center;
+    width: 26.75rem;
+    justify-content: center;
+  }
+
+  &__time-box {
+    display: flex;
+    gap: var(--spacing-3);
+    color: var(--color-text-inverse);
+    background-color: var(--color-text-primary);
+    padding: var(--spacing-1) var(--spacing-2);
+    border-radius: var(--radius-base);
+    border: 1px solid var(--color-text-inverse);
   }
 
   &__label {
@@ -20,5 +32,17 @@
     display: flex;
     align-items: center;
     width: 16rem;
+  }
+
+  .flex-start {
+    justify-content: flex-start;
+  }
+
+  .flex-end {
+    justify-content: flex-end;
+  }
+
+  .gap-3 {
+    gap: var(--spacing-3);
   }
 }
