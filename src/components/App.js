@@ -7,6 +7,7 @@ import ContactsToolBar from './ContactsToolbar/ContactsToolbar';
 import ContactsList from './ContactsList/ContactsList';
 import ContactsTimeline from './ContactsTimeline/ContactsTimeline';
 import './App.scss';
+import AddContact from './ManageContacts/AddContact';
 
 const App = () => {
   const [zoom, setZoom] = useState('8');
@@ -49,16 +50,10 @@ const App = () => {
 
             <div className={classnames('App-main__right-panel', { isOpen })}>
               {action === 'add' ? (
-                <div className='Add-contact'>
-                  <div slot='header'>Add</div>
-                  <div>Body</div>
-                  <div slot='footer'>
-                    <button onClick={handleClose}>Close</button>
-                  </div>
-                </div>
+                <AddContact handleClose={handleClose} />
               ) : (
                 <div className='Modify-contact'>
-                  <div slot='header'>Modify</div>
+                  <h2 slot='header'>Modify Contact</h2>
                   <div>Body</div>
                   <div slot='footer'>
                     <button onClick={handleClose}>Close</button>
