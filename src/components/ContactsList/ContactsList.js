@@ -97,7 +97,7 @@ const setColWidth = (index) => {
   throw new Error('Unhandled col width: ' + index);
 };
 
-const ContactsList = () => {
+const ContactsList = ({ handleModify }) => {
   const { state } = useAppContext();
   const columns = useMemo(() => columnDefs, []);
 

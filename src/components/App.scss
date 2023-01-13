@@ -7,4 +7,34 @@
     background-color: var(--color-background-surface-default);
     box-shadow: var(--container-color-border) 0 0 0 1px;
   }
+
+  &__panels {
+    height: calc(100% - 3.75rem);
+    display: flex;
+  }
+
+  &__left-panel {
+    height: 100%;
+    width: 100%;
+    transition: width 0.2s linear;
+
+    &.isOpen {
+      width: calc(100% - 400px);
+      transition: width 0.3s linear;
+    }
+  }
+
+  &__right-panel {
+    background-color: var(--color-background-base-default);
+    height: calc(100% - 1px);
+    width: 0;
+    overflow: hidden;
+    transition: width 0.2s linear;
+
+    &.isOpen {
+      transition: width 0.3s linear;
+      overflow: auto;
+      width: 400px;
+    }
+  }
 }

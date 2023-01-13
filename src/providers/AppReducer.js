@@ -19,7 +19,7 @@ export const AppReducer = (state, { type }) => {
 
       return {
         ...state,
-        contacts,
+        contacts: contacts.slice(0, 50),
         regions: setGroup(groupByToMap([...data], (e) => e.contactGround)),
         start: new Date(Math.min(...starts) * 1000),
         end: new Date(Math.max(...ends) * 1000),

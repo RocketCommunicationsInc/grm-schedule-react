@@ -1,4 +1,6 @@
 .Contacts-header {
   background-color: var(--color-background-surface-header);
   padding: var(--spacing-4);
+  display: flex;
+  justify-content: space-between;
 }
