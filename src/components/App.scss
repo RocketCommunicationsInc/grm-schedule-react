@@ -1,7 +1,7 @@
 .App-main {
   $right-panel-width: 26.25rem;
 
-  height: calc(100vh - 96px);
+  height: calc(100vh - 6rem);
   padding: var(--spacing-4) var(--spacing-6);
 
   &__container {
@@ -28,7 +28,7 @@
 
   &__right-panel {
     background-color: var(--color-background-base-default);
-    box-shadow: var(--color-background-surface-default) 0 0 16px;
+    box-shadow: var(--color-background-surface-default) 0 0 1rem;
     height: calc(100% - 1px);
     width: 0;
     overflow: hidden;
