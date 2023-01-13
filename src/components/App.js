@@ -53,9 +53,9 @@ const App = () => {
                 <AddContact handleClose={handleClose} />
               ) : (
                 <div className='Modify-contact'>
-                  <h2 slot='header'>Modify Contact</h2>
+                  <h2>Modify Contact</h2>
                   <div>Body</div>
-                  <div slot='footer'>
+                  <div>
                     <button onClick={handleClose}>Close</button>
                   </div>
                 </div>

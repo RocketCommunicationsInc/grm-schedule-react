@@ -28,10 +28,13 @@
 
   &__right-panel {
     background-color: var(--color-background-base-default);
+    box-shadow: var(--color-background-surface-default) 0 0 16px;
     height: calc(100% - 1px);
     width: 0;
     overflow: hidden;
     transition: width 0.2s linear;
+    position: relative;
+    z-index: 1;
 
     &.isOpen {
       transition: width 0.3s linear;
