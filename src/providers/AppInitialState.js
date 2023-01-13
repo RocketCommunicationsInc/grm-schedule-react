@@ -1,3 +1,7 @@
 export const initialState = {
-  ucaCount: 22,
+  contacts: [],
+  regions: [],
+  start: new Date(),
+  end: new Date(),
+  ucaCount: 0,
 };
