@@ -15,7 +15,7 @@ import './ContactsTimeline.scss';
 
 const setSubLabel = (event) => event.contactEquipment.split(' ')[1];
 
-const ContactsTimeline = ({ zoom }) => {
+const ContactsTimeline = ({ handleModify, zoom }) => {
   const { state } = useAppContext();
   const [tracks, setTracks] = useTracks(state.regions);
 
