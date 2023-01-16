@@ -4,7 +4,7 @@ import './ContactsHeader.scss';
 const ContactsHeader = ({ isOpen, handleAdd }) => (
   <header className='Contacts-header'>
     <h2>Contacts</h2>
-    <RuxButton onClick={handleAdd} disabled={isOpen}>
+    <RuxButton borderless onClick={handleAdd} disabled={isOpen}>
       Add Contact
     </RuxButton>
   </header>
