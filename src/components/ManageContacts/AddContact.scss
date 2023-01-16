@@ -1,0 +1,59 @@
+.Add-contact {
+  .section-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+  }
+
+  .Contact-list {
+    &__header {
+      background-color: var(--color-background-base-default);
+      padding: 0.5rem 1rem;
+    }
+    &__header,
+    &__passes li {
+      display: grid;
+      grid-template-columns: 2fr repeat(2, 1fr);
+      align-items: center;
+      gap: var(--spacing-2);
+    }
+    // &__header,
+    // &__passes li {
+    //   align-items: center;
+    //   display: flex;
+    //   font-size: 0.9rem;
+    //   justify-content: flex-start;
+
+    //   span:first-child {
+    //     flex-grow: 1;
+    //   }
+
+    //   span:nth-child(2),
+    //   span:last-child {
+    //     width: 4.5rem;
+    //   }
+    // }
+
+    &__passes {
+      border: 1px solid var(--container-color-border);
+      list-style: none;
+      margin: 0;
+      max-height: 9rem;
+      overflow-y: scroll;
+      padding: 0.5rem 1rem;
+
+      li {
+        cursor: pointer;
+        padding: 0.5rem 0;
+
+        &:hover {
+          background-color: var(--color-background-base-default);
+        }
+
+        &:not(:last-child) {
+          border-bottom: 1px solid var(--container-color-border);
+        }
+      }
+    }
+  }
+}
