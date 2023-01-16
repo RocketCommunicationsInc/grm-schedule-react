@@ -1,18 +1,17 @@
+import { RuxContainer } from '@astrouxds/react';
 import './AddContact.scss';
 
 const AddContact = ({ handleClose }) => {
   return (
-    <>
-      <div className='Add-contact'>
-        <header>
-          <h2>Add Contact</h2>
-        </header>
-        <div className='form'>Body</div>
-        <footer>
-          <button onClick={handleClose}>Close</button>
-        </footer>
+    <RuxContainer>
+      <div slot='header'>
+        <h2>Add Contact</h2>
       </div>
-    </>
+      <form>Body</form>
+      <div slot='footer'>
+        <button onClick={handleClose}>Close</button>
+      </div>
+    </RuxContainer>
   );
 };
 
