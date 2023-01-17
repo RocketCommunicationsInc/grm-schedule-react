@@ -12,7 +12,7 @@ const AddContact = ({ handleClose }) => {
     <RuxContainer className='Add-contact'>
       <div slot='header'>Add Contact</div>
       <form>
-        <h4>1. Choose a Contact to Reserve</h4>
+        <h6>1. Choose a Contact to Reserve</h6>
 
         <div className='section-wrapper'>
           <RuxSelect label='IRON' size='small'>
@@ -77,7 +77,7 @@ const AddContact = ({ handleClose }) => {
           </div>
         </div>
 
-        <h4>2. Configure Reservation Options</h4>
+        <h6>2. Configure Reservation Options</h6>
 
         <div className='section-wrapper'>
           <RuxSelect label='Priority' size='small'>
@@ -104,7 +104,11 @@ const AddContact = ({ handleClose }) => {
         </div>
       </form>
       <div slot='footer'>
-        <RuxButton secondary onClick={handleClose}>
+        <RuxButton
+          secondary
+          onClick={handleClose}
+          style={{ marginRight: '16px' }}
+        >
           Close
         </RuxButton>
         <RuxButton disabled>Add Contact</RuxButton>

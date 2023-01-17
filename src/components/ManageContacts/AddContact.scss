@@ -1,38 +1,30 @@
 .Add-contact {
+  &::part(footer) {
+    display: flex;
+    // gap: var(--spacing-4);
+    justify-content: flex-end;
+  }
+
   .section-wrapper {
     display: flex;
     flex-direction: column;
     gap: var(--spacing-4);
+    margin: var(--spacing-2) var(--spacing-0) var(--spacing-4);
   }
 
   .Contact-list {
     &__header {
-      background-color: var(--color-background-base-default);
+      background-color: var(--color-background-surface-header);
       padding: 0.5rem 1rem;
     }
+
     &__header,
     &__passes li {
-      display: grid;
-      grid-template-columns: 2fr repeat(2, 1fr);
       align-items: center;
+      display: grid;
       gap: var(--spacing-2);
+      grid-template-columns: 2fr repeat(2, 1fr);
     }
-    // &__header,
-    // &__passes li {
-    //   align-items: center;
-    //   display: flex;
-    //   font-size: 0.9rem;
-    //   justify-content: flex-start;
-
-    //   span:first-child {
-    //     flex-grow: 1;
-    //   }
-
-    //   span:nth-child(2),
-    //   span:last-child {
-    //     width: 4.5rem;
-    //   }
-    // }
 
     &__passes {
       border: 1px solid var(--container-color-border);
@@ -40,18 +32,25 @@
       margin: 0;
       max-height: 9rem;
       overflow-y: scroll;
-      padding: 0.5rem 1rem;
+      padding: var(--spacing-0);
 
       li {
-        cursor: pointer;
-        padding: 0.5rem 0;
+        border-left: 4px solid transparent;
+        font-size: 0.875rem;
+        padding: var(--spacing-2);
 
-        &:hover {
-          background-color: var(--color-background-base-default);
+        &.selected {
+          background-color: var(--color-background-surface-selected);
+          border-color: var(--color-background-interactive-default);
         }
 
-        &:not(:last-child) {
-          border-bottom: 1px solid var(--container-color-border);
+        &:hover {
+          background-color: var(--color-background-surface-hover);
+          cursor: pointer;
+        }
+
+        &:not(:first-child) {
+          border-top: 1px solid var(--color-background-base-default);
         }
       }
     }
