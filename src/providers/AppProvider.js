@@ -1,10 +1,10 @@
 import { createContext, useContext, useEffect, useReducer } from 'react';
 
 import data from 'data/contacts.json';
-import { getDayOfYear } from 'utils/date';
-import { groupByToMap, setGroup } from 'utils/grouping';
 import { AppReducer } from './AppReducer';
 import { initialState } from './AppInitialState';
+import { setData } from 'utils/setData';
+import { getDayOfYear } from 'utils/date';
 
 const AppContext = createContext({});
 
@@ -24,10 +24,6 @@ const AppProvider = ({ children }) => {
   }, []);
 
   useEffect(() => {
-    dispatch({ type: 'SET_DATA' });
-  }, []);
-
-  useEffect(() => {
     const contacts = data.map((contact) => ({
       ...contact,
       contactDOY: getDayOfYear(contact.contactBeginTimestamp * 1000),
@@ -35,17 +31,7 @@ const AppProvider = ({ children }) => {
       contactLOS: contact.contactEndTimestamp,
     }));
 
-    const ends = contacts.map((c) => c.contactEndTimestamp);
-    const starts = contacts.map((c) => c.contactBeginTimestamp);
-
-    const payload = {
-      contacts: contacts.slice(0),
-      regions: setGroup(groupByToMap([...contacts], (e) => e.contactGround)),
-      start: new Date(Math.min(...starts) * 1000),
-      end: new Date(Math.max(...ends) * 1000),
-    };
-
-    dispatch({ type: 'SET_DATA', payload });
+    dispatch({ type: 'SET_DATA', payload: setData(contacts.slice(0, 100)) });
   }, []);
 
   return (
