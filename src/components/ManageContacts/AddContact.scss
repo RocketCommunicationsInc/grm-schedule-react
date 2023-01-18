@@ -29,13 +29,14 @@
       padding: var(--spacing-0);
 
       li {
-        border-left: 4px solid transparent;
         font-size: 0.875rem;
-        padding: var(--spacing-2);
+        padding: var(--spacing-2) var(--spacing-4);
 
         &.selected {
           background-color: var(--color-background-surface-selected);
-          border-color: var(--color-background-interactive-default);
+          box-shadow: -4px 0 0 0 var(--color-background-interactive-default);
+          margin-left: var(--spacing-1);
+          padding-left: var(--spacing-3);
         }
 
         &:hover {
