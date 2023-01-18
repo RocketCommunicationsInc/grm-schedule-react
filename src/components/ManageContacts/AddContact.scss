@@ -1,4 +1,21 @@
 .Add-contact {
+  // The commented out lines below work if you manually set the
+  // .rux-container styles in dev tools, but there is no way to
+  // target the .rux-container inside the shadow DOM.
+
+  // height: 100%;
+
+  // .rux-container {
+  //   display: flex;
+  //   flex-direction: column;
+  //   height: 100%;
+  // }
+
+  // &::part(body) {
+  //   flex: 1;
+  //   overflow: auto;
+  // }
+
   .section-wrapper {
     display: flex;
     flex-direction: column;

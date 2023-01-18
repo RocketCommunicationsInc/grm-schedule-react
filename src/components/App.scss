@@ -38,6 +38,8 @@
 
     &.isOpen {
       transition: width 0.3s linear;
+      // When we have the ability to set a height on the .rux-container,
+      // we can get rid of the overflow setting below.
       overflow: auto;
       width: $right-panel-width;
     }
