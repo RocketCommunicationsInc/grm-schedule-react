@@ -17,6 +17,14 @@ h2 {
   margin: var(--spacing-0);
 }
 
+h6 {
+  font-weight: var(--font-heading-6-font-weight);
+  font-size: var(--font-heading-6-font-size);
+  letter-spacing: var(--font-heading-6-letter-spacing);
+  line-height: var(--font-heading-6-line-height);
+  margin: var(--spacing-0);
+}
+
 p {
   font-weight: var(--font-body-1-font-weight);
   font-size: var(--font-body-1-font-size);
