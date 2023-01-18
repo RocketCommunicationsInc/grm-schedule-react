@@ -103,12 +103,8 @@ const AddContact = ({ handleClose }) => {
           />
         </div>
       </form>
-      <div slot='footer'>
-        <RuxButton
-          secondary
-          onClick={handleClose}
-          style={{ marginRight: '16px' }}
-        >
+      <div className='footer' slot='footer'>
+        <RuxButton secondary onClick={handleClose}>
           Close
         </RuxButton>
         <RuxButton disabled>Add Contact</RuxButton>
