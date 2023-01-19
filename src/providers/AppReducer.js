@@ -24,13 +24,12 @@ export const AppReducer = (state, { type, payload }) => {
       };
     }
 
-    case 'SET_DATA': {
-      return { ...state, ...payload };
+    case 'SET_CONTACT_OPTIONS': {
+      return { ...state };
     }
 
-    case 'UPDATE_UCA': {
-      const ucaCount = state.ucaCount < 100 ? state.ucaCount + 1 : 0;
-      return { ...state, ucaCount };
+    case 'SET_DATA': {
+      return { ...state, ...payload };
     }
 
     default: {
