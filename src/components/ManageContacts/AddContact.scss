@@ -1,0 +1,76 @@
+.Add-contact {
+  // The commented out lines below work if you manually set the
+  // .rux-container styles in dev tools, but there is no way to
+  // target the .rux-container inside the shadow DOM.
+
+  // height: 100%;
+
+  // .rux-container {
+  //   display: flex;
+  //   flex-direction: column;
+  //   height: 100%;
+  // }
+
+  // &::part(body) {
+  //   flex: 1;
+  //   overflow: auto;
+  // }
+
+  .section-wrapper {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+    margin: var(--spacing-2) var(--spacing-0) var(--spacing-4);
+  }
+
+  .Contact-list {
+    &__header {
+      background-color: var(--color-background-surface-header);
+      padding: 0.5rem 1rem;
+    }
+
+    &__header,
+    &__passes li {
+      align-items: center;
+      display: grid;
+      gap: var(--spacing-2);
+      grid-template-columns: 2fr repeat(2, 1fr);
+    }
+
+    &__passes {
+      border: 1px solid var(--container-color-border);
+      list-style: none;
+      margin: 0;
+      max-height: 9rem;
+      overflow-y: scroll;
+      padding: var(--spacing-0);
+
+      li {
+        font-size: 0.875rem;
+        padding: var(--spacing-2) var(--spacing-4);
+
+        &.selected {
+          background-color: var(--color-background-surface-selected);
+          box-shadow: -4px 0 0 0 var(--color-background-interactive-default);
+          margin-left: var(--spacing-1);
+          padding-left: var(--spacing-3);
+        }
+
+        &:hover {
+          background-color: var(--color-background-surface-hover);
+          cursor: pointer;
+        }
+
+        &:not(:first-child) {
+          border-top: 1px solid var(--color-background-base-default);
+        }
+      }
+    }
+  }
+
+  .footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--spacing-4);
+  }
+}
