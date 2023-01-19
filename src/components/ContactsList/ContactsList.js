@@ -97,7 +97,7 @@ const setColWidth = (index) => {
   throw new Error('Unhandled col width: ' + index);
 };
 
-const ContactsList = ({ handleModify }) => {
+const ContactsList = ({ handleDetails }) => {
   const { state } = useAppContext();
   const columns = useMemo(() => columnDefs, []);
 
@@ -140,7 +140,7 @@ const ContactsList = ({ handleModify }) => {
 
         <tbody>
           {getRowModel().rows.map(({ id, getVisibleCells }) => (
-            <tr key={id}>
+            <tr key={id} onClick={handleDetails}>
               {getVisibleCells().map(({ id, column, getContext }, i) => (
                 <td width={setColWidth(i)} key={id}>
                   {flexRender(column.columnDef.cell, getContext())}

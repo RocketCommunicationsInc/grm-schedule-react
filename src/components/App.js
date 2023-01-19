@@ -8,6 +8,7 @@ import ContactsList from './ContactsList/ContactsList';
 import ContactsTimeline from './ContactsTimeline/ContactsTimeline';
 import './App.scss';
 import AddContact from './ManageContacts/AddContact';
+import ContactDetails from './ManageContacts/ContactDetails';
 
 const App = () => {
   const [zoom, setZoom] = useState('8');
@@ -18,6 +19,11 @@ const App = () => {
   const handleAdd = () => {
     setIsOpen(true);
     setAction('add');
+  };
+
+  const handleDetails = () => {
+    setIsOpen(true);
+    setAction('details');
   };
 
   const handleModify = () => {
@@ -42,7 +48,7 @@ const App = () => {
               <ContactsToolBar {...{ view, setView, setZoom, zoom }} />
 
               {view === 'List' ? (
-                <ContactsList handleModify={handleModify} />
+                <ContactsList handleDetails={handleDetails} />
               ) : (
                 <ContactsTimeline handleModify={handleModify} zoom={zoom} />
               )}
@@ -51,14 +57,13 @@ const App = () => {
             <div className={classnames('App-main__right-panel', { isOpen })}>
               {action === 'add' ? (
                 <AddContact handleClose={handleClose} />
+              ) : action === 'details' ? (
+                <ContactDetails
+                  handleClose={handleClose}
+                  handleModify={handleModify}
+                />
               ) : (
-                <div className='Modify-contact'>
-                  <h2>Modify Contact</h2>
-                  <div>Body</div>
-                  <div>
-                    <button onClick={handleClose}>Close</button>
-                  </div>
-                </div>
+                <div>Modify Contact</div>
               )}
             </div>
           </div>
