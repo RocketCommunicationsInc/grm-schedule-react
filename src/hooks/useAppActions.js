@@ -1,23 +1,29 @@
 import { useCallback } from 'react';
 
 import { useAppContext } from 'providers/AppProvider';
-import { getDayOfYear } from 'utils/date';
-import { randomId } from 'utils/randomId';
 import { setData } from 'utils/setData';
+import { randomContacts, randomId } from 'utils/random';
 
 export const useAppActions = () => {
   const { state, dispatch } = useAppContext();
 
   const addContact = useCallback(
-    (contact) => {
+    (values) => {
+      const randomContact = randomContacts(1)[0];
       const newContacts = [
         ...state.contacts,
         {
-          ...contact,
+          ...randomContact,
+          _id: randomId(),
           contactId: randomId(),
-          contactDOY: getDayOfYear(contact.contactBeginTimestamp * 1000),
-          contactAOS: contact.contactBeginTimestamp,
-          contactLOS: contact.contactEndTimestamp,
+          contactName: values.iron,
+          contactGround: values.ground,
+          contactEquipment: values.equipment,
+          contactDOY: values.doy,
+          contactMode: values.mode,
+          contactPriority: values.priority,
+          contactAOS: randomContact.contactBeginTimestamp,
+          contactLOS: randomContact.contactEndTimestamp,
         },
       ];
 
