@@ -10,7 +10,7 @@ import {
 
 import { generateOptions } from 'utils/generateOptions';
 import { useAppActions } from 'hooks/useAppActions';
-import './AddContact.scss';
+import './ManageContact.scss';
 
 const setDefaultValues = (options) => ({
   doy: options.doy,
@@ -22,7 +22,7 @@ const setDefaultValues = (options) => ({
   mode: options.modes[0],
 });
 
-const AddContact = ({ handleClose }) => {
+const ManageContact = ({ action, handleClose }) => {
   const { addContact } = useAppActions();
   const [options, setOptions] = useState(() => generateOptions());
   const [values, setValues] = useState(() => setDefaultValues(options));
@@ -46,8 +46,10 @@ const AddContact = ({ handleClose }) => {
   };
 
   return (
-    <RuxContainer className='Add-contact'>
-      <header slot='header'>Add Contact</header>
+    <RuxContainer className='Manage-contact'>
+      <header slot='header'>
+        {action === 'add' ? 'Add' : 'Modify'} Contact
+      </header>
 
       <form>
         <section>
@@ -152,11 +154,11 @@ const AddContact = ({ handleClose }) => {
           Close
         </RuxButton>
         <RuxButton onClick={handleSubmit} disabled={values.pass < 0}>
-          Add Contact
+          {action === 'add' ? 'Add' : 'Modify'} Contact
         </RuxButton>
       </footer>
     </RuxContainer>
   );
 };
 
-export default AddContact;
+export default ManageContact;

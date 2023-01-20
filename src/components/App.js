@@ -7,7 +7,7 @@ import ContactsToolBar from './ContactsToolbar/ContactsToolbar';
 import ContactsList from './ContactsList/ContactsList';
 import ContactsTimeline from './ContactsTimeline/ContactsTimeline';
 import './App.scss';
-import AddContact from './ManageContacts/AddContact';
+import ManageContact from './ManageContacts/ManageContact';
 import ContactDetails from './ManageContacts/ContactDetails';
 
 const App = () => {
@@ -55,15 +55,13 @@ const App = () => {
             </div>
 
             <div className={classnames('App-main__right-panel', { isOpen })}>
-              {action === 'add' ? (
-                <AddContact handleClose={handleClose} />
-              ) : action === 'details' ? (
+              {action === 'details' ? (
                 <ContactDetails
                   handleClose={handleClose}
                   handleModify={handleModify}
                 />
               ) : (
-                <div>Modify Contact</div>
+                <ManageContact action={action} handleClose={handleClose} />
               )}
             </div>
           </div>
