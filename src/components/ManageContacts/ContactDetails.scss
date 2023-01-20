@@ -1,0 +1,32 @@
+.Contact-details {
+  &::part(body) {
+    // flex: 1;
+    overflow: auto;
+    // remove the 3 lines below once a height can be set on
+    // the rux-container
+    display: flex;
+    flex-direction: column;
+    height: calc(100vh - 22.375rem);
+  }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--spacing-4);
+
+    h6 {
+      align-items: center;
+      display: flex;
+
+      rux-status {
+        margin-right: var(--spacing-2);
+      }
+    }
+  }
+
+  .footer {
+    display: flex;
+    justify-content: flex-end;
+    gap: var(--spacing-2);
+  }
+}
