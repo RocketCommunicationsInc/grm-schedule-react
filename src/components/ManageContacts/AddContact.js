@@ -1,34 +1,80 @@
+import { useState } from 'react';
 import {
   RuxButton,
   RuxContainer,
+  RuxDatetime,
   RuxInput,
   RuxOption,
   RuxSelect,
 } from '@astrouxds/react';
+
+import { generateOptions } from 'utils/generateOptions';
+import { useAppActions } from 'hooks/useAppActions';
 import './AddContact.scss';
 
+const setDefaultValues = (options) => ({
+  doy: options.doy,
+  equipment: options.configs[0].value,
+  ground: options.grounds[0],
+  iron: options.irons[0].toString(),
+  pass: -1,
+  priority: options.priorities[0],
+  mode: options.modes[0],
+});
+
 const AddContact = ({ handleClose }) => {
+  const { addContact } = useAppActions();
+  const [options, setOptions] = useState(() => generateOptions());
+  const [values, setValues] = useState(() => setDefaultValues(options));
+
+  const handleSubmit = () => {
+    addContact(values);
+    const newOptions = generateOptions();
+    setOptions(newOptions);
+    setValues(setDefaultValues(newOptions));
+  };
+
+  const handleSelectPass = (i) => {
+    setValues((prev) => ({
+      ...prev,
+      pass: prev.pass === i ? -1 : i,
+    }));
+  };
+
+  const handleSelect = (key, value) => {
+    setValues((prev) => ({ ...prev, [key]: value }));
+  };
+
   return (
     <RuxContainer className='Add-contact'>
-      <div slot='header'>Add Contact</div>
-      <form>
-        <h6>1. Choose a Contact to Reserve</h6>
+      <header slot='header'>Add Contact</header>
 
-        <div className='section-wrapper'>
-          <RuxSelect label='IRON' size='small'>
-            <RuxOption label='Any' />
-            <RuxOption label='36372' />
-            <RuxOption label='67985' />
-            <RuxOption label='78957' />
+      <form>
+        <section>
+          <h6>1. Choose a Contact to Reserve</h6>
+
+          <RuxSelect
+            label='IRON'
+            size='small'
+            onRuxchange={(e) => handleSelect('iron', e.target.value)}
+          >
+            {options.irons.map((iron) => (
+              <RuxOption key={iron} label={iron} value={iron} />
+            ))}
           </RuxSelect>
-          <RuxSelect label='Ground Station' size='small'>
-            <RuxOption label='Any' />
-            <RuxOption label='HULA' />
-            <RuxOption label='COOK' />
-            <RuxOption label='POGO' />
+
+          <RuxSelect
+            label='Ground Station'
+            size='small'
+            onRuxchange={(e) => handleSelect('ground', e.target.value)}
+          >
+            {options.grounds.map((ground) => (
+              <RuxOption key={ground} label={ground} value={ground} />
+            ))}
           </RuxSelect>
+
           <RuxSelect label='DOY' disabled size='small'>
-            <RuxOption label='016' />
+            <RuxOption label={options.doy} value={options.doy} />
           </RuxSelect>
 
           <div className='Contact-list'>
@@ -37,78 +83,78 @@ const AddContact = ({ handleClose }) => {
               <span>AOS</span>
               <span>LOS</span>
             </div>
+
             <ul className='Contact-list__passes'>
-              <li>
-                <span>44855-GUAM-14391.45</span>
-                <span>17:15:00</span>
-                <span>17:34:00</span>
-              </li>
-              <li>
-                <span>44855-GUAM-14391.45</span>
-                <span>17:15:00</span>
-                <span>17:34:00</span>
-              </li>
-              <li>
-                <span>44855-GUAM-14391.45</span>
-                <span>17:15:00</span>
-                <span>17:34:00</span>
-              </li>
-              <li>
-                <span>44855-GUAM-14391.45</span>
-                <span>17:15:00</span>
-                <span>17:34:00</span>
-              </li>
-              <li>
-                <span>44855-GUAM-14391.45</span>
-                <span>17:15:00</span>
-                <span>17:34:00</span>
-              </li>
-              <li>
-                <span>44855-GUAM-14391.45</span>
-                <span>17:15:00</span>
-                <span>17:34:00</span>
-              </li>
-              <li>
-                <span>44855-GUAM-14391.45</span>
-                <span>17:15:00</span>
-                <span>17:34:00</span>
-              </li>
+              {options.passes.map(({ id, aos, los }, i) => (
+                <li
+                  key={id + i}
+                  className={values.pass === i ? 'selected' : undefined}
+                  onClick={() => handleSelectPass(i)}
+                >
+                  <span>{id}</span>
+                  <RuxDatetime
+                    date={aos}
+                    hour='2-digit'
+                    minute='2-digit'
+                    second='2-digit'
+                  />
+                  <RuxDatetime
+                    date={los}
+                    hour='2-digit'
+                    minute='2-digit'
+                    second='2-digit'
+                  />
+                </li>
+              ))}
             </ul>
           </div>
-        </div>
+        </section>
 
-        <h6>2. Configure Reservation Options</h6>
+        <section>
+          <h6>2. Configure Reservation Options</h6>
 
-        <div className='section-wrapper'>
-          <RuxSelect label='Priority' size='small'>
-            <RuxOption label='Low' />
-            <RuxOption label='Medium' />
-            <RuxOption label='High' />
+          <RuxSelect
+            label='Priority'
+            size='small'
+            onRuxchange={(e) => handleSelect('priority', e.target.value)}
+          >
+            {options.priorities.map((priority) => (
+              <RuxOption key={priority} label={priority} value={priority} />
+            ))}
           </RuxSelect>
-          <RuxSelect label='Command Mode' size='small'>
-            <RuxOption label='Full Automation' />
-            <RuxOption label='Semi-Automation' />
-            <RuxOption label='Manual' />
+
+          <RuxSelect
+            label='Command Mode'
+            size='small'
+            onRuxchange={(e) => handleSelect('mode', e.target.value)}
+          >
+            {options.modes.map((mode) => (
+              <RuxOption key={mode} label={mode} value={mode} />
+            ))}
           </RuxSelect>
-          <RuxSelect label='Equipment String' size='small'>
-            <RuxOption label='Config A' />
-            <RuxOption label='Config B' />
-            <RuxOption label='Config C' />
-            <RuxOption label='Config D' />
-            <RuxOption label='Config E' />
+
+          <RuxSelect
+            label='Equipment String'
+            size='small'
+            onRuxchange={(e) => handleSelect('equipment', e.target.value)}
+          >
+            {options.configs.map(({ label, value }) => (
+              <RuxOption key={label} label={label} value={value} />
+            ))}
           </RuxSelect>
-          <RuxInput
-            readonly
-            value='ANT43 VAFB1 SFEP227CH1 ECEU6 WS402 USP177'
-          />
-        </div>
+
+          <RuxInput size='small' readonly value={values.equipment} />
+        </section>
       </form>
-      <div className='footer' slot='footer'>
+
+      <footer slot='footer'>
         <RuxButton secondary onClick={handleClose}>
           Close
         </RuxButton>
-        <RuxButton disabled>Add Contact</RuxButton>
-      </div>
+        <RuxButton onClick={handleSubmit} disabled={values.pass < 0}>
+          Add Contact
+        </RuxButton>
+      </footer>
     </RuxContainer>
   );
 };

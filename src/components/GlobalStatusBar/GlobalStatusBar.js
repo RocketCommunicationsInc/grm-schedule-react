@@ -1,3 +1,4 @@
+import { useEffect, useState } from 'react';
 import {
   RuxGlobalStatusBar,
   RuxClock,
@@ -8,12 +9,21 @@ import {
   RuxMenuItemDivider,
   RuxMonitoringProgressIcon,
 } from '@astrouxds/react';
+
 import './GlobalStatusBar.scss';
 
-import { useAppContext } from 'providers/AppProvider';
-
 const GlobalStatusBar = () => {
-  const { state } = useAppContext();
+  const [count, setCount] = useState(0);
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCount((prev) => (prev >= 100 ? 0 : prev + 1));
+    }, 1000);
+
+    return () => {
+      clearInterval(interval);
+    };
+  }, []);
 
   return (
     <RuxGlobalStatusBar
@@ -44,7 +54,7 @@ const GlobalStatusBar = () => {
       <RuxClock />
 
       <div className='Global-status-bar__status-indicators' slot='right-side'>
-        <RuxMonitoringProgressIcon label='UCA' progress={state.ucaCount} />
+        <RuxMonitoringProgressIcon label='UCA' progress={count} />
       </div>
     </RuxGlobalStatusBar>
   );

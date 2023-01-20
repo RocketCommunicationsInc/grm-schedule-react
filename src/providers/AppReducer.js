@@ -1,34 +1,35 @@
-import data from 'data/contacts.json';
-import { getDayOfYear } from 'utils/date';
-import { groupByToMap, setGroup } from 'utils/grouping';
-
-export const AppReducer = (state, { type }) => {
+export const AppReducer = (state, { type, payload }) => {
   switch (type) {
-    case 'SET_DATA': {
-      const contacts = data.map((contact) => ({
-        ...contact,
-        contactResolutionStatus: contact.contactResolutionStatus,
-        contactState: contact.contactState,
-        contactDOY: getDayOfYear(contact.contactBeginTimestamp * 1000),
-        contactAOS: contact.contactBeginTimestamp,
-        contactLOS: contact.contactEndTimestamp,
-      }));
+    case 'ADD_CONTACT': {
+      return { ...state, ...payload };
+    }
 
-      const ends = data.map((c) => c.contactEndTimestamp);
-      const starts = data.map((c) => c.contactBeginTimestamp);
+    case 'MODIFY_CONTACT': {
+      const contact = state.contacts.find(
+        ({ contactId }) => contactId === payload.contactId
+      );
+      console.log('MODIFY CONTACT', contact);
 
       return {
         ...state,
-        contacts: contacts.slice(0, 50),
-        regions: setGroup(groupByToMap([...data], (e) => e.contactGround)),
-        start: new Date(Math.min(...starts) * 1000),
-        end: new Date(Math.max(...ends) * 1000),
+        contacts: [
+          ...state.contacts.filter(
+            ({ contactId }) => contactId !== payload.contactId
+          ),
+          {
+            ...contact,
+            contactEquipment: 'NEW EQUIPMENT',
+          },
+        ],
       };
     }
 
-    case 'UPDATE_UCA': {
-      const ucaCount = state.ucaCount < 100 ? state.ucaCount + 1 : 0;
-      return { ...state, ucaCount };
+    case 'SET_CONTACT_OPTIONS': {
+      return { ...state };
+    }
+
+    case 'SET_DATA': {
+      return { ...state, ...payload };
     }
 
     default: {

@@ -1,7 +1,12 @@
 import { createContext, useContext, useEffect, useReducer } from 'react';
 
+import data from 'data/contacts.json';
+import { options } from 'data/options';
 import { AppReducer } from './AppReducer';
 import { initialState } from './AppInitialState';
+import { setData } from 'utils/setData';
+import { getDayOfYear } from 'utils/date';
+import { randomIndex } from 'utils/random';
 
 const AppContext = createContext({});
 
@@ -11,17 +16,16 @@ const AppProvider = ({ children }) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
 
   useEffect(() => {
-    const interval = setInterval(() => {
-      dispatch({ type: 'UPDATE_UCA' });
-    }, 1000);
+    const contacts = data.map((contact) => ({
+      ...contact,
+      contactDOY: getDayOfYear(contact.contactBeginTimestamp * 1000),
+      contactAOS: contact.contactBeginTimestamp,
+      contactLOS: contact.contactEndTimestamp,
+      contactMode: options.modes[randomIndex(options.modes)],
+      contactPriority: options.priorities[randomIndex(options.priorities)],
+    }));
 
-    return () => {
-      clearInterval(interval);
-    };
-  }, []);
-
-  useEffect(() => {
-    dispatch({ type: 'SET_DATA' });
+    dispatch({ type: 'SET_DATA', payload: setData(contacts.slice(0, 100)) });
   }, []);
 
   return (
