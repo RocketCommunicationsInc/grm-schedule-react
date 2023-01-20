@@ -114,6 +114,7 @@ const ContactsList = ({ handleDetails }) => {
         <thead>
           {getHeaderGroups().map(({ headers, id }) => (
             <tr key={id}>
+              <th>&nbsp;</th>
               {headers.map(({ id, column, getContext, isPlaceholder }, i) => (
                 <th
                   className={column.getIsSorted() ? 'sorted' : undefined}
@@ -140,7 +141,12 @@ const ContactsList = ({ handleDetails }) => {
 
         <tbody>
           {getRowModel().rows.map(({ id, getVisibleCells }) => (
-            <tr key={id} onClick={handleDetails}>
+            <tr
+              key={id}
+              onClick={handleDetails}
+              className='Contacts-list__contact-row'
+            >
+              <td>&nbsp;</td>
               {getVisibleCells().map(({ id, column, getContext }, i) => (
                 <td width={setColWidth(i)} key={id}>
                   {flexRender(column.columnDef.cell, getContext())}
