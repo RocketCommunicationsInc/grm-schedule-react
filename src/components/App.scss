@@ -11,7 +11,7 @@
   }
 
   &__panels {
-    height: calc(100% - 4.5rem);
+    height: calc(100% - 4.25rem);
     display: flex;
   }
 
@@ -27,20 +27,18 @@
   }
 
   &__right-panel {
-    background-color: var(--color-background-base-default);
-    box-shadow: var(--color-background-surface-default) 0 0 1rem;
-    height: calc(100% + 0.25rem);
+    box-shadow: -4px 0px 2px 0px var(--color-background-base-default);
+    height: 100%;
     width: 0;
     overflow: hidden;
     transition: width 0.2s linear;
-    position: relative;
-    z-index: 1;
+    z-index: 100;
 
     &.isOpen {
       transition: width 0.3s linear;
       // When we have the ability to set a height on the .rux-container,
       // we can get rid of the overflow setting below.
-      overflow: auto;
+      // overflow: auto;
       width: $right-panel-width;
     }
   }
