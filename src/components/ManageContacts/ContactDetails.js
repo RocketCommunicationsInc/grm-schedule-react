@@ -1,6 +1,7 @@
 import { RuxButton, RuxContainer, RuxInput, RuxStatus } from '@astrouxds/react';
 
 import { useAppContext } from 'providers/AppProvider';
+import { useAppActions } from 'hooks/useAppActions';
 import { setDurationMins, setHhMmSs } from 'utils/date';
 import { setPassesId } from 'utils/generateOptions';
 import './ContactDetails.scss';
@@ -10,6 +11,7 @@ const ReadOnlyInput = ({ label, value }) => (
 );
 
 const ContactDetails = ({ handleAction }) => {
+  const { resetSelectedContact } = useAppActions();
   const { state } = useAppContext();
   const {
     contactAOS,
@@ -22,9 +24,15 @@ const ContactDetails = ({ handleAction }) => {
     contactName,
     contactPriority,
     contactSatellite,
+    contactStatus,
   } = state.selectedContact;
   const aosLos = `${setHhMmSs(contactAOS)} / ${setHhMmSs(contactLOS)}`;
   const durationMins = setDurationMins(contactAOS, contactLOS);
+
+  const handleClose = () => {
+    handleAction();
+    resetSelectedContact();
+  };
 
   return (
     <RuxContainer className='Contact-details'>
@@ -32,9 +40,10 @@ const ContactDetails = ({ handleAction }) => {
 
       <form>
         <h6>
-          <RuxStatus status='normal' />
+          <RuxStatus status={contactStatus} />
           {setPassesId(state.selectedContact)}
         </h6>
+
         <ReadOnlyInput label='IRON' value={contactName} />
         <ReadOnlyInput label='Ground Station' value={contactGround} />
         <ReadOnlyInput label='Rev' value={contactSatellite} />
@@ -48,7 +57,7 @@ const ContactDetails = ({ handleAction }) => {
       </form>
 
       <div className='footer' slot='footer'>
-        <RuxButton secondary onClick={() => handleAction()}>
+        <RuxButton secondary onClick={handleClose}>
           Cancel
         </RuxButton>
         <RuxButton onClick={() => handleAction('modify')}>
