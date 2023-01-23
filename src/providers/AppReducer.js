@@ -5,22 +5,14 @@ export const AppReducer = (state, { type, payload }) => {
     }
 
     case 'MODIFY_CONTACT': {
-      const contact = state.contacts.find(
-        ({ contactId }) => contactId === payload.contactId
-      );
-      console.log('MODIFY CONTACT', contact);
+      // TODO: need to finsh this next
+      console.log('MODIFY CONTACT', payload);
 
       return {
         ...state,
-        contacts: [
-          ...state.contacts.filter(
-            ({ contactId }) => contactId !== payload.contactId
-          ),
-          {
-            ...contact,
-            contactEquipment: 'NEW EQUIPMENT',
-          },
-        ],
+        contacts: [...state.contacts],
+        selectedContact: null,
+        modifyOptions: null,
       };
     }
 
@@ -49,6 +41,10 @@ export const AppReducer = (state, { type, payload }) => {
           los: payload.contactLOS,
         },
       };
+    }
+
+    case 'RESET_SELECTED_CONTACT': {
+      return { ...state, selectedContact: null, modifyOptions: null };
     }
 
     default: {
