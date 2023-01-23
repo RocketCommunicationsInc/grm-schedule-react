@@ -1,6 +1,7 @@
 import { useEffect, useState } from 'react';
-import classnames from 'classnames';
+import classNames from 'classnames';
 
+import { useAppContext } from 'providers/AppProvider';
 import GlobalStatusBar from './GlobalStatusBar/GlobalStatusBar';
 import ContactsHeader from './ContactsHeader/ContactsHeader';
 import ContactsToolBar from './ContactsToolbar/ContactsToolbar';
@@ -9,15 +10,12 @@ import ContactsTimeline from './ContactsTimeline/ContactsTimeline';
 import ContactDetails from './ManageContacts/ContactDetails';
 import ManageContact from './ManageContacts/ManageContact';
 import './App.scss';
-import { useAppContext } from 'providers/AppProvider';
 
 const App = () => {
   const [zoom, setZoom] = useState('8');
   const [view, setView] = useState('List');
   const [isOpen, setIsOpen] = useState(false);
   const [action, setAction] = useState('');
-  const [selectedIndex, setSelectedIndex] = useState(-1);
-
   const { state } = useAppContext();
 
   useEffect(() => {
@@ -33,12 +31,6 @@ const App = () => {
 
     setIsOpen(false);
     setAction('');
-    setSelectedIndex(-1);
-  };
-
-  const handleSelected = (index) => {
-    handleDetails();
-    setSelectedIndex(index);
   };
 
   let rigthPanel = null;
@@ -59,24 +51,17 @@ const App = () => {
           <ContactsHeader {...{ isOpen, handleAction }} />
 
           <div className='App-main__panels'>
-            <div className={classnames('App-main__left-panel', { isOpen })}>
+            <div className={classNames('App-main__left-panel', { isOpen })}>
               <ContactsToolBar {...{ view, setView, setZoom, zoom }} />
 
               {view === 'List' ? (
-                <ContactsList
-                  handleSelected={handleSelected}
-                  selectedIndex={selectedIndex}
-                />
+                <ContactsList handleAction={handleAction} />
               ) : (
-                <ContactsTimeline
-                  handleSelected={handleSelected}
-                  selectedIndex={selectedIndex}
-                  zoom={zoom}
-                />
+                <ContactsTimeline handleAction={handleAction} zoom={zoom} />
               )}
             </div>
 
-            <div className={classnames('App-main__right-panel', { isOpen })}>
+            <div className={classNames('App-main__right-panel', { isOpen })}>
               {rigthPanel}
             </div>
           </div>
