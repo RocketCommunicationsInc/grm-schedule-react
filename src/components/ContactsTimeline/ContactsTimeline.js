@@ -9,15 +9,23 @@ import {
 
 import { groupByToMap, setGroup } from 'utils/grouping';
 import { useAppContext } from 'providers/AppProvider';
+import { useAppActions } from 'hooks/useAppActions';
 import { useTracks } from './useTracks';
 import { usePlayhead } from './usePlayhead';
 import './ContactsTimeline.scss';
 
 const setSubLabel = (event) => event.contactEquipment.split(' ')[1];
 
-const ContactsTimeline = ({ handleSelected, selectedIndex, zoom }) => {
+const ContactsTimeline = ({ handleAction, zoom }) => {
+  const { setSelectedContact } = useAppActions();
   const { state } = useAppContext();
   const [tracks, setTracks] = useTracks(state.regions);
+  const selectedId = state.selectedContact?.contactId;
+
+  const handleClick = (contact) => {
+    handleAction('details');
+    setSelectedContact(contact);
+  };
 
   return (
     <RuxTimeline
@@ -45,9 +53,9 @@ const ContactsTimeline = ({ handleSelected, selectedIndex, zoom }) => {
                 <p>{label}</p>
               </div>
               {!expanded &&
-                events.map((e, i) => {
-                  const start = new Date(e.contactBeginTimestamp * 1000);
-                  const end = new Date(e.contactEndTimestamp * 1000);
+                events.map((e) => {
+                  const start = new Date(e.contactBeginTimestamp);
+                  const end = new Date(e.contactEndTimestamp);
 
                   return (
                     <RuxTimeRegion
@@ -55,8 +63,8 @@ const ContactsTimeline = ({ handleSelected, selectedIndex, zoom }) => {
                       start={start.toISOString()}
                       end={end.toISOString()}
                       status={e.contactStatus}
-                      onClick={() => handleSelected(i)}
-                      selected={selectedIndex === i}
+                      onClick={() => handleClick(e)}
+                      selected={e.contactId === selectedId}
                     >
                       <div className='Contacts-timeline__title'>
                         {e.contactSatellite} {setSubLabel(e)}
@@ -72,9 +80,9 @@ const ContactsTimeline = ({ handleSelected, selectedIndex, zoom }) => {
                   <div slot='label' className='sub-label'>
                     {subLabel}
                   </div>
-                  {subEvents.map((se, i) => {
-                    const start = new Date(se.contactBeginTimestamp * 1000);
-                    const end = new Date(se.contactEndTimestamp * 1000);
+                  {subEvents.map((se) => {
+                    const start = new Date(se.contactBeginTimestamp);
+                    const end = new Date(se.contactEndTimestamp);
 
                     return (
                       <RuxTimeRegion
@@ -82,8 +90,8 @@ const ContactsTimeline = ({ handleSelected, selectedIndex, zoom }) => {
                         start={start.toISOString()}
                         end={end.toISOString()}
                         status={se.contactStatus}
-                        onClick={() => handleSelected(i)}
-                        selected={selectedIndex === i}
+                        onClick={() => handleClick(se)}
+                        selected={se.contactId === selectedId}
                       >
                         <div className='Contacts-timeline__title'>
                           {se.contactSatellite} {setSubLabel(se)}

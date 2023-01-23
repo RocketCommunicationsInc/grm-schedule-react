@@ -99,10 +99,11 @@ const setColWidth = (index) => {
   throw new Error('Unhandled col width: ' + index);
 };
 
-const ContactsList = ({ handleSelected, selectedIndex }) => {
-  const { state } = useAppContext();
-  const { setSelectedContact } = useAppActions();
+const ContactsList = ({ handleAction }) => {
   const columns = useMemo(() => columnDefs, []);
+  const { setSelectedContact } = useAppActions();
+  const { state } = useAppContext();
+  const selectedId = state.selectedContact?.contactId;
 
   const { getHeaderGroups, getRowModel } = useReactTable({
     data: state.contacts,
@@ -122,7 +123,7 @@ const ContactsList = ({ handleSelected, selectedIndex }) => {
         <thead>
           {getHeaderGroups().map(({ headers, id }) => (
             <tr key={id}>
-              <th>&nbsp;</th>
+              <th />
               {headers.map(({ id, column, getContext, isPlaceholder }, i) => (
                 <th
                   className={column.getIsSorted() ? 'sorted' : undefined}
@@ -149,7 +150,14 @@ const ContactsList = ({ handleSelected, selectedIndex }) => {
 
         <tbody>
           {getRowModel().rows.map(({ id, getVisibleCells, original }) => (
-            <tr key={id} onClick={() => handleSelect(original)}>
+            <tr
+              key={id}
+              onClick={() => handleSelect(original)}
+              className={classNames('Contacts-list__contact-row', {
+                selected: original.contactId === selectedId,
+              })}
+            >
+              <td />
               {getVisibleCells().map(({ id, column, getContext }, i) => (
                 <td width={setColWidth(i)} key={id}>
                   {flexRender(column.columnDef.cell, getContext())}
