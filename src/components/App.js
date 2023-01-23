@@ -50,7 +50,7 @@ const App = () => {
               {view === 'List' ? (
                 <ContactsList handleDetails={handleDetails} />
               ) : (
-                <ContactsTimeline handleModify={handleModify} zoom={zoom} />
+                <ContactsTimeline handleDetails={handleDetails} zoom={zoom} />
               )}
             </div>
 

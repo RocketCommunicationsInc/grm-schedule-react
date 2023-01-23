@@ -25,4 +25,11 @@
   .sub-label {
     padding-left: var(--spacing-12);
   }
+
+  rux-time-region::part(container) {
+    &:hover {
+      background-color: var(--color-background-surface-hover);
+      cursor: pointer;
+    }
+  }
 }

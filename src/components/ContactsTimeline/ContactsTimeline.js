@@ -15,7 +15,7 @@ import './ContactsTimeline.scss';
 
 const setSubLabel = (event) => event.contactEquipment.split(' ')[1];
 
-const ContactsTimeline = ({ handleModify, zoom }) => {
+const ContactsTimeline = ({ handleDetails, zoom }) => {
   const { state } = useAppContext();
   const [tracks, setTracks] = useTracks(state.regions);
 
@@ -55,6 +55,7 @@ const ContactsTimeline = ({ handleModify, zoom }) => {
                       start={start.toISOString()}
                       end={end.toISOString()}
                       status={e.contactStatus}
+                      onClick={handleDetails}
                     >
                       <div className='Contacts-timeline__title'>
                         {e.contactSatellite} {setSubLabel(e)}
@@ -80,6 +81,7 @@ const ContactsTimeline = ({ handleModify, zoom }) => {
                         start={start.toISOString()}
                         end={end.toISOString()}
                         status={se.contactStatus}
+                        onClick={handleDetails}
                       >
                         <div className='Contacts-timeline__title'>
                           {se.contactSatellite} {setSubLabel(se)}
