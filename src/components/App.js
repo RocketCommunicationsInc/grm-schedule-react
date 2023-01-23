@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import classnames from 'classnames';
 
 import GlobalStatusBar from './GlobalStatusBar/GlobalStatusBar';
@@ -6,15 +6,22 @@ import ContactsHeader from './ContactsHeader/ContactsHeader';
 import ContactsToolBar from './ContactsToolbar/ContactsToolbar';
 import ContactsList from './ContactsList/ContactsList';
 import ContactsTimeline from './ContactsTimeline/ContactsTimeline';
-import './App.scss';
-import ManageContact from './ManageContacts/ManageContact';
 import ContactDetails from './ManageContacts/ContactDetails';
+import ManageContact from './ManageContacts/ManageContact';
+import './App.scss';
+import { useAppContext } from 'providers/AppProvider';
 
 const App = () => {
   const [zoom, setZoom] = useState('8');
   const [view, setView] = useState('List');
   const [isOpen, setIsOpen] = useState(false);
   const [action, setAction] = useState('');
+
+  const { state } = useAppContext();
+
+  useEffect(() => {
+    console.log(state);
+  }, [state]);
 
   const handleAction = (action) => {
     if (action) {
@@ -26,6 +33,16 @@ const App = () => {
     setIsOpen(false);
     setAction('');
   };
+
+  let rigthPanel = null;
+
+  if (action === 'details') {
+    rigthPanel = <ContactDetails handleAction={handleAction} />;
+  }
+
+  if (action === 'add' || action === 'modify') {
+    rigthPanel = <ManageContact action={action} handleAction={handleAction} />;
+  }
 
   return (
     <>
@@ -46,11 +63,7 @@ const App = () => {
             </div>
 
             <div className={classnames('App-main__right-panel', { isOpen })}>
-              {action === 'details' ? (
-                <ContactDetails handleAction={handleAction} />
-              ) : (
-                <ManageContact action={action} handleAction={handleAction} />
-              )}
+              {rigthPanel}
             </div>
           </div>
         </section>
