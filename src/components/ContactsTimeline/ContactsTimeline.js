@@ -15,7 +15,7 @@ import './ContactsTimeline.scss';
 
 const setSubLabel = (event) => event.contactEquipment.split(' ')[1];
 
-const ContactsTimeline = ({ handleAction, zoom }) => {
+const ContactsTimeline = ({ handleSelected, selectedIndex, zoom }) => {
   const { state } = useAppContext();
   const [tracks, setTracks] = useTracks(state.regions);
 
@@ -45,9 +45,9 @@ const ContactsTimeline = ({ handleAction, zoom }) => {
                 <p>{label}</p>
               </div>
               {!expanded &&
-                events.map((e) => {
-                  const start = new Date(e.contactBeginTimestamp);
-                  const end = new Date(e.contactEndTimestamp);
+                events.map((e, i) => {
+                  const start = new Date(e.contactBeginTimestamp * 1000);
+                  const end = new Date(e.contactEndTimestamp * 1000);
 
                   return (
                     <RuxTimeRegion
@@ -55,6 +55,8 @@ const ContactsTimeline = ({ handleAction, zoom }) => {
                       start={start.toISOString()}
                       end={end.toISOString()}
                       status={e.contactStatus}
+                      onClick={() => handleSelected(i)}
+                      selected={selectedIndex === i}
                     >
                       <div className='Contacts-timeline__title'>
                         {e.contactSatellite} {setSubLabel(e)}
@@ -70,9 +72,9 @@ const ContactsTimeline = ({ handleAction, zoom }) => {
                   <div slot='label' className='sub-label'>
                     {subLabel}
                   </div>
-                  {subEvents.map((se) => {
-                    const start = new Date(se.contactBeginTimestamp);
-                    const end = new Date(se.contactEndTimestamp);
+                  {subEvents.map((se, i) => {
+                    const start = new Date(se.contactBeginTimestamp * 1000);
+                    const end = new Date(se.contactEndTimestamp * 1000);
 
                     return (
                       <RuxTimeRegion
@@ -80,6 +82,8 @@ const ContactsTimeline = ({ handleAction, zoom }) => {
                         start={start.toISOString()}
                         end={end.toISOString()}
                         status={se.contactStatus}
+                        onClick={() => handleSelected(i)}
+                        selected={selectedIndex === i}
                       >
                         <div className='Contacts-timeline__title'>
                           {se.contactSatellite} {setSubLabel(se)}

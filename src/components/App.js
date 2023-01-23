@@ -16,6 +16,7 @@ const App = () => {
   const [view, setView] = useState('List');
   const [isOpen, setIsOpen] = useState(false);
   const [action, setAction] = useState('');
+  const [selectedIndex, setSelectedIndex] = useState(-1);
 
   const { state } = useAppContext();
 
@@ -32,6 +33,12 @@ const App = () => {
 
     setIsOpen(false);
     setAction('');
+    setSelectedIndex(-1);
+  };
+
+  const handleSelected = (index) => {
+    handleDetails();
+    setSelectedIndex(index);
   };
 
   let rigthPanel = null;
@@ -56,9 +63,16 @@ const App = () => {
               <ContactsToolBar {...{ view, setView, setZoom, zoom }} />
 
               {view === 'List' ? (
-                <ContactsList handleAction={handleAction} />
+                <ContactsList
+                  handleSelected={handleSelected}
+                  selectedIndex={selectedIndex}
+                />
               ) : (
-                <ContactsTimeline handleAction={handleAction} zoom={zoom} />
+                <ContactsTimeline
+                  handleSelected={handleSelected}
+                  selectedIndex={selectedIndex}
+                  zoom={zoom}
+                />
               )}
             </div>
 
