@@ -36,8 +36,8 @@ export const useAppActions = () => {
   );
 
   const modifyContact = useCallback(
-    (contactId) => {
-      dispatch({ type: 'MODIFY_CONTACT', payload: { contactId } });
+    (values) => {
+      dispatch({ type: 'MODIFY_CONTACT', payload: values });
     },
     [dispatch]
   );
@@ -49,5 +49,14 @@ export const useAppActions = () => {
     [dispatch]
   );
 
-  return { addContact, modifyContact, setSelectedContact };
+  const resetSelectedContact = useCallback(() => {
+    dispatch({ type: 'RESET_SELECTED_CONTACT' });
+  }, [dispatch]);
+
+  return {
+    addContact,
+    modifyContact,
+    resetSelectedContact,
+    setSelectedContact,
+  };
 };
