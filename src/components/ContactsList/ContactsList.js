@@ -9,6 +9,7 @@ import {
 } from '@tanstack/react-table';
 
 import { useAppContext } from 'providers/AppProvider';
+import { useAppActions } from 'hooks/useAppActions';
 import './ContactsList.scss';
 
 const columnHelper = createColumnHelper();
@@ -45,7 +46,7 @@ const columnDefs = [
     header: 'Start Time',
     cell: (info) => (
       <RuxDatetime
-        date={new Date(info.getValue() * 1000)}
+        date={new Date(info.getValue())}
         hour='2-digit'
         minute='2-digit'
         second='2-digit'
@@ -56,7 +57,7 @@ const columnDefs = [
     header: 'AOS',
     cell: (info) => (
       <RuxDatetime
-        date={new Date(info.getValue() * 1000)}
+        date={new Date(info.getValue())}
         hour='2-digit'
         minute='2-digit'
         second='2-digit'
@@ -67,7 +68,7 @@ const columnDefs = [
     header: 'LOS',
     cell: (info) => (
       <RuxDatetime
-        date={new Date(info.getValue() * 1000)}
+        date={new Date(info.getValue())}
         hour='2-digit'
         minute='2-digit'
         second='2-digit'
@@ -78,7 +79,7 @@ const columnDefs = [
     header: 'Stop Time',
     cell: (info) => (
       <RuxDatetime
-        date={new Date(info.getValue() * 1000)}
+        date={new Date(info.getValue())}
         hour='2-digit'
         minute='2-digit'
         second='2-digit'
@@ -99,6 +100,7 @@ const setColWidth = (index) => {
 
 const ContactsList = ({ handleAction }) => {
   const { state } = useAppContext();
+  const { setSelectedContact } = useAppActions();
   const columns = useMemo(() => columnDefs, []);
 
   const { getHeaderGroups, getRowModel } = useReactTable({
@@ -107,6 +109,11 @@ const ContactsList = ({ handleAction }) => {
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
   });
+
+  const handleSelect = (original) => {
+    setSelectedContact(original);
+    handleAction('details');
+  };
 
   return (
     <div className='Contacts-list'>
@@ -139,8 +146,8 @@ const ContactsList = ({ handleAction }) => {
         </thead>
 
         <tbody>
-          {getRowModel().rows.map(({ id, getVisibleCells }) => (
-            <tr key={id} onClick={() => handleAction('details')}>
+          {getRowModel().rows.map(({ id, getVisibleCells, original }) => (
+            <tr key={id} onClick={() => handleSelect(original)}>
               {getVisibleCells().map(({ id, column, getContext }, i) => (
                 <td width={setColWidth(i)} key={id}>
                   {flexRender(column.columnDef.cell, getContext())}

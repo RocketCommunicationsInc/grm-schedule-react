@@ -46,8 +46,8 @@ const ContactsTimeline = ({ handleAction, zoom }) => {
               </div>
               {!expanded &&
                 events.map((e) => {
-                  const start = new Date(e.contactBeginTimestamp * 1000);
-                  const end = new Date(e.contactEndTimestamp * 1000);
+                  const start = new Date(e.contactBeginTimestamp);
+                  const end = new Date(e.contactEndTimestamp);
 
                   return (
                     <RuxTimeRegion
@@ -71,8 +71,8 @@ const ContactsTimeline = ({ handleAction, zoom }) => {
                     {subLabel}
                   </div>
                   {subEvents.map((se) => {
-                    const start = new Date(se.contactBeginTimestamp * 1000);
-                    const end = new Date(se.contactEndTimestamp * 1000);
+                    const start = new Date(se.contactBeginTimestamp);
+                    const end = new Date(se.contactEndTimestamp);
 
                     return (
                       <RuxTimeRegion
