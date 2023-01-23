@@ -15,7 +15,7 @@ import './ContactsTimeline.scss';
 
 const setSubLabel = (event) => event.contactEquipment.split(' ')[1];
 
-const ContactsTimeline = ({ handleDetails, zoom }) => {
+const ContactsTimeline = ({ handleSelected, selectedIndex, zoom }) => {
   const { state } = useAppContext();
   const [tracks, setTracks] = useTracks(state.regions);
 
@@ -45,7 +45,7 @@ const ContactsTimeline = ({ handleDetails, zoom }) => {
                 <p>{label}</p>
               </div>
               {!expanded &&
-                events.map((e) => {
+                events.map((e, i) => {
                   const start = new Date(e.contactBeginTimestamp * 1000);
                   const end = new Date(e.contactEndTimestamp * 1000);
 
@@ -55,7 +55,8 @@ const ContactsTimeline = ({ handleDetails, zoom }) => {
                       start={start.toISOString()}
                       end={end.toISOString()}
                       status={e.contactStatus}
-                      onClick={handleDetails}
+                      onClick={() => handleSelected(i)}
+                      selected={selectedIndex === i}
                     >
                       <div className='Contacts-timeline__title'>
                         {e.contactSatellite} {setSubLabel(e)}
@@ -71,7 +72,7 @@ const ContactsTimeline = ({ handleDetails, zoom }) => {
                   <div slot='label' className='sub-label'>
                     {subLabel}
                   </div>
-                  {subEvents.map((se) => {
+                  {subEvents.map((se, i) => {
                     const start = new Date(se.contactBeginTimestamp * 1000);
                     const end = new Date(se.contactEndTimestamp * 1000);
 
@@ -81,7 +82,8 @@ const ContactsTimeline = ({ handleDetails, zoom }) => {
                         start={start.toISOString()}
                         end={end.toISOString()}
                         status={se.contactStatus}
-                        onClick={handleDetails}
+                        onClick={() => handleSelected(i)}
+                        selected={selectedIndex === i}
                       >
                         <div className='Contacts-timeline__title'>
                           {se.contactSatellite} {setSubLabel(se)}

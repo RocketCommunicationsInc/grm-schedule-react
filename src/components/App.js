@@ -15,6 +15,7 @@ const App = () => {
   const [view, setView] = useState('List');
   const [isOpen, setIsOpen] = useState(false);
   const [action, setAction] = useState('');
+  const [selectedIndex, setSelectedIndex] = useState(-1);
 
   const handleAdd = () => {
     setIsOpen(true);
@@ -34,6 +35,12 @@ const App = () => {
   const handleClose = () => {
     setIsOpen(false);
     setAction('');
+    setSelectedIndex(-1);
+  };
+
+  const handleSelected = (index) => {
+    handleDetails();
+    setSelectedIndex(index);
   };
 
   return (
@@ -48,9 +55,16 @@ const App = () => {
               <ContactsToolBar {...{ view, setView, setZoom, zoom }} />
 
               {view === 'List' ? (
-                <ContactsList handleDetails={handleDetails} />
+                <ContactsList
+                  handleSelected={handleSelected}
+                  selectedIndex={selectedIndex}
+                />
               ) : (
-                <ContactsTimeline handleDetails={handleDetails} zoom={zoom} />
+                <ContactsTimeline
+                  handleSelected={handleSelected}
+                  selectedIndex={selectedIndex}
+                  zoom={zoom}
+                />
               )}
             </div>
 

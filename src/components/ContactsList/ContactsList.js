@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import classNames from 'classnames';
 import { RuxDatetime, RuxIcon, RuxStatus } from '@astrouxds/react';
 import {
   createColumnHelper,
@@ -97,7 +98,7 @@ const setColWidth = (index) => {
   throw new Error('Unhandled col width: ' + index);
 };
 
-const ContactsList = ({ handleDetails }) => {
+const ContactsList = ({ handleSelected, selectedIndex }) => {
   const { state } = useAppContext();
   const columns = useMemo(() => columnDefs, []);
 
@@ -140,11 +141,13 @@ const ContactsList = ({ handleDetails }) => {
         </thead>
 
         <tbody>
-          {getRowModel().rows.map(({ id, getVisibleCells }) => (
+          {getRowModel().rows.map(({ id, getVisibleCells }, i) => (
             <tr
               key={id}
-              onClick={handleDetails}
-              className='Contacts-list__contact-row'
+              onClick={() => handleSelected(i)}
+              className={classNames('Contacts-list__contact-row', {
+                selected: selectedIndex === i,
+              })}
             >
               <td>&nbsp;</td>
               {getVisibleCells().map(({ id, column, getContext }, i) => (
