@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import classNames from 'classnames';
 import { RuxDatetime, RuxIcon, RuxStatus } from '@astrouxds/react';
 import {
   createColumnHelper,
@@ -97,7 +98,7 @@ const setColWidth = (index) => {
   throw new Error('Unhandled col width: ' + index);
 };
 
-const ContactsList = ({ handleDetails }) => {
+const ContactsList = ({ handleSelected, selectedIndex }) => {
   const { state } = useAppContext();
   const columns = useMemo(() => columnDefs, []);
 
@@ -114,6 +115,7 @@ const ContactsList = ({ handleDetails }) => {
         <thead>
           {getHeaderGroups().map(({ headers, id }) => (
             <tr key={id}>
+              <th>&nbsp;</th>
               {headers.map(({ id, column, getContext, isPlaceholder }, i) => (
                 <th
                   className={column.getIsSorted() ? 'sorted' : undefined}
@@ -139,8 +141,15 @@ const ContactsList = ({ handleDetails }) => {
         </thead>
 
         <tbody>
-          {getRowModel().rows.map(({ id, getVisibleCells }) => (
-            <tr key={id} onClick={handleDetails}>
+          {getRowModel().rows.map(({ id, getVisibleCells }, i) => (
+            <tr
+              key={id}
+              onClick={() => handleSelected(i)}
+              className={classNames('Contacts-list__contact-row', {
+                selected: selectedIndex === i,
+              })}
+            >
+              <td>&nbsp;</td>
               {getVisibleCells().map(({ id, column, getContext }, i) => (
                 <td width={setColWidth(i)} key={id}>
                   {flexRender(column.columnDef.cell, getContext())}
