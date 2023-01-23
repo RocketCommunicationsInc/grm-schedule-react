@@ -18,7 +18,7 @@ const setDefaultValues = (options) => ({
 });
 
 const ManageContact = ({ action, handleAction }) => {
-  const { addContact, modifyContact } = useAppActions();
+  const { addContact, modifyContact, resetSelectedContact } = useAppActions();
   const {
     state: { modifyOptions },
   } = useAppContext();
@@ -35,7 +35,13 @@ const ManageContact = ({ action, handleAction }) => {
   };
 
   const handleModify = () => {
-    console.log(values);
+    modifyContact(values);
+    handleAction();
+  };
+
+  const handleClose = () => {
+    handleAction();
+    resetSelectedContact();
   };
 
   return (
@@ -45,7 +51,7 @@ const ManageContact = ({ action, handleAction }) => {
       <ManageContactsForm {...{ options, values, setValues }} />
 
       <footer slot='footer'>
-        <RuxButton secondary onClick={() => handleAction()}>
+        <RuxButton secondary onClick={handleClose}>
           Close
         </RuxButton>
         <RuxButton
