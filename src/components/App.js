@@ -16,22 +16,13 @@ const App = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [action, setAction] = useState('');
 
-  const handleAdd = () => {
-    setIsOpen(true);
-    setAction('add');
-  };
+  const handleAction = (action) => {
+    if (action) {
+      setIsOpen(true);
+      setAction(action);
+      return;
+    }
 
-  const handleDetails = () => {
-    setIsOpen(true);
-    setAction('details');
-  };
-
-  const handleModify = () => {
-    setIsOpen(true);
-    setAction('modify');
-  };
-
-  const handleClose = () => {
     setIsOpen(false);
     setAction('');
   };
@@ -41,27 +32,24 @@ const App = () => {
       <GlobalStatusBar />
       <main className='App-main'>
         <section className='App-main__container'>
-          <ContactsHeader {...{ isOpen, handleAdd }} />
+          <ContactsHeader {...{ isOpen, handleAction }} />
 
           <div className='App-main__panels'>
             <div className={classnames('App-main__left-panel', { isOpen })}>
               <ContactsToolBar {...{ view, setView, setZoom, zoom }} />
 
               {view === 'List' ? (
-                <ContactsList handleDetails={handleDetails} />
+                <ContactsList handleAction={handleAction} />
               ) : (
-                <ContactsTimeline handleModify={handleModify} zoom={zoom} />
+                <ContactsTimeline handleAction={handleAction} zoom={zoom} />
               )}
             </div>
 
             <div className={classnames('App-main__right-panel', { isOpen })}>
               {action === 'details' ? (
-                <ContactDetails
-                  handleClose={handleClose}
-                  handleModify={handleModify}
-                />
+                <ContactDetails handleAction={handleAction} />
               ) : (
-                <ManageContact action={action} handleClose={handleClose} />
+                <ManageContact action={action} handleAction={handleAction} />
               )}
             </div>
           </div>

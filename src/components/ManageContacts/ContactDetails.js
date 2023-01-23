@@ -1,7 +1,7 @@
 import { RuxButton, RuxContainer, RuxInput, RuxStatus } from '@astrouxds/react';
 import './ContactDetails.scss';
 
-const ContactDetails = ({ handleClose, handleModify }) => {
+const ContactDetails = ({ handleAction }) => {
   return (
     <RuxContainer className='Contact-details'>
       <div slot='header'>Contact Details</div>
@@ -43,10 +43,12 @@ const ContactDetails = ({ handleClose, handleModify }) => {
       </form>
 
       <div className='footer' slot='footer'>
-        <RuxButton secondary onClick={handleClose}>
+        <RuxButton secondary onClick={() => handleAction()}>
           Cancel
         </RuxButton>
-        <RuxButton onClick={handleModify}>Modify Contact</RuxButton>
+        <RuxButton onClick={() => handleAction('modify')}>
+          Modify Contact
+        </RuxButton>
       </div>
     </RuxContainer>
   );

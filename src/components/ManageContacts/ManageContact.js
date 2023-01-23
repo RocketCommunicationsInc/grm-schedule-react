@@ -22,7 +22,7 @@ const setDefaultValues = (options) => ({
   mode: options.modes[0],
 });
 
-const ManageContact = ({ action, handleClose }) => {
+const ManageContact = ({ action, handleAction }) => {
   const { addContact } = useAppActions();
   const [options, setOptions] = useState(() => generateOptions());
   const [values, setValues] = useState(() => setDefaultValues(options));
@@ -150,7 +150,7 @@ const ManageContact = ({ action, handleClose }) => {
       </form>
 
       <footer slot='footer'>
-        <RuxButton secondary onClick={handleClose}>
+        <RuxButton secondary onClick={() => handleAction()}>
           Close
         </RuxButton>
         <RuxButton onClick={handleSubmit} disabled={values.pass < 0}>
