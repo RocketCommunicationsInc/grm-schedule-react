@@ -7,11 +7,13 @@ export const getDayOfYear = (date) => {
   return day;
 };
 
+const setZeroBefore10 = (n) => (n < 10 ? '0' : '') + n;
+
 export const setHhMmSs = (time) => {
   const date = new Date(time);
-  const hour = date.getHours();
-  const minute = date.getMinutes();
-  const second = date.getSeconds();
+  const hour = setZeroBefore10(date.getHours());
+  const minute = setZeroBefore10(date.getMinutes());
+  const second = setZeroBefore10(date.getSeconds());
   return `${hour}:${minute}:${second}`;
 };
 
