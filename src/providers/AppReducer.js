@@ -32,6 +32,25 @@ export const AppReducer = (state, { type, payload }) => {
       return { ...state, ...payload };
     }
 
+    case 'SET_SELECTED_CONTACT': {
+      return {
+        ...state,
+        selectedContact: payload,
+        modifyOptions: {
+          doy: payload.contactDOY,
+          equipment: payload.contactEquipment,
+          ground: payload.contactGround,
+          pass: 0,
+          iron: payload.contactName,
+          priority: payload.contactPriority,
+          mode: payload.contactMode,
+          satellite: payload.contactSatellite,
+          aos: payload.contactAOS,
+          los: payload.contactLOS,
+        },
+      };
+    }
+
     default: {
       throw new Error(`Unknown type: ${type}`);
     }
