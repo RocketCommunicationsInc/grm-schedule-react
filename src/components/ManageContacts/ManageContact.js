@@ -16,6 +16,7 @@ const setDefaultValues = (options) => ({
   pass: options.pass,
   priority: options.priorities[0],
   mode: options.modes[0],
+  dirty: false,
 });
 
 const ManageContact = ({ action, handleAction }) => {
@@ -77,7 +78,7 @@ const ManageContact = ({ action, handleAction }) => {
         </RuxButton>
         <RuxButton
           onClick={isAdd ? handleAdd : handleModify}
-          disabled={values.pass < 0}
+          disabled={isAdd ? values.pass < 0 : !values.dirty}
         >
           {isAdd ? 'Add' : 'Modify'} Contact
         </RuxButton>
