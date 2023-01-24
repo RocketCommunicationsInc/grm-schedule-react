@@ -5,12 +5,9 @@ export const AppReducer = (state, { type, payload }) => {
     }
 
     case 'MODIFY_CONTACT': {
-      // TODO: need to finsh this next
-      console.log('MODIFY CONTACT', payload);
-
       return {
         ...state,
-        contacts: [...state.contacts],
+        ...payload,
         selectedContact: null,
         modifyOptions: null,
       };

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { RuxButton, RuxContainer } from '@astrouxds/react';
 
 import { generateOptions } from 'utils/generateOptions';
+import { randomInt } from 'utils/random';
 import { useAppContext } from 'providers/AppProvider';
 import { useAppActions } from 'hooks/useAppActions';
 import ManageContactsForm from './ManageContactsForm';
@@ -20,7 +21,7 @@ const setDefaultValues = (options) => ({
 const ManageContact = ({ action, handleAction }) => {
   const { addContact, modifyContact, resetSelectedContact } = useAppActions();
   const {
-    state: { modifyOptions },
+    state: { selectedContact, modifyOptions },
   } = useAppContext();
 
   const [options, setOptions] = useState(() => generateOptions(modifyOptions));
@@ -35,7 +36,27 @@ const ManageContact = ({ action, handleAction }) => {
   };
 
   const handleModify = () => {
-    modifyContact(values);
+    const { aos, los, id } = options.passes[values.pass];
+    const contactAOS = new Date(aos).getTime();
+    const contactLOS = new Date(los).getTime();
+
+    const modifiedContact = {
+      ...selectedContact,
+      contactAOS,
+      contactLOS,
+      contactBeginTimestamp: contactAOS,
+      contactEndTimestamp: contactLOS,
+      contactDOY: values.doy,
+      contactEquipment: values.equipment,
+      contactEquipmentConfig: `Config ${randomInt(1, 5)}`,
+      contactGround: values.ground,
+      contactMode: values.mode,
+      contactName: parseInt(values.iron),
+      contactPriority: values.priority,
+      contactSatellite: id.split(' ')[0],
+    };
+
+    modifyContact(modifiedContact);
     handleAction();
   };
 

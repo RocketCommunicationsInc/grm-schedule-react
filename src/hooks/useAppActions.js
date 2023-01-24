@@ -36,10 +36,18 @@ export const useAppActions = () => {
   );
 
   const modifyContact = useCallback(
-    (values) => {
-      dispatch({ type: 'MODIFY_CONTACT', payload: values });
+    (modifiedContact) => {
+      const updatedContacts = state.contacts.map((contact) => {
+        if (contact.contactId === modifiedContact.contactId) {
+          return modifiedContact;
+        }
+
+        return contact;
+      });
+
+      dispatch({ type: 'MODIFY_CONTACT', payload: setData(updatedContacts) });
     },
-    [dispatch]
+    [dispatch, state.contacts]
   );
 
   const setSelectedContact = useCallback(

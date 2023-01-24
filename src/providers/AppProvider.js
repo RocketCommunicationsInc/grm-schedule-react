@@ -21,7 +21,7 @@ const AppProvider = ({ children }) => {
       contactBeginTimestamp: contact.contactBeginTimestamp * 1000,
       contactEndTimestamp: contact.contactEndTimestamp * 1000,
       contactDOY: getDayOfYear(contact.contactBeginTimestamp * 1000),
-      contactEquipmentConfig: `Config ${randomInt(0, 5)}`,
+      contactEquipmentConfig: `Config ${randomInt(1, 5)}`,
       contactAOS: contact.contactBeginTimestamp * 1000,
       contactLOS: contact.contactEndTimestamp * 1000,
       contactMode: options.modes[randomIndex(options.modes)],
