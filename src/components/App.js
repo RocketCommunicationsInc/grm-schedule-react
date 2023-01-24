@@ -1,6 +1,8 @@
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 import classNames from 'classnames';
+import { RuxNotification } from '@astrouxds/react';
 
+import { useAppActions } from 'hooks/useAppActions';
 import { useAppContext } from 'providers/AppProvider';
 import GlobalStatusBar from './GlobalStatusBar/GlobalStatusBar';
 import ContactsHeader from './ContactsHeader/ContactsHeader';
@@ -16,11 +18,8 @@ const App = () => {
   const [view, setView] = useState('List');
   const [isOpen, setIsOpen] = useState(false);
   const [action, setAction] = useState('');
+  const { resetNotification } = useAppActions();
   const { state } = useAppContext();
-
-  useEffect(() => {
-    console.log(state);
-  }, [state]);
 
   const handleAction = (action) => {
     if (action) {
@@ -46,7 +45,19 @@ const App = () => {
   return (
     <>
       <GlobalStatusBar />
-      <main className='App-main'>
+
+      <RuxNotification
+        closeAfter={5000}
+        message={state.notification}
+        open={!!state.notification}
+        onRuxclosed={() => resetNotification()}
+      />
+
+      <main
+        className={classNames('App-main', {
+          notification: !!state.notification,
+        })}
+      >
         <section className='App-main__container'>
           <ContactsHeader {...{ isOpen, handleAction }} />
 

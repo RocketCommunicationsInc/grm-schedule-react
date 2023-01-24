@@ -1,8 +1,14 @@
 .App-main {
-  $right-panel-width: 26.25rem;
+  --right-panel-width: 26.25rem;
+  --top-deduction: 6rem;
 
-  height: calc(100vh - 6rem);
+  height: calc(100vh - var(--top-deduction));
   padding: var(--spacing-4) var(--spacing-6);
+
+  &.notification {
+    --top-deduction: 11rem;
+    padding-top: var(--spacing-050);
+  }
 
   &__container {
     height: 100%;
@@ -21,7 +27,7 @@
     transition: width 0.2s linear;
 
     &.isOpen {
-      width: calc(100% - $right-panel-width);
+      width: calc(100% - var(--right-panel-width));
       transition: width 0.3s linear;
     }
   }
@@ -36,7 +42,7 @@
 
     &.isOpen {
       transition: width 0.3s linear;
-      width: $right-panel-width;
+      width: var(--right-panel-width);
     }
   }
 }
