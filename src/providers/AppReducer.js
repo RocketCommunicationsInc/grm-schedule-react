@@ -13,6 +13,14 @@ export const AppReducer = (state, { type, payload }) => {
       };
     }
 
+    case 'RESET_NOTIFICATION': {
+      return { ...state, notification: '' };
+    }
+
+    case 'RESET_SELECTED_CONTACT': {
+      return { ...state, selectedContact: null, modifyOptions: null };
+    }
+
     case 'SET_CONTACT_OPTIONS': {
       return { ...state };
     }
@@ -38,10 +46,6 @@ export const AppReducer = (state, { type, payload }) => {
           los: payload.contactLOS,
         },
       };
-    }
-
-    case 'RESET_SELECTED_CONTACT': {
-      return { ...state, selectedContact: null, modifyOptions: null };
     }
 
     default: {
