@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 
 import { useAppContext } from 'providers/AppProvider';
 import { setData } from 'utils/setData';
-import { randomContacts, randomId } from 'utils/random';
+import { randomContacts, randomId, randomInt } from 'utils/random';
 
 export const useAppActions = () => {
   const { state, dispatch } = useAppContext();
@@ -19,11 +19,14 @@ export const useAppActions = () => {
           contactName: values.iron,
           contactGround: values.ground,
           contactEquipment: values.equipment,
+          contactEquipmentConfig: `Config ${randomInt(0, 5)}`,
           contactDOY: values.doy,
           contactMode: values.mode,
           contactPriority: values.priority,
-          contactAOS: randomContact.contactBeginTimestamp,
-          contactLOS: randomContact.contactEndTimestamp,
+          contactAOS: randomContact.contactBeginTimestamp * 1000,
+          contactLOS: randomContact.contactEndTimestamp * 1000,
+          contactBeginTimestamp: randomContact.contactBeginTimestamp * 1000,
+          contactEndTimestamp: randomContact.contactEndTimestamp * 1000,
         },
       ];
 
@@ -33,11 +36,35 @@ export const useAppActions = () => {
   );
 
   const modifyContact = useCallback(
-    (contactId) => {
-      dispatch({ type: 'MODIFY_CONTACT', payload: { contactId } });
+    (modifiedContact) => {
+      const updatedContacts = state.contacts.map((contact) => {
+        if (contact.contactId === modifiedContact.contactId) {
+          return modifiedContact;
+        }
+
+        return contact;
+      });
+
+      dispatch({ type: 'MODIFY_CONTACT', payload: setData(updatedContacts) });
+    },
+    [dispatch, state.contacts]
+  );
+
+  const setSelectedContact = useCallback(
+    (contact) => {
+      dispatch({ type: 'SET_SELECTED_CONTACT', payload: contact });
     },
     [dispatch]
   );
 
-  return { addContact, modifyContact };
+  const resetSelectedContact = useCallback(() => {
+    dispatch({ type: 'RESET_SELECTED_CONTACT' });
+  }, [dispatch]);
+
+  return {
+    addContact,
+    modifyContact,
+    resetSelectedContact,
+    setSelectedContact,
+  };
 };

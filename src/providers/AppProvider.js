@@ -6,7 +6,7 @@ import { AppReducer } from './AppReducer';
 import { initialState } from './AppInitialState';
 import { setData } from 'utils/setData';
 import { getDayOfYear } from 'utils/date';
-import { randomIndex } from 'utils/random';
+import { randomIndex, randomInt } from 'utils/random';
 
 const AppContext = createContext({});
 
@@ -18,9 +18,12 @@ const AppProvider = ({ children }) => {
   useEffect(() => {
     const contacts = data.map((contact) => ({
       ...contact,
+      contactBeginTimestamp: contact.contactBeginTimestamp * 1000,
+      contactEndTimestamp: contact.contactEndTimestamp * 1000,
       contactDOY: getDayOfYear(contact.contactBeginTimestamp * 1000),
-      contactAOS: contact.contactBeginTimestamp,
-      contactLOS: contact.contactEndTimestamp,
+      contactEquipmentConfig: `Config ${randomInt(1, 5)}`,
+      contactAOS: contact.contactBeginTimestamp * 1000,
+      contactLOS: contact.contactEndTimestamp * 1000,
       contactMode: options.modes[randomIndex(options.modes)],
       contactPriority: options.priorities[randomIndex(options.priorities)],
     }));

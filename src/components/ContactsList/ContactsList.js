@@ -10,6 +10,7 @@ import {
 } from '@tanstack/react-table';
 
 import { useAppContext } from 'providers/AppProvider';
+import { useAppActions } from 'hooks/useAppActions';
 import './ContactsList.scss';
 
 const columnHelper = createColumnHelper();
@@ -46,7 +47,7 @@ const columnDefs = [
     header: 'Start Time',
     cell: (info) => (
       <RuxDatetime
-        date={new Date(info.getValue() * 1000)}
+        date={new Date(info.getValue())}
         hour='2-digit'
         minute='2-digit'
         second='2-digit'
@@ -57,7 +58,7 @@ const columnDefs = [
     header: 'AOS',
     cell: (info) => (
       <RuxDatetime
-        date={new Date(info.getValue() * 1000)}
+        date={new Date(info.getValue())}
         hour='2-digit'
         minute='2-digit'
         second='2-digit'
@@ -68,7 +69,7 @@ const columnDefs = [
     header: 'LOS',
     cell: (info) => (
       <RuxDatetime
-        date={new Date(info.getValue() * 1000)}
+        date={new Date(info.getValue())}
         hour='2-digit'
         minute='2-digit'
         second='2-digit'
@@ -79,7 +80,7 @@ const columnDefs = [
     header: 'Stop Time',
     cell: (info) => (
       <RuxDatetime
-        date={new Date(info.getValue() * 1000)}
+        date={new Date(info.getValue())}
         hour='2-digit'
         minute='2-digit'
         second='2-digit'
@@ -98,9 +99,11 @@ const setColWidth = (index) => {
   throw new Error('Unhandled col width: ' + index);
 };
 
-const ContactsList = ({ handleSelected, selectedIndex }) => {
-  const { state } = useAppContext();
+const ContactsList = ({ handleAction }) => {
   const columns = useMemo(() => columnDefs, []);
+  const { setSelectedContact } = useAppActions();
+  const { state } = useAppContext();
+  const selectedId = state.selectedContact?.contactId;
 
   const { getHeaderGroups, getRowModel } = useReactTable({
     data: state.contacts,
@@ -109,13 +112,18 @@ const ContactsList = ({ handleSelected, selectedIndex }) => {
     getSortedRowModel: getSortedRowModel(),
   });
 
+  const handleSelect = (original) => {
+    setSelectedContact(original);
+    handleAction('details');
+  };
+
   return (
     <div className='Contacts-list'>
       <table>
         <thead>
           {getHeaderGroups().map(({ headers, id }) => (
             <tr key={id}>
-              <th>&nbsp;</th>
+              <th />
               {headers.map(({ id, column, getContext, isPlaceholder }, i) => (
                 <th
                   className={column.getIsSorted() ? 'sorted' : undefined}
@@ -141,15 +149,15 @@ const ContactsList = ({ handleSelected, selectedIndex }) => {
         </thead>
 
         <tbody>
-          {getRowModel().rows.map(({ id, getVisibleCells }, i) => (
+          {getRowModel().rows.map(({ id, getVisibleCells, original }) => (
             <tr
               key={id}
-              onClick={() => handleSelected(i)}
+              onClick={() => handleSelect(original)}
               className={classNames('Contacts-list__contact-row', {
-                selected: selectedIndex === i,
+                selected: original.contactId === selectedId,
               })}
             >
-              <td>&nbsp;</td>
+              <td />
               {getVisibleCells().map(({ id, column, getContext }, i) => (
                 <td width={setColWidth(i)} key={id}>
                   {flexRender(column.columnDef.cell, getContext())}

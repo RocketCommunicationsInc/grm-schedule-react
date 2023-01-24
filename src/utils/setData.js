@@ -7,7 +7,7 @@ export const setData = (contacts) => {
   return {
     contacts,
     regions: setGroup(groupByToMap([...contacts], (e) => e.contactGround)),
-    start: new Date(Math.min(...starts) * 1000),
-    end: new Date(Math.max(...ends) * 1000),
+    start: new Date(Math.min(...starts)),
+    end: new Date(Math.max(...ends)),
   };
 };
