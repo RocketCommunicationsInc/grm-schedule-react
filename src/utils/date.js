@@ -7,18 +7,15 @@ export const getDayOfYear = (date) => {
   return day;
 };
 
-const setZeroBefore10 = (n) => (n < 10 ? '0' : '') + n;
-
 export const setHhMmSs = (time) => {
   const date = new Date(time);
-  const hour = setZeroBefore10(date.getHours());
-  const minute = setZeroBefore10(date.getMinutes());
-  const second = setZeroBefore10(date.getSeconds());
+  const hour = String(date.getHours()).padStart(2, '0');
+  const minute = String(date.getMinutes()).padStart(2, '0');
+  const second = String(date.getSeconds()).padStart(2, '0');
   return `${hour}:${minute}:${second}`;
 };
 
 export const setDurationMins = (start, end) => {
-  const diffMins = Math.abs((start - end) / (1000 * 60)).toFixed(2);
-  const [mins, seconds] = diffMins.split('.');
-  return `${mins}:${seconds}`;
+  const diffMins = Math.abs((start - end) / (1000 * 60));
+  return `${diffMins}:00`;
 };
