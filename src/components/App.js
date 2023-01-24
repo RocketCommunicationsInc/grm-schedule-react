@@ -47,6 +47,7 @@ const App = () => {
       <GlobalStatusBar />
 
       <RuxNotification
+        small
         closeAfter={5000}
         message={state.notification}
         open={!!state.notification}
