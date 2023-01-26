@@ -5,11 +5,12 @@ const ManageContactsForm = ({ options, values, setValues }) => {
     setValues((prev) => ({
       ...prev,
       pass: prev.pass === i ? -1 : i,
+      dirty: true,
     }));
   };
 
   const handleSelect = (key, value) => {
-    setValues((prev) => ({ ...prev, [key]: value }));
+    setValues((prev) => ({ ...prev, [key]: value, dirty: true }));
   };
 
   return (

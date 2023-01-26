@@ -1,8 +1,8 @@
 import { useCallback } from 'react';
 
 import { useAppContext } from 'providers/AppProvider';
-import { setData } from 'utils/setData';
 import { randomContacts, randomId, randomInt } from 'utils/random';
+import { setData } from 'utils/setData';
 
 export const useAppActions = () => {
   const { state, dispatch } = useAppContext();
@@ -29,8 +29,10 @@ export const useAppActions = () => {
           contactEndTimestamp: randomContact.contactEndTimestamp * 1000,
         },
       ];
+      const data = setData(newContacts);
+      const notification = `Contact ${values.iron} ${randomContact.contactSatellite} has been added.`;
 
-      dispatch({ type: 'ADD_CONTACT', payload: setData(newContacts) });
+      dispatch({ type: 'ADD_CONTACT', payload: { ...data, notification } });
     },
     [dispatch, state.contacts]
   );
@@ -44,8 +46,10 @@ export const useAppActions = () => {
 
         return contact;
       });
+      const data = setData(updatedContacts);
+      const notification = `Changes saved to contact ${modifiedContact.contactName} ${modifiedContact.contactSatellite}.`;
 
-      dispatch({ type: 'MODIFY_CONTACT', payload: setData(updatedContacts) });
+      dispatch({ type: 'MODIFY_CONTACT', payload: { ...data, notification } });
     },
     [dispatch, state.contacts]
   );
@@ -57,6 +61,10 @@ export const useAppActions = () => {
     [dispatch]
   );
 
+  const resetNotification = useCallback(() => {
+    dispatch({ type: 'RESET_NOTIFICATION' });
+  }, [dispatch]);
+
   const resetSelectedContact = useCallback(() => {
     dispatch({ type: 'RESET_SELECTED_CONTACT' });
   }, [dispatch]);
@@ -64,6 +72,7 @@ export const useAppActions = () => {
   return {
     addContact,
     modifyContact,
+    resetNotification,
     resetSelectedContact,
     setSelectedContact,
   };
