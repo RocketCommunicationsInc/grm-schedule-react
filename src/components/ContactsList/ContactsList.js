@@ -19,32 +19,42 @@ const columnDefs = [
   columnHelper.accessor('contactResolutionStatus', {
     header: 'Priority',
     cell: (info) => info.getValue().toUpperCase(),
+    minSize: 100,
   }),
   columnHelper.accessor('contactStatus', {
     header: 'Status',
     cell: (info) => <RuxStatus status={info.getValue()} />,
+    minSize: 80,
   }),
   columnHelper.accessor('contactName', {
     header: 'IRON',
+    minSize: 80,
   }),
   columnHelper.accessor('contactGround', {
     header: 'Ground Station',
+    minSize: 140,
   }),
   columnHelper.accessor('contactSatellite', {
     header: 'REV',
+    minSize: 100,
   }),
   columnHelper.accessor('contactEquipment', {
     header: 'Equipment String',
+    flex: 4,
+    minSize: 448,
   }),
   columnHelper.accessor('contactState', {
     header: 'State',
     cell: (info) => info.getValue().toUpperCase(),
+    minSize: 120,
   }),
   columnHelper.accessor('contactDOY', {
     header: 'DOY',
+    minSize: 80,
   }),
   columnHelper.accessor('contactBeginTimestamp', {
     header: 'Start Time',
+    minSize: 120,
     cell: (info) => (
       <RuxDatetime
         date={new Date(info.getValue())}
@@ -56,6 +66,7 @@ const columnDefs = [
   }),
   columnHelper.accessor('contactAOS', {
     header: 'AOS',
+    minSize: 120,
     cell: (info) => (
       <RuxDatetime
         date={new Date(info.getValue())}
@@ -67,6 +78,7 @@ const columnDefs = [
   }),
   columnHelper.accessor('contactLOS', {
     header: 'LOS',
+    minSize: 120,
     cell: (info) => (
       <RuxDatetime
         date={new Date(info.getValue())}
@@ -78,6 +90,7 @@ const columnDefs = [
   }),
   columnHelper.accessor('contactEndTimestamp', {
     header: 'Stop Time',
+    minSize: 120,
     cell: (info) => (
       <RuxDatetime
         date={new Date(info.getValue())}
@@ -89,15 +102,11 @@ const columnDefs = [
   }),
 ];
 
-const setColWidth = (index) => {
-  if (index === 0 || index === 1 || index === 2 || index === 4) return 80;
-  if (index === 3) return 140;
-  if (index === 5) return 448;
-  if (index === 6) return 110;
-  if (index === 7) return 70;
-  if (index === 8 || index === 9 || index === 10 || index === 11) return 124;
-  throw new Error('Unhandled col width: ' + index);
-};
+const setStyles = (column) => ({
+  flex: column.columnDef.flex,
+  maxWidth: column.columnDef.maxSize,
+  minWidth: column.columnDef.minSize,
+});
 
 const ContactsList = ({ handleAction }) => {
   const columns = useMemo(() => columnDefs, []);
@@ -105,7 +114,7 @@ const ContactsList = ({ handleAction }) => {
   const { state } = useAppContext();
   const selectedId = state.selectedContact?.contactId;
 
-  const { getHeaderGroups, getRowModel } = useReactTable({
+  const { getRowModel, getFlatHeaders } = useReactTable({
     data: state.contacts,
     columns,
     getCoreRowModel: getCoreRowModel(),
@@ -117,56 +126,58 @@ const ContactsList = ({ handleAction }) => {
     handleAction('details');
   };
 
+  const headers = getFlatHeaders();
+  const rows = getRowModel().rows;
+
   return (
     <div className='Contacts-list'>
-      <table>
-        <thead>
-          {getHeaderGroups().map(({ headers, id }) => (
-            <tr key={id}>
-              <th />
-              {headers.map(({ id, column, getContext, isPlaceholder }, i) => (
-                <th
-                  className={column.getIsSorted() ? 'sorted' : undefined}
-                  width={setColWidth(i)}
-                  key={id}
-                  onClick={column.getToggleSortingHandler()}
-                >
-                  <div className='Contacts-list__th-inner'>
-                    <div>
-                      {isPlaceholder
-                        ? null
-                        : flexRender(column.columnDef.header, getContext())}
-                    </div>
-                    {{
-                      asc: <RuxIcon icon='arrow-drop-up' size='1.5rem' />,
-                      desc: <RuxIcon icon='arrow-drop-down' size='1.5rem' />,
-                    }[column.getIsSorted()] ?? null}
-                  </div>
-                </th>
-              ))}
-            </tr>
+      <div className='Astro-list'>
+        <header className='Astro-list__header'>
+          {headers.map(({ id, column, getContext, isPlaceholder }) => (
+            <div className='Astro-list__header-col' style={setStyles(column)}>
+              <div
+                key={id}
+                onClick={column.getToggleSortingHandler()}
+                className={classNames('Contacts-list__heading', {
+                  'Contacts-list__sorted': column.getIsSorted(),
+                })}
+              >
+                <div>
+                  {isPlaceholder
+                    ? null
+                    : flexRender(column.columnDef.header, getContext())}
+                </div>
+                {{
+                  asc: <RuxIcon icon='arrow-drop-up' size='1.5rem' />,
+                  desc: <RuxIcon icon='arrow-drop-down' size='1.5rem' />,
+                }[column.getIsSorted()] ?? null}
+              </div>
+            </div>
           ))}
-        </thead>
+        </header>
 
-        <tbody>
-          {getRowModel().rows.map(({ id, getVisibleCells, original }) => (
-            <tr
+        <ul>
+          {rows.map(({ id, getVisibleCells, original }) => (
+            <li
               key={id}
               onClick={() => handleSelect(original)}
-              className={classNames('Contacts-list__contact-row', {
-                selected: original.contactId === selectedId,
+              className={classNames('Astro-list__item', {
+                'Astro-list__item-selected': original.contactId === selectedId,
               })}
             >
-              <td />
-              {getVisibleCells().map(({ id, column, getContext }, i) => (
-                <td width={setColWidth(i)} key={id}>
+              {getVisibleCells().map(({ id, column, getContext }) => (
+                <div
+                  key={id}
+                  className='Astro-list__item-col'
+                  style={setStyles(column)}
+                >
                   {flexRender(column.columnDef.cell, getContext())}
-                </td>
+                </div>
               ))}
-            </tr>
+            </li>
           ))}
-        </tbody>
-      </table>
+        </ul>
+      </div>
     </div>
   );
 };
