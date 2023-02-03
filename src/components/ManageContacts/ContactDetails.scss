@@ -10,7 +10,6 @@
   &::part(body) {
     flex-grow: 1;
     overflow: auto;
-    height: calc(100vh - 22.375rem);
   }
 
   form {
