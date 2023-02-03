@@ -36,7 +36,9 @@ const ContactDetails = ({ handleAction }) => {
 
   return (
     <RuxContainer className='Contact-details'>
-      <div slot='header'>Contact Details</div>
+      <header slot='header'>
+        <h2>Contact Details</h2>
+      </header>
 
       <form>
         <h6>
@@ -56,14 +58,14 @@ const ContactDetails = ({ handleAction }) => {
         <ReadOnlyInput value={contactEquipment} />
       </form>
 
-      <div className='footer' slot='footer'>
+      <footer slot='footer'>
         <RuxButton secondary onClick={handleClose}>
           Cancel
         </RuxButton>
         <RuxButton onClick={() => handleAction('modify')}>
           Modify Contact
         </RuxButton>
-      </div>
+      </footer>
     </RuxContainer>
   );
 };
