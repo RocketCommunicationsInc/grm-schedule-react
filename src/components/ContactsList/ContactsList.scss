@@ -2,38 +2,64 @@
   overflow: auto;
   height: calc(100% - 5.25rem);
 
-  &__th-inner {
+  &__heading {
     display: flex;
     align-items: center;
     cursor: pointer;
   }
 
-  table thead tr th:first-child {
-    padding: 0.125rem;
-    width: 0;
+  &__sorted {
+    color: var(--color-text-interactive-default);
+  }
+}
+
+.Astro-list {
+  height: 100%;
+
+  &__header {
+    display: flex;
+    padding: var(--spacing-2) var(--spacing-4);
+    background-color: var(--color-background-surface-header);
+    border-left: 4px solid transparent;
+    gap: var(--spacing-2);
+    min-width: fit-content;
   }
 
-  &__contact-row {
-    td:first-child {
-      padding: 0.125rem;
-      width: 0;
-    }
+  &__header-col,
+  &__item-col {
+    flex: 1;
+    display: flex;
+  }
+
+  ul {
+    padding: 0;
+    margin: 0;
+  }
+
+  li {
+    list-style-type: none;
+    display: flex;
+    gap: var(--spacing-2);
+    min-width: fit-content;
+  }
+
+  &__item {
+    padding: var(--spacing-2) var(--spacing-4);
+    box-shadow: 0 1px 0 0 var(--color-background-base-default);
+    border-left: 4px solid transparent;
 
     &:hover {
       background-color: var(--color-background-surface-hover);
       cursor: pointer;
     }
-
-    &.selected {
-      background-color: var(--color-background-surface-selected);
-
-      td:first-child {
-        background-color: var(--color-background-interactive-default);
-      }
-    }
   }
 
-  .sorted {
-    color: var(--color-text-interactive-default);
+  &__item-selected {
+    background-color: var(--color-background-surface-selected);
+    border-left-color: var(--color-background-interactive-default);
+
+    &:hover {
+      background-color: var(--color-background-surface-selected);
+    }
   }
 }
