@@ -1,23 +1,15 @@
 .Manage-contact {
-  // The commented out lines below work if you manually set the
-  // .rux-container styles in dev tools, but there is no way to
-  // target the .rux-container inside the shadow DOM.
+  height: 100%;
 
-  // height: 100%;
-
-  // .rux-container {
-  //   display: flex;
-  //   flex-direction: column;
-  //   height: 100%;
-  // }
-
-  &::part(body) {
-    // flex: 1;
-    overflow: auto;
-    // remove the 3 lines below once a height can be set on
-    // the rux-container
+  &::part(container) {
+    height: 100%;
     display: flex;
     flex-direction: column;
+  }
+
+  &::part(body) {
+    flex-grow: 1;
+    overflow: auto;
     height: calc(100vh - 22.375rem);
   }
 
@@ -35,7 +27,7 @@
   .Contact-list {
     &__header {
       background-color: var(--color-background-surface-header);
-      padding: 0.5rem 1rem;
+      padding: var(--spacing-2) var(--spacing-4);
     }
 
     &__header,
@@ -49,13 +41,13 @@
     &__passes {
       border: 1px solid var(--container-color-border);
       list-style: none;
-      margin: 0;
+      margin: var(--spacing-0);
       max-height: 9rem;
       overflow-y: scroll;
       padding: var(--spacing-0);
 
       li {
-        font-size: 0.875rem;
+        font-size: var(--font-size-sm);
         padding: var(--spacing-2) var(--spacing-4);
 
         &.selected {

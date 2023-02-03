@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import classNames from 'classnames';
-import { RuxNotification } from '@astrouxds/react';
+import { RuxContainer, RuxNotification } from '@astrouxds/react';
 
 import { useAppActions } from 'hooks/useAppActions';
 import { useAppContext } from 'providers/AppProvider';
@@ -59,25 +59,23 @@ const App = () => {
           notification: !!state.notification,
         })}
       >
-        <section className='App-main__container'>
+        <RuxContainer className='App-main__container'>
           <ContactsHeader {...{ isOpen, handleAction }} />
 
-          <div className='App-main__panels'>
-            <div className={classNames('App-main__left-panel', { isOpen })}>
-              <ContactsToolBar {...{ view, setView, setZoom, zoom }} />
+          <div className={classNames('App-main__left-panel', { isOpen })}>
+            <ContactsToolBar {...{ view, setView, setZoom, zoom }} />
 
-              {view === 'List' ? (
-                <ContactsList handleAction={handleAction} />
-              ) : (
-                <ContactsTimeline handleAction={handleAction} zoom={zoom} />
-              )}
-            </div>
-
-            <div className={classNames('App-main__right-panel', { isOpen })}>
-              {rigthPanel}
-            </div>
+            {view === 'List' ? (
+              <ContactsList handleAction={handleAction} />
+            ) : (
+              <ContactsTimeline handleAction={handleAction} zoom={zoom} />
+            )}
           </div>
-        </section>
+
+          <aside className={classNames('App-main__right-panel', { isOpen })}>
+            {rigthPanel}
+          </aside>
+        </RuxContainer>
       </main>
     </>
   );
