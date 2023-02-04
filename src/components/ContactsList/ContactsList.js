@@ -34,7 +34,7 @@ const columnDefs = [
     header: 'Ground Station',
     minSize: 140,
   }),
-  columnHelper.accessor('contactSatellite', {
+  columnHelper.accessor('contactREV', {
     header: 'REV',
     minSize: 100,
   }),
