@@ -23,7 +23,7 @@ const ContactDetails = ({ handleAction }) => {
     contactMode,
     contactName,
     contactPriority,
-    contactSatellite,
+    contactREV,
     contactStatus,
   } = state.selectedContact;
   const aosLos = `${setHhMmSs(contactAOS)} / ${setHhMmSs(contactLOS)}`;
@@ -48,7 +48,7 @@ const ContactDetails = ({ handleAction }) => {
 
         <ReadOnlyInput label='IRON' value={contactName} />
         <ReadOnlyInput label='Ground Station' value={contactGround} />
-        <ReadOnlyInput label='Rev' value={contactSatellite} />
+        <ReadOnlyInput label='Rev' value={contactREV} />
         <ReadOnlyInput label='DOY' value={contactDOY} />
         <ReadOnlyInput label='AOS/LOS' value={aosLos} />
         <ReadOnlyInput label='Duration' value={durationMins} />
