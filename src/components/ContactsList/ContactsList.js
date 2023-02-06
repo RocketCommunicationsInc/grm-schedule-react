@@ -13,91 +13,74 @@ import { useAppContext } from 'providers/AppProvider';
 import { useAppActions } from 'hooks/useAppActions';
 import './ContactsList.scss';
 
+const TwoDigitTime = ({ time }) => (
+  <RuxDatetime
+    date={new Date(time)}
+    hour='2-digit'
+    minute='2-digit'
+    second='2-digit'
+  />
+);
+
 const columnHelper = createColumnHelper();
 
-const columnDefs = [
+export const columnDefs = [
   columnHelper.accessor('contactResolutionStatus', {
     header: 'Priority',
     cell: (info) => info.getValue().toUpperCase(),
+    size: 80,
   }),
   columnHelper.accessor('contactStatus', {
     header: 'Status',
     cell: (info) => <RuxStatus status={info.getValue()} />,
+    size: 68,
   }),
   columnHelper.accessor('contactName', {
     header: 'IRON',
+    size: 68,
   }),
   columnHelper.accessor('contactGround', {
     header: 'Ground Station',
+    size: 148,
   }),
-  columnHelper.accessor('contactSatellite', {
+  columnHelper.accessor('contactREV', {
     header: 'REV',
+    size: 60,
   }),
   columnHelper.accessor('contactEquipment', {
     header: 'Equipment String',
+    size: 424,
   }),
   columnHelper.accessor('contactState', {
     header: 'State',
     cell: (info) => info.getValue().toUpperCase(),
+    size: 120,
   }),
   columnHelper.accessor('contactDOY', {
     header: 'DOY',
+    size: 60,
   }),
   columnHelper.accessor('contactBeginTimestamp', {
     header: 'Start Time',
-    cell: (info) => (
-      <RuxDatetime
-        date={new Date(info.getValue())}
-        hour='2-digit'
-        minute='2-digit'
-        second='2-digit'
-      />
-    ),
+    size: 112,
+    cell: (info) => <TwoDigitTime time={info.getValue()} />,
   }),
   columnHelper.accessor('contactAOS', {
     header: 'AOS',
-    cell: (info) => (
-      <RuxDatetime
-        date={new Date(info.getValue())}
-        hour='2-digit'
-        minute='2-digit'
-        second='2-digit'
-      />
-    ),
+    size: 96,
+    cell: (info) => <TwoDigitTime time={info.getValue()} />,
   }),
   columnHelper.accessor('contactLOS', {
     header: 'LOS',
-    cell: (info) => (
-      <RuxDatetime
-        date={new Date(info.getValue())}
-        hour='2-digit'
-        minute='2-digit'
-        second='2-digit'
-      />
-    ),
+    size: 96,
+    cell: (info) => <TwoDigitTime time={info.getValue()} />,
   }),
   columnHelper.accessor('contactEndTimestamp', {
     header: 'Stop Time',
-    cell: (info) => (
-      <RuxDatetime
-        date={new Date(info.getValue())}
-        hour='2-digit'
-        minute='2-digit'
-        second='2-digit'
-      />
-    ),
+    size: 112,
+    cell: (info) => <TwoDigitTime time={info.getValue()} />,
   }),
 ];
-
-const setColWidth = (index) => {
-  if (index === 0 || index === 1 || index === 2 || index === 4) return 80;
-  if (index === 3) return 140;
-  if (index === 5) return 448;
-  if (index === 6) return 110;
-  if (index === 7) return 70;
-  if (index === 8 || index === 9 || index === 10 || index === 11) return 124;
-  throw new Error('Unhandled col width: ' + index);
-};
 
 const ContactsList = ({ handleAction }) => {
   const columns = useMemo(() => columnDefs, []);
@@ -124,19 +107,18 @@ const ContactsList = ({ handleAction }) => {
           {getHeaderGroups().map(({ headers, id }) => (
             <tr key={id}>
               <th />
-              {headers.map(({ id, column, getContext, isPlaceholder }, i) => (
+              {headers.map(({ id, column, getContext, isPlaceholder }) => (
                 <th
                   className={column.getIsSorted() ? 'sorted' : undefined}
-                  width={setColWidth(i)}
+                  width={column.columnDef.size}
                   key={id}
                   onClick={column.getToggleSortingHandler()}
                 >
                   <div className='Contacts-list__th-inner'>
-                    <div>
-                      {isPlaceholder
-                        ? null
-                        : flexRender(column.columnDef.header, getContext())}
-                    </div>
+                    {isPlaceholder
+                      ? null
+                      : flexRender(column.columnDef.header, getContext())}
+
                     {{
                       asc: <RuxIcon icon='arrow-drop-up' size='1.5rem' />,
                       desc: <RuxIcon icon='arrow-drop-down' size='1.5rem' />,
@@ -158,8 +140,8 @@ const ContactsList = ({ handleAction }) => {
               })}
             >
               <td />
-              {getVisibleCells().map(({ id, column, getContext }, i) => (
-                <td width={setColWidth(i)} key={id}>
+              {getVisibleCells().map(({ id, column, getContext }) => (
+                <td width={column.columnDef.size} key={id}>
                   {flexRender(column.columnDef.cell, getContext())}
                 </td>
               ))}
