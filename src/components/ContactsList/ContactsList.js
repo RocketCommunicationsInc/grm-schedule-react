@@ -5,7 +5,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 
-import { AstroTable } from 'common';
+import { AstroReactTable } from 'common';
 import { useAppContext } from 'providers/AppProvider';
 import { useAppActions } from 'hooks/useAppActions';
 import { columnDefs } from './ContactsListColumns';
@@ -32,8 +32,9 @@ const ContactsList = ({ handleAction }) => {
 
   return (
     <div className='Contacts-list'>
-      <AstroTable
+      <AstroReactTable
         table={table}
+        isSortable
         onRowClick={handleRowClick}
         setIsSelected={handleSelected}
       />
