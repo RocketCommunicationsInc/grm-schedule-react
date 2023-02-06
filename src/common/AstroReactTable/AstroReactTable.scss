@@ -1,4 +1,4 @@
-.Astro-table {
+.Astro-react-table {
   &__header {
     display: flex;
     background-color: var(--color-background-surface-header);
@@ -13,7 +13,8 @@
     top: 0;
   }
 
-  &__col {
+  &__sortable,
+  &__selectable {
     cursor: pointer;
   }
 
@@ -47,10 +48,6 @@
     &:hover {
       background-color: var(--color-background-surface-selected);
     }
-  }
-
-  &__selectable {
-    cursor: pointer;
   }
 
   &__cell {

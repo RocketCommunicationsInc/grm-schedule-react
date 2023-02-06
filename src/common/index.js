@@ -1,1 +1,1 @@
-export * from './AstroTable/AstroTable';
+export * from './AstroReactTable/AstroReactTable';
