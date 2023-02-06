@@ -11,15 +11,13 @@ export const AstroReactTable = ({
   setIsSelected,
 }) => {
   const handleRowClick = (original) => {
-    if (onRowClick) {
-      onRowClick(original);
-    }
+    if (!onRowClick) return;
+    onRowClick(original);
   };
 
   const handleIsSelected = (original) => {
-    if (setIsSelected) {
-      return setIsSelected(original);
-    }
+    if (setIsSelected) return setIsSelected(original);
+    return false;
   };
 
   return (
@@ -33,7 +31,7 @@ export const AstroReactTable = ({
               'Astro-react-table__sortable': isSortable,
             })}
             style={column.columnDef.style}
-            onClick={isSortable && column.getToggleSortingHandler()}
+            onClick={isSortable ? column.getToggleSortingHandler() : undefined}
           >
             {flexRender(column.columnDef.header, getContext())}
 
