@@ -8,14 +8,14 @@ export const randomId = () => {
   return randomString() + randomString();
 };
 
-export const randomInt = (min, max) => {
+export const randomInt = (min: number, max: number) => {
   return Math.floor(Math.random() * (max - min + 1)) + min;
 };
 
-export const randomIndex = (arr) => {
+export const randomIndex = (arr: string | any[]) => {
   return randomInt(0, arr.length - 1);
 };
 
-export const randomContacts = (length) => {
+export const randomContacts = (length: number) => {
   return Array.from({ length }, () => data[randomIndex(data)]);
 };

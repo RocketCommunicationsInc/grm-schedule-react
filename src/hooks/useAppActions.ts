@@ -40,7 +40,7 @@ export const useAppActions = () => {
 
   const modifyContact = useCallback(
     (modifiedContact) => {
-      const updatedContacts = state.contacts.map((contact) => {
+      const updatedContacts = state.contacts.map((contact: { contactId: number | string; }) => {
         if (contact.contactId === modifiedContact.contactId) {
           return modifiedContact;
         }

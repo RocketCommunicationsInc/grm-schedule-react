@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { SetStateAction, useState } from 'react';
 import classNames from 'classnames';
 import { RuxContainer, RuxNotification } from '@astrouxds/react';
 
@@ -21,7 +21,7 @@ const App = () => {
   const { resetNotification } = useAppActions();
   const { state } = useAppContext();
 
-  const handleAction = (action) => {
+  const handleAction = (action: SetStateAction<string>) => {
     if (action) {
       setIsOpen(true);
       setAction(action);

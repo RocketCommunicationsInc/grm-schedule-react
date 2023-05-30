@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export const useTracks = (data) => {
+export const useTracks = (data: [any][]) => {
   const [tracks, setTracks] = useState({});
 
   useEffect(() => {
@@ -9,10 +9,10 @@ export const useTracks = (data) => {
     });
   }, [data]);
 
-  const handleExpanded = (label) => {
+  const handleExpanded = (label: string | number) => {
     setTracks((prev) => ({
       ...prev,
-      [label]: prev[label] ? false : true,
+      [label]: prev[label as keyof typeof prev] ? false : true,
     }));
   };
 

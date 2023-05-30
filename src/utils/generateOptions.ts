@@ -2,14 +2,15 @@ import data from 'data/contacts.json';
 import { options } from 'data/options';
 import { getDayOfYear } from './date';
 import { randomContacts, randomIndex, randomInt } from './random';
+import { GenerateOptions } from 'Types';
 
-export const setPassesId = ({ contactSatellite, contactEquipment }) => {
+export const setPassesId = ({ contactSatellite, contactEquipment }: any) => {
   return `${contactSatellite} ${contactEquipment.split(' ')[1]}`;
 };
 
-const unique = (arr) => [...new Set(arr)];
+const unique = (arr: any[]) => [...new Set(arr)];
 
-export const generateOptions = (modifyOptions) => {
+export const generateOptions = (modifyOptions: GenerateOptions) => {
   const contacts = randomContacts(8);
 
   const irons = Array.from({ length: 8 }, () => randomInt(60_000, 90_000));

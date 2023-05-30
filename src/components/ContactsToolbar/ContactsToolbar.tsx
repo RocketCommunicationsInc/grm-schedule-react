@@ -3,14 +3,23 @@ import { RuxButton, RuxSegmentedButton, RuxSlider } from '@astrouxds/react';
 import { setLabels } from 'utils/labels';
 import { getDayOfYear } from 'utils/date';
 import { useAppContext } from 'providers/AppProvider';
-import './ContactsToolbar.scss';
+import './ContactsToolbar.css';
 
-const ContactsToolbar = ({ view, setView, setZoom, zoom }) => {
+type PropTypes = {
+  view: any;
+  setView: (e: any) => void;
+  setZoom: (e: any) => void;
+  zoom: any;
+};
+
+const ContactsToolbar = ({ view, setView, setZoom, zoom }: PropTypes) => {
   const { state } = useAppContext();
   const labels = setLabels(state.contacts);
-  const handleZoom = (e) => setZoom(e.target.value);
-  const handleZoomIn = () => setZoom((prev) => String(parseInt(prev) + 1));
-  const handleZoomOut = () => setZoom((prev) => String(parseInt(prev) - 1));
+  const handleZoom = (e: any) => setZoom(e.target.value);
+  const handleZoomIn = () =>
+    setZoom((prev: string) => String(parseInt(prev) + 1));
+  const handleZoomOut = () =>
+    setZoom((prev: string) => String(parseInt(prev) - 1));
 
   return (
     <div className='Contacts-toolbar'>

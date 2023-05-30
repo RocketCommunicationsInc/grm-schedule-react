@@ -9,16 +9,23 @@ import { AstroReactTable } from 'common';
 import { useAppContext } from 'providers/AppProvider';
 import { useAppActions } from 'hooks/useAppActions';
 import { columnDefs } from './ContactsListColumns';
-import './ContactsList.scss';
+import './ContactsList.css';
 
-const ContactsList = ({ handleAction }) => {
+type PropTypes = {
+  handleAction: (e: any) => void;
+};
+
+const ContactsList = ({ handleAction }: PropTypes) => {
   const columns = useMemo(() => columnDefs, []);
   const { setSelectedContact } = useAppActions();
   const { state } = useAppContext();
   const selectedId = state.selectedContact?.contactId;
-  const handleSelected = (row) => row.contactId === selectedId;
+  console.log(state.selectedContact?.contactId);
+  const handleSelected = (row: { contactId: any }) =>
+    row.contactId === selectedId;
 
-  const handleRowClick = (row) => {
+  const handleRowClick = (row: any) => {
+    console.log(row, 'row');
     setSelectedContact(row);
     handleAction('details');
   };

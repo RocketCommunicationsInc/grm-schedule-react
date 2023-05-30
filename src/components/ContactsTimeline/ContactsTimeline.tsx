@@ -12,17 +12,23 @@ import { useAppContext } from 'providers/AppProvider';
 import { useAppActions } from 'hooks/useAppActions';
 import { useTracks } from './useTracks';
 import { usePlayhead } from './usePlayhead';
-import './ContactsTimeline.scss';
+import './ContactsTimeline.css';
+import { Contact, Status } from 'Types';
 
-const setSubLabel = (event) => event.contactEquipment.split(' ')[1];
+type PropTypes = {
+  handleAction: (e: string) => void;
+  zoom: any;
+};
 
-const ContactsTimeline = ({ handleAction, zoom }) => {
+const setSubLabel = (event: any) => event.contactEquipment.split(' ')[1];
+
+const ContactsTimeline = ({ handleAction, zoom }: PropTypes) => {
   const { setSelectedContact } = useAppActions();
   const { state } = useAppContext();
-  const [tracks, setTracks] = useTracks(state.regions);
+  const [tracks, setTracks] = useTracks(state.regions) as any;
   const selectedId = state.selectedContact?.contactId;
 
-  const handleClick = (contact) => {
+  const handleClick = (contact: any) => {
     handleAction('details');
     setSelectedContact(contact);
   };
@@ -36,7 +42,7 @@ const ContactsTimeline = ({ handleAction, zoom }) => {
       interval='hour'
       zoom={zoom}
     >
-      {state.regions.map(([label, events]) => {
+      {state.regions.map(([label, events]: any) => {
         const subRegions = setGroup(groupByToMap(events, setSubLabel));
         const expanded = tracks[label];
 
@@ -53,25 +59,34 @@ const ContactsTimeline = ({ handleAction, zoom }) => {
                 <p>{label}</p>
               </div>
               {!expanded &&
-                events.map((e) => {
-                  const start = new Date(e.contactBeginTimestamp);
-                  const end = new Date(e.contactEndTimestamp);
+                events.map(
+                  (e: {
+                    contactBeginTimestamp?: any;
+                    contactEndTimestamp?: any;
+                    contactId?: any;
+                    contactStatus?: any;
+                    contactSatellite?: any;
+                    contactEquipment?: string;
+                  }) => {
+                    const start = new Date(e.contactBeginTimestamp);
+                    const end = new Date(e.contactEndTimestamp);
 
-                  return (
-                    <RuxTimeRegion
-                      key={e.contactId}
-                      start={start.toISOString()}
-                      end={end.toISOString()}
-                      status={e.contactStatus}
-                      onClick={() => handleClick(e)}
-                      selected={e.contactId === selectedId}
-                    >
-                      <div className='Contacts-timeline__title'>
-                        {e.contactSatellite} {setSubLabel(e)}
-                      </div>
-                    </RuxTimeRegion>
-                  );
-                })}
+                    return (
+                      <RuxTimeRegion
+                        key={e.contactId}
+                        start={start.toISOString()}
+                        end={end.toISOString()}
+                        status={e.contactStatus}
+                        onClick={() => handleClick(e)}
+                        selected={e.contactId === selectedId}
+                      >
+                        <div className='Contacts-timeline__title'>
+                          {e.contactSatellite} {setSubLabel(e)}
+                        </div>
+                      </RuxTimeRegion>
+                    );
+                  }
+                )}
             </RuxTrack>
 
             {expanded &&
@@ -80,7 +95,7 @@ const ContactsTimeline = ({ handleAction, zoom }) => {
                   <div slot='label' className='sub-label'>
                     {subLabel}
                   </div>
-                  {subEvents.map((se) => {
+                  {subEvents.map((se: Contact) => {
                     const start = new Date(se.contactBeginTimestamp);
                     const end = new Date(se.contactEndTimestamp);
 
@@ -89,7 +104,7 @@ const ContactsTimeline = ({ handleAction, zoom }) => {
                         key={se.contactId}
                         start={start.toISOString()}
                         end={end.toISOString()}
-                        status={se.contactStatus}
+                        status={se.contactStatus as Status}
                         onClick={() => handleClick(se)}
                         selected={se.contactId === selectedId}
                       >

@@ -1,7 +1,13 @@
+// @ts-nocheck
+//TODO come back for errors on style 
 import { RuxDatetime, RuxStatus } from '@astrouxds/react';
 import { createColumnHelper } from '@tanstack/react-table';
 
-const TwoDigitTime = ({ time }) => (
+type PropTypes = {
+  time: Date
+};
+
+const TwoDigitTime = ({ time }: PropTypes) => (
   <RuxDatetime
     date={new Date(time)}
     hour='2-digit'
@@ -10,7 +16,7 @@ const TwoDigitTime = ({ time }) => (
   />
 );
 
-const columnHelper = createColumnHelper();
+const columnHelper = createColumnHelper<any>();
 
 export const columnDefs = [
   columnHelper.accessor('contactResolutionStatus', {

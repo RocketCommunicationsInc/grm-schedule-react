@@ -1,28 +1,30 @@
-const setLabelsCount = ({ type, contacts }) => {
+import { Contact } from 'Types';
+
+const setLabelsCount = ({ type, contacts }: any) => {
   switch (type) {
     case 'contacts': {
       return contacts.length;
     }
     case 'upcoming': {
-      const upcoming = contacts.filter((c) => {
+      const upcoming = contacts.filter((c: { contactResolution: string }) => {
         return c.contactResolution === 'scheduled';
       });
       return upcoming.length || 0;
     }
     case 'executing': {
-      const excuting = contacts.filter((c) => {
+      const excuting = contacts.filter((c: { contactState: string }) => {
         return c.contactState === 'executing';
       });
       return excuting.length || 0;
     }
     case 'complete': {
-      const complete = contacts.filter((c) => {
+      const complete = contacts.filter((c: { contactResolution: string }) => {
         return c.contactResolution === 'complete';
       });
       return complete.length;
     }
     case 'failed': {
-      const failed = contacts.filter((c) => {
+      const failed = contacts.filter((c: { contactResolution: string }) => {
         return c.contactResolution === 'failed';
       });
       return failed.length || 0;
@@ -32,7 +34,7 @@ const setLabelsCount = ({ type, contacts }) => {
   }
 };
 
-export const setLabels = (contacts) => [
+export const setLabels = (contacts: Contact) => [
   {
     count: setLabelsCount({ type: 'contacts', contacts }),
     label: 'Contacts',

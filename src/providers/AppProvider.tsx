@@ -10,9 +10,13 @@ import { randomIndex, randomInt } from 'utils/random';
 
 const AppContext = createContext({});
 
-export const useAppContext = () => useContext(AppContext);
+export const useAppContext = () => useContext<any>(AppContext);
 
-const AppProvider = ({ children }) => {
+type PropTypes = {
+  children: React.ReactNode;
+};
+
+const AppProvider = ({ children }: PropTypes) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
 
   useEffect(() => {

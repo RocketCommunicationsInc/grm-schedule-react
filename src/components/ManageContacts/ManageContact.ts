@@ -6,9 +6,10 @@ import { randomInt } from 'utils/random';
 import { useAppContext } from 'providers/AppProvider';
 import { useAppActions } from 'hooks/useAppActions';
 import ManageContactsForm from './ManageContactsForm';
-import './ManageContact.scss';
+import './ManageContact.css';
+import { DefaulOptions } from 'Types';
 
-const setDefaultValues = (options) => ({
+const setDefaultValues = (options: DefaulOptions) => ({
   doy: options.doy,
   equipment: options.configs[0].value,
   ground: options.grounds[0],
@@ -19,14 +20,14 @@ const setDefaultValues = (options) => ({
   dirty: false,
 });
 
-const ManageContact = ({ action, handleAction }) => {
+const ManageContact = ({ action, handleAction }: any) => {
   const { addContact, modifyContact, resetSelectedContact } = useAppActions();
   const {
     state: { selectedContact, modifyOptions },
   } = useAppContext();
 
   const [options, setOptions] = useState(() => generateOptions(modifyOptions));
-  const [values, setValues] = useState(() => setDefaultValues(options));
+  const [values, setValues] = useState(() => setDefaultValues(options as any));
   const isAdd = action === 'add';
 
   const handleAdd = () => {
@@ -37,7 +38,7 @@ const ManageContact = ({ action, handleAction }) => {
   };
 
   const handleModify = () => {
-    const { aos, los, id } = options.passes[values.pass];
+    const { aos, los, id } = options.passes[values.pass as keyof typeof values.pass];
     const contactAOS = new Date(aos).getTime();
     const contactLOS = new Date(los).getTime();
 

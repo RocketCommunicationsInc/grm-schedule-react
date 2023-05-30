@@ -10,7 +10,7 @@ import {
   RuxMonitoringProgressIcon,
 } from '@astrouxds/react';
 
-import './GlobalStatusBar.scss';
+import './GlobalStatusBar.css';
 
 const GlobalStatusBar = () => {
   const [count, setCount] = useState(0);
@@ -52,7 +52,7 @@ const GlobalStatusBar = () => {
       <RuxClock />
 
       <div className='Global-status-bar__status-indicators' slot='right-side'>
-        <RuxMonitoringProgressIcon label='UCA' progress={count} />
+        <RuxMonitoringProgressIcon label='UCA' progress={count} range={[]} />
       </div>
     </RuxGlobalStatusBar>
   );

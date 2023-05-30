@@ -4,13 +4,18 @@ import { useAppContext } from 'providers/AppProvider';
 import { useAppActions } from 'hooks/useAppActions';
 import { setDurationMins, setHhMmSs } from 'utils/date';
 import { setPassesId } from 'utils/generateOptions';
-import './ContactDetails.scss';
+import './ContactDetails.css';
 
-const ReadOnlyInput = ({ label, value }) => (
+type PropTypes = {
+  label?: string;
+  value: string;
+};
+
+const ReadOnlyInput = ({ label, value }: PropTypes) => (
   <RuxInput label={label} readonly value={value} size='small' />
 );
 
-const ContactDetails = ({ handleAction }) => {
+const ContactDetails = ({ handleAction }: any) => {
   const { resetSelectedContact } = useAppActions();
   const { state } = useAppContext();
   const {

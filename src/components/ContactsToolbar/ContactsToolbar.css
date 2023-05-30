@@ -3,8 +3,8 @@
   display: flex;
   align-items: center;
   justify-content: space-between;
-
-  &__container {
+}
+.Contacts-toolbar__container {
     display: flex;
     gap: var(--spacing-4);
     align-items: center;
@@ -13,7 +13,7 @@
     color: var(--color-text-secondary);
   }
 
-  &__time-box {
+  .Contacts-toolbar__time-box {
     display: flex;
     gap: var(--spacing-3);
     background-color: var(--color-background-base-default);
@@ -21,19 +21,19 @@
     border-radius: var(--radius-base);
   }
 
-  &__label {
+.Contacts-toolbar__label {
     display: flex;
     flex-direction: column;
     align-items: center;
   }
 
-  &__zoom {
+.Contacts-toolbar__zoom {
     display: flex;
     align-items: center;
     width: 16rem;
   }
 
-  .flex-start {
+  .Contacts-toolbar__container .flex-start {
     justify-content: flex-start;
   }
 
@@ -41,7 +41,6 @@
     justify-content: flex-end;
   }
 
-  .gap-3 {
+  .Contacts-toolbar__container .flex-start .gap-3 {
     gap: var(--spacing-3);
   }
-}

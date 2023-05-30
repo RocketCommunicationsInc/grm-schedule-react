@@ -1,7 +1,12 @@
 import { RuxButton } from '@astrouxds/react';
-import './ContactsHeader.scss';
+import './ContactsHeader.css';
 
-const ContactsHeader = ({ isOpen, handleAction }) => (
+type PropTypes = {
+  isOpen: boolean;
+  handleAction: (e: any) => void;
+};
+
+const ContactsHeader = ({ isOpen, handleAction }: PropTypes) => (
   <header slot='header' className='Contacts-header'>
     <h2>Contacts</h2>
     <RuxButton

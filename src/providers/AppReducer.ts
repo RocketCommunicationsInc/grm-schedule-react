@@ -1,4 +1,4 @@
-export const AppReducer = (state, { type, payload }) => {
+export const AppReducer = (state: any, { type, payload }: any) => {
   switch (type) {
     case 'ADD_CONTACT': {
       return { ...state, ...payload };
