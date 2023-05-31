@@ -10,13 +10,13 @@ const ContactsHeader = ({ isOpen, handleAction }: PropTypes) => (
   <header slot='header' className='Contacts-header'>
     <h2>Contacts</h2>
     <RuxButton
-      icon='add'
+      icon='chevron-right'
       borderless
-      onClick={() => handleAction('add')}
+      onClick={() => handleAction('manage')}
       disabled={isOpen}
       size='small'
     >
-      Add Contact
+      Manage Contacts
     </RuxButton>
   </header>
 );

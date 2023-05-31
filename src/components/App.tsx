@@ -12,6 +12,8 @@ import ContactsTimeline from './ContactsTimeline/ContactsTimeline';
 import ContactDetails from './ManageContacts/ContactDetails';
 import ManageContact from './ManageContacts/ManageContact';
 import './App.scss';
+import ManagePanel from './ManageContacts/ManagePanel';
+import FilterContacts from './ManageContacts/FilterContacts';
 
 const App = () => {
   const [zoom, setZoom] = useState('8');
@@ -34,8 +36,16 @@ const App = () => {
 
   let rigthPanel = null;
 
+  if (action === 'manage') {
+    rigthPanel = <ManagePanel handleAction={handleAction} />;
+  }
+
   if (action === 'details') {
     rigthPanel = <ContactDetails handleAction={handleAction} />;
+  }
+
+  if (action === 'filter') {
+    rigthPanel = <FilterContacts action={action} handleAction={handleAction} />;
   }
 
   if (action === 'add' || action === 'modify') {
