@@ -3,12 +3,13 @@ import { useCallback } from 'react';
 import { useAppContext } from 'providers/AppProvider';
 import { randomContacts, randomId, randomInt } from 'utils/random';
 import { setData } from 'utils/setData';
+import { Contact, GenerateOptions } from 'Types';
 
 export const useAppActions = () => {
   const { state, dispatch } = useAppContext();
 
   const addContact = useCallback(
-    (values) => {
+    (values: Partial<GenerateOptions>) => {
       const randomContact = randomContacts(1)[0];
       const newContacts = [
         ...state.contacts,
@@ -39,14 +40,16 @@ export const useAppActions = () => {
   );
 
   const modifyContact = useCallback(
-    (modifiedContact) => {
-      const updatedContacts = state.contacts.map((contact: { contactId: number | string; }) => {
-        if (contact.contactId === modifiedContact.contactId) {
-          return modifiedContact;
-        }
+    (modifiedContact: Contact) => {
+      const updatedContacts = state.contacts.map(
+        (contact: { contactId: number | string }) => {
+          if (contact.contactId === modifiedContact.contactId) {
+            return modifiedContact;
+          }
 
-        return contact;
-      });
+          return contact;
+        }
+      );
       const data = setData(updatedContacts);
       const notification = `Changes saved to contact ${modifiedContact.contactName} ${modifiedContact.contactSatellite}.`;
 
@@ -56,7 +59,7 @@ export const useAppActions = () => {
   );
 
   const setSelectedContact = useCallback(
-    (contact) => {
+    (contact: Contact) => {
       dispatch({ type: 'SET_SELECTED_CONTACT', payload: contact });
     },
     [dispatch]

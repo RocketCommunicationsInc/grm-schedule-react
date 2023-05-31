@@ -1,5 +1,5 @@
 export type GenerateOptions = {
-  iron: number;
+  iron: number | any;
   ground: string;
   priority: string;
   doy: number;
