@@ -13,13 +13,33 @@
   overflow: auto;
 }
 
-header {
-    display: flex;
-    justify-content: space-between;  
-    align-items: center;
+.filter-contact header {
+  display: flex;
+  justify-content: space-between;  
+  align-items: center;
 }
 
-footer {
-    display: flex;
-    justify-content: flex-end;
+.filter-contact header rux-icon {
+cursor: pointer;
+margin-left: -.5rem;
+}
+
+.filter-contact header rux-button {
+margin-right: -1.25rem;
+margin-left: 3.5rem;
+}
+
+rux-checkbox-group::part(container) {
+  box-shadow: none;
+  padding: 0;
+  margin-bottom: 1.5rem;
+  }
+
+  rux-checkbox-group:nth-of-type(2) rux-status {
+  display: inline-block;
+  margin-right: .5rem;
+  }
+
+  .filter-contact rux-input {
+    margin-bottom: 1.5rem;
   }

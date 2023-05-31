@@ -66,7 +66,17 @@ li:hover {
 li:not(:first-child) {
   border-top: 1px solid var(--color-background-base-default);
  }
- 
+
+ .Manage-contact header {
+   display: flex;
+   align-items: center;
+ }
+
+ .Manage-contact header rux-icon {
+  cursor: pointer;
+  margin-left: -.5rem;
+  margin-right: .75rem;
+}
 
   footer {
     display: flex;

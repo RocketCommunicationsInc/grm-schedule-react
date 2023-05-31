@@ -1,5 +1,13 @@
 import { SetStateAction } from 'react';
-import { RuxButton, RuxCheckbox, RuxCheckboxGroup, RuxContainer } from '@astrouxds/react';
+import {
+  RuxButton,
+  RuxCheckbox,
+  RuxCheckboxGroup,
+  RuxContainer,
+  RuxIcon,
+  RuxInput,
+  RuxStatus,
+} from '@astrouxds/react';
 
 import { useAppActions } from 'hooks/useAppActions';
 import './FilterContacts.css';
@@ -19,29 +27,65 @@ const ManageContact = ({ handleAction }: PropTypes) => {
 
   return (
     <RuxContainer className='filter-contact'>
-      <header slot='header'>Filter Contacts
-      <RuxButton borderless secondary icon='refresh'>Reset Filters</RuxButton>
+      <header slot='header'>
+        <RuxIcon icon='arrow-back' size='1.5rem' onClick={handleClose}/>
+        Filter Contacts
+        <RuxButton borderless secondary icon='refresh'>
+          Reset Filters
+        </RuxButton>
       </header>
 
-      <label>Priority</label>
-      <RuxCheckboxGroup>
-        <RuxCheckbox>#High</RuxCheckbox>
-        <RuxCheckbox>#Medium</RuxCheckbox>
-        <RuxCheckbox>#Low</RuxCheckbox>
+      <RuxCheckboxGroup label='Priority'>
+        <RuxCheckbox label='# High 1 - 66' />
+        <RuxCheckbox label='# Medium 67 - 133' />
+        <RuxCheckbox label='# Low 134 - 200' />
       </RuxCheckboxGroup>
 
-      <label>Status</label>
-      <RuxCheckboxGroup>
-        <RuxCheckbox>Critical</RuxCheckbox>
-        <RuxCheckbox>Caution</RuxCheckbox>
-        <RuxCheckbox>Normal</RuxCheckbox>
-        <RuxCheckbox>Stand By</RuxCheckbox>
+      <RuxCheckboxGroup label='Status'>
+        <RuxCheckbox>
+          <RuxStatus status='critical'/>
+          Critical
+        </RuxCheckbox>
+        <RuxCheckbox>
+          <RuxStatus status='caution' />
+          Caution
+        </RuxCheckbox>
+        <RuxCheckbox>
+          <RuxStatus status='normal' />
+          Normal
+        </RuxCheckbox>
+        <RuxCheckbox>
+          <RuxStatus status='standby' />
+          Stand By
+        </RuxCheckbox>
       </RuxCheckboxGroup>
-      <footer slot='footer'>
-        <RuxButton secondary onClick={handleClose}>
-          Close
-        </RuxButton>
-      </footer>
+
+      <RuxInput
+        type='search'
+        label='IRON'
+        placeholder='All IRONs'
+        size='small'
+      />
+
+      <RuxCheckboxGroup label='Ground Station'>
+        <RuxCheckbox label='LION-A' />
+        <RuxCheckbox label='PUMA-C' />
+        <RuxCheckbox label='TIGER-B' />
+      </RuxCheckboxGroup>
+
+      <RuxCheckboxGroup label='State'>
+        <RuxCheckbox label='Upcoming' />
+        <RuxCheckbox label='Executing' />
+        <RuxCheckbox label='Complete' />
+        <RuxCheckbox label='Failed' />
+      </RuxCheckboxGroup>
+
+      <RuxInput
+        type='search'
+        label='Equipment String'
+        placeholder='All Equipment'
+        size='small'
+      />
     </RuxContainer>
   );
 };

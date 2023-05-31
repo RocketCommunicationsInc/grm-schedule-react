@@ -1,5 +1,5 @@
 import { SetStateAction, useState } from 'react';
-import { RuxButton, RuxContainer } from '@astrouxds/react';
+import { RuxButton, RuxContainer, RuxIcon } from '@astrouxds/react';
 
 import { generateOptions } from 'utils/generateOptions';
 import { randomInt } from 'utils/random';
@@ -25,7 +25,6 @@ const setDefaultValues = (options: DefaulOptions) => ({
 });
 
 const ManageContact = ({ action, handleAction }: PropTypes) => {
-
   const { addContact, modifyContact, resetSelectedContact } = useAppActions();
   const {
     state: { selectedContact, modifyOptions },
@@ -74,13 +73,17 @@ const ManageContact = ({ action, handleAction }: PropTypes) => {
 
   return (
     <RuxContainer className='Manage-contact'>
-      <header slot='header'>{isAdd ? 'Add' : 'Modify'} Contact</header>
+       <header slot='header'>
+        <RuxIcon icon='arrow-back' size='1.5rem' onClick={handleClose} />
+        {isAdd ? 'Add' : 'Modify'}
+        &nbsp;Contact
+      </header>
 
       <ManageContactsForm {...{ options, values, setValues }} />
 
       <footer slot='footer'>
         <RuxButton secondary onClick={handleClose}>
-          Close
+          Cancel
         </RuxButton>
         <RuxButton
           onClick={isAdd ? handleAdd : handleModify}
