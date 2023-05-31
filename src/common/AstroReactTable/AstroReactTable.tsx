@@ -4,18 +4,25 @@ import { flexRender } from '@tanstack/react-table';
 
 import './AstroReactTable.scss';
 
+type PropTypes = {
+  table: any;
+  isSortable: boolean;
+  onRowClick: (original: any) => void;
+  setIsSelected: (original: any) => void;
+};
+
 export const AstroReactTable = ({
   table,
   isSortable = false,
   onRowClick,
   setIsSelected,
-}) => {
-  const handleRowClick = (original) => {
+}: PropTypes) => {
+  const handleRowClick = (original: any) => {
     if (!onRowClick) return;
     onRowClick(original);
   };
 
-  const handleIsSelected = (original) => {
+  const handleIsSelected = (original: any) => {
     if (setIsSelected) return setIsSelected(original);
     return false;
   };
@@ -23,7 +30,7 @@ export const AstroReactTable = ({
   return (
     <div className='Astro-react-table'>
       <header className='Astro-react-table__header'>
-        {table.getFlatHeaders().map(({ id, column, getContext }) => (
+        {table.getFlatHeaders().map(({ id, column, getContext }: any) => (
           <div
             key={id}
             className={classNames('Astro-react-table__col', {
@@ -36,6 +43,7 @@ export const AstroReactTable = ({
             {flexRender(column.columnDef.header, getContext())}
 
             {isSortable &&
+              //@ts-expect-error need to rip out classNames
               {
                 asc: <RuxIcon icon='arrow-drop-up' size='1.5rem' />,
                 desc: <RuxIcon icon='arrow-drop-down' size='1.5rem' />,
@@ -45,26 +53,28 @@ export const AstroReactTable = ({
       </header>
 
       <div className='Astro-react-table__body'>
-        {table.getRowModel().rows.map(({ id, getVisibleCells, original }) => (
-          <div
-            key={id}
-            onClick={() => handleRowClick(original)}
-            className={classNames('Astro-react-table__row', {
-              'Astro-react-table__selected': handleIsSelected(original),
-              'Astro-react-table__selectable': !!onRowClick,
-            })}
-          >
-            {getVisibleCells().map(({ id, column, getContext }) => (
-              <div
-                key={id}
-                className='Astro-react-table__cell'
-                style={column.columnDef.style}
-              >
-                {flexRender(column.columnDef.cell, getContext())}
-              </div>
-            ))}
-          </div>
-        ))}
+        {table
+          .getRowModel()
+          .rows.map(({ id, getVisibleCells, original }: any) => (
+            <div
+              key={id}
+              onClick={() => handleRowClick(original)}
+              className={classNames('Astro-react-table__row', {
+                'Astro-react-table__selected': handleIsSelected(original),
+                'Astro-react-table__selectable': !!onRowClick,
+              })}
+            >
+              {getVisibleCells().map(({ id, column, getContext }: any) => (
+                <div
+                  key={id}
+                  className='Astro-react-table__cell'
+                  style={column.columnDef.style}
+                >
+                  {flexRender(column.columnDef.cell, getContext())}
+                </div>
+              ))}
+            </div>
+          ))}
       </div>
     </div>
   );

@@ -10,7 +10,7 @@ export const setPassesId = ({ contactSatellite, contactEquipment }: any) => {
 
 const unique = (arr: any[]) => [...new Set(arr)];
 
-export const generateOptions = (modifyOptions: GenerateOptions) => {
+export const generateOptions = (modifyOptions?: GenerateOptions) => {
   const contacts = randomContacts(8);
 
   const irons = Array.from({ length: 8 }, () => randomInt(60_000, 90_000));

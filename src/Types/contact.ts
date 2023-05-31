@@ -1,4 +1,4 @@
-import { Status } from "./commonTypes";
+import { Status } from './commonTypes';
 
 export type Contact = {
   _id: string;

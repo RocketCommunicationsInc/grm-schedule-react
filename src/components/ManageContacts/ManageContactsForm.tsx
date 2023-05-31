@@ -1,16 +1,23 @@
 import { RuxDatetime, RuxInput, RuxOption, RuxSelect } from '@astrouxds/react';
+import { DefaulOptions } from 'Types';
 
-const ManageContactsForm = ({ options, values, setValues }) => {
-  const handleSelectPass = (i) => {
-    setValues((prev) => ({
+type PropTypes = {
+  options: DefaulOptions;
+  values: any;
+  setValues: (prev: any) => void;
+};
+
+const ManageContactsForm = ({ options, values, setValues }: PropTypes) => {
+  const handleSelectPass = (i: number) => {
+    setValues((prev: { pass: number }) => ({
       ...prev,
       pass: prev.pass === i ? -1 : i,
       dirty: true,
     }));
   };
 
-  const handleSelect = (key, value) => {
-    setValues((prev) => ({ ...prev, [key]: value, dirty: true }));
+  const handleSelect = (key: string, value: string | string[] | undefined) => {
+    setValues((prev: number[]) => ({ ...prev, [key]: value, dirty: true }));
   };
 
   return (
@@ -23,7 +30,7 @@ const ManageContactsForm = ({ options, values, setValues }) => {
           size='small'
           onRuxchange={(e) => handleSelect('iron', e.target.value)}
         >
-          {options.irons.map((iron) => (
+          {options.irons.map((iron: any) => (
             <RuxOption key={iron} label={iron} value={iron} />
           ))}
         </RuxSelect>
@@ -39,7 +46,10 @@ const ManageContactsForm = ({ options, values, setValues }) => {
         </RuxSelect>
 
         <RuxSelect label='DOY' disabled size='small'>
-          <RuxOption label={options.doy} value={options.doy} />
+          <RuxOption
+            label={options.doy.toString()}
+            value={options.doy.toString()}
+          />
         </RuxSelect>
 
         <div className='Contact-list'>
@@ -50,7 +60,7 @@ const ManageContactsForm = ({ options, values, setValues }) => {
           </div>
 
           <ul className='Contact-list__passes'>
-            {options.passes.map(({ id, aos, los }, i) => (
+            {options?.passes?.map(({ id, aos, los }, i) => (
               <li
                 key={id + i}
                 className={values.pass === i ? 'selected' : undefined}

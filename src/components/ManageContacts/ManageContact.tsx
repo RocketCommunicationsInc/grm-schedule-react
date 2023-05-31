@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { SetStateAction, useState } from 'react';
 import { RuxButton, RuxContainer } from '@astrouxds/react';
 
 import { generateOptions } from 'utils/generateOptions';
@@ -9,6 +9,10 @@ import ManageContactsForm from './ManageContactsForm';
 import './ManageContact.css';
 import { DefaulOptions } from 'Types';
 
+type PropTypes = {
+  action: any;
+  handleAction: (action?: SetStateAction<any>) => void;
+};
 const setDefaultValues = (options: DefaulOptions) => ({
   doy: options.doy,
   equipment: options.configs[0].value,
@@ -20,14 +24,15 @@ const setDefaultValues = (options: DefaulOptions) => ({
   dirty: false,
 });
 
-const ManageContact = ({ action, handleAction }: any) => {
+const ManageContact = ({ action, handleAction }: PropTypes) => {
+
   const { addContact, modifyContact, resetSelectedContact } = useAppActions();
   const {
     state: { selectedContact, modifyOptions },
   } = useAppContext();
 
   const [options, setOptions] = useState(() => generateOptions(modifyOptions));
-  const [values, setValues] = useState(() => setDefaultValues(options as any));
+  const [values, setValues] = useState(() => setDefaultValues(options));
   const isAdd = action === 'add';
 
   const handleAdd = () => {
@@ -38,7 +43,7 @@ const ManageContact = ({ action, handleAction }: any) => {
   };
 
   const handleModify = () => {
-    const { aos, los, id } = options.passes[values.pass as keyof typeof values.pass];
+    const { aos, los, id } = options.passes[values.pass as any];
     const contactAOS = new Date(aos).getTime();
     const contactLOS = new Date(los).getTime();
 

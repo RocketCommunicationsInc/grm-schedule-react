@@ -1,5 +1,5 @@
 export type GenerateOptions = {
-  iron: number[];
+  iron: number;
   ground: string;
   priority: string;
   doy: number;
@@ -12,12 +12,12 @@ export type GenerateOptions = {
 };
 
 export type DefaulOptions = {
-  irons: number[];
-  grounds: string;
-  priorities:string;
+  irons: (number | number[])[];
+  grounds: string[];
+  priorities: string[];
   doy: number;
-  pass: string;
+  pass: number;
   passes?: { id: string; aos: string; los: string }[];
-  modes: string;
-  configs: any;
+  modes: string[];
+  configs: any[];
 };
