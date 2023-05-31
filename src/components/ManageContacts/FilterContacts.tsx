@@ -1,8 +1,8 @@
 import { SetStateAction } from 'react';
-import { RuxButton, RuxContainer } from '@astrouxds/react';
+import { RuxButton, RuxCheckbox, RuxCheckboxGroup, RuxContainer } from '@astrouxds/react';
 
 import { useAppActions } from 'hooks/useAppActions';
-import './ManageContact.css';
+import './FilterContacts.css';
 
 type PropTypes = {
   action?: any;
@@ -18,8 +18,25 @@ const ManageContact = ({ handleAction }: PropTypes) => {
   };
 
   return (
-    <RuxContainer className='Manage-contact'>
-      <header slot='header'>Filter</header>
+    <RuxContainer className='filter-contact'>
+      <header slot='header'>Filter Contacts
+      <RuxButton borderless secondary icon='refresh'>Reset Filters</RuxButton>
+      </header>
+
+      <label>Priority</label>
+      <RuxCheckboxGroup>
+        <RuxCheckbox>#High</RuxCheckbox>
+        <RuxCheckbox>#Medium</RuxCheckbox>
+        <RuxCheckbox>#Low</RuxCheckbox>
+      </RuxCheckboxGroup>
+
+      <label>Status</label>
+      <RuxCheckboxGroup>
+        <RuxCheckbox>Critical</RuxCheckbox>
+        <RuxCheckbox>Caution</RuxCheckbox>
+        <RuxCheckbox>Normal</RuxCheckbox>
+        <RuxCheckbox>Stand By</RuxCheckbox>
+      </RuxCheckboxGroup>
       <footer slot='footer'>
         <RuxButton secondary onClick={handleClose}>
           Close

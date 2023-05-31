@@ -1,0 +1,25 @@
+.filter-contact {
+  height: 100%;
+}
+
+.filter-contact::part(container) {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  }
+
+.filter-contact::part(body) {
+  flex-grow: 1;
+  overflow: auto;
+}
+
+header {
+    display: flex;
+    justify-content: space-between;  
+    align-items: center;
+}
+
+footer {
+    display: flex;
+    justify-content: flex-end;
+  }
