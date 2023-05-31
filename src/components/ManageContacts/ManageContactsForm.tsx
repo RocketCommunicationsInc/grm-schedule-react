@@ -23,7 +23,7 @@ const ManageContactsForm = ({ options, values, setValues }: PropTypes) => {
   return (
     <form>
       <section>
-        <h6>1. Choose a Contact to Reserve</h6>
+        {/* <h6>1. Choose a Contact to Reserve</h6> */}
 
         <RuxSelect
           label='IRON'
@@ -45,12 +45,15 @@ const ManageContactsForm = ({ options, values, setValues }: PropTypes) => {
           ))}
         </RuxSelect>
 
-        <RuxSelect label='DOY' disabled size='small'>
+        <RuxSelect label='Priority' size='small'>
+        </RuxSelect>
+
+        {/* <RuxSelect label='Doy' disabled size='small'>
           <RuxOption
             label={options.doy.toString()}
             value={options.doy.toString()}
           />
-        </RuxSelect>
+        </RuxSelect> */}
 
         <div className='Contact-list'>
           <div className='Contact-list__header'>

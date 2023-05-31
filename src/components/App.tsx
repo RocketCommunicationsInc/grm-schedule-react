@@ -1,6 +1,6 @@
 import { SetStateAction, useState } from 'react';
 import classNames from 'classnames';
-import { RuxContainer, RuxNotification } from '@astrouxds/react';
+import { RuxContainer, RuxInput, RuxNotification } from '@astrouxds/react';
 
 import { useAppActions } from 'hooks/useAppActions';
 import { useAppContext } from 'providers/AppProvider';
@@ -63,12 +63,17 @@ const App = () => {
         open={!!state.notification}
         onRuxclosed={() => resetNotification()}
       />
-
       <main
         className={classNames('App-main', {
           notification: !!state.notification,
         })}
       >
+        <RuxInput
+          type='search'
+          placeholder='Search'
+          size='small'
+          className='main-search'
+        />
         <RuxContainer className='App-main__container'>
           <ContactsHeader {...{ isOpen, handleAction }} />
 
