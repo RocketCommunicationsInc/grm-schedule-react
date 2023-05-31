@@ -1,6 +1,6 @@
 import { SetStateAction, useState } from 'react';
 import classNames from 'classnames';
-import { RuxContainer, RuxInput, RuxNotification } from '@astrouxds/react';
+import { RuxContainer, RuxNotification } from '@astrouxds/react';
 
 import { useAppActions } from 'hooks/useAppActions';
 import { useAppContext } from 'providers/AppProvider';
@@ -14,6 +14,7 @@ import ManageContact from './ManageContacts/ManageContact';
 import './App.scss';
 import ManagePanel from './ManageContacts/ManagePanel';
 import FilterContacts from './ManageContacts/FilterContacts';
+import SearchBar from './SearchBar/SearchBar';
 
 const App = () => {
   const [zoom, setZoom] = useState('8');
@@ -68,12 +69,7 @@ const App = () => {
           notification: !!state.notification,
         })}
       >
-        <RuxInput
-          type='search'
-          placeholder='Search'
-          size='small'
-          className='main-search'
-        />
+        <SearchBar />
         <RuxContainer className='App-main__container'>
           <ContactsHeader {...{ isOpen, handleAction }} />
 
