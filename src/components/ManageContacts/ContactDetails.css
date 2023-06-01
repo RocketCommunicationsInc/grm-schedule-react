@@ -43,12 +43,12 @@ form {
   margin-right: 0.5rem;
 }
 
-rux-input::part(form-field) {
+.Contact-details rux-input::part(form-field) {
   flex-direction: row;
   align-items: center;
 }
 
-rux-input::part(label) {
+.Contact-details rux-input::part(label) {
   margin-right: var(--spacing-2);
   width: 13rem;
 }

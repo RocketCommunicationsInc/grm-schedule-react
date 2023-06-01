@@ -25,7 +25,6 @@ const ManagePanel = ({ handleAction }: PropTypes) => {
         Filter Contacts
         <RuxIcon icon='arrow-right' size='small' />
       </div>
-      
       <footer slot='footer' className='manage-panel-footer'>
         <RuxButton secondary onClick={handleClose}>
           Close
