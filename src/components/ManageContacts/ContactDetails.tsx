@@ -42,15 +42,11 @@ const ContactDetails = ({ handleAction }: any) => {
   return (
     <RuxContainer className='Contact-details'>
       <header slot='header'>
-        <h2>Contact Details</h2>
+        <RuxStatus status={contactStatus} />
+        {setPassesId(state.selectedContact)}
       </header>
 
       <form>
-        <h6>
-          <RuxStatus status={contactStatus} />
-          {setPassesId(state.selectedContact)}
-        </h6>
-
         <ReadOnlyInput label='IRON' value={contactName} />
         <ReadOnlyInput label='Ground Station' value={contactGround} />
         <ReadOnlyInput label='Rev' value={contactREV} />

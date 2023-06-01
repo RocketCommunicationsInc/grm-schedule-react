@@ -28,9 +28,30 @@
     }
   }
 
-  footer {
+  .Contact-details footer {
     display: flex;
     justify-content: flex-end;
     gap: var(--spacing-2);
   }
+
+  .Contact-details header {
+    display: flex;
+    flex-direction: row;
+  }
+
+  .Contact-details header rux-status {
+   margin-right: .5rem;
+  }
+
+rux-input::part(form-field) {
+    flex-direction: row;
+    align-items: center;
+  }
+
+rux-input::part(label) {
+    margin-right: var(--spacing-2);
+    width: 13rem;
+  }
+
+
 

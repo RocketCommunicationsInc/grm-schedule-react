@@ -9,7 +9,7 @@ type PropTypes = {
   isSortable: boolean;
   onRowClick: (original: any) => void;
   setIsSelected: (original: any) => void;
-};
+}
 
 export const AstroReactTable = ({
   table,
@@ -43,7 +43,7 @@ export const AstroReactTable = ({
             {flexRender(column.columnDef.header, getContext())}
 
             {isSortable &&
-              //@ts-expect-error need to rip out classNames
+            //@ts-expect-error need to rip out classNames
               {
                 asc: <RuxIcon icon='arrow-drop-up' size='1.5rem' />,
                 desc: <RuxIcon icon='arrow-drop-down' size='1.5rem' />,
@@ -53,28 +53,26 @@ export const AstroReactTable = ({
       </header>
 
       <div className='Astro-react-table__body'>
-        {table
-          .getRowModel()
-          .rows.map(({ id, getVisibleCells, original }: any) => (
-            <div
-              key={id}
-              onClick={() => handleRowClick(original)}
-              className={classNames('Astro-react-table__row', {
-                'Astro-react-table__selected': handleIsSelected(original),
-                'Astro-react-table__selectable': !!onRowClick,
-              })}
-            >
-              {getVisibleCells().map(({ id, column, getContext }: any) => (
-                <div
-                  key={id}
-                  className='Astro-react-table__cell'
-                  style={column.columnDef.style}
-                >
-                  {flexRender(column.columnDef.cell, getContext())}
-                </div>
-              ))}
-            </div>
-          ))}
+        {table.getRowModel().rows.map(({ id, getVisibleCells, original }: any) => (
+          <div
+            key={id}
+            onClick={() => handleRowClick(original)}
+            className={classNames('Astro-react-table__row', {
+              'Astro-react-table__selected': handleIsSelected(original),
+              'Astro-react-table__selectable': !!onRowClick,
+            })}
+          >
+            {getVisibleCells().map(({ id, column, getContext }: any) => (
+              <div
+                key={id}
+                className='Astro-react-table__cell'
+                style={column.columnDef.style}
+              >
+                {flexRender(column.columnDef.cell, getContext())}
+              </div>
+            ))}
+          </div>
+        ))}
       </div>
     </div>
   );
