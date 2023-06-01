@@ -6,7 +6,7 @@
   height: 100%;
   display: flex;
   flex-direction: column;
-  }
+}
 
 .Manage-contact::part(body) {
   flex-grow: 1;
@@ -18,11 +18,11 @@ section {
   display: flex;
   flex-direction: column;
   gap: var(--spacing-8);
-  }
+}
 
 section {
   gap: var(--spacing-4);
-  }
+}
 
 .Contact-list__header {
   background-color: var(--color-background-surface-header);
@@ -50,7 +50,7 @@ li {
   font-size: var(--font-size-sm);
   padding: var(--spacing-2) var(--spacing-4);
 }
-  
+
 li.selected {
   background-color: var(--color-background-surface-selected);
   box-shadow: -4px 0 0 0 var(--color-background-interactive-default);
@@ -65,21 +65,21 @@ li:hover {
 
 li:not(:first-child) {
   border-top: 1px solid var(--color-background-base-default);
- }
-
- .Manage-contact header {
-   display: flex;
-   align-items: center;
- }
-
- .Manage-contact header rux-icon {
-  cursor: pointer;
-  margin-left: -.5rem;
-  margin-right: .75rem;
 }
 
-  footer {
-    display: flex;
-    justify-content: flex-end;
-    gap: var(--spacing-2);
-  }
+.Manage-contact header {
+  display: flex;
+  align-items: center;
+}
+
+.Manage-contact header rux-icon {
+  cursor: pointer;
+  margin-left: -0.5rem;
+  margin-right: 0.75rem;
+}
+
+footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-2);
+}

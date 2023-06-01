@@ -3,55 +3,52 @@
 }
 
 .Contact-details::part(container) {
-    height: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.Contact-details::part(body) {
+  flex-grow: 1;
+  overflow: auto;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+
+  h6 {
+    align-items: center;
     display: flex;
-    flex-direction: column;
-  }
 
-  .Contact-details::part(body) {
-    flex-grow: 1;
-    overflow: auto;
-  }
-
-  form {
-    display: flex;
-    flex-direction: column;
-    gap: var(--spacing-4);
-
-    h6 {
-      align-items: center;
-      display: flex;
-
-      rux-status {
-        margin-right: var(--spacing-2);
-      }
+    rux-status {
+      margin-right: var(--spacing-2);
     }
   }
+}
 
-  .Contact-details footer {
-    display: flex;
-    justify-content: flex-end;
-    gap: var(--spacing-2);
-  }
+.Contact-details footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-2);
+}
 
-  .Contact-details header {
-    display: flex;
-    flex-direction: row;
-  }
+.Contact-details header {
+  display: flex;
+  flex-direction: row;
+}
 
-  .Contact-details header rux-status {
-   margin-right: .5rem;
-  }
+.Contact-details header rux-status {
+  margin-right: 0.5rem;
+}
 
 rux-input::part(form-field) {
-    flex-direction: row;
-    align-items: center;
-  }
+  flex-direction: row;
+  align-items: center;
+}
 
 rux-input::part(label) {
-    margin-right: var(--spacing-2);
-    width: 13rem;
-  }
-
-
-
+  margin-right: var(--spacing-2);
+  width: 13rem;
+}

@@ -11,10 +11,10 @@ import ContactsList from './ContactsList/ContactsList';
 import ContactsTimeline from './ContactsTimeline/ContactsTimeline';
 import ContactDetails from './ManageContacts/ContactDetails';
 import ManageContact from './ManageContacts/ManageContact';
-import './App.scss';
 import ManagePanel from './ManageContacts/ManagePanel';
 import FilterContacts from './ManageContacts/FilterContacts';
 import SearchBar from './SearchBar/SearchBar';
+import './App.css';
 
 const App = () => {
   const [zoom, setZoom] = useState('8');

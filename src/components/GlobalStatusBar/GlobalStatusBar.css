@@ -5,8 +5,8 @@
 }
 
 .Global-status-bar__status-indicators {
-    align-items: center;
-    display: flex;
-    justify-content: flex-end;
-    min-width: 16.875rem;
-  }
+  align-items: center;
+  display: flex;
+  justify-content: flex-end;
+  min-width: 16.875rem;
+}

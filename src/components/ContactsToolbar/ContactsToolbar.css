@@ -5,42 +5,42 @@
   justify-content: space-between;
 }
 .Contacts-toolbar__container {
-    display: flex;
-    gap: var(--spacing-4);
-    align-items: center;
-    width: 26.75rem;
-    justify-content: center;
-    color: var(--color-text-secondary);
-  }
+  display: flex;
+  gap: var(--spacing-4);
+  align-items: center;
+  width: 26.75rem;
+  justify-content: center;
+  color: var(--color-text-secondary);
+}
 
-  .Contacts-toolbar__time-box {
-    display: flex;
-    gap: var(--spacing-3);
-    background-color: var(--color-background-base-default);
-    padding: var(--spacing-2) var(--spacing-3);
-    border-radius: var(--radius-base);
-  }
+.Contacts-toolbar__time-box {
+  display: flex;
+  gap: var(--spacing-3);
+  background-color: var(--color-background-base-default);
+  padding: var(--spacing-2) var(--spacing-3);
+  border-radius: var(--radius-base);
+}
 
 .Contacts-toolbar__label {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-  }
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
 
 .Contacts-toolbar__zoom {
-    display: flex;
-    align-items: center;
-    width: 16rem;
-  }
+  display: flex;
+  align-items: center;
+  width: 16rem;
+}
 
-  .Contacts-toolbar__container .flex-start {
-    justify-content: flex-start;
-  }
+.Contacts-toolbar__container .flex-start {
+  justify-content: flex-start;
+}
 
-  .flex-end {
-    justify-content: flex-end;
-  }
+.flex-end {
+  justify-content: flex-end;
+}
 
-  .Contacts-toolbar__container .flex-start .gap-3 {
-    gap: var(--spacing-3);
-  }
+.Contacts-toolbar__container .flex-start .gap-3 {
+  gap: var(--spacing-3);
+}
