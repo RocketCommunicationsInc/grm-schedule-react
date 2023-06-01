@@ -34,6 +34,7 @@ const ContactsTimeline = ({ handleAction, zoom }: PropTypes) => {
   };
 
   return (
+    <div className='timeline-wrapper'>
     <RuxTimeline
       className='Contacts-timeline'
       start={state.start.toISOString()}
@@ -124,6 +125,7 @@ const ContactsTimeline = ({ handleAction, zoom }: PropTypes) => {
         <RuxRuler />
       </RuxTrack>
     </RuxTimeline>
+    </div>
   );
 };
 

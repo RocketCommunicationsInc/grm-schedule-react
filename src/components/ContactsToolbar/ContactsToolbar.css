@@ -2,15 +2,17 @@
   padding: var(--spacing-4);
   display: flex;
   align-items: center;
-  justify-content: space-between;
+  height: 3rem;
 }
+
 .Contacts-toolbar__container {
   display: flex;
   gap: var(--spacing-4);
   align-items: center;
-  width: 26.75rem;
-  justify-content: center;
+  width: 23.5rem;
   color: var(--color-text-secondary);
+  justify-content: flex-start;
+  margin-left: .75rem;
 }
 
 .Contacts-toolbar__time-box {
@@ -33,12 +35,9 @@
   width: 16rem;
 }
 
-.Contacts-toolbar__container .flex-start {
-  justify-content: flex-start;
-}
-
 .flex-end {
   justify-content: flex-end;
+  margin-left: 33.5rem;
 }
 
 .Contacts-toolbar__container .flex-start .gap-3 {

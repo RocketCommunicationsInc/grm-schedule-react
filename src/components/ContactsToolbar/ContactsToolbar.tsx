@@ -23,7 +23,7 @@ const ContactsToolbar = ({ view, setView, setZoom, zoom }: PropTypes) => {
 
   return (
     <div className='Contacts-toolbar'>
-      <div className='Contacts-toolbar__container flex-start gap-3'>
+      <div className='Contacts-toolbar__container'>
         <div className='Contacts-toolbar__time-box'>
           <span>{state.start.getFullYear()}</span>
           <span>{getDayOfYear(state.start)}</span>
