@@ -20,12 +20,10 @@ const ContactsList = ({ handleAction }: PropTypes) => {
   const { setSelectedContact } = useAppActions();
   const { state } = useAppContext();
   const selectedId = state.selectedContact?.contactId;
-  console.log(state.selectedContact?.contactId);
   const handleSelected = (row: { contactId: any }) =>
     row.contactId === selectedId;
 
   const handleRowClick = (row: any) => {
-    console.log(row, 'row');
     setSelectedContact(row);
     handleAction('details');
   };

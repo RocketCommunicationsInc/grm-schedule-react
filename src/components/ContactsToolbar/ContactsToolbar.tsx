@@ -1,5 +1,4 @@
 import { RuxButton, RuxSegmentedButton, RuxSlider } from '@astrouxds/react';
-
 import { setLabels } from 'utils/labels';
 import { getDayOfYear } from 'utils/date';
 import { useAppContext } from 'providers/AppProvider';
