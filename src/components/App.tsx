@@ -1,4 +1,4 @@
-import { SetStateAction, useState } from 'react';
+import { useState } from 'react';
 import classNames from 'classnames';
 import { RuxContainer, RuxNotification } from '@astrouxds/react';
 
@@ -20,11 +20,11 @@ const App = () => {
   const [zoom, setZoom] = useState('8');
   const [view, setView] = useState('List');
   const [isOpen, setIsOpen] = useState(false);
-  const [action, setAction] = useState('');
+  const [action, setAction] = useState<string>('');
   const { resetNotification } = useAppActions();
   const { state } = useAppContext();
 
-  const handleAction = (action: SetStateAction<string>) => {
+  const handleAction = (action: string) => {
     if (action) {
       setIsOpen(true);
       setAction(action);

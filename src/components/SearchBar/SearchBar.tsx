@@ -7,7 +7,6 @@ const SearchBar = () => {
   // const [searchValue, setSearchValue] = useState('');
 
   return (
-    <>
       <RuxInput
         type='search'
         placeholder='Search'
@@ -15,7 +14,6 @@ const SearchBar = () => {
         className='main-search'
         // onRuxinput={(event) => setSearchValue(event.target.value)}
       />
-    </>
   );
 };
 
