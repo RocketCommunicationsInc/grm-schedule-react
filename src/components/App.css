@@ -24,7 +24,8 @@
   flex-grow: 1;
   display: flex;
   --body-padding: 0;
-  overflow: auto;
+  overflow-x: auto;
+  overflow-y: hidden;
 }
 
 .App-main__left-panel {
