@@ -13,7 +13,7 @@ const TwoDigitTime = ({ time }) => (
 const columnHelper = createColumnHelper();
 
 export const columnDefs = [
-  columnHelper.accessor('contactResolutionStatus', {
+  columnHelper.accessor('contactPriority', {
     header: 'Priority',
     cell: (info) => info.getValue().toUpperCase(),
     style: { minWidth: 80 },

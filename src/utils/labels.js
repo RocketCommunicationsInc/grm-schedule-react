@@ -17,13 +17,13 @@ const setLabelsCount = ({ type, contacts }) => {
     }
     case 'complete': {
       const complete = contacts.filter((c) => {
-        return c.contactResolution === 'complete';
+        return c.contactState === 'complete';
       });
       return complete.length;
     }
     case 'failed': {
       const failed = contacts.filter((c) => {
-        return c.contactResolution === 'failed';
+        return c.contactState === 'failed';
       });
       return failed.length || 0;
     }
