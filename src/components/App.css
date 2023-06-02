@@ -1,0 +1,51 @@
+.App-main {
+  --right-panel-width: 26.25rem;
+  --top-deduction: 8rem;
+
+  height: calc(100vh - var(--top-deduction));
+  padding: var(--spacing-4) var(--spacing-6);
+}
+
+.App-main.notification {
+  --top-deduction: 9.25rem;
+}
+
+.App-main__container {
+  height: 100%;
+}
+
+.App-main__container::part(container) {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.App-main__container::part(body) {
+  flex-grow: 1;
+  display: flex;
+  --body-padding: 0;
+  overflow: auto;
+}
+
+.App-main__left-panel {
+  width: 100%;
+  transition: width 0.2s linear;
+}
+
+.App-main__left-panel.isOpen {
+  width: calc(100% - var(--right-panel-width));
+  transition: width 0.3s linear;
+}
+
+.App-main__right-panel {
+  box-shadow: -4px 0px 2px 0px var(--color-background-base-default);
+  width: 0;
+  overflow: hidden;
+  transition: width 0.2s linear;
+  z-index: 100;
+}
+
+.App-main__right-panel.isOpen {
+  transition: width 0.3s linear;
+  width: var(--right-panel-width);
+}

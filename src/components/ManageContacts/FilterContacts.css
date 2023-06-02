@@ -1,0 +1,45 @@
+.filter-contact {
+  height: 100%;
+}
+
+.filter-contact::part(container) {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+
+.filter-contact::part(body) {
+  flex-grow: 1;
+  overflow: auto;
+}
+
+.filter-contact header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.filter-contact header rux-icon {
+  cursor: pointer;
+  margin-left: -0.5rem;
+}
+
+.filter-contact header rux-button {
+  margin-right: -1.25rem;
+  margin-left: 3.5rem;
+}
+
+rux-checkbox-group::part(container) {
+  box-shadow: none;
+  padding: 0;
+  margin-bottom: 1.5rem;
+}
+
+rux-checkbox-group:nth-of-type(2) rux-status {
+  display: inline-block;
+  margin-right: 0.5rem;
+}
+
+.filter-contact rux-input {
+  margin-bottom: 1.5rem;
+}
