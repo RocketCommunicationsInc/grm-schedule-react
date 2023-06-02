@@ -21,7 +21,7 @@
 }
 
 rux-time-region::part(container) {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .timeline-wrapper {

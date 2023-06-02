@@ -12,7 +12,7 @@
   width: 23.5rem;
   color: var(--color-text-secondary);
   justify-content: flex-start;
-  margin-left: .75rem;
+  margin-left: 0.75rem;
 }
 
 .Contacts-toolbar__time-box {
