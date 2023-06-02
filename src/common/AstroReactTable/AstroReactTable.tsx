@@ -1,4 +1,3 @@
-import classNames from 'classnames';
 import { RuxIcon } from '@astrouxds/react';
 import { flexRender } from '@tanstack/react-table';
 
@@ -33,17 +32,14 @@ export const AstroReactTable = ({
         {table.getFlatHeaders().map(({ id, column, getContext }: any) => (
           <div
             key={id}
-            className={classNames('Astro-react-table__col', {
-              'Astro-react-table__sorted': isSortable && !!column.getIsSorted(),
-              'Astro-react-table__sortable': isSortable,
-            })}
+            className={isSortable && !!column.getIsSorted() ? 'Astro-react-table__col Astro-react-table__sorted' : 'Astro-react-table__col' || isSortable ? 'Astro-react-table__col Astro-react-table__sortable' : 'Astro-react-table__col'}
             style={column.columnDef.style}
             onClick={isSortable ? column.getToggleSortingHandler() : undefined}
           >
             {flexRender(column.columnDef.header, getContext())}
 
             {isSortable &&
-            //@ts-expect-error need to rip out classNames
+            //@ts-expect-error with types
               {
                 asc: <RuxIcon icon='arrow-drop-up' size='1.5rem' />,
                 desc: <RuxIcon icon='arrow-drop-down' size='1.5rem' />,
@@ -57,10 +53,7 @@ export const AstroReactTable = ({
           <div
             key={id}
             onClick={() => handleRowClick(original)}
-            className={classNames('Astro-react-table__row', {
-              'Astro-react-table__selected': handleIsSelected(original),
-              'Astro-react-table__selectable': !!onRowClick,
-            })}
+            className={handleIsSelected(original) ? 'Astro-react-table__row Astro-react-table__selected' : 'Astro-react-table__row' || !!onRowClick ? 'Astro-react-table__row Astro-react-table__selectable' : 'Astro-react-table__row'}
           >
             {getVisibleCells().map(({ id, column, getContext }: any) => (
               <div
