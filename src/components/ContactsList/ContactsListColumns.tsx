@@ -3,7 +3,7 @@ import { RuxDatetime, RuxStatus } from '@astrouxds/react';
 import { createColumnHelper } from '@tanstack/react-table';
 
 type PropTypes = {
-  time: Date
+  time: Date;
 };
 
 const TwoDigitTime = ({ time }: PropTypes) => (
@@ -26,7 +26,7 @@ export const columnDefs = [
   columnHelper.accessor('contactStatus', {
     header: 'Status',
     cell: (info) => <RuxStatus status={info.getValue()} />,
-    style: { minWidth: 68, justifyContent: "center" },
+    style: { minWidth: 68, justifyContent: 'center' },
   }),
   columnHelper.accessor('contactName', {
     header: 'IRON',
