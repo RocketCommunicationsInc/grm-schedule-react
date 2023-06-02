@@ -18,7 +18,7 @@ const TwoDigitTime = ({ time }: PropTypes) => (
 const columnHelper = createColumnHelper<any>();
 
 export const columnDefs = [
-  columnHelper.accessor('contactResolutionStatus', {
+  columnHelper.accessor('contactPriority', {
     header: 'Priority',
     cell: (info) => info.getValue(),
     style: { maxWidth: 55 },

@@ -6,8 +6,8 @@ const setLabelsCount = ({ type, contacts }: any) => {
       return contacts.length;
     }
     case 'upcoming': {
-      const upcoming = contacts.filter((c: { contactResolution: string }) => {
-        return c.contactResolution === 'scheduled';
+      const upcoming = contacts.filter((c: { contactState: string }) => {
+        return c.contactState === 'scheduled';
       });
       return upcoming.length || 0;
     }
@@ -18,14 +18,14 @@ const setLabelsCount = ({ type, contacts }: any) => {
       return excuting.length || 0;
     }
     case 'complete': {
-      const complete = contacts.filter((c: { contactResolution: string }) => {
-        return c.contactResolution === 'complete';
+      const complete = contacts.filter((c: { contactState: string }) => {
+        return c.contactState === 'complete';
       });
       return complete.length;
     }
     case 'failed': {
-      const failed = contacts.filter((c: { contactResolution: string }) => {
-        return c.contactResolution === 'failed';
+      const failed = contacts.filter((c: { contactState: string }) => {
+        return c.contactState === 'failed';
       });
       return failed.length || 0;
     }
