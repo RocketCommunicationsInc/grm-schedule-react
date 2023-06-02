@@ -34,22 +34,22 @@ const App = () => {
     setAction('');
   };
 
-  let rigthPanel = null;
+  let rightPanel = null;
 
   if (action === 'manage') {
-    rigthPanel = <ManagePanel handleAction={handleAction} />;
+    rightPanel = <ManagePanel handleAction={handleAction} />;
   }
 
   if (action === 'details') {
-    rigthPanel = <ContactDetails handleAction={handleAction} />;
+    rightPanel = <ContactDetails handleAction={handleAction} />;
   }
 
   if (action === 'filter') {
-    rigthPanel = <FilterContacts action={action} handleAction={handleAction} />;
+    rightPanel = <FilterContacts action={action} handleAction={handleAction} />;
   }
 
   if (action === 'add' || action === 'modify') {
-    rigthPanel = <ManageContact action={action} handleAction={handleAction} />;
+    rightPanel = <ManageContact action={action} handleAction={handleAction} />;
   }
 
   return (
@@ -87,7 +87,7 @@ const App = () => {
               isOpen ? 'App-main__right-panel isOpen' : 'App-main__right-panel'
             }
           >
-            {rigthPanel}
+            {rightPanel}
           </aside>
         </RuxContainer>
       </main>

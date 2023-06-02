@@ -2,17 +2,16 @@
   padding: var(--spacing-4);
   display: flex;
   align-items: center;
-  overflow: hidden;
+  justify-content: space-between;
 }
 
 .Contacts-toolbar__container {
   display: flex;
   gap: var(--spacing-4);
   align-items: center;
-  width: 23.5rem;
   color: var(--color-text-secondary);
-  justify-content: flex-start;
-  margin-left: 0.75rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
 .Contacts-toolbar__time-box {
@@ -37,7 +36,7 @@
 
 .flex-end {
   justify-content: flex-end;
-  margin-left: 33.5rem;
+  width: 60%;
 }
 
 .Contacts-toolbar__container .flex-start .gap-3 {
@@ -45,6 +44,5 @@
 }
 
 rux-segmented-button {
-  display: flex;
-  justify-content: flex-end;
+  margin-right: 1rem;
 }
