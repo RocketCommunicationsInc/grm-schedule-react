@@ -21,12 +21,12 @@ export const columnDefs = [
   columnHelper.accessor('contactPriority', {
     header: 'Priority',
     cell: (info) => info.getValue(),
-    style: { maxWidth: 55 },
+    style: { minWidth: 50, maxWidth: 50 },
   }),
   columnHelper.accessor('contactStatus', {
     header: 'Status',
     cell: (info) => <RuxStatus status={info.getValue()} />,
-    style: { minWidth: 68, justifyContent: 'center' },
+    style: { minWidth: 60, justifyContent: 'center' },
   }),
   columnHelper.accessor('contactName', {
     header: 'IRON',
