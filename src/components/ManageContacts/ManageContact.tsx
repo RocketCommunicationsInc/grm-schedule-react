@@ -67,13 +67,14 @@ const ManageContact = ({ action, handleAction }: PropTypes) => {
   };
 
   const handleClose = () => {
-    handleAction();
+    // TODO: Add form verification of changes
+    isAdd ? handleAction('manage') : handleAction();
     resetSelectedContact();
   };
 
   return (
     <RuxContainer className='Manage-contact'>
-       <header slot='header'>
+      <header slot='header'>
         <RuxIcon icon='arrow-back' size='1.5rem' onClick={handleClose} />
         {isAdd ? 'Add' : 'Modify'}
         &nbsp;Contact
