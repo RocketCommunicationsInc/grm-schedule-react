@@ -12,13 +12,13 @@
 
 .App-main__container {
   height: 100%;
+  padding-bottom: var(--spacing-4);
 }
 
 .App-main__container::part(container) {
   height: 100%;
   display: flex;
   flex-direction: column;
-  position: relative;
 }
 
 .App-main__container::part(body) {
