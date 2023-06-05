@@ -1,4 +1,4 @@
-import { SetStateAction, useState } from 'react';
+import { useState } from 'react';
 import { RuxButton, RuxContainer, RuxIcon } from '@astrouxds/react';
 
 import { generateOptions } from 'utils/generateOptions';
@@ -7,11 +7,11 @@ import { useAppContext } from 'providers/AppProvider';
 import { useAppActions } from 'hooks/useAppActions';
 import ManageContactsForm from './ManageContactsForm';
 import './ManageContact.css';
-import { DefaulOptions } from 'Types';
+import type { DefaulOptions, Actions } from 'Types';
 
 type PropTypes = {
   action: any;
-  handleAction: (action?: SetStateAction<any>) => void;
+  handleAction: (action?: Actions) => void;
 };
 const setDefaultValues = (options: DefaulOptions) => ({
   doy: options.doy,

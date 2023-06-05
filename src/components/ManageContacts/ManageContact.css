@@ -83,3 +83,11 @@ footer {
   justify-content: flex-end;
   gap: var(--spacing-2);
 }
+
+.Manage-contact .start-stop-time {
+  display: flex;
+}
+
+.Manage-contact .start-stop-time div {
+  width: 8rem;
+}
