@@ -74,13 +74,14 @@ const App = () => {
             }
           >
             <ContactsToolBar {...{ view, setView, setZoom, zoom }} />
-
+            {/* <div className='main-container-wrapper'> */}
             {view === 'List' ? (
               <ContactsList handleAction={handleAction} />
             ) : (
               <ContactsTimeline handleAction={handleAction} zoom={zoom} />
             )}
           </div>
+          {/* </div> */}
 
           <aside
             className={

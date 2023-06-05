@@ -26,8 +26,18 @@ rux-time-region::part(container) {
 
 .timeline-wrapper {
   position: relative;
-  display: flex;
-  flex-direction: row;
+  overflow: auto;
+  height: 100%;
+}
+
+.timeline-wrapper rux-track[slot='ruler'] {
+  background-color: red;
+}
+
+rux-timeline.Contacts-timeline::-webkit-scrollbar-track {
+}
+
+.timeline-wrapper::-webkit-scrollbar-track {
 }
 
 .timeline-wrapper::-webkit-scrollbar:horizontal {
@@ -36,5 +46,4 @@ rux-time-region::part(container) {
 }
 
 .timeline-wrapper rux-timeline rux-track::part(container) {
-  width: 100%;
 }
