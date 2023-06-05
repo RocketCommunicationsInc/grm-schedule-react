@@ -16,15 +16,17 @@ import FilterContacts from './ManageContacts/FilterContacts';
 import SearchBar from './SearchBar/SearchBar';
 import './App.css';
 
+import type { Actions } from 'Types';
+
 const App = () => {
   const [zoom, setZoom] = useState('8');
   const [view, setView] = useState('List');
   const [isOpen, setIsOpen] = useState(false);
-  const [action, setAction] = useState<string>('');
+  const [action, setAction] = useState<Actions>('');
   const { resetNotification } = useAppActions();
   const { state } = useAppContext();
 
-  const handleAction = (action: string) => {
+  const handleAction = (action?: Actions) => {
     if (action) {
       setIsOpen(true);
       setAction(action);

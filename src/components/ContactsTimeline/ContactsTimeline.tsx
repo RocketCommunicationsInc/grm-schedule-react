@@ -13,10 +13,10 @@ import { useAppActions } from 'hooks/useAppActions';
 import { useTracks } from './useTracks';
 import { usePlayhead } from './usePlayhead';
 import './ContactsTimeline.css';
-import { Contact, Status } from 'Types';
+import type { Contact, Status, Actions } from 'Types';
 
 type PropTypes = {
-  handleAction: (e: string) => void;
+  handleAction: (action: Actions) => void;
   zoom: any;
 };
 
