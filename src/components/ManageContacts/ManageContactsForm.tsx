@@ -23,8 +23,6 @@ const ManageContactsForm = ({ options, values, setValues }: PropTypes) => {
   return (
     <form>
       <section>
-        {/* <h6>1. Choose a Contact to Reserve</h6> */}
-
         <RuxSelect
           label='IRON'
           size='small'
@@ -45,15 +43,19 @@ const ManageContactsForm = ({ options, values, setValues }: PropTypes) => {
           ))}
         </RuxSelect>
 
-        <RuxSelect label='Priority' size='small'>
+        <RuxSelect
+          label='Priority'
+          size='small'
+          onRuxchange={(e) => handleSelect('priority', e.target.value)}
+        >
+          {options.priorities.map((priority) => (
+            <RuxOption key={priority} label={priority} value={priority} />
+          ))}
         </RuxSelect>
 
-        {/* <RuxSelect label='Doy' disabled size='small'>
-          <RuxOption
-            label={options.doy.toString()}
-            value={options.doy.toString()}
-          />
-        </RuxSelect> */}
+        <label>
+          Passes {options?.passes?.length ? `(${options?.passes?.length})` : ''}
+        </label>
 
         <div className='Contact-list'>
           <div className='Contact-list__header'>
@@ -86,21 +88,36 @@ const ManageContactsForm = ({ options, values, setValues }: PropTypes) => {
             ))}
           </ul>
         </div>
+
+        <div className='start-stop-time'>
+          <div>Pre Pass Start:</div>
+          {values.pass !== -1 && options.passes ? (
+            <RuxDatetime
+              date={options?.passes[values.pass].aos}
+              hour='2-digit'
+              minute='2-digit'
+              second='2-digit'
+            />
+          ) : (
+            '---'
+          )}
+        </div>
+        <div className='start-stop-time'>
+          <div>Post Pass Stop: </div>
+          {values.pass !== -1 && options.passes ? (
+            <RuxDatetime
+              date={options?.passes[values.pass].los}
+              hour='2-digit'
+              minute='2-digit'
+              second='2-digit'
+            />
+          ) : (
+            '---'
+          )}
+        </div>
       </section>
 
       <section>
-        <h6>2. Configure Reservation Options</h6>
-
-        <RuxSelect
-          label='Priority'
-          size='small'
-          onRuxchange={(e) => handleSelect('priority', e.target.value)}
-        >
-          {options.priorities.map((priority) => (
-            <RuxOption key={priority} label={priority} value={priority} />
-          ))}
-        </RuxSelect>
-
         <RuxSelect
           label='Command Mode'
           size='small'
