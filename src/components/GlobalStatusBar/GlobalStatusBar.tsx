@@ -52,7 +52,16 @@ const GlobalStatusBar = () => {
       <RuxClock />
 
       <div className='Global-status-bar__status-indicators' slot='right-side'>
-        <RuxMonitoringProgressIcon label='UCA' progress={count} range={[]} />
+        <RuxMonitoringProgressIcon
+          label='UCA'
+          progress={count}
+          range={[
+            {
+              threshold: 99,
+              status: 'caution',
+            },
+          ]}
+        />
       </div>
     </RuxGlobalStatusBar>
   );
