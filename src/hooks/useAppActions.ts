@@ -58,22 +58,27 @@ export const useAppActions = () => {
     [dispatch, state.contacts]
   );
 
-  const deleteContact = useCallback((deleteContact: Contact) => {
-    if(state.selectedContact) {
-      // delete state.selectedContact
-      // console.log(state.selectedContact, "second state")
-    
-    const updatedContacts = state.contacts.filter((contact: Contact) => contact.contactId !== state.selectedContact.contactId)
-    console.log(updatedContacts)
+  const deleteContact = useCallback(
+    (deleteContact: Contact) => {
+      if (state.selectedContact) {
+        const updatedContacts = state.contacts.filter(
+          (contact: Contact) =>
+            contact.contactId !== state.selectedContact.contactId
+        );
 
-    const data = setData(updatedContacts);
-    console.log(data, "data")
-    const notification = `Contact ${deleteContact.contactName} ${deleteContact.contactSatellite} has been deleted.`;
-    console.log(notification, "notification")
+        const data = setData(updatedContacts);
+        const notification = `Contact ${deleteContact.contactName} ${deleteContact.contactSatellite} has been deleted.`;
 
-    dispatch({ type: 'DELETE_CONTACT', payload: data, notification, ...state});
-    }
-  }, [dispatch, state]);
+        dispatch({
+          type: 'DELETE_CONTACT',
+          payload: data,
+          notification,
+          ...state,
+        });
+      }
+    },
+    [dispatch, state]
+  );
 
   const setSelectedContact = useCallback(
     (contact: Contact) => {

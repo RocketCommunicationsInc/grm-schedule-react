@@ -41,8 +41,8 @@ const ContactDetails = ({ handleAction }: any) => {
     contactEndTimestamp,
   } = state.selectedContact;
 
-  //const contactStateCapitalized =
-  // contactState.charAt(0).toUpperCase() + contactState.slice(1);
+  const contactStateCapitalized =
+    contactState.charAt(0).toUpperCase() + contactState.slice(1);
 
   const handleClose = () => {
     handleAction();
@@ -50,7 +50,6 @@ const ContactDetails = ({ handleAction }: any) => {
   };
 
   const handleDelete = () => {
-    console.log(state.selectedContact, 'selected in comp');
     deleteContact(state.selectedContact);
     handleClose();
   };
@@ -64,7 +63,7 @@ const ContactDetails = ({ handleAction }: any) => {
 
       <form>
         <ReadOnlyInput label='Priority' value={contactPriority} />
-        <ReadOnlyInput label='State' value={contactState} />
+        <ReadOnlyInput label='State' value={contactStateCapitalized} />
         <ReadOnlyInput label='IRON' value={contactName} />
         <ReadOnlyInput label='Ground Station' value={contactGround} />
         <ReadOnlyInput label='REV' value={contactREV} />
