@@ -69,8 +69,6 @@ export const useAppActions = () => {
         const data = setData(updatedContacts);
         const notification = `Contact ${deleteContact.contactName} ${deleteContact.contactSatellite} has been deleted.`;
 
-        console.log(state.notification);
-
         dispatch({
           type: 'DELETE_CONTACT',
           payload: { ...data, notification },
