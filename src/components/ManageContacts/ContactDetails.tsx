@@ -22,7 +22,7 @@ const ReadOnlyInput = ({ label, value }: PropTypes) => (
 );
 
 const ContactDetails = ({ handleAction }: any) => {
-  const { resetSelectedContact } = useAppActions();
+  const { resetSelectedContact, deleteContact } = useAppActions();
   const { state } = useAppContext();
   const {
     contactAOS,
@@ -41,12 +41,18 @@ const ContactDetails = ({ handleAction }: any) => {
     contactEndTimestamp,
   } = state.selectedContact;
 
-  const cStateCapitalized =
-    contactState.charAt(0).toUpperCase() + contactState.slice(1);
+  //const contactStateCapitalized =
+  // contactState.charAt(0).toUpperCase() + contactState.slice(1);
 
   const handleClose = () => {
     handleAction();
     resetSelectedContact();
+  };
+
+  const handleDelete = () => {
+    console.log(state.selectedContact, 'selected in comp');
+    deleteContact(state.selectedContact);
+    handleClose();
   };
 
   return (
@@ -58,7 +64,7 @@ const ContactDetails = ({ handleAction }: any) => {
 
       <form>
         <ReadOnlyInput label='Priority' value={contactPriority} />
-        <ReadOnlyInput label='State' value={cStateCapitalized} />
+        <ReadOnlyInput label='State' value={contactState} />
         <ReadOnlyInput label='IRON' value={contactName} />
         <ReadOnlyInput label='Ground Station' value={contactGround} />
         <ReadOnlyInput label='REV' value={contactREV} />
@@ -84,7 +90,7 @@ const ContactDetails = ({ handleAction }: any) => {
       </form>
 
       <footer slot='footer'>
-        <RuxButton size='small' secondary onClick={handleClose}>
+        <RuxButton size='small' secondary onClick={handleDelete}>
           Delete
         </RuxButton>
         <RuxButton size='small' secondary onClick={handleClose}>
