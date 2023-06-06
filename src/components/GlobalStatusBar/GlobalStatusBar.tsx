@@ -19,30 +19,12 @@ type RangeItem = {
 };
 
 const range: RangeItem[] = [
-  {
-    threshold: 17,
-    status: 'off',
-  },
-  {
-    threshold: 33,
-    status: 'critical',
-  },
-  {
-    threshold: 50,
-    status: 'serious',
-  },
-  {
-    threshold: 66,
-    status: 'caution',
-  },
-  {
-    threshold: 83,
-    status: 'standby',
-  },
-  {
-    threshold: 33,
-    status: 'normal',
-  },
+  { threshold: 17, status: 'off' },
+  { threshold: 33, status: 'critical' },
+  { threshold: 50, status: 'serious' },
+  { threshold: 66, status: 'caution' },
+  { threshold: 83, status: 'standby' },
+  { threshold: 33, status: 'normal' },
 ];
 
 const GlobalStatusBar = () => {
