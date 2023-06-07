@@ -8,8 +8,10 @@
   letter-spacing: var(--font-heading-5-letter-spacing);
   line-height: var(--font-heading-5-line-height);
   box-shadow: var(--shadow-overlay);
-  min-width: fit-content;
   padding-right: 1rem;
+  flex: 1;
+  overflow: auto;
+  width: 100%;
 }
 
 .Astro-react-table__sortable,

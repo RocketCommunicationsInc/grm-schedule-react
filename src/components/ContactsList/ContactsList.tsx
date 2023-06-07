@@ -37,7 +37,7 @@ const ContactsList = ({ handleAction }: PropTypes) => {
   });
 
   return (
-    <>
+    <div className='table-wrapper'>
       <AstroReactTableHeader isSortable table={table} />
       <div className='Contacts-list'>
         <AstroReactTable
@@ -46,7 +46,7 @@ const ContactsList = ({ handleAction }: PropTypes) => {
           setIsSelected={handleSelected}
         />
       </div>
-    </>
+    </div>
   );
 };
 
