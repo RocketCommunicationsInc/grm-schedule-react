@@ -1,12 +1,12 @@
-.Contacts-list {
-  height: calc(100vh - 22.5rem);
-  overflow: auto;
-}
-
 .table-wrapper {
   overflow: auto;
-  width: 100%;
-  display: flex;
-  flex-direction: column;
+  position: relative;
+  border-top: 2px solid var(--color-background-base-default);
+}
+
+.Contacts-list {
   min-width: fit-content;
+  overflow-x: auto;
+  position: relative;
+  height: calc(100vh - 22.5rem);
 }
