@@ -1,5 +1,15 @@
-import { RuxDatetime, RuxInput, RuxOption, RuxSelect } from '@astrouxds/react';
-import { DefaulOptions } from 'Types';
+import {
+  RuxDatetime,
+  RuxOption,
+  RuxSelect,
+  RuxTextarea,
+} from '@astrouxds/react';
+import EquipmentIcons from 'common/EquipmentIcons/EquipmentIcons';
+import {
+  RuxTextareaCustomEvent,
+  RuxInputCustomEvent,
+} from '@astrouxds/astro-web-components/dist/types/components';
+import type { DefaulOptions } from 'Types';
 
 type PropTypes = {
   options: DefaulOptions;
@@ -18,6 +28,18 @@ const ManageContactsForm = ({ options, values, setValues }: PropTypes) => {
 
   const handleSelect = (key: string, value: string | string[] | undefined) => {
     setValues((prev: number[]) => ({ ...prev, [key]: value, dirty: true }));
+  };
+
+  const handleTextArea = (
+    e:
+      | RuxTextareaCustomEvent<HTMLRuxTextareaElement>
+      | RuxInputCustomEvent<HTMLRuxInputElement>
+  ) => {
+    setValues((prev: any) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+      dirty: true,
+    }));
   };
 
   return (
@@ -137,8 +159,15 @@ const ManageContactsForm = ({ options, values, setValues }: PropTypes) => {
             <RuxOption key={label} label={label} value={value} />
           ))}
         </RuxSelect>
+        <p>{values.equipment}</p>
 
-        <RuxInput size='small' readonly value={values.equipment} />
+        <EquipmentIcons equipmentString={values.equipment} />
+
+        <RuxTextarea
+          label='Notes'
+          name='contactDetail'
+          onRuxinput={handleTextArea}
+        />
       </section>
     </form>
   );
