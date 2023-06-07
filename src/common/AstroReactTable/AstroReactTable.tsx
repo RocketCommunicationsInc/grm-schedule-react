@@ -1,4 +1,3 @@
-import { RuxIcon } from '@astrouxds/react';
 import { flexRender } from '@tanstack/react-table';
 
 import './AstroReactTable.css';

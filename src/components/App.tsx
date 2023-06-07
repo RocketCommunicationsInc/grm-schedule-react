@@ -70,7 +70,7 @@ const App = () => {
 
           <div className={`App-main__left-panel ${isOpen ? 'isOpen' : ''}`}>
             <ContactsToolBar {...{ view, setView, setZoom, zoom }} />
-            {/* <div className='main-container-wrapper'> */}
+
             {view === 'List' ? (
               <ContactsList handleAction={handleAction} />
             ) : (
