@@ -68,11 +68,7 @@ const App = () => {
         <RuxContainer className='App-main__container'>
           <ContactsHeader {...{ isOpen, handleAction }} />
 
-          <div
-            className={
-              isOpen ? 'App-main__left-panel isOpen' : 'App-main__left-panel'
-            }
-          >
+          <div className={`App-main__left-panel ${isOpen ? 'isOpen' : ''}`}>
             <ContactsToolBar {...{ view, setView, setZoom, zoom }} />
             {/* <div className='main-container-wrapper'> */}
             {view === 'List' ? (
@@ -81,13 +77,7 @@ const App = () => {
               <ContactsTimeline handleAction={handleAction} zoom={zoom} />
             )}
           </div>
-          {/* </div> */}
-
-          <aside
-            className={
-              isOpen ? 'App-main__right-panel isOpen' : 'App-main__right-panel'
-            }
-          >
+          <aside className={`App-main__right-panel ${isOpen ? 'isOpen' : ''}`}>
             {rightPanel}
           </aside>
         </RuxContainer>

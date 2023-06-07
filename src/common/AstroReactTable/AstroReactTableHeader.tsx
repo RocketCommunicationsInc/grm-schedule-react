@@ -16,13 +16,13 @@ export const AstroReactTableHeader = ({
       {table.getFlatHeaders().map(({ id, column, getContext }: any) => (
         <div
           key={id}
-          className={
+          className={`Astro-react-table__col ${
             isSortable && !!column.getIsSorted()
-              ? 'Astro-react-table__col Astro-react-table__sorted'
-              : 'Astro-react-table__col' || isSortable
-              ? 'Astro-react-table__col Astro-react-table__sortable'
-              : 'Astro-react-table__col'
-          }
+              ? 'Astro-react-table__sorted'
+              : isSortable
+              ? 'Astro-react-table__sortable'
+              : ''
+          }`}
           style={column.columnDef.style}
           onClick={isSortable ? column.getToggleSortingHandler() : undefined}
         >

@@ -71,7 +71,12 @@ const GlobalStatusBar = () => {
           slot='right-side'
           label='UCA'
           progress={count}
-          range={[]}
+          range={[
+            {
+              threshold: 99,
+              status: 'caution',
+            },
+          ]}
         />
       </RuxGlobalStatusBar>
     </>

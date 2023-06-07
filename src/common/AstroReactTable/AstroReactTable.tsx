@@ -1,3 +1,4 @@
+import { RuxIcon } from '@astrouxds/react';
 import { flexRender } from '@tanstack/react-table';
 
 import './AstroReactTable.css';
@@ -32,13 +33,13 @@ export const AstroReactTable = ({
             <div
               key={id}
               onClick={() => handleRowClick(original)}
-              className={
+              className={`Astro-react-table__row ${
                 handleIsSelected(original)
-                  ? 'Astro-react-table__row Astro-react-table__selected'
-                  : 'Astro-react-table__row' || !!onRowClick
-                  ? 'Astro-react-table__row Astro-react-table__selectable'
-                  : 'Astro-react-table__row'
-              }
+                  ? 'Astro-react-table__selected'
+                  : !!onRowClick
+                  ? 'Astro-react-table__selectable'
+                  : ''
+              }`}
             >
               {getVisibleCells().map(({ id, column, getContext }: any) => (
                 <div
