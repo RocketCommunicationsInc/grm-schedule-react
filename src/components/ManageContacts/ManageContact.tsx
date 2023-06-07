@@ -6,6 +6,7 @@ import { randomInt } from 'utils/random';
 import { useAppContext } from 'providers/AppProvider';
 import { useAppActions } from 'hooks/useAppActions';
 import ManageContactsForm from './ManageContactsForm';
+import DiscardChanges from './DiscardChanges/DiscardChanges';
 import './ManageContact.css';
 import type { DefaulOptions, Actions } from 'Types';
 
@@ -32,6 +33,7 @@ const ManageContact = ({ action, handleAction }: PropTypes) => {
 
   const [options, setOptions] = useState(() => generateOptions(modifyOptions));
   const [values, setValues] = useState(() => setDefaultValues(options));
+  const [verifyDiscard, setVerifyDiscard] = useState(false);
   const isAdd = action === 'add';
 
   const handleAdd = () => {
@@ -80,19 +82,28 @@ const ManageContact = ({ action, handleAction }: PropTypes) => {
         &nbsp;Contact
       </header>
 
-      <ManageContactsForm {...{ options, values, setValues }} />
+      {!verifyDiscard ? (
+        <>
+          <ManageContactsForm {...{ options, values, setValues }} />
 
-      <footer slot='footer'>
-        <RuxButton secondary onClick={handleClose}>
-          Cancel
-        </RuxButton>
-        <RuxButton
-          onClick={isAdd ? handleAdd : handleModify}
-          disabled={isAdd ? values.pass < 0 : !values.dirty}
-        >
-          {isAdd ? 'Add' : 'Modify'} Contact
-        </RuxButton>
-      </footer>
+          <footer slot='footer'>
+            <RuxButton secondary onClick={handleClose}>
+              Cancel
+            </RuxButton>
+            <RuxButton
+              onClick={isAdd ? handleAdd : handleModify}
+              disabled={isAdd ? values.pass < 0 : !values.dirty}
+            >
+              {isAdd ? 'Add' : 'Modify'} Contact
+            </RuxButton>
+          </footer>
+        </>
+      ) : (
+        <DiscardChanges
+          setVerifyDiscard={setVerifyDiscard}
+          handleClose={handleClose}
+        />
+      )}
     </RuxContainer>
   );
 };
