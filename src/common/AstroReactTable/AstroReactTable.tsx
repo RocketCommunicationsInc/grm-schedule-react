@@ -32,13 +32,13 @@ export const AstroReactTable = ({
         {table.getFlatHeaders().map(({ id, column, getContext }: any) => (
           <div
             key={id}
-            className={
+            className={`Astro-react-table__col ${
               isSortable && !!column.getIsSorted()
-                ? 'Astro-react-table__col Astro-react-table__sorted'
-                : 'Astro-react-table__col' || isSortable
-                ? 'Astro-react-table__col Astro-react-table__sortable'
-                : 'Astro-react-table__col'
-            }
+                ? 'Astro-react-table__sorted'
+                : isSortable
+                ? 'Astro-react-table__sortable'
+                : ''
+            }`}
             style={column.columnDef.style}
             onClick={isSortable ? column.getToggleSortingHandler() : undefined}
           >
@@ -61,13 +61,13 @@ export const AstroReactTable = ({
             <div
               key={id}
               onClick={() => handleRowClick(original)}
-              className={
+              className={`Astro-react-table__row ${
                 handleIsSelected(original)
-                  ? 'Astro-react-table__row Astro-react-table__selected'
-                  : 'Astro-react-table__row' || !!onRowClick
-                  ? 'Astro-react-table__row Astro-react-table__selectable'
-                  : 'Astro-react-table__row'
-              }
+                  ? 'Astro-react-table__selected'
+                  : !!onRowClick
+                  ? 'Astro-react-table__selectable'
+                  : ''
+              }`}
             >
               {getVisibleCells().map(({ id, column, getContext }: any) => (
                 <div
