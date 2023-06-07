@@ -1,4 +1,4 @@
-import { RuxButton, RuxIcon } from '@astrouxds/react';
+import { RuxButton, RuxContainer, RuxIcon } from '@astrouxds/react';
 import { useAppActions } from 'hooks/useAppActions';
 import './ManagePanel.css';
 import { SetStateAction } from 'react';
@@ -16,7 +16,7 @@ const ManagePanel = ({ handleAction }: PropTypes) => {
   };
 
   return (
-    <div className='manage-panel'>
+    <RuxContainer className='manage-panel'>
       <div className='button-row' onClick={() => handleAction('add')}>
         Add Contact
         <RuxIcon icon='arrow-right' size='small' />
@@ -25,12 +25,12 @@ const ManagePanel = ({ handleAction }: PropTypes) => {
         Filter Contacts
         <RuxIcon icon='arrow-right' size='small' />
       </div>
-      <footer slot='footer' className='manage-panel-footer'>
+      <footer slot='footer'>
         <RuxButton secondary onClick={handleClose}>
           Close
         </RuxButton>
       </footer>
-    </div>
+    </RuxContainer>
   );
 };
 

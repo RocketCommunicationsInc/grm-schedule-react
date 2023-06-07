@@ -8,12 +8,14 @@ import {
   RuxMenuItem,
   RuxMenuItemDivider,
   RuxMonitoringProgressIcon,
+  RuxNotification,
 } from '@astrouxds/react';
 
 import './GlobalStatusBar.css';
 
 const GlobalStatusBar = () => {
   const [count, setCount] = useState(0);
+  const [openBanner, setOpenBanner] = useState(false);
 
   useEffect(() => {
     const interval = setInterval(() => {
@@ -26,44 +28,53 @@ const GlobalStatusBar = () => {
   }, []);
 
   return (
-    <RuxGlobalStatusBar
-      className='Global-status-bar'
-      app-domain='GRM'
-      app-name='Schedule'
-      username='J. Smith'
-    >
-      <RuxPopUp id='grm-popup-menu' placement='bottom-start' slot='left-side'>
-        <RuxIcon
-          icon='apps'
-          aria-controls='grm-popup-menu'
-          slot='trigger'
-          size='2rem'
-        />
-        <RuxMenu>
-          <RuxMenuItem>GRM Dashboard</RuxMenuItem>
-          <RuxMenuItem>GRM Equipment Manager</RuxMenuItem>
-          <RuxMenuItem>GRM Schedule</RuxMenuItem>
-          <RuxMenuItemDivider />
-          <RuxMenuItem>Preferences...</RuxMenuItem>
-          <RuxMenuItem>Sign Out...</RuxMenuItem>
-        </RuxMenu>
-      </RuxPopUp>
+    <>
+      <RuxNotification
+        small
+        closeAfter={3}
+        onRuxclosed={() => setOpenBanner(false)}
+        open={openBanner}
+      >
+        This feature has not been implemented.
+      </RuxNotification>
+      <RuxGlobalStatusBar
+        className='Global-status-bar'
+        app-domain='GRM'
+        app-name='SCHEDULE'
+        username='J. Smith'
+      >
+        <RuxPopUp
+          closeOnSelect
+          id='grm-popup-menu'
+          placement='bottom-start'
+          slot='left-side'
+        >
+          <RuxIcon
+            icon='apps'
+            aria-controls='grm-popup-menu'
+            slot='trigger'
+            size='2rem'
+          />
+          <RuxMenu onRuxmenuselected={() => setOpenBanner(true)}>
+            <RuxMenuItem>GRM Dashboard</RuxMenuItem>
+            <RuxMenuItem>GRM Equipment Manager</RuxMenuItem>
+            <RuxMenuItem>GRM Schedule</RuxMenuItem>
+            <RuxMenuItemDivider />
+            <RuxMenuItem>Preferences...</RuxMenuItem>
+            <RuxMenuItem>Sign Out...</RuxMenuItem>
+          </RuxMenu>
+        </RuxPopUp>
 
-      <RuxClock />
+        <RuxClock />
 
-      <div className='Global-status-bar__status-indicators' slot='right-side'>
         <RuxMonitoringProgressIcon
+          slot='right-side'
           label='UCA'
           progress={count}
-          range={[
-            {
-              threshold: 99,
-              status: 'caution',
-            },
-          ]}
+          range={[]}
         />
-      </div>
-    </RuxGlobalStatusBar>
+      </RuxGlobalStatusBar>
+    </>
   );
 };
 

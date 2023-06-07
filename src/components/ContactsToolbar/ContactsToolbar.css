@@ -4,13 +4,14 @@
   align-items: center;
   justify-content: space-between;
 }
+
 .Contacts-toolbar__container {
   display: flex;
   gap: var(--spacing-4);
   align-items: center;
-  width: 26.75rem;
-  justify-content: center;
   color: var(--color-text-secondary);
+  margin-left: 1rem;
+  margin-right: 1rem;
 }
 
 .Contacts-toolbar__time-box {
@@ -33,14 +34,15 @@
   width: 16rem;
 }
 
-.Contacts-toolbar__container .flex-start {
-  justify-content: flex-start;
-}
-
 .flex-end {
   justify-content: flex-end;
+  width: 60%;
 }
 
 .Contacts-toolbar__container .flex-start .gap-3 {
   gap: var(--spacing-3);
+}
+
+rux-segmented-button {
+  margin-right: 1rem;
 }

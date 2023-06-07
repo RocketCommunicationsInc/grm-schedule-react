@@ -1,8 +1,17 @@
 .manage-panel {
+  height: 100%;
+}
+
+.manage-panel::part(body) {
+  flex-grow: 1;
+  overflow: auto;
+  padding: 0;
+}
+
+.manage-panel::part(container) {
+  height: 100%;
   display: flex;
   flex-direction: column;
-  flex-wrap: wrap;
-  margin: 0;
 }
 
 .button-row {
@@ -15,7 +24,7 @@
   padding: 1rem;
 }
 
-.manage-panel-footer {
-  margin-top: 34rem;
-  margin-right: 1rem;
+.manage-panel footer[slot='footer'] {
+  display: flex;
+  justify-content: flex-end;
 }
