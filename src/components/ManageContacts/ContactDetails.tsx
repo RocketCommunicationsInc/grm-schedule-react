@@ -1,21 +1,18 @@
-import { RuxButton, RuxContainer, RuxInput, RuxStatus } from '@astrouxds/react';
+import { RuxButton, RuxContainer, RuxStatus } from '@astrouxds/react';
 
 import { useAppContext } from 'providers/AppProvider';
 import { useAppActions } from 'hooks/useAppActions';
 import { setDurationMins, setHhMmSs } from 'utils/date';
 import { setPassesId } from 'utils/generateOptions';
+import SmallReadOnlyInput from 'common/SmallReadOnlyInput/SmallReadOnlyInput';
 import './ContactDetails.css';
+import { Actions } from 'Types';
 
 type PropTypes = {
-  label?: string;
-  value: string;
+  handleAction: (action?: Actions) => void;
 };
 
-const ReadOnlyInput = ({ label, value }: PropTypes) => (
-  <RuxInput label={label} readonly value={value} size='small' />
-);
-
-const ContactDetails = ({ handleAction }: any) => {
+const ContactDetails = ({ handleAction }: PropTypes) => {
   const { resetSelectedContact } = useAppActions();
   const { state } = useAppContext();
   const {
@@ -47,16 +44,16 @@ const ContactDetails = ({ handleAction }: any) => {
       </header>
 
       <form>
-        <ReadOnlyInput label='IRON' value={contactName} />
-        <ReadOnlyInput label='Ground Station' value={contactGround} />
-        <ReadOnlyInput label='Rev' value={contactREV} />
-        <ReadOnlyInput label='DOY' value={contactDOY} />
-        <ReadOnlyInput label='AOS/LOS' value={aosLos} />
-        <ReadOnlyInput label='Duration' value={durationMins} />
-        <ReadOnlyInput label='Priority' value={contactPriority} />
-        <ReadOnlyInput label='Command Mode' value={contactMode} />
-        <ReadOnlyInput label='Equipment String' value={config} />
-        <ReadOnlyInput value={contactEquipment} />
+        <SmallReadOnlyInput label='IRON' value={contactName} />
+        <SmallReadOnlyInput label='Ground Station' value={contactGround} />
+        <SmallReadOnlyInput label='Rev' value={contactREV} />
+        <SmallReadOnlyInput label='DOY' value={contactDOY} />
+        <SmallReadOnlyInput label='AOS/LOS' value={aosLos} />
+        <SmallReadOnlyInput label='Duration' value={durationMins} />
+        <SmallReadOnlyInput label='Priority' value={contactPriority} />
+        <SmallReadOnlyInput label='Command Mode' value={contactMode} />
+        <SmallReadOnlyInput label='Equipment String' value={config} />
+        <SmallReadOnlyInput value={contactEquipment} />
       </form>
 
       <footer slot='footer'>
