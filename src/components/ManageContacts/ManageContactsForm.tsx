@@ -75,9 +75,7 @@ const ManageContactsForm = ({ options, values, setValues }: PropTypes) => {
           ))}
         </RuxSelect>
 
-        <label>
-          Passes {options?.passes?.length ? `(${options?.passes?.length})` : ''}
-        </label>
+        <label>Passes {options.passes.length}</label>
 
         <div className='Contact-list'>
           <div className='Contact-list__header'>
@@ -87,7 +85,7 @@ const ManageContactsForm = ({ options, values, setValues }: PropTypes) => {
           </div>
 
           <ul className='Contact-list__passes'>
-            {options?.passes?.map(({ id, aos, los }, i) => (
+            {options.passes.map(({ id, aos, los }, i) => (
               <li
                 key={id + i}
                 className={values.pass === i ? 'selected' : undefined}
@@ -167,6 +165,7 @@ const ManageContactsForm = ({ options, values, setValues }: PropTypes) => {
           label='Notes'
           name='contactDetail'
           onRuxinput={handleTextArea}
+          value={values.contactDetail}
         />
       </section>
     </form>
