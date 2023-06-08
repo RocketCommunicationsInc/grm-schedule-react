@@ -11,7 +11,7 @@
 }
 
 .App-main__container {
-  height: 100%;
+  height: calc(100% - 44px);
 }
 
 .App-main__container::part(container) {
