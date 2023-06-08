@@ -9,6 +9,7 @@ import ManageContactsForm from './ManageContactsForm';
 import DiscardChanges from '../../common/DiscardChanges/DiscardChanges';
 import './ManageContact.css';
 import type { DefaulOptions, Actions } from 'Types';
+import AddContactConfirm from './AddContactConfirm/AddContactConfirm';
 
 type PropTypes = {
   action: any;
@@ -34,6 +35,7 @@ const ManageContact = ({ action, handleAction }: PropTypes) => {
   const [options, setOptions] = useState(() => generateOptions(modifyOptions));
   const [values, setValues] = useState(() => setDefaultValues(options));
   const [verifyDiscard, setVerifyDiscard] = useState(false);
+  const [showAddConfirm, setShowAddConfirm] = useState(false);
   const isAdd = action === 'add';
 
   const handleAdd = () => {
@@ -89,7 +91,7 @@ const ManageContact = ({ action, handleAction }: PropTypes) => {
         &nbsp;Contact
       </header>
 
-      {!verifyDiscard ? (
+      {!verifyDiscard && !showAddConfirm ? (
         <>
           <ManageContactsForm {...{ options, values, setValues }} />
 
@@ -98,13 +100,22 @@ const ManageContact = ({ action, handleAction }: PropTypes) => {
               Cancel
             </RuxButton>
             <RuxButton
-              onClick={isAdd ? handleAdd : handleModify}
+              onClick={() => {
+                isAdd ? setShowAddConfirm(true) : handleModify();
+              }}
               disabled={isAdd ? values.pass < 0 : !values.dirty}
             >
               {isAdd ? 'Add' : 'Modify'} Contact
             </RuxButton>
           </footer>
         </>
+      ) : showAddConfirm ? (
+        <AddContactConfirm
+          values={values}
+          options={options}
+          handleAdd={handleAdd}
+          setShowAddConfirm={setShowAddConfirm}
+        />
       ) : (
         <DiscardChanges
           setVerifyDiscard={setVerifyDiscard}
