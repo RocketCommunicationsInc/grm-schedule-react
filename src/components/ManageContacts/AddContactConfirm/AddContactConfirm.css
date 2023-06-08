@@ -1,0 +1,22 @@
+.add-contact-confirm-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-4);
+  margin-top: 1.5rem;
+}
+
+.add-contact-confirm-wrapper rux-input::part(form-field) {
+  flex-direction: row;
+  align-items: center;
+}
+
+.add-contact-confirm-wrapper rux-input::part(label) {
+  margin-right: var(--spacing-2);
+  width: 13rem;
+}
+
+.add-contact-confirm-buttons {
+  display: flex;
+  justify-content: space-evenly;
+  margin-top: 2rem;
+}
