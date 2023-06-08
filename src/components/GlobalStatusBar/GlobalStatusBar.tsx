@@ -24,7 +24,7 @@ const range: RangeItem[] = [
   { threshold: 50, status: 'serious' },
   { threshold: 66, status: 'caution' },
   { threshold: 83, status: 'standby' },
-  { threshold: 33, status: 'normal' },
+  { threshold: 100, status: 'normal' },
 ];
 
 const GlobalStatusBar = () => {
