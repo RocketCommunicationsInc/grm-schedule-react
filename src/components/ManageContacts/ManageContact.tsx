@@ -6,7 +6,7 @@ import { randomInt } from 'utils/random';
 import { useAppContext } from 'providers/AppProvider';
 import { useAppActions } from 'hooks/useAppActions';
 import ManageContactsForm from './ManageContactsForm';
-import DiscardChanges from './DiscardChanges/DiscardChanges';
+import DiscardChanges from '../../common/DiscardChanges/DiscardChanges';
 import './ManageContact.css';
 import type { DefaulOptions, Actions } from 'Types';
 
@@ -68,16 +68,23 @@ const ManageContact = ({ action, handleAction }: PropTypes) => {
     handleAction();
   };
 
-  const handleClose = () => {
-    // TODO: Add form verification of changes
-    isAdd ? handleAction('manage') : handleAction();
-    resetSelectedContact();
+  const handleClose = (verifyPanel: boolean) => {
+    if (verifyPanel && ((isAdd && values.pass >= 0) || values.dirty)) {
+      setVerifyDiscard(true);
+    } else {
+      isAdd ? handleAction('manage') : handleAction();
+      resetSelectedContact();
+    }
   };
 
   return (
     <RuxContainer className='Manage-contact'>
       <header slot='header'>
-        <RuxIcon icon='arrow-back' size='1.5rem' onClick={handleClose} />
+        <RuxIcon
+          icon='arrow-back'
+          size='1.5rem'
+          onClick={() => handleClose(true)}
+        />
         {isAdd ? 'Add' : 'Modify'}
         &nbsp;Contact
       </header>
@@ -87,7 +94,7 @@ const ManageContact = ({ action, handleAction }: PropTypes) => {
           <ManageContactsForm {...{ options, values, setValues }} />
 
           <footer slot='footer'>
-            <RuxButton secondary onClick={handleClose}>
+            <RuxButton secondary onClick={() => handleClose(true)}>
               Cancel
             </RuxButton>
             <RuxButton

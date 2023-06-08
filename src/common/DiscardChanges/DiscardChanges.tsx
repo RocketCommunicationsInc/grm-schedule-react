@@ -1,8 +1,10 @@
 import { RuxButton } from '@astrouxds/react';
 
+import './DiscardChanges.css';
+
 type PropTypes = {
   setVerifyDiscard: (verifyDiscard: boolean) => void;
-  handleClose: () => void;
+  handleClose: (verifyPanel: boolean) => void;
 };
 
 const DiscardChanges = ({ setVerifyDiscard, handleClose }: PropTypes) => {
@@ -16,7 +18,9 @@ const DiscardChanges = ({ setVerifyDiscard, handleClose }: PropTypes) => {
         <RuxButton secondary onClick={() => setVerifyDiscard(false)}>
           Continue Working
         </RuxButton>
-        <RuxButton onClick={handleClose}>Discard Changes</RuxButton>
+        <RuxButton onClick={() => handleClose(false)}>
+          Discard Changes
+        </RuxButton>
       </div>
     </div>
   );
