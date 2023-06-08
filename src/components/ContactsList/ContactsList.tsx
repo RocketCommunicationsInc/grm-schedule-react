@@ -5,7 +5,7 @@ import {
   useReactTable,
 } from '@tanstack/react-table';
 
-import { AstroReactTable } from 'common';
+import { AstroReactTable } from 'common/AstroReactTable/AstroReactTable';
 import { useAppContext } from 'providers/AppProvider';
 import { useAppActions } from 'hooks/useAppActions';
 import { columnDefs } from './ContactsListColumns';
