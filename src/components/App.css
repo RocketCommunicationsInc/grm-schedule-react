@@ -1,6 +1,6 @@
 .App-main {
   --right-panel-width: 26.25rem;
-  --top-deduction: 8rem;
+  --top-deduction: 6rem;
 
   height: calc(100vh - var(--top-deduction));
   padding: var(--spacing-4) var(--spacing-6);
