@@ -11,12 +11,6 @@
   }
 }
 
-.Contacts-timeline__title__title {
-  white-space: nowrap;
-  overflow: hidden;
-  text-overflow: ellipsis;
-}
-
 .sub-track::part(container),
 .sub-track::part(track-header) {
   background-color: var(--color-background-surface-header);
@@ -27,8 +21,20 @@
 }
 
 rux-time-region::part(container) {
-  &:hover {
-    background-color: var(--color-background-surface-hover);
-    cursor: pointer;
-  }
+  cursor: pointer;
+}
+
+.timeline-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: row;
+}
+
+.timeline-wrapper::-webkit-scrollbar:horizontal {
+  position: sticky;
+  bottom: 0;
+}
+
+.timeline-wrapper rux-timeline rux-track::part(container) {
+  width: 100%;
 }

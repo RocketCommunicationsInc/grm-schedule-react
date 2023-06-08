@@ -1,10 +1,9 @@
 // @ts-nocheck
-//TODO come back for errors on style 
 import { RuxDatetime, RuxStatus } from '@astrouxds/react';
 import { createColumnHelper } from '@tanstack/react-table';
 
 type PropTypes = {
-  time: Date
+  time: Date;
 };
 
 const TwoDigitTime = ({ time }: PropTypes) => (
@@ -19,15 +18,15 @@ const TwoDigitTime = ({ time }: PropTypes) => (
 const columnHelper = createColumnHelper<any>();
 
 export const columnDefs = [
-  columnHelper.accessor('contactResolutionStatus', {
+  columnHelper.accessor('contactPriority', {
     header: 'Priority',
-    cell: (info) => info.getValue().toUpperCase(),
-    style: { minWidth: 80 },
+    cell: (info) => info.getValue(),
+    style: { minWidth: 50, maxWidth: 50 },
   }),
   columnHelper.accessor('contactStatus', {
     header: 'Status',
     cell: (info) => <RuxStatus status={info.getValue()} />,
-    style: { minWidth: 68 },
+    style: { minWidth: 60, justifyContent: 'center' },
   }),
   columnHelper.accessor('contactName', {
     header: 'IRON',
@@ -47,7 +46,7 @@ export const columnDefs = [
   }),
   columnHelper.accessor('contactState', {
     header: 'State',
-    cell: (info) => info.getValue().toUpperCase(),
+    cell: (info) => info.getValue(),
     style: { minWidth: 120 },
   }),
   columnHelper.accessor('contactDOY', {
