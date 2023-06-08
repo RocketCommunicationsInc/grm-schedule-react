@@ -8,9 +8,10 @@ import {
   RuxInput,
   RuxStatus,
 } from '@astrouxds/react';
-
+import { useAppContext } from 'providers/AppProvider';
 import { useAppActions } from 'hooks/useAppActions';
 import './FilterContacts.css';
+import { ContactState, GroundStation, Priority } from 'Types';
 
 type PropTypes = {
   action?: any;
@@ -18,32 +19,76 @@ type PropTypes = {
 };
 
 const ManageContact = ({ handleAction }: PropTypes) => {
-  const { resetSelectedContact } = useAppActions();
+  const { resetSelectedContact, filterContacts } = useAppActions();
+  const { state } = useAppContext();
 
   const handleClose = () => {
     handleAction();
     resetSelectedContact();
   };
 
+  const priority: Priority = state.contacts.map(
+    (contact: { contactPriority: any }) => contact.contactPriority
+  );
+
+  const cState: ContactState = state.contacts.map(
+    (contact: { contactState: any }) => contact.contactState
+  );
+
+  const handleFilter = () => {
+    // const priority: Priority = state.contacts.map(
+    //   (contact: { contactPriority: any }) => contact.contactPriority
+    // );
+    // //console.log(priority, 'priority');
+    // const groundS: GroundStation = state.contacts.map(
+    //   (contact: { contactGround: any }) => contact.contactGround
+    // );
+    // const cState: ContactState = state.contacts.map(
+    //   (contact: { contactState: any }) => contact.contactState
+    // );
+    // if (priority) {
+    //   filterContacts(priority);
+    // }
+    // if (groundS) {
+    //   //@ts-expect-error
+    //   filterContacts(groundS);
+    // }
+    // if (cState) {
+    //   //@ts-expect-error
+    //   filterContacts(cState);
+    // }
+    filterContacts(cState);
+  };
+
+  const handleClear = () => {
+    resetSelectedContact();
+  };
+
+  //const checkboxes = document.querySelectorAll;
+
   return (
     <RuxContainer className='filter-contact'>
       <header slot='header'>
-        <RuxIcon icon='arrow-back' size='1.5rem' onClick={handleClose}/>
+        <RuxIcon icon='arrow-back' size='1.5rem' onClick={handleClose} />
         Filter Contacts
-        <RuxButton borderless secondary icon='refresh'>
+        <RuxButton borderless secondary icon='refresh' onClick={handleClear}>
           Reset Filters
         </RuxButton>
       </header>
 
       <RuxCheckboxGroup label='Priority'>
-        <RuxCheckbox label='# High 1 - 66' />
-        <RuxCheckbox label='# Medium 67 - 133' />
-        <RuxCheckbox label='# Low 134 - 200' />
+        <RuxCheckbox
+          label='# High 1 - 66'
+          checked={state}
+          onRuxinput={handleFilter}
+        />
+        <RuxCheckbox label='# Medium 67 - 133' onRuxinput={handleFilter} />
+        <RuxCheckbox label='# Low 134 - 200' onRuxinput={handleFilter} />
       </RuxCheckboxGroup>
 
       <RuxCheckboxGroup label='Status'>
         <RuxCheckbox>
-          <RuxStatus status='critical'/>
+          <RuxStatus status='critical' />
           Critical
         </RuxCheckbox>
         <RuxCheckbox>

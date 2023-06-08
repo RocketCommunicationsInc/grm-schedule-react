@@ -20,6 +20,13 @@ export const AppReducer = (state: any, { type, payload }: any) => {
       };
     }
 
+    case 'FILTER_CONTACTS': {
+      return {
+        ...state,
+        ...payload,
+      };
+    }
+
     case 'RESET_NOTIFICATION': {
       return { ...state, notification: '' };
     }

@@ -1,9 +1,15 @@
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 
 import { useAppContext } from 'providers/AppProvider';
 import { randomContacts, randomId, randomInt } from 'utils/random';
 import { setData } from 'utils/setData';
-import { Contact, GenerateOptions } from 'Types';
+import {
+  Contact,
+  ContactState,
+  GenerateOptions,
+  GroundStation,
+  Priority,
+} from 'Types';
 
 export const useAppActions = () => {
   const { state, dispatch } = useAppContext();
@@ -78,6 +84,73 @@ export const useAppActions = () => {
     [dispatch, state]
   );
 
+  const filterContacts = (
+    contact: any
+    // priority: Priority,
+    // groundStation: GroundStation,
+    // contactState: ContactState
+    ) => {
+// if(priority === "Low") {
+//   const priorityC = state.contacts.filter((contact: Contact) => contact.contactPriority === "Low" )
+//   console.log(priorityC)
+if(contact) {
+
+  const filteredContacts = state.contacts.filter((contact: Contact) => contact.contactState)
+
+      // const priorityFilter = priority
+      // ? state.contacts.filter(
+      //   (contact: Contact) => contact.contactPriority === priority
+      //   )
+      //   : state.contact;
+      //   console.log(priorityFilter, "priority")
+      //   const groundFilter = groundStation
+      //   ? state.contacts.filter(
+      //     (contact: Contact) => contact.contactGround === groundStation
+      //     )
+      //     : state.contact;
+          
+      //     const stateFilter = contactState
+      //     ? state.contacts.filter(
+      //       (contact: Contact) => contact.contactState === contactState
+      //       )
+      //       : state.contact;
+              
+    // const filterData = () => {
+    //   if (priority) {
+    //     state.contact.filter(
+    //       (contact: Contact) => contact.contactPriority === priority
+    //     );
+    //   } else if (groundStation) {
+    //     state.contact.filter(
+    //       (contact: Contact) => contact.contactGround === groundStation
+    //     );
+    //   } else if (contactState) {
+    //     state.contact.filter(
+    //       (contact: Contact) => contact.contactState === contactState
+    //     );
+    //   } else return state.contact;
+    // };
+
+
+//     const filteredData = () => {
+//       if(priorityFilter) {
+// setData(priorityFilter)
+//       } if(groundFilter) {
+//         setData(groundFilter)
+//       } if  (stateFilter) {
+//         setData(stateFilter)
+//       }
+//     }
+//     console.log(priorityFilter, "priFilt")
+
+const data = setData(filteredContacts)
+    console.log(data, "data")
+    dispatch({
+      type: 'FILTER_CONTACTS',
+      payload: { ...data },
+    });
+  }}
+
   const setSelectedContact = useCallback(
     (contact: Contact) => {
       dispatch({ type: 'SET_SELECTED_CONTACT', payload: contact });
@@ -97,6 +170,7 @@ export const useAppActions = () => {
     addContact,
     modifyContact,
     deleteContact,
+    filterContacts,
     resetNotification,
     resetSelectedContact,
     setSelectedContact,

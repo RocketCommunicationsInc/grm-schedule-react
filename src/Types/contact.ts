@@ -1,14 +1,14 @@
-import { Status } from './commonTypes';
+import { ContactState, GroundStation, Priority, Status } from './commonTypes';
 
 export type Contact = {
   _id: string;
   contactId: string;
   contactStatus: string | Status;
   contactName: number;
-  contactGround: string;
+  contactGround: GroundStation
   contactSatellite: string;
   contactEquipment: string;
-  contactState: string;
+  contactState: ContactState;
   contactStep: string;
   contactDetail: string;
   contactBeginTimestamp: number;
@@ -18,7 +18,8 @@ export type Contact = {
   contactAzimuth: number;
   contactElevation: number;
   contactResolution: string;
-  contactResolutionStatus: string;
+  contactResolutionStatus: Status;
+  contactPriority: Priority;
   alerts: [
     {
       errorId: string;
