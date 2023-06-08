@@ -16,7 +16,6 @@
 form {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-4);
 
   h6 {
     align-items: center;
@@ -28,10 +27,19 @@ form {
   }
 }
 
+.Contact-details form,
+section {
+  gap: var(--spacing-3);
+}
+
 .Contact-details footer {
   display: flex;
-  justify-content: flex-end;
-  gap: var(--spacing-2);
+  justify-content: space-evenly;
+  align-items: center;
+}
+
+.Contact-details footer rux-button {
+  width: 7.5rem;
 }
 
 .Contact-details header {
@@ -45,10 +53,18 @@ form {
 
 .Contact-details rux-input::part(form-field) {
   flex-direction: row;
-  align-items: center;
 }
 
 .Contact-details rux-input::part(label) {
   margin-right: var(--spacing-2);
   width: 13rem;
+}
+
+.active-cb {
+  display: flex;
+  flex-direction: row nowrap;
+}
+
+.active-cb label {
+  width: 8.5rem;
 }

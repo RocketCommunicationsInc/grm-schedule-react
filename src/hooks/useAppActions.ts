@@ -58,6 +58,26 @@ export const useAppActions = () => {
     [dispatch, state.contacts]
   );
 
+  const deleteContact = useCallback(
+    (deleteContact: Contact) => {
+      if (state.selectedContact) {
+        const updatedContacts = state.contacts.filter(
+          (contact: Contact) =>
+            contact.contactId !== state.selectedContact.contactId
+        );
+
+        const data = setData(updatedContacts);
+        const notification = `Contact ${deleteContact.contactName} ${deleteContact.contactSatellite} has been deleted.`;
+
+        dispatch({
+          type: 'DELETE_CONTACT',
+          payload: { ...data, notification },
+        });
+      }
+    },
+    [dispatch, state]
+  );
+
   const setSelectedContact = useCallback(
     (contact: Contact) => {
       dispatch({ type: 'SET_SELECTED_CONTACT', payload: contact });
@@ -76,6 +96,7 @@ export const useAppActions = () => {
   return {
     addContact,
     modifyContact,
+    deleteContact,
     resetNotification,
     resetSelectedContact,
     setSelectedContact,

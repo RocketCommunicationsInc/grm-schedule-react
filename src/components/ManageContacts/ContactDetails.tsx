@@ -1,8 +1,14 @@
-import { RuxButton, RuxContainer, RuxInput, RuxStatus } from '@astrouxds/react';
+import {
+  RuxButton,
+  RuxCheckbox,
+  RuxContainer,
+  RuxInput,
+  RuxStatus,
+} from '@astrouxds/react';
 
 import { useAppContext } from 'providers/AppProvider';
 import { useAppActions } from 'hooks/useAppActions';
-import { setDurationMins, setHhMmSs } from 'utils/date';
+import { setHhMmSs } from 'utils/date';
 import { setPassesId } from 'utils/generateOptions';
 import './ContactDetails.css';
 
@@ -16,7 +22,7 @@ const ReadOnlyInput = ({ label, value }: PropTypes) => (
 );
 
 const ContactDetails = ({ handleAction }: any) => {
-  const { resetSelectedContact } = useAppActions();
+  const { resetSelectedContact, deleteContact } = useAppActions();
   const { state } = useAppContext();
   const {
     contactAOS,
@@ -30,13 +36,22 @@ const ContactDetails = ({ handleAction }: any) => {
     contactPriority,
     contactREV,
     contactStatus,
+    contactState,
+    contactBeginTimestamp,
+    contactEndTimestamp,
   } = state.selectedContact;
-  const aosLos = `${setHhMmSs(contactAOS)} / ${setHhMmSs(contactLOS)}`;
-  const durationMins = setDurationMins(contactAOS, contactLOS);
+
+  const contactStateCapitalized =
+    contactState.charAt(0).toUpperCase() + contactState.slice(1);
 
   const handleClose = () => {
     handleAction();
     resetSelectedContact();
+  };
+
+  const handleDelete = () => {
+    deleteContact(state.selectedContact);
+    handleClose();
   };
 
   return (
@@ -47,24 +62,41 @@ const ContactDetails = ({ handleAction }: any) => {
       </header>
 
       <form>
+        <ReadOnlyInput label='Priority' value={contactPriority} />
+        <ReadOnlyInput label='State' value={contactStateCapitalized} />
         <ReadOnlyInput label='IRON' value={contactName} />
         <ReadOnlyInput label='Ground Station' value={contactGround} />
-        <ReadOnlyInput label='Rev' value={contactREV} />
+        <ReadOnlyInput label='REV' value={contactREV} />
         <ReadOnlyInput label='DOY' value={contactDOY} />
-        <ReadOnlyInput label='AOS/LOS' value={aosLos} />
-        <ReadOnlyInput label='Duration' value={durationMins} />
-        <ReadOnlyInput label='Priority' value={contactPriority} />
+        <ReadOnlyInput
+          label='Start Time'
+          value={setHhMmSs(contactBeginTimestamp)}
+        />
+        <ReadOnlyInput label='AOS' value={setHhMmSs(contactAOS)} />
+        <ReadOnlyInput label='LOS' value={setHhMmSs(contactLOS)} />
+        <ReadOnlyInput
+          label='Stop Time'
+          value={setHhMmSs(contactEndTimestamp)}
+        />
         <ReadOnlyInput label='Command Mode' value={contactMode} />
+        <span className='active-cb'>
+          <label>Active</label>
+          <RuxCheckbox checked />
+        </span>
         <ReadOnlyInput label='Equipment String' value={config} />
+        <ReadOnlyInput label='Configuration' value={contactName} />
         <ReadOnlyInput value={contactEquipment} />
       </form>
 
       <footer slot='footer'>
-        <RuxButton secondary onClick={handleClose}>
+        <RuxButton size='small' secondary onClick={handleDelete}>
+          Delete
+        </RuxButton>
+        <RuxButton size='small' secondary onClick={handleClose}>
           Cancel
         </RuxButton>
-        <RuxButton onClick={() => handleAction('modify')}>
-          Modify Contact
+        <RuxButton size='small' onClick={() => handleAction('modify')}>
+          Modify
         </RuxButton>
       </footer>
     </RuxContainer>
