@@ -71,7 +71,7 @@ const GlobalStatusBar = () => {
             size='2rem'
           />
 
-          <RuxMenu>
+          <RuxMenu onRuxmenuselected={() => setOpenBanner(true)}>
             <RuxMenuItem>GRM Dashboard</RuxMenuItem>
             <RuxMenuItem>GRM Equipment Manager</RuxMenuItem>
             <RuxMenuItem>GRM Schedule</RuxMenuItem>
@@ -83,13 +83,12 @@ const GlobalStatusBar = () => {
 
         <RuxClock />
 
-        <div className='Global-status-bar__status-indicators' slot='right-side'>
-          <RuxMonitoringProgressIcon
-            label='UCA'
-            progress={count}
-            range={range}
-          />
-        </div>
+        <RuxMonitoringProgressIcon
+          slot='right-side'
+          label='UCA'
+          progress={count}
+          range={range}
+        />
       </RuxGlobalStatusBar>
     </>
   );
