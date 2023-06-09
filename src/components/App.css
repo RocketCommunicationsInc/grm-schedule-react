@@ -6,12 +6,18 @@
   padding: var(--spacing-4) var(--spacing-6);
 }
 
+body {
+  overflow: hidden;
+}
+
 .App-main.notification {
   --top-deduction: 9.25rem;
 }
 
 .App-main__container {
+  overflow: hidden;
   height: 100%;
+  padding-bottom: var(--spacing-4);
 }
 
 .App-main__container::part(container) {
@@ -24,7 +30,6 @@
   flex-grow: 1;
   display: flex;
   --body-padding: 0;
-  overflow: auto;
 }
 
 .App-main__left-panel {
@@ -41,6 +46,7 @@
   box-shadow: -4px 0px 2px 0px var(--color-background-base-default);
   width: 0;
   overflow: hidden;
+  height: calc(100vh - 14.625rem);
   transition: width 0.2s linear;
   z-index: 100;
 }
