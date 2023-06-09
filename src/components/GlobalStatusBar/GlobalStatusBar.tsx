@@ -11,22 +11,12 @@ import {
   RuxNotification,
 } from '@astrouxds/react';
 import type { Status } from 'Types';
-
 import './GlobalStatusBar.css';
 
 type RangeItem = {
   threshold: number;
   status: Status;
 };
-
-const range: RangeItem[] = [
-  { threshold: 17, status: 'off' },
-  { threshold: 33, status: 'critical' },
-  { threshold: 50, status: 'serious' },
-  { threshold: 66, status: 'caution' },
-  { threshold: 83, status: 'standby' },
-  { threshold: 100, status: 'normal' },
-];
 
 const GlobalStatusBar = () => {
   const [count, setCount] = useState(0);
@@ -41,6 +31,15 @@ const GlobalStatusBar = () => {
       clearInterval(interval);
     };
   }, []);
+
+  const range: RangeItem[] = [
+    { threshold: 17, status: 'off' },
+    { threshold: 33, status: 'critical' },
+    { threshold: 50, status: 'serious' },
+    { threshold: 66, status: 'caution' },
+    { threshold: 83, status: 'standby' },
+    { threshold: 100, status: 'normal' },
+  ];
 
   return (
     <>

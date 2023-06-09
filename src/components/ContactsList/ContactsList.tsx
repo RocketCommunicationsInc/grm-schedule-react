@@ -10,6 +10,7 @@ import { useAppContext } from 'providers/AppProvider';
 import { useAppActions } from 'hooks/useAppActions';
 import { columnDefs } from './ContactsListColumns';
 import './ContactsList.css';
+import { AstroReactTableHeader } from 'common/AstroReactTable/AstroReactTableHeader';
 
 type PropTypes = {
   handleAction: (e: any) => void;
@@ -36,13 +37,15 @@ const ContactsList = ({ handleAction }: PropTypes) => {
   });
 
   return (
-    <div className='Contacts-list'>
-      <AstroReactTable
-        table={table}
-        isSortable
-        onRowClick={handleRowClick}
-        setIsSelected={handleSelected}
-      />
+    <div className='table-wrapper'>
+      <AstroReactTableHeader isSortable table={table} />
+      <div className='Contacts-list'>
+        <AstroReactTable
+          table={table}
+          onRowClick={handleRowClick}
+          setIsSelected={handleSelected}
+        />
+      </div>
     </div>
   );
 };
