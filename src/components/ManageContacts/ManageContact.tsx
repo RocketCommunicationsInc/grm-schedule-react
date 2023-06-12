@@ -5,11 +5,12 @@ import { generateOptions } from 'utils/generateOptions';
 import { randomInt } from 'utils/random';
 import { useAppContext } from 'providers/AppProvider';
 import { useAppActions } from 'hooks/useAppActions';
-import ManageContactsForm from './ManageContactsForm';
+import ModifyContactForm from './ModifyContactForm';
 import DiscardChanges from '../../common/DiscardChanges/DiscardChanges';
 import './ManageContact.css';
 import type { DefaulOptions, Actions } from 'Types';
 import AddContactConfirm from './AddContactConfirm/AddContactConfirm';
+import AddContactForm from './AddContact';
 
 type PropTypes = {
   action: any;
@@ -24,6 +25,7 @@ const setDefaultValues = (options: DefaulOptions) => ({
   priority: options.priorities[0],
   mode: options.modes[0],
   dirty: false,
+  state: options?.state,
 });
 
 const ManageContact = ({ action, handleAction }: PropTypes) => {
@@ -65,6 +67,7 @@ const ManageContact = ({ action, handleAction }: PropTypes) => {
       contactName: parseInt(values.iron),
       contactPriority: values.priority,
       contactSatellite: id.split(' ')[0],
+      contactState: values.state,
     };
 
     modifyContact(modifiedContact);
@@ -94,7 +97,11 @@ const ManageContact = ({ action, handleAction }: PropTypes) => {
 
       {!verifyDiscard && !showAddConfirm ? (
         <>
-          <ManageContactsForm {...{ options, values, setValues }} />
+          {isAdd ? (
+            <AddContactForm {...{ options, values, setValues }} />
+          ) : (
+            <ModifyContactForm {...{ options, values, setValues }} />
+          )}
 
           <footer slot='footer'>
             <RuxButton size='small' secondary onClick={() => handleClose(true)}>

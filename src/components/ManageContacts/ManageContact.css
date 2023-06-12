@@ -30,6 +30,7 @@ rux-select::part(select) {
 rux-select::part(label) {
   margin-right: var(--spacing-2);
   width: 13rem;
+  margin-top: var(--spacing-1);
 }
 
 .Manage-contact rux-container div[slot='header'] {
@@ -103,12 +104,27 @@ footer {
 
 .Manage-contact .start-stop-time {
   display: flex;
+  padding-top: 0.5rem;
 }
 
 .Manage-contact .start-stop-time div {
-  width: 8rem;
+  width: 8.5rem;
+  padding-top: 0.5rem;
 }
+
+.Manage-contact .start-stop-time rux-datetime {
+  padding-top: 0.5rem;
+}
+
+.Manage-contact .start-stop-time span {
+  padding-top: 0.5rem;
+}
+
 .Manage-contact::part(body) {
   height: 100%;
   overflow-y: auto;
+}
+
+.Manage-contact rux-textarea {
+  padding-top: 0.5rem;
 }

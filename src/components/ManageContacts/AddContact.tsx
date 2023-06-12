@@ -18,7 +18,7 @@ type PropTypes = {
   setValues: (prev: any) => void;
 };
 
-const ManageContactsForm = ({ options, values, setValues }: PropTypes) => {
+const AddContactForm = ({ options, values, setValues }: PropTypes) => {
   const handleSelectPass = (i: number) => {
     setValues((prev: { pass: number }) => ({
       ...prev,
@@ -47,16 +47,6 @@ const ManageContactsForm = ({ options, values, setValues }: PropTypes) => {
     <form>
       <section>
         <RuxSelect
-          label='Priority'
-          size='small'
-          onRuxchange={(e) => handleSelect('priority', e.target.value)}
-        >
-          {options.priorities.map((priority) => (
-            <RuxOption key={priority} label={priority} value={priority} />
-          ))}
-        </RuxSelect>
-
-        <RuxSelect
           label='IRON'
           size='small'
           onRuxchange={(e) => handleSelect('iron', e.target.value)}
@@ -73,6 +63,16 @@ const ManageContactsForm = ({ options, values, setValues }: PropTypes) => {
         >
           {options.grounds.map((ground) => (
             <RuxOption key={ground} label={ground} value={ground} />
+          ))}
+        </RuxSelect>
+
+        <RuxSelect
+          label='Priority'
+          size='small'
+          onRuxchange={(e) => handleSelect('priority', e.target.value)}
+        >
+          {options.priorities.map((priority) => (
+            <RuxOption key={priority} label={priority} value={priority} />
           ))}
         </RuxSelect>
 
@@ -116,7 +116,7 @@ const ManageContactsForm = ({ options, values, setValues }: PropTypes) => {
               second='2-digit'
             />
           ) : (
-            '---'
+            <span>---</span>
           )}
         </div>
         <div className='start-stop-time'>
@@ -129,7 +129,7 @@ const ManageContactsForm = ({ options, values, setValues }: PropTypes) => {
               second='2-digit'
             />
           ) : (
-            '---'
+            <span>---</span>
           )}
         </div>
       </section>
@@ -172,4 +172,4 @@ const ManageContactsForm = ({ options, values, setValues }: PropTypes) => {
   );
 };
 
-export default ManageContactsForm;
+export default AddContactForm;

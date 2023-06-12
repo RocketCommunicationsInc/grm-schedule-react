@@ -9,6 +9,7 @@ export type GenerateOptions = {
   aos: string | number | Date;
   los: string | number | Date;
   mode: any;
+  state: string | string[];
 };
 
 export type DefaulOptions = {
@@ -20,4 +21,5 @@ export type DefaulOptions = {
   passes: { id: string; aos: string; los: string }[];
   modes: string[];
   configs: any[];
+  state: string[];
 };
