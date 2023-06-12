@@ -68,3 +68,20 @@ section {
 .active-cb label {
   width: 8.5rem;
 }
+
+.Contact-details rux-container div[slot='header'] {
+  font-size: var(--font-size-base);
+  margin: 0;
+}
+
+.Contact-details rux-container::part(header) {
+  padding: var(--spacing-1);
+}
+
+.Contact-details .equipment-icons {
+  margin-top: var(--spacing-3);
+}
+
+.Contact-details rux-container rux-input::part(form-field) {
+  margin-bottom: var(--spacing-2);
+}
