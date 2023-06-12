@@ -13,20 +13,36 @@
   overflow: auto;
 }
 
-form,
-section {
+form {
   display: flex;
   flex-direction: column;
-  gap: var(--spacing-8);
 }
 
-section {
-  gap: var(--spacing-4);
+rux-select {
+  display: flex;
+  margin-block: var(--spacing-3);
+}
+
+rux-select::part(select) {
+  flex-direction: row;
+}
+
+rux-select::part(label) {
+  margin-right: var(--spacing-2);
+  width: 13rem;
+}
+
+.Manage-contact rux-container div[slot='header'] {
+  font-size: var(--font-size-base);
+}
+
+.Manage-contact rux-container::part(header) {
+  padding: var(--spacing-1);
 }
 
 .Contact-list__header {
   background-color: var(--color-background-surface-header);
-  padding: var(--spacing-2) var(--spacing-4);
+  padding: var(--spacing-1) var(--spacing-4);
 }
 
 .Contact-list__header,
@@ -44,6 +60,7 @@ section {
   max-height: 9rem;
   overflow-y: scroll;
   padding: var(--spacing-0);
+  margin-top: var(--spacing-1);
 }
 
 li {
@@ -90,12 +107,6 @@ footer {
 
 .Manage-contact .start-stop-time div {
   width: 8rem;
-}
-
-.Manage-contact::part(container) {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
 }
 .Manage-contact::part(body) {
   height: 100%;

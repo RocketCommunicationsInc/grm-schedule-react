@@ -97,10 +97,11 @@ const ManageContact = ({ action, handleAction }: PropTypes) => {
           <ManageContactsForm {...{ options, values, setValues }} />
 
           <footer slot='footer'>
-            <RuxButton secondary onClick={() => handleClose(true)}>
+            <RuxButton size='small' secondary onClick={() => handleClose(true)}>
               Cancel
             </RuxButton>
             <RuxButton
+              size='small'
               onClick={() => {
                 isAdd ? setShowAddConfirm(true) : handleModify();
               }}

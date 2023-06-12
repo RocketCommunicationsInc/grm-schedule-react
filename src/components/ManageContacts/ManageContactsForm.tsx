@@ -1,4 +1,5 @@
 import {
+  RuxContainer,
   RuxDatetime,
   RuxOption,
   RuxSelect,
@@ -46,6 +47,16 @@ const ManageContactsForm = ({ options, values, setValues }: PropTypes) => {
     <form>
       <section>
         <RuxSelect
+          label='Priority'
+          size='small'
+          onRuxchange={(e) => handleSelect('priority', e.target.value)}
+        >
+          {options.priorities.map((priority) => (
+            <RuxOption key={priority} label={priority} value={priority} />
+          ))}
+        </RuxSelect>
+
+        <RuxSelect
           label='IRON'
           size='small'
           onRuxchange={(e) => handleSelect('iron', e.target.value)}
@@ -65,49 +76,35 @@ const ManageContactsForm = ({ options, values, setValues }: PropTypes) => {
           ))}
         </RuxSelect>
 
-        <RuxSelect
-          label='Priority'
-          size='small'
-          onRuxchange={(e) => handleSelect('priority', e.target.value)}
-        >
-          {options.priorities.map((priority) => (
-            <RuxOption key={priority} label={priority} value={priority} />
-          ))}
-        </RuxSelect>
-
-        <label>Passes {options.passes.length}</label>
-
-        <div className='Contact-list'>
-          <div className='Contact-list__header'>
+        <label>Passes ({options.passes.length})</label>
+        <ul className='Contact-list__passes'>
+          <div slot='toolbar' className='Contact-list__header'>
             <span>Contact</span>
             <span>AOS</span>
             <span>LOS</span>
           </div>
-
-          <ul className='Contact-list__passes'>
-            {options.passes.map(({ id, aos, los }, i) => (
-              <li
-                key={id + i}
-                className={values.pass === i ? 'selected' : undefined}
-                onClick={() => handleSelectPass(i)}
-              >
-                <span>{id}</span>
-                <RuxDatetime
-                  date={aos}
-                  hour='2-digit'
-                  minute='2-digit'
-                  second='2-digit'
-                />
-                <RuxDatetime
-                  date={los}
-                  hour='2-digit'
-                  minute='2-digit'
-                  second='2-digit'
-                />
-              </li>
-            ))}
-          </ul>
-        </div>
+          {options.passes.map(({ id, aos, los }, i) => (
+            <li
+              key={id + i}
+              className={values.pass === i ? 'selected' : undefined}
+              onClick={() => handleSelectPass(i)}
+            >
+              <span>{id}</span>
+              <RuxDatetime
+                date={aos}
+                hour='2-digit'
+                minute='2-digit'
+                second='2-digit'
+              />
+              <RuxDatetime
+                date={los}
+                hour='2-digit'
+                minute='2-digit'
+                second='2-digit'
+              />
+            </li>
+          ))}
+        </ul>
 
         <div className='start-stop-time'>
           <div>Pre Pass Start:</div>
@@ -148,18 +145,21 @@ const ManageContactsForm = ({ options, values, setValues }: PropTypes) => {
           ))}
         </RuxSelect>
 
-        <RuxSelect
-          label='Equipment String'
-          size='small'
-          onRuxchange={(e) => handleSelect('equipment', e.target.value)}
-        >
-          {options.configs.map(({ label, value }) => (
-            <RuxOption key={label} label={label} value={value} />
-          ))}
-        </RuxSelect>
-        <p>{values.equipment}</p>
+        <RuxContainer>
+          <div slot='header'>Equipment String</div>
+          <RuxSelect
+            label='Configuration'
+            size='small'
+            onRuxchange={(e) => handleSelect('equipment', e.target.value)}
+          >
+            {options.configs.map(({ label, value }) => (
+              <RuxOption key={label} label={label} value={value} />
+            ))}
+          </RuxSelect>
+          <p>{values.equipment}</p>
 
-        <EquipmentIcons equipmentString={values.equipment} />
+          <EquipmentIcons equipmentString={values.equipment} />
+        </RuxContainer>
 
         <RuxTextarea
           label='Notes'

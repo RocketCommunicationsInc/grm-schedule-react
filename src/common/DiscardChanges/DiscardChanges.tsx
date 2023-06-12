@@ -15,10 +15,14 @@ const DiscardChanges = ({ setVerifyDiscard, handleClose }: PropTypes) => {
         <p>Do you wish to continue working or discard changes?</p>
       </div>
       <div className='discard-changes-buttons'>
-        <RuxButton secondary onClick={() => setVerifyDiscard(false)}>
+        <RuxButton
+          size='small'
+          secondary
+          onClick={() => setVerifyDiscard(false)}
+        >
           Continue Working
         </RuxButton>
-        <RuxButton onClick={() => handleClose(false)}>
+        <RuxButton size='small' onClick={() => handleClose(false)}>
           Discard Changes
         </RuxButton>
       </div>
