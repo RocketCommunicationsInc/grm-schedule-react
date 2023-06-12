@@ -28,6 +28,8 @@ const ModifyContactForm = ({ options, values, setValues }: PropTypes) => {
     setValues((prev: number[]) => ({ ...prev, [key]: value, dirty: true }));
   };
 
+  console.log(options);
+
   return (
     <form>
       <section>

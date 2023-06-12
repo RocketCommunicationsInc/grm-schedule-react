@@ -29,7 +29,6 @@ export const useAppActions = () => {
           contactBeginTimestamp: randomContact.contactBeginTimestamp * 1000,
           contactEndTimestamp: randomContact.contactEndTimestamp * 1000,
           contactREV: randomInt(1, 9999).toString().padStart(4, '0'),
-          contactState: values.state
         },
       ];
       const data = setData(newContacts);
