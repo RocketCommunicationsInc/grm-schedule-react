@@ -41,6 +41,10 @@ rux-select::part(label) {
   padding: var(--spacing-1);
 }
 
+.Manage-contact .active-cb {
+  padding-bottom: var(--spacing-3);
+}
+
 .Contact-list__header {
   background-color: var(--color-background-surface-header);
   padding: var(--spacing-1) var(--spacing-4);

@@ -25,7 +25,7 @@ const setDefaultValues = (options: DefaulOptions) => ({
   priority: options.priorities[0],
   mode: options.modes[0],
   dirty: false,
-  state: options?.state,
+  state: options?.state[0],
 });
 
 const ManageContact = ({ action, handleAction }: PropTypes) => {
