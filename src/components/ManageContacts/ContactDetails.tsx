@@ -2,7 +2,6 @@ import {
   RuxButton,
   RuxCheckbox,
   RuxContainer,
-  RuxInput,
   RuxStatus,
 } from '@astrouxds/react';
 
@@ -10,18 +9,15 @@ import { useAppContext } from 'providers/AppProvider';
 import { useAppActions } from 'hooks/useAppActions';
 import { setHhMmSs } from 'utils/date';
 import { setPassesId } from 'utils/generateOptions';
+import SmallReadOnlyInput from 'common/SmallReadOnlyInput/SmallReadOnlyInput';
 import './ContactDetails.css';
+import { Actions } from 'Types';
 
 type PropTypes = {
-  label?: string;
-  value: string;
+  handleAction: (action?: Actions) => void;
 };
 
-const ReadOnlyInput = ({ label, value }: PropTypes) => (
-  <RuxInput label={label} readonly value={value} size='small' />
-);
-
-const ContactDetails = ({ handleAction }: any) => {
+const ContactDetails = ({ handleAction }: PropTypes) => {
   const { resetSelectedContact, deleteContact } = useAppActions();
   const { state } = useAppContext();
   const {
@@ -62,30 +58,30 @@ const ContactDetails = ({ handleAction }: any) => {
       </header>
 
       <form>
-        <ReadOnlyInput label='Priority' value={contactPriority} />
-        <ReadOnlyInput label='State' value={contactStateCapitalized} />
-        <ReadOnlyInput label='IRON' value={contactName} />
-        <ReadOnlyInput label='Ground Station' value={contactGround} />
-        <ReadOnlyInput label='REV' value={contactREV} />
-        <ReadOnlyInput label='DOY' value={contactDOY} />
-        <ReadOnlyInput
+        <SmallReadOnlyInput label='Priority' value={contactPriority} />
+        <SmallReadOnlyInput label='State' value={contactStateCapitalized} />
+        <SmallReadOnlyInput label='IRON' value={contactName} />
+        <SmallReadOnlyInput label='Ground Station' value={contactGround} />
+        <SmallReadOnlyInput label='REV' value={contactREV} />
+        <SmallReadOnlyInput label='DOY' value={contactDOY} />
+        <SmallReadOnlyInput
           label='Start Time'
           value={setHhMmSs(contactBeginTimestamp)}
         />
-        <ReadOnlyInput label='AOS' value={setHhMmSs(contactAOS)} />
-        <ReadOnlyInput label='LOS' value={setHhMmSs(contactLOS)} />
-        <ReadOnlyInput
+        <SmallReadOnlyInput label='AOS' value={setHhMmSs(contactAOS)} />
+        <SmallReadOnlyInput label='LOS' value={setHhMmSs(contactLOS)} />
+        <SmallReadOnlyInput
           label='Stop Time'
           value={setHhMmSs(contactEndTimestamp)}
         />
-        <ReadOnlyInput label='Command Mode' value={contactMode} />
+        <SmallReadOnlyInput label='Command Mode' value={contactMode} />
         <span className='active-cb'>
           <label>Active</label>
           <RuxCheckbox checked />
         </span>
-        <ReadOnlyInput label='Equipment String' value={config} />
-        <ReadOnlyInput label='Configuration' value={contactName} />
-        <ReadOnlyInput value={contactEquipment} />
+        <SmallReadOnlyInput label='Equipment String' value={config} />
+        <SmallReadOnlyInput label='Configuration' value={contactName} />
+        <SmallReadOnlyInput value={contactEquipment} />
       </form>
 
       <footer slot='footer'>

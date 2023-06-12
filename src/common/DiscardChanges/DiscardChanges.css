@@ -1,0 +1,11 @@
+.discard-changes-wrapper {
+  margin-top: 2rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.discard-changes-buttons {
+  margin-top: 4rem;
+  display: flex;
+  justify-content: space-evenly;
+}

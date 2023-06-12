@@ -1,6 +1,6 @@
 .App-main {
   --right-panel-width: 26.25rem;
-  --top-deduction: 8rem;
+  --top-deduction: 6rem;
 
   height: calc(100vh - var(--top-deduction));
   padding: var(--spacing-4) var(--spacing-6);
@@ -15,21 +15,20 @@ body {
 }
 
 .App-main__container {
-  overflow: hidden;
-  height: 100%;
-  padding-bottom: var(--spacing-4);
+  height: calc(100% - 44px);
 }
 
 .App-main__container::part(container) {
-  height: 100%;
   display: flex;
   flex-direction: column;
+  height: 100%;
 }
 
 .App-main__container::part(body) {
   flex-grow: 1;
   display: flex;
   --body-padding: 0;
+  height: calc(100% - 3.75rem);
 }
 
 .App-main__left-panel {

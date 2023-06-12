@@ -1,5 +1,15 @@
-import { RuxDatetime, RuxInput, RuxOption, RuxSelect } from '@astrouxds/react';
-import { DefaulOptions } from 'Types';
+import {
+  RuxDatetime,
+  RuxOption,
+  RuxSelect,
+  RuxTextarea,
+} from '@astrouxds/react';
+import EquipmentIcons from 'common/EquipmentIcons/EquipmentIcons';
+import {
+  RuxTextareaCustomEvent,
+  RuxInputCustomEvent,
+} from '@astrouxds/astro-web-components/dist/types/components';
+import type { DefaulOptions } from 'Types';
 
 type PropTypes = {
   options: DefaulOptions;
@@ -20,11 +30,21 @@ const ManageContactsForm = ({ options, values, setValues }: PropTypes) => {
     setValues((prev: number[]) => ({ ...prev, [key]: value, dirty: true }));
   };
 
+  const handleTextArea = (
+    e:
+      | RuxTextareaCustomEvent<HTMLRuxTextareaElement>
+      | RuxInputCustomEvent<HTMLRuxInputElement>
+  ) => {
+    setValues((prev: any) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+      dirty: true,
+    }));
+  };
+
   return (
     <form>
       <section>
-        {/* <h6>1. Choose a Contact to Reserve</h6> */}
-
         <RuxSelect
           label='IRON'
           size='small'
@@ -45,15 +65,17 @@ const ManageContactsForm = ({ options, values, setValues }: PropTypes) => {
           ))}
         </RuxSelect>
 
-        <RuxSelect label='Priority' size='small'>
+        <RuxSelect
+          label='Priority'
+          size='small'
+          onRuxchange={(e) => handleSelect('priority', e.target.value)}
+        >
+          {options.priorities.map((priority) => (
+            <RuxOption key={priority} label={priority} value={priority} />
+          ))}
         </RuxSelect>
 
-        {/* <RuxSelect label='Doy' disabled size='small'>
-          <RuxOption
-            label={options.doy.toString()}
-            value={options.doy.toString()}
-          />
-        </RuxSelect> */}
+        <label>Passes {options.passes.length}</label>
 
         <div className='Contact-list'>
           <div className='Contact-list__header'>
@@ -63,7 +85,7 @@ const ManageContactsForm = ({ options, values, setValues }: PropTypes) => {
           </div>
 
           <ul className='Contact-list__passes'>
-            {options?.passes?.map(({ id, aos, los }, i) => (
+            {options.passes.map(({ id, aos, los }, i) => (
               <li
                 key={id + i}
                 className={values.pass === i ? 'selected' : undefined}
@@ -86,21 +108,36 @@ const ManageContactsForm = ({ options, values, setValues }: PropTypes) => {
             ))}
           </ul>
         </div>
+
+        <div className='start-stop-time'>
+          <div>Pre Pass Start:</div>
+          {values.pass !== -1 && options.passes ? (
+            <RuxDatetime
+              date={options?.passes[values.pass].aos}
+              hour='2-digit'
+              minute='2-digit'
+              second='2-digit'
+            />
+          ) : (
+            '---'
+          )}
+        </div>
+        <div className='start-stop-time'>
+          <div>Post Pass Stop: </div>
+          {values.pass !== -1 && options.passes ? (
+            <RuxDatetime
+              date={options?.passes[values.pass].los}
+              hour='2-digit'
+              minute='2-digit'
+              second='2-digit'
+            />
+          ) : (
+            '---'
+          )}
+        </div>
       </section>
 
       <section>
-        <h6>2. Configure Reservation Options</h6>
-
-        <RuxSelect
-          label='Priority'
-          size='small'
-          onRuxchange={(e) => handleSelect('priority', e.target.value)}
-        >
-          {options.priorities.map((priority) => (
-            <RuxOption key={priority} label={priority} value={priority} />
-          ))}
-        </RuxSelect>
-
         <RuxSelect
           label='Command Mode'
           size='small'
@@ -120,8 +157,16 @@ const ManageContactsForm = ({ options, values, setValues }: PropTypes) => {
             <RuxOption key={label} label={label} value={value} />
           ))}
         </RuxSelect>
+        <p>{values.equipment}</p>
 
-        <RuxInput size='small' readonly value={values.equipment} />
+        <EquipmentIcons equipmentString={values.equipment} />
+
+        <RuxTextarea
+          label='Notes'
+          name='contactDetail'
+          onRuxinput={handleTextArea}
+          value={values.contactDetail}
+        />
       </section>
     </form>
   );

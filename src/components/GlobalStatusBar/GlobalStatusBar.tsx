@@ -69,6 +69,7 @@ const GlobalStatusBar = () => {
             slot='trigger'
             size='2rem'
           />
+
           <RuxMenu onRuxmenuselected={() => setOpenBanner(true)}>
             <RuxMenuItem>GRM Dashboard</RuxMenuItem>
             <RuxMenuItem>GRM Equipment Manager</RuxMenuItem>

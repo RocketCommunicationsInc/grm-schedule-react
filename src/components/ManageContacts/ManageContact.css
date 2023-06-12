@@ -83,3 +83,21 @@ footer {
   justify-content: flex-end;
   gap: var(--spacing-2);
 }
+
+.Manage-contact .start-stop-time {
+  display: flex;
+}
+
+.Manage-contact .start-stop-time div {
+  width: 8rem;
+}
+
+.Manage-contact::part(container) {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}
+.Manage-contact::part(body) {
+  height: 100%;
+  overflow-y: auto;
+}
