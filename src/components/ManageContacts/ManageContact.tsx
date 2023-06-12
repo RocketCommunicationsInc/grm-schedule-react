@@ -34,8 +34,8 @@ const ManageContact = ({ action, handleAction }: PropTypes) => {
     state: { selectedContact, modifyOptions },
   } = useAppContext();
 
-  const [options, setOptions] = useState(() => generateOptions(modifyOptions));
-  const [values, setValues] = useState(() => setDefaultValues(options));
+  const [options, setOptions] = useState(generateOptions(modifyOptions));
+  const [values, setValues] = useState(setDefaultValues(options));
   const [verifyDiscard, setVerifyDiscard] = useState(false);
   const [showAddConfirm, setShowAddConfirm] = useState(false);
   const isAdd = action === 'add';

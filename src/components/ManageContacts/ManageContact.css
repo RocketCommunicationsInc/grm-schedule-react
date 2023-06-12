@@ -132,3 +132,7 @@ footer {
 .Manage-contact rux-textarea {
   padding-top: 0.5rem;
 }
+
+rux-select option .state-select {
+  text-transform: capitalize;
+}

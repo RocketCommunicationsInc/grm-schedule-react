@@ -29,6 +29,8 @@ const ContactsList = ({ handleAction }: PropTypes) => {
     handleAction('details');
   };
 
+  console.log(state);
+
   const table = useReactTable({
     data: state.contacts,
     columns,

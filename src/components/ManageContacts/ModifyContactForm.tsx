@@ -28,8 +28,6 @@ const ModifyContactForm = ({ options, values, setValues }: PropTypes) => {
     setValues((prev: number[]) => ({ ...prev, [key]: value, dirty: true }));
   };
 
-  console.log(options);
-
   return (
     <form>
       <section>
@@ -48,8 +46,13 @@ const ModifyContactForm = ({ options, values, setValues }: PropTypes) => {
           size='small'
           onRuxchange={(e) => handleSelect('state', e.target.value)}
         >
-          {options.state.map((state) => (
-            <RuxOption key={state} label={state} value={state} />
+          {options.state.map((state, i) => (
+            <RuxOption
+              className='state-select'
+              key={i}
+              label={state}
+              value={state}
+            />
           ))}
         </RuxSelect>
 
