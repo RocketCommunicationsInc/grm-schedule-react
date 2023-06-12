@@ -1,4 +1,4 @@
-import { useCallback, useMemo } from 'react';
+import { useCallback } from 'react';
 
 import { useAppContext } from 'providers/AppProvider';
 import { randomContacts, randomId, randomInt } from 'utils/random';
@@ -84,72 +84,13 @@ export const useAppActions = () => {
     [dispatch, state]
   );
 
-  const filterContacts = (
-    contact: any
-    // priority: Priority,
-    // groundStation: GroundStation,
-    // contactState: ContactState
-    ) => {
-// if(priority === "Low") {
-//   const priorityC = state.contacts.filter((contact: Contact) => contact.contactPriority === "Low" )
-//   console.log(priorityC)
-if(contact) {
-
-  const filteredContacts = state.contacts.filter((contact: Contact) => contact.contactState)
-
-      // const priorityFilter = priority
-      // ? state.contacts.filter(
-      //   (contact: Contact) => contact.contactPriority === priority
-      //   )
-      //   : state.contact;
-      //   console.log(priorityFilter, "priority")
-      //   const groundFilter = groundStation
-      //   ? state.contacts.filter(
-      //     (contact: Contact) => contact.contactGround === groundStation
-      //     )
-      //     : state.contact;
-          
-      //     const stateFilter = contactState
-      //     ? state.contacts.filter(
-      //       (contact: Contact) => contact.contactState === contactState
-      //       )
-      //       : state.contact;
-              
-    // const filterData = () => {
-    //   if (priority) {
-    //     state.contact.filter(
-    //       (contact: Contact) => contact.contactPriority === priority
-    //     );
-    //   } else if (groundStation) {
-    //     state.contact.filter(
-    //       (contact: Contact) => contact.contactGround === groundStation
-    //     );
-    //   } else if (contactState) {
-    //     state.contact.filter(
-    //       (contact: Contact) => contact.contactState === contactState
-    //     );
-    //   } else return state.contact;
-    // };
-
-
-//     const filteredData = () => {
-//       if(priorityFilter) {
-// setData(priorityFilter)
-//       } if(groundFilter) {
-//         setData(groundFilter)
-//       } if  (stateFilter) {
-//         setData(stateFilter)
-//       }
-//     }
-//     console.log(priorityFilter, "priFilt")
-
-const data = setData(filteredContacts)
-    console.log(data, "data")
+  const filterContacts = () => {
+    const filteredContacts = [...state.contacts];
     dispatch({
       type: 'FILTER_CONTACTS',
-      payload: { ...data },
+      payload: { filteredContacts: filteredContacts},
     });
-  }}
+  };
 
   const setSelectedContact = useCallback(
     (contact: Contact) => {
@@ -176,3 +117,81 @@ const data = setData(filteredContacts)
     setSelectedContact,
   };
 };
+
+// const priority = (
+//   filters: ContactState | GroundStation | Priority
+// ): filters is Priority => {
+//   return filters.hasOwnProperty('contactPriority');
+// };
+
+// const contactState = (
+//   filters: ContactState | GroundStation | Priority
+// ): filters is ContactState => {
+//   return filters.hasOwnProperty('state');
+// };
+
+// const groundStation = (
+//   filters: ContactState | GroundStation | Priority
+// ): filters is GroundStation => {
+//   return filters.hasOwnProperty('groundStation');
+// };
+// const filterContacts = (filters: ContactState | GroundStation | Priority) => {
+//   const filterArr = {...state.contacts}
+//   const filteredContacts = filterArr.filter((contact: Contact) => {
+//     if (priority(filters)) {
+//       return contact.contactPriority === filters;
+//     } else if (contactState(filters)) {
+//       return contact.contactState === filters;
+//     } else if (groundStation(filters)) {
+//       return contact.contactGround === filters;
+//     }
+//     return true;
+//   });
+//   console.log(filteredContacts)
+
+//   const data = setData(filteredContacts);
+//   dispatch({
+//     type: 'FILTER_CONTACTS',
+//     payload: {...data, filteredContacts: filteredContacts,},
+//     filteredContacts: filterArr
+//   });
+// };
+// for (let i = 0; i < filteredContacts.length; i++) {
+//   const contactsObj = filteredContacts[i];
+//   if(filters.every(filter => con))
+
+// }
+
+//   dispatch({
+//     type: 'FILTER_CONTACTS',
+//     //payload: { ...data },
+//     filterContacts: []
+//   });
+// };
+
+//   const filterContacts = (
+//     contact: Contact, filter: any
+//     ) => {
+
+//   const filteredContacts = state.contacts.filter((contact: { contactPriority: any; }) => contact.contactPriority)
+//   if(filter === 'low' && contact.contactPriority) {
+// return true
+//   }
+
+// const data = setData(filteredContacts)
+//     console.log(data, "data")
+// dispatch({
+//   type: 'FILTER_CONTACTS',
+//   payload: { ...data },
+//   filterContacts: []
+// });
+//   }}
+
+//   let isFiltered = true;
+//   filter.forEach((filterValue: string) => {
+//     if (!contact[filterValue as keyof typeof contact]) {
+//       isFiltered = false;
+//     }
+//   });
+//   return isFiltered;
+//});

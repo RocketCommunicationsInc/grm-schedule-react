@@ -1,4 +1,4 @@
-import { SetStateAction } from 'react';
+import { SetStateAction, useState } from 'react';
 import {
   RuxButton,
   RuxCheckbox,
@@ -11,77 +11,101 @@ import {
 import { useAppContext } from 'providers/AppProvider';
 import { useAppActions } from 'hooks/useAppActions';
 import './FilterContacts.css';
-import { ContactState, GroundStation, Priority } from 'Types';
+import { Contact, ContactState, GroundStation, Priority } from 'Types';
 
 type PropTypes = {
   action?: any;
   handleAction: (action?: SetStateAction<any>) => void;
+  //priority: Priority;
 };
 
 const ManageContact = ({ handleAction }: PropTypes) => {
   const { resetSelectedContact, filterContacts } = useAppActions();
   const { state } = useAppContext();
+  const checkbox = document.querySelector('rux-checkbox');
+  const [checked, setChecked] = useState(false);
+
+  console.log(state);
 
   const handleClose = () => {
     handleAction();
     resetSelectedContact();
   };
 
-  const priority: Priority = state.contacts.map(
-    (contact: { contactPriority: any }) => contact.contactPriority
-  );
+  //console.log(state);
+  const priority: Priority = state.contacts.map((contact: any) => contact);
 
-  const cState: ContactState = state.contacts.map(
-    (contact: { contactState: any }) => contact.contactState
-  );
+  // const cState: ContactState = state.contacts.map(
+  //   (contact: { contactState: any }) => contact.contactState
+  // );
+
+  const ruxCheckboxGroup = document.querySelector('rux-checkbox-group');
+  //console.log(ruxCheckboxGroup);
 
   const handleFilter = () => {
+    //     const priorityFilter = priority
+    // ? state.contacts.filter(
+    //   (contact: Contact) => contact.contactPriority === priority
+    //   )
+    //   : state.contact;
+    //   console.log(priorityFilter, "priority")
+    //   const groundFilter = groundStation
+    //   ? state.contacts.filter(
+    //     (contact: Contact) => contact.contactGround === groundStation
+    //     )
+    //     : state.contact;
+    //     const stateFilter = contactState
+    //     ? state.contacts.filter(
+    //       (contact: Contact) => contact.contactState === contactState
+    //       )
+    //       : state.contact;
     // const priority: Priority = state.contacts.map(
-    //   (contact: { contactPriority: any }) => contact.contactPriority
+    //   (contact: { contactPriority: any }) => contact.contactPriority === 'Low'
     // );
-    // //console.log(priority, 'priority');
+    // console.log(priority, 'priority');
     // const groundS: GroundStation = state.contacts.map(
     //   (contact: { contactGround: any }) => contact.contactGround
     // );
     // const cState: ContactState = state.contacts.map(
     //   (contact: { contactState: any }) => contact.contactState
     // );
-    // if (priority) {
+    // if (ruxCheckboxGroup?.label === 'Priority') {
     //   filterContacts(priority);
     // }
     // if (groundS) {
-    //   //@ts-expect-error
     //   filterContacts(groundS);
     // }
     // if (cState) {
-    //   //@ts-expect-error
     //   filterContacts(cState);
     // }
-    filterContacts(cState);
+    filterContacts();
   };
 
-  const handleClear = () => {
-    resetSelectedContact();
+  const handleClear = (e: any) => {
+    console.log(checkbox);
+    if (checkbox?.checked) {
+      checkbox.checked = false;
+    }
   };
 
-  //const checkboxes = document.querySelectorAll;
-
+  //make a copy filter from there. Import 'setData' and format data.
   return (
     <RuxContainer className='filter-contact'>
       <header slot='header'>
         <RuxIcon icon='arrow-back' size='1.5rem' onClick={handleClose} />
         Filter Contacts
-        <RuxButton borderless secondary icon='refresh' onClick={handleClear}>
+        <RuxButton
+          borderless
+          secondary
+          icon='refresh'
+          onClick={(e) => handleClear(e)}
+        >
           Reset Filters
         </RuxButton>
       </header>
 
       <RuxCheckboxGroup label='Priority'>
-        <RuxCheckbox
-          label='# High 1 - 66'
-          checked={state}
-          onRuxinput={handleFilter}
-        />
+        <RuxCheckbox label='# High 1 - 66' onRuxinput={handleFilter} />
         <RuxCheckbox label='# Medium 67 - 133' onRuxinput={handleFilter} />
         <RuxCheckbox label='# Low 134 - 200' onRuxinput={handleFilter} />
       </RuxCheckboxGroup>
@@ -136,3 +160,48 @@ const ManageContact = ({ handleAction }: PropTypes) => {
 };
 
 export default ManageContact;
+
+// const priorityFilter = priority
+// ? state.contacts.filter(
+//   (contact: Contact) => contact.contactPriority === priority
+//   )
+//   : state.contact;
+//   console.log(priorityFilter, "priority")
+//   const groundFilter = groundStation
+//   ? state.contacts.filter(
+//     (contact: Contact) => contact.contactGround === groundStation
+//     )
+//     : state.contact;
+
+//     const stateFilter = contactState
+//     ? state.contacts.filter(
+//       (contact: Contact) => contact.contactState === contactState
+//       )
+//       : state.contact;
+
+// const filterData = () => {
+//   if (priority) {
+//     state.contact.filter(
+//       (contact: Contact) => contact.contactPriority === priority
+//     );
+//   } else if (groundStation) {
+//     state.contact.filter(
+//       (contact: Contact) => contact.contactGround === groundStation
+//     );
+//   } else if (contactState) {
+//     state.contact.filter(
+//       (contact: Contact) => contact.contactState === contactState
+//     );
+//   } else return state.contact;
+// };
+
+//     const filteredData = () => {
+//       if(priorityFilter) {
+// setData(priorityFilter)
+//       } if(groundFilter) {
+//         setData(groundFilter)
+//       } if  (stateFilter) {
+//         setData(stateFilter)
+//       }
+//     }
+//     console.log(priorityFilter, "priFilt")
