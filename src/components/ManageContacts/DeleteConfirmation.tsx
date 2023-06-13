@@ -28,6 +28,10 @@ const DeleteConfirmation = ({
     handleClose();
   };
 
+  const handleCancel = () => {
+    setPendingDelete(false);
+  };
+
   return (
     <>
       <RuxTable className='delete-confirmation-table'>
@@ -72,7 +76,7 @@ const DeleteConfirmation = ({
       </RuxTable>
 
       <footer slot='footer'>
-        <RuxButton size='small' secondary onClick={handleClose}>
+        <RuxButton size='small' secondary onClick={handleCancel}>
           Cancel
         </RuxButton>
         <RuxButton size='small' secondary onClick={handleDelete}>
