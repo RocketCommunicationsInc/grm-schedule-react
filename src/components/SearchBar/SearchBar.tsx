@@ -1,19 +1,18 @@
 import { useState } from 'react';
 import { RuxInput } from '@astrouxds/react';
 import './SearchBar.css';
+//import { useAppContext } from 'providers/AppProvider';
 
 const SearchBar = () => {
+  //const { state } = useAppContext();
   const [searchValue, setSearchValue] = useState('');
 
-  const tRow = document.getElementsByClassName('Astro-react-table__row') as any;
-  const tCell = document.getElementsByClassName('Astro-react-table__cell');
-
-  // const tCellArr = Array.from(tRow.childNodes).filter(
-  //   (node: any) => node.nodeName === 'Astro-react-table__cell'
-  // );
-  console.log(tRow.value, 'row value');
-
-  //const rowData = Object.values(tRow).map((row) => row.innerHTML)
+  const tRow = document.getElementsByClassName(
+    'Astro-react-table__row'
+  ) as HTMLCollectionOf<HTMLElement>;
+  const tCell = document.getElementsByClassName(
+    'Astro-react-table__cell'
+  ) as HTMLCollectionOf<HTMLElement>;
 
   for (let i = 0; i < tRow.length; i++) {
     //const resultsList = [];
@@ -23,14 +22,16 @@ const SearchBar = () => {
 
     for (let j = 0; j < tCell.length; j++) {
       const cell = tCell[j];
+      //console.log(cell, 'cell');
       const cellValue = cell.innerHTML.toLowerCase();
-      // console.log(cellValue, 'cellValue');
+      //console.log(cellValue, 'cellValue');
 
       if (cellValue.includes(searchValue)) {
+        //cell.style.backgroundColor = 'purple';
         searchVal = true;
         // resultsList.push(row);
         // console.log(resultsList, 'list');
-        console.log(searchVal, 'searchVal');
+        // console.log(searchVal, 'searchVal');
         break;
       }
       if (!cellValue.includes(searchValue)) {
@@ -52,3 +53,9 @@ const SearchBar = () => {
 };
 
 export default SearchBar;
+
+//* need to account for times being strings
+//* removing values, typing with any uppercase
+//* cells need to be associated with the row they're in
+//* Status values highlighting multiples
+//* only highlighting single value, need all values to be searched- removing break will do that but it runs too much without it

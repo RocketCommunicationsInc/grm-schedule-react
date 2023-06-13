@@ -22,7 +22,6 @@ export const AstroReactTable = ({
     if (setIsSelected) return setIsSelected(original);
     return false;
   };
-  console.log(table.rows, 'table');
 
   return (
     <div className='Astro-react-table'>
