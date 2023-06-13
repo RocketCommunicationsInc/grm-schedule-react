@@ -9,9 +9,10 @@ export type GenerateOptions = {
   aos: string | number | Date;
   los: string | number | Date;
   mode: any;
+  state: any;
 };
 
-export type DefaulOptions = {
+export type DefaultOptions = {
   irons: (number | number[])[];
   grounds: string[];
   priorities: string[];
@@ -20,4 +21,5 @@ export type DefaulOptions = {
   passes: { id: string; aos: string; los: string }[];
   modes: string[];
   configs: any[];
+  state: string[];
 };

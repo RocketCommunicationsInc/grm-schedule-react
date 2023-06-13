@@ -13,21 +13,21 @@
   overflow: auto;
 }
 
-form {
+.Contact-details form {
   display: flex;
   flex-direction: column;
-
-  h6 {
-    align-items: center;
-    display: flex;
-
-    rux-status {
-      margin-right: var(--spacing-2);
-    }
-  }
 }
 
-.Contact-details form,
+.Contact-details h6 {
+  align-items: center;
+  display: flex;
+}
+
+.Contact-detail rux-status {
+  margin-right: var(--spacing-2);
+}
+
+form,
 section {
   gap: var(--spacing-3);
 }
@@ -51,11 +51,11 @@ section {
   margin-right: 0.5rem;
 }
 
-.Contact-details rux-input::part(form-field) {
+rux-input::part(form-field) {
   flex-direction: row;
 }
 
-.Contact-details rux-input::part(label) {
+rux-input::part(label) {
   margin-right: var(--spacing-2);
   width: 13rem;
 }
@@ -67,4 +67,20 @@ section {
 
 .active-cb label {
   width: 8.5rem;
+}
+
+.Contact-details rux-container div[slot='header'] {
+  font-size: var(--font-size-base);
+}
+
+.Contact-details rux-container::part(header) {
+  padding: var(--spacing-1);
+}
+
+.Contact-details rux-container rux-input::part(form-field) {
+  margin-bottom: var(--spacing-2);
+}
+
+.Contact-details rux-checkbox {
+  pointer-events: none;
 }

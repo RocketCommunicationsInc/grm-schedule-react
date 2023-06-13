@@ -7,7 +7,7 @@ const setLabelsCount = ({ type, contacts }: any) => {
     }
     case 'upcoming': {
       const upcoming = contacts.filter((c: { contactState: string }) => {
-        return c.contactState === 'scheduled';
+        return c.contactState === 'upcoming';
       });
       return upcoming.length || 0;
     }

@@ -52,6 +52,7 @@ export const AppReducer = (state: any, { type, payload }: any) => {
           aos: payload.contactAOS,
           los: payload.contactLOS,
           rev: payload.contactREV,
+          state: payload.contactState
         },
       };
     }
