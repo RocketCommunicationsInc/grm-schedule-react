@@ -13,6 +13,7 @@ import { setPassesId } from 'utils/generateOptions';
 import SmallReadOnlyInput from 'common/SmallReadOnlyInput/SmallReadOnlyInput';
 import './ContactDetails.css';
 import { Actions } from 'Types';
+import EquipmentIcons from 'common/EquipmentIcons/EquipmentIcons';
 
 type PropTypes = {
   handleAction: (action?: Actions) => void;
@@ -83,9 +84,12 @@ const ContactDetails = ({ handleAction }: PropTypes) => {
               <label>Active</label>
               <RuxCheckbox checked label='Active' />
             </span>
-            <SmallReadOnlyInput label='Equipment String' value={config} />
-            <SmallReadOnlyInput label='Configuration' value={contactName} />
-            <SmallReadOnlyInput value={contactEquipment} />
+            <RuxContainer>
+              <div slot='header'>Equipment String</div>
+              <SmallReadOnlyInput label='Configuration' value={config} />
+              <label>{contactEquipment}</label>
+              <EquipmentIcons equipmentString={contactEquipment} />
+            </RuxContainer>
           </form>
           <footer slot='footer'>
             <RuxButton

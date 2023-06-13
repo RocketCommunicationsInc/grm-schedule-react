@@ -1,6 +1,6 @@
 import { RuxButton } from '@astrouxds/react';
 import SmallReadOnlyInput from 'common/SmallReadOnlyInput/SmallReadOnlyInput';
-import type { DefaulOptions } from 'Types';
+import type { DefaultOptions } from 'Types';
 
 import './AddContactConfirm.css';
 
@@ -15,7 +15,7 @@ type PropTypes = {
     mode: string;
     dirty: boolean;
   };
-  options: DefaulOptions;
+  options: DefaultOptions;
   handleAdd: () => void;
   setShowAddConfirm: (open: boolean) => void;
 };

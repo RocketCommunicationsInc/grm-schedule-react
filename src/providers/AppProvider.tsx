@@ -31,6 +31,7 @@ const AppProvider = ({ children }: PropTypes) => {
       contactMode: options.modes[randomIndex(options.modes)],
       contactPriority: options.priorities[randomIndex(options.priorities)],
       contactREV: randomInt(1, 9999).toString().padStart(4, '0'),
+      contactState: options.state[randomIndex(options.state)],
     }));
 
     dispatch({ type: 'SET_DATA', payload: setData(contacts.slice(0, 100)) });
