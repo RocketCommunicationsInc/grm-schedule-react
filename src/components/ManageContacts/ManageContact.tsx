@@ -86,11 +86,19 @@ const ManageContact = ({ action, handleAction }: PropTypes) => {
   return (
     <RuxContainer className='Manage-contact'>
       <header slot='header'>
-        <RuxIcon
-          icon='arrow-back'
-          size='1.5rem'
-          onClick={() => handleClose(true)}
-        />
+        {isAdd ? (
+          <RuxIcon
+            icon='arrow-back'
+            size='1.5rem'
+            onClick={() => handleClose(true)}
+          />
+        ) : (
+          <RuxIcon
+            icon='arrow-back'
+            size='1.5rem'
+            onClick={() => handleAction('details')}
+          />
+        )}
         {isAdd ? 'Add' : 'Modify'}
         &nbsp;Contact
       </header>
@@ -104,9 +112,24 @@ const ManageContact = ({ action, handleAction }: PropTypes) => {
           )}
 
           <footer slot='footer'>
-            <RuxButton size='small' secondary onClick={() => handleClose(true)}>
-              Cancel
-            </RuxButton>
+            {isAdd ? (
+              <RuxButton
+                size='small'
+                secondary
+                onClick={() => handleClose(true)}
+              >
+                Cancel
+              </RuxButton>
+            ) : (
+              <RuxButton
+                size='small'
+                secondary
+                onClick={() => handleAction('details')}
+              >
+                Cancel
+              </RuxButton>
+            )}
+
             <RuxButton
               size='small'
               onClick={() => {
