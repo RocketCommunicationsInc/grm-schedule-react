@@ -8,6 +8,7 @@ import {
 import { setHhMmSs } from 'utils/date';
 import { useAppActions } from 'hooks/useAppActions';
 import './DeleteConfirmation.css';
+import SmallReadOnlyInput from '../../common/SmallReadOnlyInput/SmallReadOnlyInput';
 
 type PropTypes = {
   contact: any;
@@ -21,6 +22,15 @@ const DeleteConfirmation = ({
   handleClose,
 }: PropTypes) => {
   const { deleteContact } = useAppActions();
+  const {
+    contactName,
+    contactGround,
+    contactDOY,
+    contactBeginTimestamp,
+    contactAOS,
+    contactLOS,
+    contactEndTimestamp,
+  } = contact;
 
   const handleDelete = () => {
     deleteContact(contact);
@@ -28,62 +38,32 @@ const DeleteConfirmation = ({
     handleClose();
   };
 
-  const handleCancel = () => {
-    setPendingDelete(false);
-  };
-
   return (
-    <>
-      <RuxTable className='delete-confirmation-table'>
-        <caption>
-          Please confirm if you with to <strong>DELETE</strong> the following
-          contact:
-        </caption>
-        <RuxTableBody>
-          <RuxTableRow>
-            <RuxTableCell>IRON</RuxTableCell>
-            <RuxTableCell>{contact.contactName}</RuxTableCell>
-          </RuxTableRow>
-          <RuxTableRow>
-            <RuxTableCell>Ground Station</RuxTableCell>
-            <RuxTableCell>{contact.contactGround}</RuxTableCell>
-          </RuxTableRow>
-          <RuxTableRow>
-            <RuxTableCell>DOY</RuxTableCell>
-            <RuxTableCell>{contact.contactDOY}</RuxTableCell>
-          </RuxTableRow>
-          <RuxTableRow>
-            <RuxTableCell>Pre Pass Start</RuxTableCell>
-            <RuxTableCell>
-              {setHhMmSs(contact.contactBeginTimestamp)}
-            </RuxTableCell>
-          </RuxTableRow>
-          <RuxTableRow>
-            <RuxTableCell>AOS</RuxTableCell>
-            <RuxTableCell>{setHhMmSs(contact.contactAOS)}</RuxTableCell>
-          </RuxTableRow>
-          <RuxTableRow>
-            <RuxTableCell>LOS</RuxTableCell>
-            <RuxTableCell>{setHhMmSs(contact.contactLOS)}</RuxTableCell>
-          </RuxTableRow>
-          <RuxTableRow>
-            <RuxTableCell>Post Pas Stop</RuxTableCell>
-            <RuxTableCell>
-              {setHhMmSs(contact.contactEndTimestamp)}
-            </RuxTableCell>
-          </RuxTableRow>
-        </RuxTableBody>
-      </RuxTable>
-
-      <footer slot='footer'>
-        <RuxButton size='small' secondary onClick={handleCancel}>
+    <div className='delete-contact-confirm-wrapper'>
+      <p>
+        Please confirm if you with to <strong>DELETE</strong> the following
+        contact:
+      </p>
+      <SmallReadOnlyInput label='IRON' value={contactName} />
+      <SmallReadOnlyInput label='Ground Station' value={contactGround} />
+      <SmallReadOnlyInput label='DOY' value={contactDOY.toString()} />
+      <SmallReadOnlyInput
+        label='Pre Pass Start'
+        value={setHhMmSs(contactBeginTimestamp)}
+      />
+      <SmallReadOnlyInput label='AOS' value={setHhMmSs(contactAOS)} />
+      <SmallReadOnlyInput label='LOS' value={setHhMmSs(contactLOS)} />
+      <SmallReadOnlyInput
+        label='Post Pass Stop'
+        value={setHhMmSs(contactEndTimestamp)}
+      />
+      <div className='delete-contact-confirm-buttons'>
+        <RuxButton secondary onClick={() => setPendingDelete(false)}>
           Cancel
         </RuxButton>
-        <RuxButton size='small' secondary onClick={handleDelete}>
-          Delete
-        </RuxButton>
-      </footer>
-    </>
+        <RuxButton onClick={handleDelete}>Delete</RuxButton>
+      </div>
+    </div>
   );
 };
 

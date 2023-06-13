@@ -1,9 +1,26 @@
-.delete-confirmation-table rux-table-row > rux-table-cell:first-of-type {
-  width: 35%;
+.delete-contact-confirm-wrapper {
+  display: flex;
+  flex-direction: column;
+  gap: var(--spacing-3);
+  margin-top: 1.5rem;
 }
 
-.delete-confirmation-table caption {
-  padding-block: 2em 1em;
-  font-size: 0.9em;
-  text-align: left;
+.delete-contact-confirm-wrapper rux-input::part(form-field) {
+  flex-direction: row;
+  align-items: center;
+}
+
+.delete-contact-confirm-wrapper rux-input::part(label) {
+  margin-right: var(--spacing-2);
+  width: 13rem;
+}
+
+.delete-contact-confirm-buttons {
+  display: flex;
+  justify-content: center;
+  margin-top: 2rem;
+}
+
+.delete-contact-confirm-buttons rux-button:last-child {
+  margin-left: 1rem;
 }
