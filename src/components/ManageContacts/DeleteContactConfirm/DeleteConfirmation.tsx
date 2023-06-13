@@ -35,7 +35,7 @@ const DeleteConfirmation = ({
   return (
     <div className='delete-contact-confirm-wrapper'>
       <p>
-        Please confirm if you with to <strong>DELETE</strong> the following
+        Please confirm if you wish to <strong>DELETE</strong> the following
         contact:
       </p>
       <SmallReadOnlyInput label='IRON' value={contactName} />
