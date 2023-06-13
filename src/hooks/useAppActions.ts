@@ -47,7 +47,6 @@ export const useAppActions = () => {
           if (contact.contactId === modifiedContact.contactId) {
             return modifiedContact;
           }
-
           return contact;
         }
       );

@@ -9,7 +9,7 @@ export type GenerateOptions = {
   aos: string | number | Date;
   los: string | number | Date;
   mode: any;
-  state: string;
+  state: any;
 };
 
 export type DefaultOptions = {

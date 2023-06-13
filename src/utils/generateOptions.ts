@@ -21,7 +21,7 @@ export const generateOptions = (modifyOptions?: GenerateOptions) => {
   }));
 
   const cState = modifyOptions
-  ? ([modifyOptions.state, ...options.state])
+  ? [modifyOptions.state, ...options.state]
   : options.state
   console.log(cState)
   console.log(modifyOptions, "modify")
@@ -68,8 +68,6 @@ export const generateOptions = (modifyOptions?: GenerateOptions) => {
           ...configs.slice(1),
         ]
       : configs,
-      state: modifyOptions
-      ? unique([modifyOptions.state, ...options.state])
-      : options.state,
+      state: modifyOptions?.state ? modifyOptions.state : options.state
   };
 };
