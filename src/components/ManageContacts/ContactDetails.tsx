@@ -5,8 +5,7 @@ import {
   RuxContainer,
   RuxStatus,
 } from '@astrouxds/react';
-import DeleteConfirmation from './DeleteConfirmation';
-
+import DeleteConfirmation from './DeleteContactConfirm/DeleteConfirmation';
 import { useAppContext } from 'providers/AppProvider';
 import { useAppActions } from 'hooks/useAppActions';
 import { setHhMmSs } from 'utils/date';

@@ -1,14 +1,8 @@
-import {
-  RuxButton,
-  RuxTable,
-  RuxTableBody,
-  RuxTableRow,
-  RuxTableCell,
-} from '@astrouxds/react';
+import { RuxButton } from '@astrouxds/react';
 import { setHhMmSs } from 'utils/date';
 import { useAppActions } from 'hooks/useAppActions';
 import './DeleteConfirmation.css';
-import SmallReadOnlyInput from '../../common/SmallReadOnlyInput/SmallReadOnlyInput';
+import SmallReadOnlyInput from '../../../common/SmallReadOnlyInput/SmallReadOnlyInput';
 
 type PropTypes = {
   contact: any;
