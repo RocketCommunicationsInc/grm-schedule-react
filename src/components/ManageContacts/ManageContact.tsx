@@ -43,7 +43,7 @@ const ManageContact = ({ action, handleAction }: PropTypes) => {
   const handleAdd = () => {
     addContact(values);
     handleAction('manage');
-    const newOptions = generateOptions();
+    const newOptions = generateOptions(modifyOptions);
     setOptions(newOptions);
     setValues(setDefaultValues(newOptions));
   };

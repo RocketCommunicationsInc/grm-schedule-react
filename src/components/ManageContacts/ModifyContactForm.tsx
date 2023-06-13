@@ -47,15 +47,9 @@ const ModifyContactForm = ({ options, values, setValues }: PropTypes) => {
           onRuxchange={(e) => handleSelect('state', e.target.value)}
         >
           {options.state.map((state, i) => {
-            console.log(state);
-            return (
-              <RuxOption
-                className='state-select'
-                key={i}
-                label={state}
-                value={state}
-              />
-            );
+            const stateCapitalized =
+              state.charAt(0).toUpperCase() + state.slice(1);
+            return <RuxOption key={i} label={stateCapitalized} value={state} />;
           })}
         </RuxSelect>
 

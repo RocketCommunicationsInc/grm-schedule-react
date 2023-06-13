@@ -10,7 +10,7 @@ export const setPassesId = ({ contactSatellite, contactEquipment }: any) => {
 
 const unique = (arr: any[]) => [...new Set(arr)];
 
-export const generateOptions = (modifyOptions?: GenerateOptions) => {
+export const generateOptions = (modifyOptions: GenerateOptions) => {
   const contacts = randomContacts(8);
 
   const irons = Array.from({ length: 8 }, () => randomInt(60_000, 90_000));
@@ -19,12 +19,6 @@ export const generateOptions = (modifyOptions?: GenerateOptions) => {
     label: `Config ${i + 1}`,
     value: data[randomIndex(data)].contactEquipment,
   }));
-
-  const cState = modifyOptions
-  ? [modifyOptions.state, ...options.state]
-  : options.state
-  console.log(cState)
-  console.log(modifyOptions, "modify")
 
   const passes = contacts.map((contact) => ({
     id: setPassesId(contact),
@@ -68,6 +62,8 @@ export const generateOptions = (modifyOptions?: GenerateOptions) => {
           ...configs.slice(1),
         ]
       : configs,
-      state: modifyOptions?.state ? modifyOptions.state : options.state
+      state: modifyOptions
+      ? unique([modifyOptions.state, ...options.state])
+      : options.state
   };
 };
