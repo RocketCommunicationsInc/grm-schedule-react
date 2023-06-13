@@ -1,0 +1,9 @@
+.delete-confirmation-table rux-table-row > rux-table-cell:first-of-type {
+  width: 35%;
+}
+
+.delete-confirmation-table caption {
+  padding-block: 2em 1em;
+  font-size: 0.9em;
+  text-align: left;
+}

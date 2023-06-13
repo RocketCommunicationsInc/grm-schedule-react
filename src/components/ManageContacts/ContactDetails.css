@@ -16,15 +16,15 @@
 form {
   display: flex;
   flex-direction: column;
+}
 
-  h6 {
-    align-items: center;
-    display: flex;
+.Contact-details h6 {
+  align-items: center;
+  display: flex;
+}
 
-    rux-status {
-      margin-right: var(--spacing-2);
-    }
-  }
+.Contact-detail rux-status {
+  margin-right: var(--spacing-2);
 }
 
 .Contact-details form,
