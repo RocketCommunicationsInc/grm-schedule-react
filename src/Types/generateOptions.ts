@@ -12,7 +12,7 @@ export type GenerateOptions = {
   state: string;
 };
 
-export type DefaulOptions = {
+export type DefaultOptions = {
   irons: (number | number[])[];
   grounds: string[];
   priorities: string[];

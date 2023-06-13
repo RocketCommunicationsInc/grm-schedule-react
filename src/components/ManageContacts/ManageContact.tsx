@@ -8,7 +8,7 @@ import { useAppActions } from 'hooks/useAppActions';
 import ModifyContactForm from './ModifyContactForm';
 import DiscardChanges from '../../common/DiscardChanges/DiscardChanges';
 import './ManageContact.css';
-import type { DefaulOptions, Actions } from 'Types';
+import type { DefaultOptions, Actions } from 'Types';
 import AddContactConfirm from './AddContactConfirm/AddContactConfirm';
 import AddContactForm from './AddContact';
 
@@ -16,7 +16,7 @@ type PropTypes = {
   action: any;
   handleAction: (action?: Actions) => void;
 };
-const setDefaultValues = (options: DefaulOptions) => ({
+const setDefaultValues = (options: DefaultOptions) => ({
   doy: options.doy,
   equipment: options.configs[0].value,
   ground: options.grounds[0],

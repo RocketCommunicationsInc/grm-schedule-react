@@ -10,10 +10,10 @@ import {
   RuxTextareaCustomEvent,
   RuxInputCustomEvent,
 } from '@astrouxds/astro-web-components/dist/types/components';
-import type { DefaulOptions } from 'Types';
+import type { DefaultOptions } from 'Types';
 
 type PropTypes = {
-  options: DefaulOptions;
+  options: DefaultOptions;
   values: any;
   setValues: (prev: any) => void;
 };

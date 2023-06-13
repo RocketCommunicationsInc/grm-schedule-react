@@ -20,6 +20,12 @@ export const generateOptions = (modifyOptions?: GenerateOptions) => {
     value: data[randomIndex(data)].contactEquipment,
   }));
 
+  const cState = modifyOptions
+  ? ([modifyOptions.state, ...options.state])
+  : options.state
+  console.log(cState)
+  console.log(modifyOptions, "modify")
+
   const passes = contacts.map((contact) => ({
     id: setPassesId(contact),
     aos: new Date(contact.contactBeginTimestamp * 1000).toISOString(),

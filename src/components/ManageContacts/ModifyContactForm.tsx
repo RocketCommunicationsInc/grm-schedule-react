@@ -7,10 +7,10 @@ import {
   RuxSelect,
 } from '@astrouxds/react';
 import EquipmentIcons from 'common/EquipmentIcons/EquipmentIcons';
-import type { DefaulOptions } from 'Types';
+import type { DefaultOptions } from 'Types';
 
 type PropTypes = {
-  options: DefaulOptions;
+  options: DefaultOptions;
   values: any;
   setValues: (prev: any) => void;
 };
@@ -46,14 +46,17 @@ const ModifyContactForm = ({ options, values, setValues }: PropTypes) => {
           size='small'
           onRuxchange={(e) => handleSelect('state', e.target.value)}
         >
-          {options.state.map((state, i) => (
-            <RuxOption
-              className='state-select'
-              key={i}
-              label={state}
-              value={state}
-            />
-          ))}
+          {options.state.map((state, i) => {
+            console.log(state);
+            return (
+              <RuxOption
+                className='state-select'
+                key={i}
+                label={state}
+                value={state}
+              />
+            );
+          })}
         </RuxSelect>
 
         <RuxSelect
