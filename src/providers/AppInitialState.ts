@@ -7,4 +7,6 @@ export const initialState = {
   start: new Date(),
   end: new Date(),
   ucaCount: 0,
+  filteredData: [], 
+  searchedData: []
 };
