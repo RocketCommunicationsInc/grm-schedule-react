@@ -15,7 +15,7 @@ const SearchBar = () => {
   ) as HTMLCollectionOf<HTMLElement>;
 
   for (let i = 0; i < tRow.length; i++) {
-    //const resultsList = [];
+    // const resultsList = [];
     const row = tRow[i] as HTMLElement;
     //console.log(row, 'row');
     let searchVal = false;
@@ -25,20 +25,28 @@ const SearchBar = () => {
       //console.log(cell, 'cell');
       const cellValue = cell.innerHTML.toLowerCase();
       //console.log(cellValue, 'cellValue');
+      const cellRow = cell.parentElement;
 
       if (cellValue.includes(searchValue)) {
-        //cell.style.backgroundColor = 'purple';
         searchVal = true;
-        // resultsList.push(row);
+        cellRow
+          ? (cellRow.style.backgroundColor = 'purple')
+          : (searchVal = true);
         // console.log(resultsList, 'list');
         // console.log(searchVal, 'searchVal');
         break;
       }
-      if (!cellValue.includes(searchValue)) {
-        searchVal = false;
-      }
     }
-    row.style.display = searchVal ? '' : 'none';
+
+    //row.filter(search => )
+
+    if (searchValue === '') {
+      searchVal = false;
+      row.style.display = 'visible';
+    } else {
+      row.style.display = searchVal ? '' : 'none';
+    }
+    // console.log(searchVal, 'final search val');
   }
 
   return (
@@ -59,3 +67,8 @@ export default SearchBar;
 //* cells need to be associated with the row they're in
 //* Status values highlighting multiples
 //* only highlighting single value, need all values to be searched- removing break will do that but it runs too much without it
+
+// for (let k = 0; k < tCell.length; k++) {
+//   resultsList.push(cellValue);
+// }
+// console.log(resultsList, 'result');
