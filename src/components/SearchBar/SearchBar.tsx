@@ -22,27 +22,23 @@ const SearchBar = () => {
 
     for (let j = 0; j < tCell.length; j++) {
       const cell = tCell[j];
-      //console.log(cell, 'cell');
+      const cellRow = cell.parentElement as HTMLElement;
       const cellValue = cell.innerHTML.toLowerCase();
       //console.log(cellValue, 'cellValue');
-      const cellRow = cell.parentElement;
 
       if (cellValue.includes(searchValue)) {
         searchVal = true;
-        cellRow
-          ? (cellRow.style.backgroundColor = 'purple')
-          : (searchVal = true);
+
+        cellRow.style.backgroundColor = 'purple';
         // console.log(resultsList, 'list');
         // console.log(searchVal, 'searchVal');
         break;
       }
+      cellRow.style.display = searchVal ? '' : 'none';
     }
-
-    //row.filter(search => )
 
     if (searchValue === '') {
       searchVal = false;
-      row.style.display = 'visible';
     } else {
       row.style.display = searchVal ? '' : 'none';
     }
@@ -62,11 +58,9 @@ const SearchBar = () => {
 
 export default SearchBar;
 
-//* need to account for times being strings
 //* removing values, typing with any uppercase
-//* cells need to be associated with the row they're in
-//* Status values highlighting multiples
 //* only highlighting single value, need all values to be searched- removing break will do that but it runs too much without it
+//contacts needs to be actually removed from list so numbers update?
 
 // for (let k = 0; k < tCell.length; k++) {
 //   resultsList.push(cellValue);
