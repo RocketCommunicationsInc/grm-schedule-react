@@ -3,12 +3,12 @@ import { RuxInput } from '@astrouxds/react';
 import { useAppActions } from 'hooks/useAppActions';
 
 import './SearchBar.css';
-//import { useAppContext } from 'providers/AppProvider';
+import { useAppContext } from 'providers/AppProvider';
 
 const SearchBar = () => {
-  const { searchContacts } = useAppActions();
+  const { searchContacts, searchedRegionContacts } = useAppActions();
   const [search, setSearch] = useState('');
-  //const { state } = useAppContext();
+  const { state } = useAppContext();
 
   useEffect(() => {
     if (search === '') {
@@ -17,12 +17,11 @@ const SearchBar = () => {
   }, [search, searchContacts]);
 
   const handleSearch = (e: any) => {
+    searchedRegionContacts();
     searchContacts(e.target.value);
     setSearch(e.target.value);
-    if (search === '') {
-      setSearch('');
-    }
   };
+  console.log(state);
 
   return (
     <RuxInput

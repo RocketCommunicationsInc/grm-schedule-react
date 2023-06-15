@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react';
 
-export const useTracks = (data: [any][]) => {
+export const useTracks = (data: [any]) => {
   const [tracks, setTracks] = useState({});
 
   useEffect(() => {

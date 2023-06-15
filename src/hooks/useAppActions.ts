@@ -6,6 +6,7 @@ import { setData } from 'utils/setData';
 import { Contact, GenerateOptions } from 'Types';
 import { setHhMmSs } from 'utils/date';
 import { searchKeys } from 'data/options';
+import { groupByToMap, setGroup } from 'utils/grouping';
 
 export const useAppActions = () => {
   const { state, dispatch } = useAppContext();
@@ -140,7 +141,18 @@ export const useAppActions = () => {
     [dispatch, state.filteredData]
   );
 
-  // const keys = ['contactDetail', 'contactAzimuth', 'contactElevation', 'contactEquipmentConfig', 'contactId', 'contactLongitude', 'contactLatitude', 'contactResolutionStatus', 'contactStep', '_id' ]
+  const searchedRegionContacts = () => {
+    const searchedRegionContacts = setGroup(
+      groupByToMap(
+        [...state.searchedContacts],
+        (e: { contactGround: Date | number }) => e.contactGround
+      )
+    )
+    dispatch({
+      type: 'REGION_CONTACTS',
+      payload: { searchedRegionContacts: searchedRegionContacts },
+    });
+  };
 
   return {
     addContact,
@@ -151,5 +163,6 @@ export const useAppActions = () => {
     setSelectedContact,
     filterContacts,
     searchContacts,
+    searchedRegionContacts
   };
 };

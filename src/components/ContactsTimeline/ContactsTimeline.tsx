@@ -25,7 +25,7 @@ const setSubLabel = (event: any) => event.contactEquipment.split(' ')[1];
 const ContactsTimeline = ({ handleAction, zoom }: PropTypes) => {
   const { setSelectedContact } = useAppActions();
   const { state } = useAppContext();
-  const [tracks, setTracks] = useTracks(state.regions) as any;
+  const [tracks, setTracks] = useTracks(state.searchedRegionContacts) as any;
   const selectedId = state.selectedContact?.contactId;
 
   const handleClick = (contact: any) => {
