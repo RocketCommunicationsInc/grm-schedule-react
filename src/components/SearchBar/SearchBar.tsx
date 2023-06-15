@@ -4,6 +4,7 @@ import { useAppActions } from 'hooks/useAppActions';
 import { useAppContext } from 'providers/AppProvider';
 
 import './SearchBar.css';
+import { isRowSelected } from '@tanstack/react-table';
 
 const SearchBar = () => {
   const { searchContacts } = useAppActions();
@@ -11,20 +12,16 @@ const SearchBar = () => {
   const [search, setSearch] = useState('');
 
   useEffect(() => {
-    if (search) {
-      searchContacts(search);
-    }
     if (search === '') {
       setSearch('');
+      // isRowSelected(selectedRow, false)
     }
   }, [search, searchContacts]);
   console.log(state);
 
   const handleSearch = (e: any) => {
-    // if (e.key === 'Enter') {
-    //searchContacts(e.target.value);
+    searchContacts(e.target.value);
     setSearch(e.target.value);
-    //}
   };
 
   return (
@@ -34,7 +31,6 @@ const SearchBar = () => {
       size='small'
       className='main-search'
       onRuxinput={handleSearch}
-      //onKeyDown={handleSearch}
     />
   );
 };
@@ -42,7 +38,6 @@ const SearchBar = () => {
 export default SearchBar;
 
 //* removing values, typing with any uppercase
-//* only highlighting single value, need all values to be searched- removing break will do that but it runs too much without it
 //contacts needs to be actually removed from list so numbers update?
 
 // for (let k = 0; k < tCell.length; k++) {

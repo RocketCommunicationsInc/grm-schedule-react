@@ -30,7 +30,7 @@ const ContactsList = ({ handleAction }: PropTypes) => {
   };
 
   const table = useReactTable({
-    data: state.contacts,
+    data: state.searchedContacts,
     columns,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
