@@ -5,6 +5,7 @@ import { randomContacts, randomId, randomInt } from 'utils/random';
 import { setData } from 'utils/setData';
 import { Contact, GenerateOptions } from 'Types';
 import { setHhMmSs } from 'utils/date';
+import { searchKeys } from 'data/options';
 
 export const useAppActions = () => {
   const { state, dispatch } = useAppContext();
@@ -102,54 +103,44 @@ export const useAppActions = () => {
     });
   };
 
-  const searchContacts = useCallback((searchValue: string) => {
-    const contacts =[...state.contacts]
-   const newFilteredContacts =  contacts.map(
-      //deleting contact values that we do not want searched 
-      (contact: Partial<Contact>) => {
-        delete contact.contactAzimuth;
-        delete contact.contactDetail;
-        delete contact.contactElevation;
-        delete contact.contactEquipmentConfig;
-        delete contact.contactId;
-        delete contact.contactLongitude;
-        delete contact.contactLatitude;
-        delete contact.contactResolutionStatus;
-        delete contact.contactStep;
-        delete contact._id;
-        return contact;
-      }
-    );
-
-    const searchedContacts = newFilteredContacts.filter((contact: any) => {
-      let matchedValue = false
-      for (const key in contact) {
-        let currentValue = ''
-        //converting to string value for searching
-        if (typeof contact[key] === 'string') {
-          currentValue = contact[key].toLowerCase()
-        } else if (
-          key === contact.contactBeginTimestamp ||
-          key === contact.contactEndTimestamp ||
-          key === contact.contactAOS ||
-          key === contact.contactLOS
-        ) {
-          currentValue = setHhMmSs(contact[key])
-
-        } else if (typeof contact[key] === 'number') {
-          currentValue = contact[key].toString()
+  const searchContacts = useCallback(
+    (searchValue: string) => {
+      const contacts = [...state.filteredData];
+      const searchedContacts = contacts.filter((contact: any) => {
+        let matchedValue = false;
+        for (const key in contact) {
+          //searchKeys are the only keys we want data from
+          if (searchKeys.includes(key)) {
+            let currentValue = '';
+            //converting to string value for searching
+            if (typeof contact[key] === 'string') {
+              currentValue = contact[key].toLowerCase();
+            } else if (
+              key === contact.contactBeginTimestamp ||
+              key === contact.contactEndTimestamp ||
+              key === contact.contactAOS ||
+              key === contact.contactLOS
+            ) {
+              currentValue = setHhMmSs(contact[key]);
+            } else if (typeof contact[key] === 'number') {
+              currentValue = contact[key].toString();
+            }
+            //comparing the search value
+            if (currentValue.includes(searchValue)) matchedValue = true;
+          }
         }
-        //comparing the search value
-        if(currentValue.includes(searchValue)) matchedValue = true
-      }
-      return matchedValue
-    });
+        return matchedValue;
+      });
 
-    dispatch({
-      type: 'SEARCHED_CONTACTS',
-      payload: { searchedContacts: searchedContacts },
-    });
-  }, [dispatch, state.contacts]);
+      dispatch({
+        type: 'SEARCHED_CONTACTS',
+        payload: { searchedContacts: searchedContacts },
+      });
+    },
+    [dispatch, state.filteredData]
+  );
+
+  // const keys = ['contactDetail', 'contactAzimuth', 'contactElevation', 'contactEquipmentConfig', 'contactId', 'contactLongitude', 'contactLatitude', 'contactResolutionStatus', 'contactStep', '_id' ]
 
   return {
     addContact,

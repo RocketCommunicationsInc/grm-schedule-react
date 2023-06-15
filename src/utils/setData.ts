@@ -16,5 +16,11 @@ export const setData = (contacts: any[]) => {
     end: new Date(Math.max(...ends)),
     filteredData: contacts,
     searchedContacts: contacts,
+    searchedRegionContacts: setGroup(
+      groupByToMap(
+        [...contacts],
+        (e: { contactGround: Date | number }) => e.contactGround
+      )
+    ),
   };
 };

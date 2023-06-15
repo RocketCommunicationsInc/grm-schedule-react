@@ -71,6 +71,13 @@ export const AppReducer = (state: any, { type, payload }: any) => {
       };
     }
 
+    case 'REGION_CONTACTS': {
+      return {
+        ...state,
+        ...payload,
+      };
+    }
+
     default: {
       throw new Error(`Unknown type: ${type}`);
     }

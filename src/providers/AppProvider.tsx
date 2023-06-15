@@ -26,6 +26,7 @@ const AppProvider = ({ children }: PropTypes) => {
     ucaCount: 0,
     filteredData: [],
     searchedContacts: [],
+    searchedRegionContacts: [],
   };
   const [state, dispatch] = useReducer(AppReducer, initialState);
 

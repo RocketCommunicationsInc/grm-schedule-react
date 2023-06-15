@@ -33,6 +33,8 @@ const ContactsTimeline = ({ handleAction, zoom }: PropTypes) => {
     setSelectedContact(contact);
   };
 
+  console.log(state);
+
   return (
     <div className='timeline-wrapper'>
       <RuxTimeline

@@ -4,3 +4,20 @@ export const options = {
   modes: ['Full Automation', 'Semi-Automation', 'Manual'],
   state: ['executing', 'upcoming', 'complete', 'failed']
 };
+
+export const searchKeys = [
+  'contactAOS',
+  'contactLOS',
+  'contactDOY',
+  'contactBeginTimestamp',
+  'contactEndTimestamp',
+  'contactEquipment',
+  'contactGround',
+  'contactName',
+  'contactPriority',
+  'contactREV',
+  'contactResolution',
+  'contactSatellite',
+  'contactState',
+  'contactStatus',
+];
