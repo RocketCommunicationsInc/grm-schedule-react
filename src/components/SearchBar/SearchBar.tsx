@@ -14,7 +14,7 @@ const SearchBar = () => {
   return (
     <RuxInput
       type='search'
-      placeholder='Search'
+      placeholder='Search...'
       size='small'
       className='main-search'
       onRuxinput={handleSearch}
