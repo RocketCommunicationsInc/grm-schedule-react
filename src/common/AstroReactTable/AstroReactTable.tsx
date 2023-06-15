@@ -1,5 +1,4 @@
 import { flexRender } from '@tanstack/react-table';
-
 import './AstroReactTable.css';
 
 type PropTypes = {

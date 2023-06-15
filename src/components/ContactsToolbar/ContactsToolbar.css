@@ -39,10 +39,6 @@
   width: 60%;
 }
 
-.Contacts-toolbar__container .flex-start .gap-3 {
-  gap: var(--spacing-3);
-}
-
 rux-segmented-button {
   margin-right: 1rem;
 }
