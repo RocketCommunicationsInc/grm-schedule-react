@@ -33,8 +33,6 @@ const ContactsTimeline = ({ handleAction, zoom }: PropTypes) => {
     setSelectedContact(contact);
   };
 
-  console.log(state);
-
   return (
     <div className='timeline-wrapper'>
       <RuxTimeline
@@ -45,7 +43,7 @@ const ContactsTimeline = ({ handleAction, zoom }: PropTypes) => {
         interval='hour'
         zoom={zoom}
       >
-        {state.regions.map(([label, events]: any) => {
+        {state.searchedRegionContacts.map(([label, events]: any) => {
           const subRegions = setGroup(groupByToMap(events, setSubLabel));
           const expanded = tracks[label];
 

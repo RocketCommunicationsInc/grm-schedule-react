@@ -31,6 +31,7 @@ rux-time-region::part(container) {
 rux-timeline {
   position: relative;
   display: flex;
+  height: 100%;
 }
 
 .timeline-wrapper::-webkit-scrollbar:horizontal {
