@@ -4,11 +4,11 @@ import { generateOptions } from 'utils/generateOptions';
 import { randomInt } from 'utils/random';
 import { useAppContext } from 'providers/AppProvider';
 import { useAppActions } from 'hooks/useAppActions';
-import ModifyContactForm from './ModifyContact';
+import ModifyContactForm from './AddAndModifyPanel/ModifyContact';
 import DiscardChanges from '../../common/DiscardChanges/DiscardChanges';
 import type { DefaultOptions, Actions } from 'Types';
 import AddContactConfirm from './AddContactConfirm/AddContactConfirm';
-import AddContactForm from './AddContact';
+import AddContactForm from './AddAndModifyPanel/AddContact';
 import './ManageContact.css';
 
 type PropTypes = {
