@@ -16,8 +16,6 @@ export const searchKeys = [
   'contactName',
   'contactPriority',
   'contactREV',
-  'contactResolution',
   'contactSatellite',
   'contactState',
-  'contactStatus',
 ];

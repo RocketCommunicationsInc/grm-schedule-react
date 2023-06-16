@@ -4,10 +4,9 @@ import { useAppActions } from 'hooks/useAppActions';
 import './SearchBar.css';
 
 const SearchBar = () => {
-  const { searchContacts, searchedRegionContacts } = useAppActions();
+  const { searchContacts } = useAppActions();
 
   const handleSearch = (e: any) => {
-    searchedRegionContacts();
     searchContacts(e.target.value);
   };
 

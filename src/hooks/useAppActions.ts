@@ -10,6 +10,7 @@ import { groupByToMap, setGroup } from 'utils/grouping';
 
 export const useAppActions = () => {
   const { state, dispatch } = useAppContext();
+  console.log(state.contacts)
 
   const addContact = useCallback(
     (values: Partial<GenerateOptions>) => {
@@ -117,12 +118,13 @@ export const useAppActions = () => {
             if (typeof contact[key] === 'string') {
               currentValue = contact[key].toLowerCase();
             } else if (
-              key === contact.contactBeginTimestamp ||
-              key === contact.contactEndTimestamp ||
-              key === contact.contactAOS ||
-              key === contact.contactLOS
-            ) {
+              contact[key] === contact.contactBeginTimestamp ||
+              contact[key] === contact.contactEndTimestamp ||
+              contact[key] === contact.contactAOS ||
+              contact[key] === contact.contactLOS
+              ) {
               currentValue = setHhMmSs(contact[key]);
+              console.log(setHhMmSs(contact[key]));
             } else if (typeof contact[key] === 'number') {
               currentValue = contact[key].toString();
             }
@@ -133,26 +135,24 @@ export const useAppActions = () => {
         return matchedValue;
       });
 
+      const searchedRegionContacts = setGroup(
+        groupByToMap(
+          [...state.searchedContacts],
+          (e: { contactGround: Date | number }) => e.contactGround
+        )
+      );
+      dispatch({
+        type: 'REGION_CONTACTS',
+        payload: { searchedRegionContacts: searchedRegionContacts },
+      });
+
       dispatch({
         type: 'SEARCHED_CONTACTS',
         payload: { searchedContacts: searchedContacts },
       });
     },
-    [dispatch, state.filteredData]
+    [dispatch, state.filteredData, state.searchedContacts]
   );
-
-  const searchedRegionContacts = () => {
-    const searchedRegionContacts = setGroup(
-      groupByToMap(
-        [...state.searchedContacts],
-        (e: { contactGround: Date | number }) => e.contactGround
-      )
-    )
-    dispatch({
-      type: 'REGION_CONTACTS',
-      payload: { searchedRegionContacts: searchedRegionContacts },
-    });
-  };
 
   return {
     addContact,
@@ -163,6 +163,5 @@ export const useAppActions = () => {
     setSelectedContact,
     filterContacts,
     searchContacts,
-    searchedRegionContacts
   };
 };
