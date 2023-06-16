@@ -8,7 +8,6 @@ import {
   RuxInput,
   RuxStatus,
 } from '@astrouxds/react';
-
 import { useAppActions } from 'hooks/useAppActions';
 import './FilterContacts.css';
 
@@ -28,7 +27,7 @@ const ManageContact = ({ handleAction }: PropTypes) => {
   return (
     <RuxContainer className='filter-contact'>
       <header slot='header'>
-        <RuxIcon icon='arrow-back' size='1.5rem' onClick={handleClose}/>
+        <RuxIcon icon='arrow-back' size='1.5rem' onClick={handleClose} />
         Filter Contacts
         <RuxButton borderless secondary icon='refresh'>
           Reset Filters
@@ -43,7 +42,7 @@ const ManageContact = ({ handleAction }: PropTypes) => {
 
       <RuxCheckboxGroup label='Status'>
         <RuxCheckbox>
-          <RuxStatus status='critical'/>
+          <RuxStatus status='critical' />
           Critical
         </RuxCheckbox>
         <RuxCheckbox>

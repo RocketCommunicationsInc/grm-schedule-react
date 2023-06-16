@@ -83,8 +83,8 @@ const ModifyContactForm = ({ options, values, setValues }: PropTypes) => {
         />
 
         <label>Passes ({options.passes.length})</label>
-        <ul className='Contact-list__passes'>
-          <div slot='toolbar' className='Contact-list__header'>
+        <ul>
+          <div slot='toolbar'>
             <span>Contact</span>
             <span>AOS</span>
             <span>LOS</span>

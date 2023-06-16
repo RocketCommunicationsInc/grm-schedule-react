@@ -14,7 +14,7 @@
   flex-direction: column;
 }
 
-.button-row {
+.manage-panel div {
   display: flex;
   flex-direction: row nowrap;
   align-items: center;
@@ -27,4 +27,8 @@
 .manage-panel footer[slot='footer'] {
   display: flex;
   justify-content: flex-end;
+}
+
+.manage-panel footer rux-button {
+  width: 7.5rem;
 }

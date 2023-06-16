@@ -8,10 +8,10 @@ import ContactsHeader from './ContactsHeader/ContactsHeader';
 import ContactsToolBar from './ContactsToolbar/ContactsToolbar';
 import ContactsList from './ContactsList/ContactsList';
 import ContactsTimeline from './ContactsTimeline/ContactsTimeline';
-import ContactDetails from './ManageContacts/ContactDetails';
+import ContactDetails from './ManageContacts/ContactDetails/ContactDetails';
 import ManageContact from './ManageContacts/ManageContact';
-import ManagePanel from './ManageContacts/ManagePanel';
-import FilterContacts from './ManageContacts/FilterContacts';
+import ManagePanel from './ManageContacts/ManagePanel/ManagePanel';
+import FilterContacts from './ManageContacts/FilterContacts/FilterContacts';
 import SearchBar from './SearchBar/SearchBar';
 import './App.css';
 

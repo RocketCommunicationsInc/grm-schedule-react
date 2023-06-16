@@ -1,16 +1,15 @@
 import { useState } from 'react';
 import { RuxButton, RuxContainer, RuxIcon } from '@astrouxds/react';
-
 import { generateOptions } from 'utils/generateOptions';
 import { randomInt } from 'utils/random';
 import { useAppContext } from 'providers/AppProvider';
 import { useAppActions } from 'hooks/useAppActions';
-import ModifyContactForm from './ModifyContactForm';
+import ModifyContactForm from './ModifyContact';
 import DiscardChanges from '../../common/DiscardChanges/DiscardChanges';
-import './ManageContact.css';
 import type { DefaultOptions, Actions } from 'Types';
 import AddContactConfirm from './AddContactConfirm/AddContactConfirm';
 import AddContactForm from './AddContact';
+import './ManageContact.css';
 
 type PropTypes = {
   action: any;
