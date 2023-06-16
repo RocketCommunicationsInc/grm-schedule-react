@@ -10,7 +10,6 @@ import { groupByToMap, setGroup } from 'utils/grouping';
 
 export const useAppActions = () => {
   const { state, dispatch } = useAppContext();
-  console.log(state.contacts)
 
   const addContact = useCallback(
     (values: Partial<GenerateOptions>) => {
@@ -137,7 +136,7 @@ export const useAppActions = () => {
 
       const searchedRegionContacts = setGroup(
         groupByToMap(
-          [...state.searchedContacts],
+          [...searchedContacts],
           (e: { contactGround: Date | number }) => e.contactGround
         )
       );
@@ -151,7 +150,7 @@ export const useAppActions = () => {
         payload: { searchedContacts: searchedContacts },
       });
     },
-    [dispatch, state.filteredData, state.searchedContacts]
+    [dispatch, state.filteredData]
   );
 
   return {
