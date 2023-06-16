@@ -4,6 +4,9 @@ import { useAppContext } from 'providers/AppProvider';
 import { randomContacts, randomId, randomInt } from 'utils/random';
 import { setData } from 'utils/setData';
 import { Contact, GenerateOptions } from 'Types';
+import { setHhMmSs } from 'utils/date';
+import { searchKeys } from 'data/options';
+import { groupByToMap, setGroup } from 'utils/grouping';
 
 export const useAppActions = () => {
   const { state, dispatch } = useAppContext();
@@ -29,7 +32,7 @@ export const useAppActions = () => {
           contactBeginTimestamp: randomContact.contactBeginTimestamp * 1000,
           contactEndTimestamp: randomContact.contactEndTimestamp * 1000,
           contactREV: randomInt(1, 9999).toString().padStart(4, '0'),
-          contactState: values.state
+          contactState: values.state,
         },
       ];
       const data = setData(newContacts);
@@ -93,6 +96,63 @@ export const useAppActions = () => {
     dispatch({ type: 'RESET_SELECTED_CONTACT' });
   }, [dispatch]);
 
+  const filterContacts = () => {
+    const filteredContacts = [...state.contacts];
+    dispatch({
+      type: 'FILTER_CONTACTS',
+      payload: { filteredContacts: filteredContacts },
+    });
+  };
+
+  const searchContacts = useCallback(
+    (searchValue: string) => {
+      const contacts = [...state.filteredData];
+      const searchedContacts = contacts.filter((contact: any) => {
+        let matchedValue = false;
+        for (const key in contact) {
+          //searchKeys are the only keys we want data from
+          if (searchKeys.includes(key)) {
+            let currentValue = '';
+            //converting to string value for searching
+            if (typeof contact[key] === 'string') {
+              currentValue = contact[key].toLowerCase();
+            } else if (
+              contact[key] === contact.contactBeginTimestamp ||
+              contact[key] === contact.contactEndTimestamp ||
+              contact[key] === contact.contactAOS ||
+              contact[key] === contact.contactLOS
+              ) {
+              currentValue = setHhMmSs(contact[key]);
+              console.log(setHhMmSs(contact[key]));
+            } else if (typeof contact[key] === 'number') {
+              currentValue = contact[key].toString();
+            }
+            //comparing the search value
+            if (currentValue.includes(searchValue)) matchedValue = true;
+          }
+        }
+        return matchedValue;
+      });
+
+      const searchedRegionContacts = setGroup(
+        groupByToMap(
+          [...searchedContacts],
+          (e: { contactGround: Date | number }) => e.contactGround
+        )
+      );
+      dispatch({
+        type: 'REGION_CONTACTS',
+        payload: { searchedRegionContacts: searchedRegionContacts },
+      });
+
+      dispatch({
+        type: 'SEARCHED_CONTACTS',
+        payload: { searchedContacts: searchedContacts },
+      });
+    },
+    [dispatch, state.filteredData]
+  );
+
   return {
     addContact,
     modifyContact,
@@ -100,5 +160,7 @@ export const useAppActions = () => {
     resetNotification,
     resetSelectedContact,
     setSelectedContact,
+    filterContacts,
+    searchContacts,
   };
 };

@@ -13,7 +13,7 @@ type PropTypes = {
 
 const ContactsToolbar = ({ view, setView, setZoom, zoom }: PropTypes) => {
   const { state } = useAppContext();
-  const labels = setLabels(state.contacts);
+  const labels = setLabels(state.searchedContacts);
   const handleZoom = (e: any) => setZoom(e.target.value);
   const handleZoomIn = () =>
     setZoom((prev: string) => String(parseInt(prev) + 1));

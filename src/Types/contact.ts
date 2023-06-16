@@ -12,6 +12,7 @@ export type Contact = {
   contactStep: string;
   contactDetail: string;
   contactBeginTimestamp: number;
+  contactEquipmentConfig: string;
   contactEndTimestamp: number;
   contactLatitude: number;
   contactLongitude: number;

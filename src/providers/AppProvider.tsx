@@ -1,9 +1,7 @@
 import { createContext, useContext, useEffect, useReducer } from 'react';
-
 import data from 'data/contacts.json';
 import { options } from 'data/options';
 import { AppReducer } from './AppReducer';
-import { initialState } from './AppInitialState';
 import { setData } from 'utils/setData';
 import { getDayOfYear } from 'utils/date';
 import { randomIndex, randomInt } from 'utils/random';
@@ -17,6 +15,19 @@ type PropTypes = {
 };
 
 const AppProvider = ({ children }: PropTypes) => {
+  const initialState = {
+    contacts: [],
+    regions: [],
+    selectedContact: null,
+    modifyOptions: null,
+    notification: '',
+    start: new Date(),
+    end: new Date(),
+    ucaCount: 0,
+    filteredData: [],
+    searchedContacts: [],
+    searchedRegionContacts: [],
+  };
   const [state, dispatch] = useReducer(AppReducer, initialState);
 
   useEffect(() => {

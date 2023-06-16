@@ -6,8 +6,21 @@ export const setData = (contacts: any[]) => {
 
   return {
     contacts,
-    regions: setGroup(groupByToMap([...contacts], (e: { contactGround: Date | number; }) => e.contactGround)),
+    regions: setGroup(
+      groupByToMap(
+        [...contacts],
+        (e: { contactGround: Date | number }) => e.contactGround
+      )
+    ),
     start: new Date(Math.min(...starts)),
     end: new Date(Math.max(...ends)),
+    filteredData: contacts,
+    searchedContacts: contacts,
+    searchedRegionContacts: setGroup(
+      groupByToMap(
+        [...contacts],
+        (e: { contactGround: Date | number }) => e.contactGround
+      )
+    ),
   };
 };
