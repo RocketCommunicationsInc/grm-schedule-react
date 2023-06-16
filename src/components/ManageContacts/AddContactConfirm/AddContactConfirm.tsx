@@ -51,11 +51,17 @@ const AddContactConfirm = ({
       <SmallReadOnlyInput label='AOS' value={aos} />
       <SmallReadOnlyInput label='LOS' value={los} />
       <SmallReadOnlyInput label='Post Pass Stop' value={los} />
-      <div className='add-contact-confirm-buttons'>
-        <RuxButton secondary onClick={() => setShowAddConfirm(false)}>
+      <div>
+        <RuxButton
+          size='small'
+          secondary
+          onClick={() => setShowAddConfirm(false)}
+        >
           Cancel
         </RuxButton>
-        <RuxButton onClick={() => handleAdd()}>Add Contact</RuxButton>
+        <RuxButton size='small' onClick={() => handleAdd()}>
+          Add Contact
+        </RuxButton>
       </div>
     </div>
   );
