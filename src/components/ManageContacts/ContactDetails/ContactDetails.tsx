@@ -92,19 +92,13 @@ const ContactDetails = ({ handleAction }: PropTypes) => {
             </RuxContainer>
           </form>
           <footer slot='footer'>
-            <RuxButton
-              size='small'
-              secondary
-              onClick={() => setPendingDelete(true)}
-            >
+            <RuxButton secondary onClick={() => setPendingDelete(true)}>
               Delete
             </RuxButton>
-            <RuxButton size='small' secondary onClick={handleClose}>
+            <RuxButton secondary onClick={handleClose}>
               Cancel
             </RuxButton>
-            <RuxButton size='small' onClick={() => handleAction('modify')}>
-              Modify
-            </RuxButton>
+            <RuxButton onClick={() => handleAction('modify')}>Modify</RuxButton>
           </footer>
         </>
       )}

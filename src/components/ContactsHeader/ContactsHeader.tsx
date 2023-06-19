@@ -14,7 +14,6 @@ const ContactsHeader = ({ isOpen, handleAction }: PropTypes) => (
       borderless
       onClick={() => handleAction('manage')}
       disabled={isOpen}
-      size='small'
     >
       Manage Contacts
     </RuxButton>

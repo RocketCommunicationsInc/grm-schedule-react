@@ -52,16 +52,10 @@ const DeleteConfirmation = ({
         value={setHhMmSs(contactEndTimestamp)}
       />
       <div>
-        <RuxButton
-          size='small'
-          secondary
-          onClick={() => setPendingDelete(false)}
-        >
+        <RuxButton secondary onClick={() => setPendingDelete(false)}>
           Cancel
         </RuxButton>
-        <RuxButton size='small' onClick={handleDelete}>
-          Delete
-        </RuxButton>
+        <RuxButton onClick={handleDelete}>Delete</RuxButton>
       </div>
     </div>
   );

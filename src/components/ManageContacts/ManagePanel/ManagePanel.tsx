@@ -26,7 +26,7 @@ const ManagePanel = ({ handleAction }: PropTypes) => {
         <RuxIcon icon='arrow-right' size='small' />
       </div>
       <footer slot='footer'>
-        <RuxButton size='small' secondary onClick={handleClose}>
+        <RuxButton secondary onClick={handleClose}>
           Close
         </RuxButton>
       </footer>
