@@ -17,16 +17,16 @@ const ManagePanel = ({ handleAction }: PropTypes) => {
 
   return (
     <RuxContainer className='manage-panel'>
-      <div className='button-row' onClick={() => handleAction('add')}>
+      <div onClick={() => handleAction('add')}>
         Add Contact
         <RuxIcon icon='arrow-right' size='small' />
       </div>
-      <div className='button-row' onClick={() => handleAction('filter')}>
+      <div onClick={() => handleAction('filter')}>
         Filter Contacts
         <RuxIcon icon='arrow-right' size='small' />
       </div>
       <footer slot='footer'>
-        <RuxButton size='small' secondary onClick={handleClose}>
+        <RuxButton secondary onClick={handleClose}>
           Close
         </RuxButton>
       </footer>

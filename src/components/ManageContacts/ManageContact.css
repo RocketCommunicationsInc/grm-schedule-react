@@ -1,3 +1,4 @@
+/* MANAGE CONTACT */
 .Manage-contact {
   height: 100%;
 }
@@ -13,6 +14,36 @@
   overflow: auto;
 }
 
+.Manage-contact rux-container div[slot='header'] {
+  font-size: var(--font-size-base);
+}
+
+.Manage-contact rux-container::part(header) {
+  padding: var(--spacing-1);
+}
+
+.Manage-contact header {
+  display: flex;
+  align-items: center;
+}
+
+.Manage-contact header rux-icon {
+  cursor: pointer;
+  margin-left: -0.5rem;
+  margin-right: 0.75rem;
+}
+
+footer {
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--spacing-2);
+}
+
+.Manage-contact footer rux-button {
+  width: 7.5rem;
+}
+
+/* ADD/MODIFY CONTACT FORM STYLES*/
 form {
   display: flex;
   flex-direction: column;
@@ -33,32 +64,41 @@ rux-select::part(label) {
   margin-top: var(--spacing-1);
 }
 
-.Manage-contact rux-container div[slot='header'] {
-  font-size: var(--font-size-base);
-}
-
-.Manage-contact rux-container::part(header) {
-  padding: var(--spacing-1);
-}
-
-.Manage-contact .active-cb {
+form rux-checkbox {
   padding-bottom: var(--spacing-3);
 }
 
-.Contact-list__header {
-  background-color: var(--color-background-surface-header);
-  padding: var(--spacing-1) var(--spacing-4);
+.Manage-contact {
+  .start-stop-time {
+    display: flex;
+    padding-top: 0.5rem;
+  }
+
+  .start-stop-time div {
+    width: 8.5rem;
+    padding-top: 0.5rem;
+  }
+
+  .start-stop-time rux-datetime {
+    padding-top: 0.5rem;
+  }
+
+  .start-stop-time span {
+    padding-top: 0.5rem;
+  }
+
+  .Manage-contact::part(body) {
+    height: 100%;
+    overflow-y: auto;
+  }
+
+  rux-textarea {
+    padding-top: 0.5rem;
+  }
 }
 
-.Contact-list__header,
-.Contact-list__passes li {
-  align-items: center;
-  display: grid;
-  gap: var(--spacing-2);
-  grid-template-columns: 2fr repeat(2, 1fr);
-}
-
-.Contact-list__passes {
+/* PASSES */
+ul {
   border: 1px solid var(--container-color-border);
   list-style: none;
   margin: var(--spacing-0);
@@ -66,6 +106,22 @@ rux-select::part(label) {
   overflow-y: scroll;
   padding: var(--spacing-0);
   margin-top: var(--spacing-1);
+  position: relative;
+}
+
+ul div[slot='toolbar'] {
+  background-color: var(--color-background-surface-header);
+  padding: var(--spacing-1) var(--spacing-4);
+  position: sticky;
+  top: 0;
+}
+
+ul div[slot='toolbar'],
+ul li {
+  align-items: center;
+  display: grid;
+  gap: var(--spacing-2);
+  grid-template-columns: 2fr repeat(2, 1fr);
 }
 
 li {
@@ -87,48 +143,4 @@ li:hover {
 
 li:not(:first-child) {
   border-top: 1px solid var(--color-background-base-default);
-}
-
-.Manage-contact header {
-  display: flex;
-  align-items: center;
-}
-
-.Manage-contact header rux-icon {
-  cursor: pointer;
-  margin-left: -0.5rem;
-  margin-right: 0.75rem;
-}
-
-footer {
-  display: flex;
-  justify-content: flex-end;
-  gap: var(--spacing-2);
-}
-
-.Manage-contact .start-stop-time {
-  display: flex;
-  padding-top: 0.5rem;
-}
-
-.Manage-contact .start-stop-time div {
-  width: 8.5rem;
-  padding-top: 0.5rem;
-}
-
-.Manage-contact .start-stop-time rux-datetime {
-  padding-top: 0.5rem;
-}
-
-.Manage-contact .start-stop-time span {
-  padding-top: 0.5rem;
-}
-
-.Manage-contact::part(body) {
-  height: 100%;
-  overflow-y: auto;
-}
-
-.Manage-contact rux-textarea {
-  padding-top: 0.5rem;
 }

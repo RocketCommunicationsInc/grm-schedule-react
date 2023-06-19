@@ -1,16 +1,15 @@
 import { useState } from 'react';
 import { RuxButton, RuxContainer, RuxIcon } from '@astrouxds/react';
-
 import { generateOptions } from 'utils/generateOptions';
 import { randomInt } from 'utils/random';
 import { useAppContext } from 'providers/AppProvider';
 import { useAppActions } from 'hooks/useAppActions';
-import ModifyContactForm from './ModifyContactForm';
+import ModifyContactForm from './AddAndModifyPanel/ModifyContact';
 import DiscardChanges from '../../common/DiscardChanges/DiscardChanges';
-import './ManageContact.css';
 import type { DefaultOptions, Actions } from 'Types';
 import AddContactConfirm from './AddContactConfirm/AddContactConfirm';
-import AddContactForm from './AddContact';
+import AddContactForm from './AddAndModifyPanel/AddContact';
+import './ManageContact.css';
 
 type PropTypes = {
   action: any;
@@ -113,25 +112,16 @@ const ManageContact = ({ action, handleAction }: PropTypes) => {
 
           <footer slot='footer'>
             {isAdd ? (
-              <RuxButton
-                size='small'
-                secondary
-                onClick={() => handleClose(true)}
-              >
+              <RuxButton secondary onClick={() => handleClose(true)}>
                 Cancel
               </RuxButton>
             ) : (
-              <RuxButton
-                size='small'
-                secondary
-                onClick={() => handleAction('details')}
-              >
+              <RuxButton secondary onClick={() => handleAction('details')}>
                 Cancel
               </RuxButton>
             )}
 
             <RuxButton
-              size='small'
               onClick={() => {
                 isAdd ? setShowAddConfirm(true) : handleModify();
               }}

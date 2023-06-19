@@ -9,22 +9,12 @@
 }
 
 .Contact-details::part(body) {
-  flex-grow: 1;
   overflow: auto;
 }
 
 .Contact-details form {
   display: flex;
   flex-direction: column;
-}
-
-.Contact-details h6 {
-  align-items: center;
-  display: flex;
-}
-
-.Contact-detail rux-status {
-  margin-right: var(--spacing-2);
 }
 
 form,

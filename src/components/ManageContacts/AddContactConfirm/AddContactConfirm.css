@@ -5,6 +5,11 @@
   margin-top: 1.5rem;
 }
 
+.add-contact-confirm-wrapper p {
+  text-align: center;
+  margin-bottom: var(--spacing-2);
+}
+
 .add-contact-confirm-wrapper rux-input::part(form-field) {
   flex-direction: row;
   align-items: center;
@@ -15,12 +20,16 @@
   width: 13rem;
 }
 
-.add-contact-confirm-buttons {
+.add-contact-confirm-wrapper div {
   display: flex;
   justify-content: center;
   margin-top: 2rem;
 }
 
-.add-contact-confirm-buttons rux-button:last-child {
+.add-contact-confirm-wrapper rux-button:last-child {
   margin-left: 1rem;
+}
+
+.add-contact-confirm-wrapper rux-button {
+  width: 7.5rem;
 }

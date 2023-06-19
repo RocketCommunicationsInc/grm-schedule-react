@@ -5,15 +5,15 @@ import {
   RuxContainer,
   RuxStatus,
 } from '@astrouxds/react';
-import DeleteConfirmation from './DeleteContactConfirm/DeleteConfirmation';
+import DeleteConfirmation from '../DeleteContactConfirm/DeleteConfirmation';
 import { useAppContext } from 'providers/AppProvider';
 import { useAppActions } from 'hooks/useAppActions';
 import { setHhMmSs } from 'utils/date';
 import { setPassesId } from 'utils/generateOptions';
 import SmallReadOnlyInput from 'common/SmallReadOnlyInput/SmallReadOnlyInput';
-import './ContactDetails.css';
 import { Actions } from 'Types';
 import EquipmentIcons from 'common/EquipmentIcons/EquipmentIcons';
+import './ContactDetails.css';
 
 type PropTypes = {
   handleAction: (action?: Actions) => void;
@@ -82,7 +82,7 @@ const ContactDetails = ({ handleAction }: PropTypes) => {
             <SmallReadOnlyInput label='Command Mode' value={contactMode} />
             <span className='active-cb'>
               <label>Active</label>
-              <RuxCheckbox checked label='Active' />
+              <RuxCheckbox checked />
             </span>
             <RuxContainer>
               <div slot='header'>Equipment String</div>
@@ -92,19 +92,13 @@ const ContactDetails = ({ handleAction }: PropTypes) => {
             </RuxContainer>
           </form>
           <footer slot='footer'>
-            <RuxButton
-              size='small'
-              secondary
-              onClick={() => setPendingDelete(true)}
-            >
+            <RuxButton secondary onClick={() => setPendingDelete(true)}>
               Delete
             </RuxButton>
-            <RuxButton size='small' secondary onClick={handleClose}>
+            <RuxButton secondary onClick={handleClose}>
               Cancel
             </RuxButton>
-            <RuxButton size='small' onClick={() => handleAction('modify')}>
-              Modify
-            </RuxButton>
+            <RuxButton onClick={() => handleAction('modify')}>Modify</RuxButton>
           </footer>
         </>
       )}

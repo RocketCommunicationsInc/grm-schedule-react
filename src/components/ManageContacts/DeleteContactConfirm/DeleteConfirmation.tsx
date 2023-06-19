@@ -51,7 +51,7 @@ const DeleteConfirmation = ({
         label='Post Pass Stop'
         value={setHhMmSs(contactEndTimestamp)}
       />
-      <div className='delete-contact-confirm-buttons'>
+      <div>
         <RuxButton secondary onClick={() => setPendingDelete(false)}>
           Cancel
         </RuxButton>
