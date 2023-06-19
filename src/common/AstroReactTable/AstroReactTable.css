@@ -42,10 +42,6 @@
   border-left-color: var(--color-background-interactive-default);
 }
 
-.Astro-react-table__selected:hover {
-  background-color: var(--color-background-interactive-hover);
-}
-
 .Astro-react-table__cell {
   padding-top: var(--spacing-1);
   padding-bottom: var(--spacing-1);
