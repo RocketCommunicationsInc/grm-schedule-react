@@ -112,25 +112,16 @@ const ManageContact = ({ action, handleAction }: PropTypes) => {
 
           <footer slot='footer'>
             {isAdd ? (
-              <RuxButton
-                size='small'
-                secondary
-                onClick={() => handleClose(true)}
-              >
+              <RuxButton secondary onClick={() => handleClose(true)}>
                 Cancel
               </RuxButton>
             ) : (
-              <RuxButton
-                size='small'
-                secondary
-                onClick={() => handleAction('details')}
-              >
+              <RuxButton secondary onClick={() => handleAction('details')}>
                 Cancel
               </RuxButton>
             )}
 
             <RuxButton
-              size='small'
               onClick={() => {
                 isAdd ? setShowAddConfirm(true) : handleModify();
               }}
