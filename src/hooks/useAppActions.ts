@@ -96,17 +96,9 @@ export const useAppActions = () => {
     dispatch({ type: 'RESET_SELECTED_CONTACT' });
   }, [dispatch]);
 
-  const filterContacts = () => {
-    const filteredContacts = [...state.contacts];
-    dispatch({
-      type: 'FILTER_CONTACTS',
-      payload: { filteredContacts: filteredContacts },
-    });
-  };
-
-  const searchContacts = useCallback(
+  const searchAndFilterContacts = useCallback(
     (searchValue: string) => {
-      const contacts = [...state.filteredData];
+      const contacts = [...state.contacts];
       const searchedContacts = contacts.filter((contact: any) => {
         let matchedValue = false;
         for (const key in contact) {
@@ -123,7 +115,6 @@ export const useAppActions = () => {
               contact[key] === contact.contactLOS
               ) {
               currentValue = setHhMmSs(contact[key]);
-              console.log(setHhMmSs(contact[key]));
             } else if (typeof contact[key] === 'number') {
               currentValue = contact[key].toString();
             }
@@ -150,7 +141,7 @@ export const useAppActions = () => {
         payload: { searchedContacts: searchedContacts },
       });
     },
-    [dispatch, state.filteredData]
+    [dispatch, state.contacts]
   );
 
   return {
@@ -160,7 +151,6 @@ export const useAppActions = () => {
     resetNotification,
     resetSelectedContact,
     setSelectedContact,
-    filterContacts,
-    searchContacts,
+    searchAndFilterContacts,
   };
 };
