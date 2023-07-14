@@ -20,7 +20,6 @@ type PropTypes = {
 
 const FilterContacts = ({ handleAction }: PropTypes) => {
   const { resetSelectedContact, searchAndFilterContacts } = useAppActions();
-  const [multipleFilters, setMultipleFilters] = useState([]) as any;
 
   const [priorityCB, setPriorityCB] = useState([
     { id: 1, checked: false, value: 'high', label: '# High 1 - 66' },
@@ -79,79 +78,62 @@ const FilterContacts = ({ handleAction }: PropTypes) => {
     searchAndFilterContacts(e.target.value);
   };
 
-  const checkboxes = document.getElementsByClassName(
-    'filter-checkboxes'
-  ) as any;
-
   const handleCheckboxFilter = (e: any) => {
-    const allCheckedValues = [];
-    const { value } = e.target;
-    setMultipleFilters((prevFilters: string[]) => {
-      for (let i = 0; i < checkboxes.length; i++) {
-        const checked = checkboxes[i].checked;
-        if (checked) {
-          return [...prevFilters, value];
-        }
-        // else {
-        //   prevFilters.filter((filter: any) => filter !== value);
-        // }
-      }
-    });
+    let keys = ['low', 'medium', 'high', 'normal'];
+    searchAndFilterContacts(e.target.value);
   };
 
   const handleReset = () => {
     searchAndFilterContacts('');
-    const priorityCb = priorityCB.map((checkbox) => ({
-      ...checkbox,
-      checked: false,
-    }));
-    const groundCb = groundCB.map((checkbox) => ({
-      ...checkbox,
-      checked: false,
-    }));
-    const stateCb = stateCB.map((checkbox) => ({
-      ...checkbox,
-      checked: false,
-    }));
-    const statusCb = statusCB.map((checkbox) => ({
-      ...checkbox,
-      checked: false,
-    }));
-    setPriorityCB(priorityCb);
-    setGroundCB(groundCb);
-    setStateCB(stateCb);
-    setStausCB(statusCb);
+    setPriorityCB(
+      priorityCB.map((checkbox) => ({ ...checkbox, checked: false }))
+    );
+    setGroundCB(groundCB.map((checkbox) => ({ ...checkbox, checked: false })));
+    setStateCB(stateCB.map((checkbox) => ({ ...checkbox, checked: false })));
+    setStausCB(statusCB.map((checkbox) => ({ ...checkbox, checked: false })));
   };
 
   const handleCheckboxes = (id: number) => {
-    const priorityCb = priorityCB.map((checkbox: any) => {
-      if (checkbox.id === id) {
-        return { ...checkbox, checked: !checkbox.checked };
-      }
-      return checkbox;
-    });
-    const statusCb = statusCB.map((checkbox: any) => {
-      if (checkbox.id === id) {
-        return { ...checkbox, checked: !checkbox.checked };
-      }
-      return checkbox;
-    });
-    const stateCb = stateCB.map((checkbox: any) => {
-      if (checkbox.id === id) {
-        return { ...checkbox, checked: !checkbox.checked };
-      }
-      return checkbox;
-    });
-    const groundCb = groundCB.map((checkbox: any) => {
-      if (checkbox.id === id) {
-        return { ...checkbox, checked: !checkbox.checked };
-      }
-      return checkbox;
-    });
-    setPriorityCB(priorityCb);
-    setGroundCB(groundCb);
-    setStateCB(stateCb);
-    setStausCB(statusCb);
+    setPriorityCB((prevValue) =>
+      prevValue.map((checkbox) =>
+        checkbox.id === id
+          ? { ...checkbox, checked: !checkbox.checked }
+          : checkbox
+      )
+    );
+    setGroundCB((prevValue) =>
+      prevValue.map((checkbox) =>
+        checkbox.id === id
+          ? { ...checkbox, checked: !checkbox.checked }
+          : checkbox
+      )
+    );
+    setStateCB((prevValue) =>
+      prevValue.map((checkbox) =>
+        checkbox.id === id
+          ? { ...checkbox, checked: !checkbox.checked }
+          : checkbox
+      )
+    );
+    setStausCB((prevValue) =>
+      prevValue.map((checkbox) =>
+        checkbox.id === id
+          ? { ...checkbox, checked: !checkbox.checked }
+          : checkbox
+      )
+    );
+    if (priorityCB.find((checkbox) => checkbox.id === id)?.checked) {
+      searchAndFilterContacts('');
+    }
+    if (statusCB.find((checkbox) => checkbox.id === id)?.checked) {
+      searchAndFilterContacts('');
+    }
+    if (groundCB.find((checkbox) => checkbox.id === id)?.checked) {
+      searchAndFilterContacts('');
+    }
+    if (priorityCB.find((checkbox) => checkbox.id === id)?.checked) {
+      searchAndFilterContacts('');
+    }
   };
 
   return (
@@ -182,7 +164,7 @@ const FilterContacts = ({ handleAction }: PropTypes) => {
         {statusCB.map(({ id, checked, value, label, status }) => (
           <RuxCheckbox
             value={value}
-            onRuxinput={handleFilter}
+            onRuxinput={handleCheckboxFilter}
             label={label}
             checked={checked}
             onRuxchange={() => handleCheckboxes(id)}

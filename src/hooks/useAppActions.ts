@@ -97,7 +97,7 @@ export const useAppActions = () => {
   }, [dispatch]);
 
   const searchAndFilterContacts = useCallback(
-    (searchValue: string) => {
+    (searchValue: string, ...filters: (string | string[])[]) => {
       const contacts = [...state.contacts];
       const searchedContacts = contacts.filter((contact: any) => {
         let matchedValue = false;
@@ -105,18 +105,15 @@ export const useAppActions = () => {
           //searchKeys are the only keys we want data from
           if (searchKeys.includes(key)) {
             let currentValue = '';
-            //converting to string value for searching
-            if (typeof contact[key] === 'string') {
-              currentValue = contact[key].toLowerCase();
-            } else if (
+            if (
               contact[key] === contact.contactBeginTimestamp ||
               contact[key] === contact.contactEndTimestamp ||
               contact[key] === contact.contactAOS ||
               contact[key] === contact.contactLOS
-              ) {
+            ) {
               currentValue = setHhMmSs(contact[key]);
-            } else if (typeof contact[key] === 'number') {
-              currentValue = contact[key].toString();
+            } else if (contact[key]) {
+              currentValue = contact[key].toString().toLowerCase();
             }
             //comparing the search value
             if (currentValue.includes(searchValue)) matchedValue = true;
@@ -124,7 +121,6 @@ export const useAppActions = () => {
         }
         return matchedValue;
       });
-
       const searchedRegionContacts = setGroup(
         groupByToMap(
           [...searchedContacts],
@@ -135,7 +131,6 @@ export const useAppActions = () => {
         type: 'REGION_CONTACTS',
         payload: { searchedRegionContacts: searchedRegionContacts },
       });
-
       dispatch({
         type: 'SEARCHED_CONTACTS',
         payload: { searchedContacts: searchedContacts },
