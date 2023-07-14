@@ -19,7 +19,8 @@ type PropTypes = {
 };
 
 const FilterContacts = ({ handleAction }: PropTypes) => {
-  const { resetSelectedContact, searchAndFilterContacts } = useAppActions();
+  const { resetSelectedContact, filterContacts, searchContacts } =
+    useAppActions();
 
   const [priorityCB, setPriorityCB] = useState([
     { id: 1, checked: false, value: 'high', label: '# High 1 - 66' },
@@ -75,16 +76,20 @@ const FilterContacts = ({ handleAction }: PropTypes) => {
   };
 
   const handleFilter = (e: any) => {
-    searchAndFilterContacts(e.target.value);
+    searchContacts(e.target.value);
   };
 
   const handleCheckboxFilter = (e: any) => {
-    let keys = ['low', 'medium', 'high', 'normal'];
-    searchAndFilterContacts(e.target.value);
+    const checkedCB = priorityCB
+      .filter((checkbox) => checkbox.checked)
+      .map((checkbox) => checkbox.value);
+    console.log(...checkedCB);
+    // const keys = ['low', 'high', 'medium', 'cts'];
+    filterContacts(e.target.value, ...checkedCB);
   };
 
   const handleReset = () => {
-    searchAndFilterContacts('');
+    filterContacts('' as any);
     setPriorityCB(
       priorityCB.map((checkbox) => ({ ...checkbox, checked: false }))
     );
@@ -123,16 +128,16 @@ const FilterContacts = ({ handleAction }: PropTypes) => {
       )
     );
     if (priorityCB.find((checkbox) => checkbox.id === id)?.checked) {
-      searchAndFilterContacts('');
+      filterContacts('' as any);
     }
     if (statusCB.find((checkbox) => checkbox.id === id)?.checked) {
-      searchAndFilterContacts('');
+      filterContacts('' as any);
     }
     if (groundCB.find((checkbox) => checkbox.id === id)?.checked) {
-      searchAndFilterContacts('');
+      filterContacts('' as any);
     }
     if (priorityCB.find((checkbox) => checkbox.id === id)?.checked) {
-      searchAndFilterContacts('');
+      filterContacts('' as any);
     }
   };
 
@@ -164,7 +169,7 @@ const FilterContacts = ({ handleAction }: PropTypes) => {
         {statusCB.map(({ id, checked, value, label, status }) => (
           <RuxCheckbox
             value={value}
-            onRuxinput={handleCheckboxFilter}
+            onRuxinput={handleFilter}
             label={label}
             checked={checked}
             onRuxchange={() => handleCheckboxes(id)}

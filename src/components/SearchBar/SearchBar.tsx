@@ -4,10 +4,10 @@ import { useAppActions } from 'hooks/useAppActions';
 import './SearchBar.css';
 
 const SearchBar = () => {
-  const { searchAndFilterContacts } = useAppActions();
+  const { searchContacts } = useAppActions();
 
   const handleSearch = (e: any) => {
-    searchAndFilterContacts(e.target.value);
+    searchContacts(e.target.value);
   };
 
   return (

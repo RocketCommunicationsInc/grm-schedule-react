@@ -5,7 +5,7 @@ import { randomContacts, randomId, randomInt } from 'utils/random';
 import { setData } from 'utils/setData';
 import { Contact, GenerateOptions } from 'Types';
 import { setHhMmSs } from 'utils/date';
-import { searchKeys } from 'data/options';
+import { searchKeys, filterKeys } from 'data/options';
 import { groupByToMap, setGroup } from 'utils/grouping';
 
 export const useAppActions = () => {
@@ -96,8 +96,55 @@ export const useAppActions = () => {
     dispatch({ type: 'RESET_SELECTED_CONTACT' });
   }, [dispatch]);
 
-  const searchAndFilterContacts = useCallback(
-    (searchValue: string, ...filters: (string | string[])[]) => {
+  
+  const filterContacts = useCallback(
+    (...filter: string[]) => {
+      const valueKeys = ['low', 'medium', 'high', 'critical', 'serious', 'caution', 'normal', 'cts', 'hts', 'dgs', 'tcs', 'upcoming', 'executing', 'complete', 'failed']
+
+      const contacts = [...state.contacts];
+      const searchedContacts = contacts.filter((contact: any) => {
+        let matchedValue = false;
+        for (const key in contact) {
+            let currentValue = '';
+             if (filterKeys.includes(key)) {
+              if(contact[key]){
+              currentValue = contact[key].toString().toLowerCase();
+            }
+            if (valueKeys.some((key) => key.includes(key))) {
+              matchedValue = true
+  
+            // } 
+
+              } else {
+                if(!filter.includes(currentValue)) {
+                  matchedValue = false
+             
+                }
+              }
+            }
+      }
+        return matchedValue;
+      });
+      const searchedRegionContacts = setGroup(
+        groupByToMap(
+          [...searchedContacts],
+          (e: { contactGround: Date | number }) => e.contactGround
+        )
+      );
+      dispatch({
+        type: 'REGION_CONTACTS',
+        payload: { searchedRegionContacts: searchedRegionContacts },
+      });
+      dispatch({
+        type: 'SEARCHED_CONTACTS',
+        payload: { searchedContacts: searchedContacts },
+      });
+    },
+    [dispatch, state.contacts]
+  );
+
+  const searchContacts = useCallback(
+    (searchValue: string) => {
       const contacts = [...state.contacts];
       const searchedContacts = contacts.filter((contact: any) => {
         let matchedValue = false;
@@ -146,6 +193,7 @@ export const useAppActions = () => {
     resetNotification,
     resetSelectedContact,
     setSelectedContact,
-    searchAndFilterContacts,
+    filterContacts,
+    searchContacts,
   };
 };

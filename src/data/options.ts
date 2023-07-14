@@ -20,3 +20,10 @@ export const searchKeys = [
   'contactState',
   'contactStatus'
 ];
+
+export const filterKeys = [
+  'contactPriority',
+  'contactStatus',
+  'contactGround',
+  'contactState',
+]
