@@ -1,0 +1,36 @@
+.table-wrapper {
+  min-width: 350px;
+}
+
+.table-wrapper rux-table {
+  width: 100%;
+}
+
+.table-wrapper rux-table-header-row rux-icon {
+  vertical-align: middle;
+  width: 32px;
+}
+
+.table-wrapper rux-table-header-row .visible {
+  visibility: visible;
+}
+
+.table-wrapper rux-table-header-cell:has(rux-icon.visible) {
+  color: var(--color-text-interactive-default);
+}
+
+.table-wrapper rux-table-header-row .hidden {
+  visibility: hidden;
+}
+
+.table-wrapper rux-table-cell,
+.table-wrapper rux-table-header-cell {
+  max-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+.table-wrapper rux-table-header-cell[data-sortprop='status'] {
+  text-align: center;
+}

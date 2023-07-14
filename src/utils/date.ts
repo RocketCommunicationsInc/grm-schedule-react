@@ -19,3 +19,6 @@ export const setDurationMins = (start: number, end: number) => {
   const diffMins = Math.abs((start - end) / (1000 * 60));
   return `${diffMins}:00`;
 };
+
+export const determineTimeString = (originalValue: number | string) =>
+  new Date(originalValue).toTimeString().slice(0, 8);

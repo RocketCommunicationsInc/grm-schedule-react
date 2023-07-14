@@ -18,57 +18,57 @@ const TwoDigitTime = ({ time }: PropTypes) => (
 const columnHelper = createColumnHelper<any>();
 
 export const columnDefs = [
-  columnHelper.accessor('contactPriority', {
+  columnHelper.accessor('priority', {
     header: 'Priority',
     cell: (info) => info.getValue(),
     style: { minWidth: 50, maxWidth: 50 },
   }),
-  columnHelper.accessor('contactStatus', {
+  columnHelper.accessor('status', {
     header: 'Status',
     cell: (info) => <RuxStatus status={info.getValue()} />,
     style: { minWidth: 60, justifyContent: 'center' },
   }),
-  columnHelper.accessor('contactName', {
+  columnHelper.accessor('name', {
     header: 'IRON',
     style: { minWidth: 68 },
   }),
-  columnHelper.accessor('contactGround', {
+  columnHelper.accessor('ground', {
     header: 'Ground Station',
     style: { minWidth: 148 },
   }),
-  columnHelper.accessor('contactREV', {
+  columnHelper.accessor('rev', {
     header: 'REV',
     style: { minWidth: 60 },
   }),
-  columnHelper.accessor('contactEquipment', {
+  columnHelper.accessor('equipment', {
     header: 'Equipment String',
     style: { minWidth: 424, flex: 4 },
   }),
-  columnHelper.accessor('contactState', {
+  columnHelper.accessor('state', {
     header: 'State',
     cell: (info) => info.getValue(),
     style: { minWidth: 120 },
   }),
-  columnHelper.accessor('contactDOY', {
+  columnHelper.accessor('dayOfYear', {
     header: 'DOY',
     style: { minWidth: 60 },
   }),
-  columnHelper.accessor('contactBeginTimestamp', {
+  columnHelper.accessor('beginTimestamp', {
     header: 'Start Time',
     style: { minWidth: 112 },
     cell: (info) => <TwoDigitTime time={info.getValue()} />,
   }),
-  columnHelper.accessor('contactAOS', {
+  columnHelper.accessor('aos', {
     header: 'AOS',
     style: { minWidth: 96 },
     cell: (info) => <TwoDigitTime time={info.getValue()} />,
   }),
-  columnHelper.accessor('contactLOS', {
+  columnHelper.accessor('los', {
     header: 'LOS',
     style: { minWidth: 96 },
     cell: (info) => <TwoDigitTime time={info.getValue()} />,
   }),
-  columnHelper.accessor('contactEndTimestamp', {
+  columnHelper.accessor('endTimestamp', {
     header: 'Stop Time',
     style: { minWidth: 112 },
     cell: (info) => <TwoDigitTime time={info.getValue()} />,

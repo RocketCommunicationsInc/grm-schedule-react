@@ -3,16 +3,16 @@ import { RuxContainer, RuxNotification } from '@astrouxds/react';
 
 import { useAppActions } from 'hooks/useAppActions';
 import { useAppContext } from 'providers/AppProvider';
-import GlobalStatusBar from './GlobalStatusBar/GlobalStatusBar';
-import ContactsHeader from './ContactsHeader/ContactsHeader';
-import ContactsToolBar from './ContactsToolbar/ContactsToolbar';
-import ContactsList from './ContactsList/ContactsList';
-import ContactsTimeline from './ContactsTimeline/ContactsTimeline';
-import ContactDetails from './ManageContacts/ContactDetails/ContactDetails';
-import ManageContact from './ManageContacts/ManageContact';
-import ManagePanel from './ManageContacts/ManagePanel/ManagePanel';
-import FilterContacts from './ManageContacts/FilterContacts/FilterContacts';
-import SearchBar from './SearchBar/SearchBar';
+import GlobalStatusBar from './components/GlobalStatusBar/GlobalStatusBar';
+import ContactsHeader from './components/ContactsHeader/ContactsHeader';
+import ContactsToolBar from './components/ContactsToolbar/ContactsToolbar';
+import ContactsTable from './components/ContactsList/NewContactsList';
+import ContactsTimeline from './components/ContactsTimeline/ContactsTimeline';
+import ContactDetails from './components/ManageContacts/ContactDetails/ContactDetails';
+import ManageContact from './components/ManageContacts/ManageContact';
+import ManagePanel from './components/ManageContacts/ManagePanel/ManagePanel';
+import FilterContacts from './components/ManageContacts/FilterContacts/FilterContacts';
+import SearchBar from './components/SearchBar/SearchBar';
 import './App.css';
 
 import type { Actions } from 'Types';
@@ -74,7 +74,11 @@ const App = () => {
             <ContactsToolBar {...{ view, setView, setZoom, zoom }} />
 
             {view === 'List' ? (
-              <ContactsList handleAction={handleAction} />
+              <ContactsTable
+                searchValue={''}
+                setSearchValue={() => {}}
+                handleAction={handleAction}
+              />
             ) : (
               <ContactsTimeline handleAction={handleAction} zoom={zoom} />
             )}
