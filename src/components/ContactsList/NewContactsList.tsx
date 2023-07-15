@@ -5,7 +5,7 @@ import type { Contact } from '@astrouxds/mock-data';
 import type { ColumnDef } from '../../common/Table/Table';
 import Table from '../../common/Table/Table';
 import { determineTimeString, setHhMmSs } from '../../utils/date';
-import './ContactsList.css';
+import { searchContacts } from '../../utils/searchContacts';
 
 export function capitalize(str: string) {
   if (!str) return;
@@ -63,38 +63,9 @@ const ContactsTable = ({
     setSearchValue('');
   };
 
-  const filterContacts = useCallback(
-    (contactsArray: Contact[], searchValue: string) => {
-      if (!searchValue) return contactsArray;
-      const propertyArray = columnDefs.map((def) => def.property);
-      const filteredForStateContacts = contactsArray.filter((contact) =>
-        propertyArray.some((key) => {
-          const contactVal = contact[key];
-          if (
-            key === 'beginTimestamp' ||
-            key === 'endTimestamp' ||
-            key === 'los' ||
-            key === 'aos'
-          ) {
-            return setHhMmSs(contactVal as number)
-              .toString()
-              .includes(searchValue);
-          } else {
-            return contactVal
-              .toString()
-              .toLowerCase()
-              .includes(searchValue.toLowerCase());
-          }
-        })
-      );
-      return filteredForStateContacts || contactsArray;
-    },
-    []
-  );
-
   const filteredContacts = useMemo(() => {
-    return filterContacts(contacts, searchValue);
-  }, [contacts, filterContacts, searchValue]);
+    return searchContacts(contacts, searchValue, columnDefs);
+  }, [contacts, searchValue]);
 
   return (
     <RuxContainer>

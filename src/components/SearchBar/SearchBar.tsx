@@ -1,22 +1,20 @@
 import { RuxInput } from '@astrouxds/react';
-import { useAppActions } from 'hooks/useAppActions';
 
 import './SearchBar.css';
 
-const SearchBar = () => {
-  const { searchContacts } = useAppActions();
+type PropTypes = {
+  searchValue: string;
+  setSearchValue: React.Dispatch<React.SetStateAction<string>>;
+};
 
-  const handleSearch = (e: any) => {
-    searchContacts(e.target.value);
-  };
-
+const SearchBar = ({ searchValue, setSearchValue }: PropTypes) => {
   return (
     <RuxInput
       type='search'
       placeholder='Search...'
       size='small'
       className='main-search'
-      onRuxinput={handleSearch}
+      onRuxinput={(e) => setSearchValue(e.target.value)}
     />
   );
 };

@@ -24,6 +24,7 @@ const App = () => {
   const [action, setAction] = useState<Actions>('');
   const { resetNotification } = useAppActions();
   const { state } = useAppContext();
+  const [searchValue, setSearchValue] = useState<string>('');
 
   const handleAction = (action?: Actions) => {
     if (action) {
@@ -66,7 +67,7 @@ const App = () => {
         onRuxclosed={() => resetNotification()}
       />
       <main className='App-main'>
-        <SearchBar />
+        <SearchBar searchValue={searchValue} setSearchValue={setSearchValue} />
         <RuxContainer className='App-main__container'>
           <ContactsHeader {...{ isOpen, handleAction }} />
 
@@ -75,8 +76,8 @@ const App = () => {
 
             {view === 'List' ? (
               <ContactsTable
-                searchValue={''}
-                setSearchValue={() => {}}
+                searchValue={searchValue}
+                setSearchValue={setSearchValue}
                 handleAction={handleAction}
               />
             ) : (

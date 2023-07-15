@@ -34,3 +34,11 @@
 .table-wrapper rux-table-header-cell[data-sortprop='status'] {
   text-align: center;
 }
+
+.table-wrapper rux-table-cell rux-status {
+  padding-right: 32px;
+}
+
+.table-wrapper rux-table-cell rux-status::part(status) {
+  margin-inline: auto;
+}
