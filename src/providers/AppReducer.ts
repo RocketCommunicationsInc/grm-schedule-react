@@ -57,13 +57,6 @@ export const AppReducer = (state: any, { type, payload }: any) => {
       };
     }
 
-    case 'FILTER_CONTACTS': {
-      return {
-        ...state,
-        ...payload,
-      };
-    }
-
     case 'SEARCHED_CONTACTS': {
       return {
         ...state,

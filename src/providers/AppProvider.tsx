@@ -24,7 +24,6 @@ const AppProvider = ({ children }: PropTypes) => {
     start: new Date(),
     end: new Date(),
     ucaCount: 0,
-    filteredData: [],
     searchedContacts: [],
     searchedRegionContacts: [],
   };
