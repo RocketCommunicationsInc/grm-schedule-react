@@ -96,33 +96,79 @@ export const useAppActions = () => {
     dispatch({ type: 'RESET_SELECTED_CONTACT' });
   }, [dispatch]);
 
-  
+  const filterIronAndEqupimentContacts = useCallback(
+    (filter: string, value: 'iron' | 'equipment') => {
+      const contacts = [...state.contacts];
+      const searchedContacts = contacts.filter((contact: any) => {
+        if (
+          value === 'iron' &&
+          contact.contactName.toString().includes(filter)
+        ) {
+          return true;
+        } else if (
+          value === 'equipment' &&
+          contact.contactEquipment.toLowerCase().includes(filter)
+        ) {
+          return true;
+        }
+        return false;
+      });
+      const searchedRegionContacts = setGroup(
+        groupByToMap(
+          [...searchedContacts],
+          (e: { contactGround: Date | number }) => e.contactGround
+        )
+      );
+      dispatch({
+        type: 'REGION_CONTACTS',
+        payload: { searchedRegionContacts: searchedRegionContacts },
+      });
+      dispatch({
+        type: 'SEARCHED_CONTACTS',
+        payload: { searchedContacts: searchedContacts },
+      });
+    },
+    [dispatch, state.contacts]
+  );
+
   const filterContacts = useCallback(
     (...filter: string[]) => {
-      const valueKeys = ['low', 'medium', 'high', 'critical', 'serious', 'caution', 'normal', 'cts', 'hts', 'dgs', 'tcs', 'upcoming', 'executing', 'complete', 'failed']
+      const valueKeys = [
+        'low',
+        'medium',
+        'high',
+        'critical',
+        'serious',
+        'caution',
+        'normal',
+        'cts',
+        'hts',
+        'dgs',
+        'tcs',
+        'upcoming',
+        'executing',
+        'complete',
+        'failed',
+      ];
 
       const contacts = [...state.contacts];
       const searchedContacts = contacts.filter((contact: any) => {
         let matchedValue = false;
         for (const key in contact) {
-            let currentValue = '';
-             if (filterKeys.includes(key)) {
-              if(contact[key]){
+          let currentValue = '';
+          if (filterKeys.includes(key)) {
+            if (contact[key]) {
               currentValue = contact[key].toString().toLowerCase();
             }
             if (valueKeys.some((key) => key.includes(key))) {
-              matchedValue = true
-  
-            // } 
-
-              } else {
-                if(!filter.includes(currentValue)) {
-                  matchedValue = false
-             
-                }
+              matchedValue = true;
+            } else {
+              if (!filter.includes(currentValue)) {
+                matchedValue = false;
               }
             }
-      }
+          }
+        }
         return matchedValue;
       });
       const searchedRegionContacts = setGroup(
@@ -195,5 +241,6 @@ export const useAppActions = () => {
     setSelectedContact,
     filterContacts,
     searchContacts,
+    filterIronAndEqupimentContacts,
   };
 };

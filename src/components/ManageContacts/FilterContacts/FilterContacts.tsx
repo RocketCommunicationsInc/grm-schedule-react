@@ -19,8 +19,12 @@ type PropTypes = {
 };
 
 const FilterContacts = ({ handleAction }: PropTypes) => {
-  const { resetSelectedContact, filterContacts, searchContacts } =
-    useAppActions();
+  const {
+    resetSelectedContact,
+    filterContacts,
+    searchContacts,
+    filterIronAndEqupimentContacts,
+  } = useAppActions();
 
   const [priorityCB, setPriorityCB] = useState([
     { id: 1, checked: false, value: 'high', label: '# High 1 - 66' },
@@ -89,7 +93,7 @@ const FilterContacts = ({ handleAction }: PropTypes) => {
   };
 
   const handleReset = () => {
-    filterContacts('' as any);
+    filterContacts('');
     setPriorityCB(
       priorityCB.map((checkbox) => ({ ...checkbox, checked: false }))
     );
@@ -128,16 +132,16 @@ const FilterContacts = ({ handleAction }: PropTypes) => {
       )
     );
     if (priorityCB.find((checkbox) => checkbox.id === id)?.checked) {
-      filterContacts('' as any);
+      filterContacts('');
     }
     if (statusCB.find((checkbox) => checkbox.id === id)?.checked) {
-      filterContacts('' as any);
+      filterContacts('');
     }
     if (groundCB.find((checkbox) => checkbox.id === id)?.checked) {
-      filterContacts('' as any);
+      filterContacts('');
     }
     if (priorityCB.find((checkbox) => checkbox.id === id)?.checked) {
-      filterContacts('' as any);
+      filterContacts('');
     }
   };
 
@@ -186,7 +190,9 @@ const FilterContacts = ({ handleAction }: PropTypes) => {
         label='IRON'
         placeholder='All IRONs'
         size='small'
-        onRuxinput={handleFilter}
+        onRuxinput={(e: any) =>
+          filterIronAndEqupimentContacts(e.target.value, 'iron')
+        }
       />
 
       <RuxCheckboxGroup label='Ground Station'>
@@ -220,7 +226,9 @@ const FilterContacts = ({ handleAction }: PropTypes) => {
         label='Equipment String'
         placeholder='All Equipment'
         size='small'
-        onRuxinput={handleFilter}
+        onRuxinput={(e: any) =>
+          filterIronAndEqupimentContacts(e.target.value, 'equipment')
+        }
       />
     </RuxContainer>
   );
