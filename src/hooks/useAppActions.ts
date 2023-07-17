@@ -3,7 +3,14 @@ import { useCallback } from 'react';
 import { useAppContext } from 'providers/AppProvider';
 import { randomContacts, randomId, randomInt } from 'utils/random';
 import { setData } from 'utils/setData';
-import { Contact, GenerateOptions, Ground, Priortiy, State, Status } from 'Types';
+import {
+  Contact,
+  GenerateOptions,
+  Ground,
+  Priority,
+  State,
+  Status,
+} from 'Types';
 import { setHhMmSs } from 'utils/date';
 import { searchKeys } from 'data/options';
 import { groupByToMap, setGroup } from 'utils/grouping';
@@ -132,24 +139,39 @@ export const useAppActions = () => {
   );
 
   const filterContacts = useCallback(
-    (status: Status | '', priority: Priortiy | '', ground: Ground | '', cState: State | '') => {
+    (
+      status: Status[] | any[],
+      priority: Priority[] | any[],
+      ground: Ground[] | any[],
+      cState: State[] | any[] //assigning any because it defailts to type 'never'
+    ) => {
       const contacts = [...state.contacts];
-      const searchedContacts = contacts.filter((contact) => {
-        const statusValue = status === '' || contact.contactStatus.toLowerCase() === status;
-        const priorityValue = priority === '' || contact.contactPriority.toLowerCase()  === priority;
-        const groundValue = ground === '' || contact.contactGround.toLowerCase()  === ground;
-        const stateValue= cState === '' || contact.contactState.toLowerCase() === cState;
-        console.log(statusValue, "statusValue")
-        console.log(priorityValue, "priorityVal")
-        console.log(groundValue, "groundVal")
-        console.log(stateValue, "stateVal")
-  
-        return statusValue && priorityValue && groundValue && stateValue;
-      });
-      
+      let filteredContacts: any[] = [...contacts];
+
+      if (status.length > 0) {
+        filteredContacts = filteredContacts.filter((contact) =>
+          status.includes(contact.contactStatus.toLowerCase())
+        );
+      }
+      if (priority.length > 0) {
+        filteredContacts = filteredContacts.filter((contact) =>
+          priority.includes(contact.contactPriority.toLowerCase())
+        );
+      }
+      if (ground.length > 0) {
+        filteredContacts = filteredContacts.filter((contact) =>
+          ground.includes(contact.contactGround.toLowerCase())
+        );
+      }
+      if (cState.length > 0) {
+        filteredContacts = filteredContacts.filter((contact) =>
+          cState.includes(contact.contactState.toLowerCase())
+        );
+      }
+
       const searchedRegionContacts = setGroup(
         groupByToMap(
-          [...searchedContacts],
+          [...filteredContacts],
           (e: { contactGround: Date | number }) => e.contactGround
         )
       );
@@ -159,7 +181,7 @@ export const useAppActions = () => {
       });
       dispatch({
         type: 'SEARCHED_CONTACTS',
-        payload: { searchedContacts: searchedContacts },
+        payload: { searchedContacts: filteredContacts },
       });
     },
     [dispatch, state.contacts]

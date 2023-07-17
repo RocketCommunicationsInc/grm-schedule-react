@@ -1,4 +1,4 @@
-import { SetStateAction, useState } from 'react';
+import { SetStateAction, useState, useEffect } from 'react';
 import {
   RuxButton,
   RuxCheckbox,
@@ -10,7 +10,7 @@ import {
 } from '@astrouxds/react';
 import { useAppActions } from 'hooks/useAppActions';
 import './FilterContacts.css';
-import { Ground, Priortiy, State, Status } from 'Types';
+import { Ground, Priority, State, Status } from 'Types';
 import { capitalize } from 'utils/labels';
 
 type PropTypes = {
@@ -30,7 +30,7 @@ const FilterContacts = ({ handleAction }: PropTypes) => {
     { id: 2, checked: false, value: 'medium', label: '# Medium 67 - 133' },
     { id: 3, checked: false, value: 'low', label: '# Low 134 - 200' },
   ]);
-  const [statusCB, setStausCB] = useState([
+  const [statusCB, setStatusCB] = useState([
     {
       id: 4,
       checked: false,
@@ -80,49 +80,48 @@ const FilterContacts = ({ handleAction }: PropTypes) => {
 
   const handleCheckboxFilter = () => {
     const checkedPriorityCB = priorityCB
-      .filter((checkbox) => checkbox.checked)
-      .map((checkbox) => checkbox.value as Priortiy);
+      .filter((cb) => cb.checked)
+      .map((cb) => cb.value as Priority);
 
     const checkedStatusCB = statusCB
-      .filter((checkbox) => checkbox.checked)
-      .map((checkbox) => checkbox.value as Status);
+      .filter((cb) => cb.checked)
+      .map((cb) => cb.value as Status);
 
     const checkedGroundCB = groundCB
-      .filter((checkbox) => checkbox.checked)
-      .map((checkbox) => checkbox.value as Ground);
+      .filter((cb) => cb.checked)
+      .map((cb) => cb.value as Ground);
 
     const checkedStateCB = stateCB
-      .filter((checkbox) => checkbox.checked)
-      .map((checkbox) => checkbox.value as State);
-    console.log(checkedGroundCB, 'ground');
-    console.log(checkedPriorityCB, 'priority');
-    console.log(checkedStateCB, 'state');
-    console.log(checkedStatusCB, 'status');
+      .filter((cb) => cb.checked)
+      .map((cb) => cb.value as State);
 
     filterContacts(
-      checkedStatusCB.length > 0 ? checkedStatusCB[0] : '',
-      checkedPriorityCB.length > 0 ? checkedPriorityCB[0] : '',
-      checkedGroundCB.length > 0 ? checkedGroundCB[0] : '',
-      checkedStateCB.length > 0 ? checkedStateCB[0] : ''
+      checkedStatusCB.length > 0 ? checkedStatusCB : [],
+      checkedPriorityCB.length > 0 ? checkedPriorityCB : [],
+      checkedGroundCB.length > 0 ? checkedGroundCB : [],
+      checkedStateCB.length > 0 ? checkedStateCB : []
     );
   };
 
+  useEffect(() => {
+    handleCheckboxFilter();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [priorityCB, groundCB, stateCB, statusCB]);
+
   const handleReset = () => {
-    filterContacts('', '', '', '');
+    filterContacts([], [], [], []);
     setPriorityCB(
       priorityCB.map((checkbox) => ({ ...checkbox, checked: false }))
     );
     setGroundCB(groundCB.map((checkbox) => ({ ...checkbox, checked: false })));
     setStateCB(stateCB.map((checkbox) => ({ ...checkbox, checked: false })));
-    setStausCB(statusCB.map((checkbox) => ({ ...checkbox, checked: false })));
+    setStatusCB(statusCB.map((checkbox) => ({ ...checkbox, checked: false })));
   };
 
   const handleCheckboxes = (id: number) => {
     setPriorityCB((prevValue) =>
-      prevValue.map((checkbox) =>
-        checkbox.id === id
-          ? { ...checkbox, checked: !checkbox.checked }
-          : checkbox
+      prevValue.map((cb) =>
+        cb.id === id ? { ...cb, checked: !cb.checked } : cb
       )
     );
     setGroundCB((prevValue) =>
@@ -139,14 +138,13 @@ const FilterContacts = ({ handleAction }: PropTypes) => {
           : checkbox
       )
     );
-    setStausCB((prevValue) =>
+    setStatusCB((prevValue) =>
       prevValue.map((checkbox) =>
         checkbox.id === id
           ? { ...checkbox, checked: !checkbox.checked }
           : checkbox
       )
     );
-    handleCheckboxFilter();
   };
 
   return (
@@ -163,7 +161,7 @@ const FilterContacts = ({ handleAction }: PropTypes) => {
         {priorityCB.map(({ id, checked, value, label }) => (
           <RuxCheckbox
             value={value}
-            // onRuxinput={handleCheckboxFilter}
+            onRuxinput={handleCheckboxFilter}
             label={label}
             checked={checked}
             onRuxchange={() => handleCheckboxes(id)}
@@ -177,7 +175,7 @@ const FilterContacts = ({ handleAction }: PropTypes) => {
         {statusCB.map(({ id, checked, value, label, status }) => (
           <RuxCheckbox
             value={value}
-            // onRuxinput={handleCheckboxFilter}
+            onRuxinput={handleCheckboxFilter}
             label={label}
             checked={checked}
             onRuxchange={() => handleCheckboxes(id)}

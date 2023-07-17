@@ -8,8 +8,8 @@ export type Status =
 
 export type Actions = 'add' | 'modify' | 'manage' | 'details' | 'filter' | '';
 
-export type Priortiy = 'low' | 'medium' | 'high'
+export type Priority = 'low' | 'medium' | 'high';
 
-export type Ground = 'cts' | 'hts' | 'dgs' | 'tcs'
+export type Ground = 'cts' | 'hts' | 'dgs' | 'tcs';
 
-export type State = 'upcoming' | 'executing' | 'complete' | 'failed'
+export type State = 'upcoming' | 'executing' | 'complete' | 'failed';
