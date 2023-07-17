@@ -3,9 +3,9 @@ import { useCallback } from 'react';
 import { useAppContext } from 'providers/AppProvider';
 import { randomContacts, randomId, randomInt } from 'utils/random';
 import { setData } from 'utils/setData';
-import { Contact, GenerateOptions } from 'Types';
+import { Contact, GenerateOptions, Ground, Priortiy, State, Status } from 'Types';
 import { setHhMmSs } from 'utils/date';
-import { searchKeys, filterKeys } from 'data/options';
+import { searchKeys } from 'data/options';
 import { groupByToMap, setGroup } from 'utils/grouping';
 
 export const useAppActions = () => {
@@ -132,45 +132,21 @@ export const useAppActions = () => {
   );
 
   const filterContacts = useCallback(
-    (...filter: string[]) => {
-      const valueKeys = [
-        'low',
-        'medium',
-        'high',
-        'critical',
-        'serious',
-        'caution',
-        'normal',
-        'cts',
-        'hts',
-        'dgs',
-        'tcs',
-        'upcoming',
-        'executing',
-        'complete',
-        'failed',
-      ];
-
+    (status: Status | '', priority: Priortiy | '', ground: Ground | '', cState: State | '') => {
       const contacts = [...state.contacts];
-      const searchedContacts = contacts.filter((contact: any) => {
-        let matchedValue = false;
-        for (const key in contact) {
-          let currentValue = '';
-          if (filterKeys.includes(key)) {
-            if (contact[key]) {
-              currentValue = contact[key].toString().toLowerCase();
-            }
-            if (valueKeys.some((key) => key.includes(key))) {
-              matchedValue = true;
-            } else {
-              if (!filter.includes(currentValue)) {
-                matchedValue = false;
-              }
-            }
-          }
-        }
-        return matchedValue;
+      const searchedContacts = contacts.filter((contact) => {
+        const statusValue = status === '' || contact.contactStatus.toLowerCase() === status;
+        const priorityValue = priority === '' || contact.contactPriority.toLowerCase()  === priority;
+        const groundValue = ground === '' || contact.contactGround.toLowerCase()  === ground;
+        const stateValue= cState === '' || contact.contactState.toLowerCase() === cState;
+        console.log(statusValue, "statusValue")
+        console.log(priorityValue, "priorityVal")
+        console.log(groundValue, "groundVal")
+        console.log(stateValue, "stateVal")
+  
+        return statusValue && priorityValue && groundValue && stateValue;
       });
+      
       const searchedRegionContacts = setGroup(
         groupByToMap(
           [...searchedContacts],
