@@ -109,13 +109,10 @@ const FilterContacts = ({ handleAction }: PropTypes) => {
   }, [priorityCB, groundCB, stateCB, statusCB]);
 
   const handleReset = () => {
-    filterContacts([], [], [], []);
-    setPriorityCB(
-      priorityCB.map((checkbox) => ({ ...checkbox, checked: false }))
-    );
-    setGroundCB(groundCB.map((checkbox) => ({ ...checkbox, checked: false })));
-    setStateCB(stateCB.map((checkbox) => ({ ...checkbox, checked: false })));
-    setStatusCB(statusCB.map((checkbox) => ({ ...checkbox, checked: false })));
+    setPriorityCB(priorityCB.map((cb) => ({ ...cb, checked: false })));
+    setGroundCB(groundCB.map((cb) => ({ ...cb, checked: false })));
+    setStateCB(stateCB.map((cb) => ({ ...cb, checked: false })));
+    setStatusCB(statusCB.map((cb) => ({ ...cb, checked: false })));
   };
 
   const handleCheckboxes = (id: number) => {
@@ -125,24 +122,18 @@ const FilterContacts = ({ handleAction }: PropTypes) => {
       )
     );
     setGroundCB((prevValue) =>
-      prevValue.map((checkbox) =>
-        checkbox.id === id
-          ? { ...checkbox, checked: !checkbox.checked }
-          : checkbox
+      prevValue.map((cb) =>
+        cb.id === id ? { ...cb, checked: !cb.checked } : cb
       )
     );
     setStateCB((prevValue) =>
-      prevValue.map((checkbox) =>
-        checkbox.id === id
-          ? { ...checkbox, checked: !checkbox.checked }
-          : checkbox
+      prevValue.map((cb) =>
+        cb.id === id ? { ...cb, checked: !cb.checked } : cb
       )
     );
     setStatusCB((prevValue) =>
-      prevValue.map((checkbox) =>
-        checkbox.id === id
-          ? { ...checkbox, checked: !checkbox.checked }
-          : checkbox
+      prevValue.map((cb) =>
+        cb.id === id ? { ...cb, checked: !cb.checked } : cb
       )
     );
   };

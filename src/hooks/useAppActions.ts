@@ -140,10 +140,10 @@ export const useAppActions = () => {
 
   const filterContacts = useCallback(
     (
-      status: Status[] | any[],
-      priority: Priority[] | any[],
-      ground: Ground[] | any[],
-      cState: State[] | any[] //assigning any because it defailts to type 'never'
+      status: Status[],
+      priority: Priority[],
+      ground: Ground[],
+      cState: State[]
     ) => {
       const contacts = [...state.contacts];
       let filteredContacts: any[] = [...contacts];
