@@ -79,27 +79,11 @@ const FilterContacts = ({ handleAction }: PropTypes) => {
   };
 
   const handleCheckboxFilter = () => {
-    const checkedPriorityCB = priorityCB
-      .filter((cb) => cb.checked)
-      .map((cb) => cb.value as Priority);
-
-    const checkedStatusCB = statusCB
-      .filter((cb) => cb.checked)
-      .map((cb) => cb.value as Status);
-
-    const checkedGroundCB = groundCB
-      .filter((cb) => cb.checked)
-      .map((cb) => cb.value as Ground);
-
-    const checkedStateCB = stateCB
-      .filter((cb) => cb.checked)
-      .map((cb) => cb.value as State);
-
     filterContacts(
-      checkedStatusCB.length > 0 ? checkedStatusCB : [],
-      checkedPriorityCB.length > 0 ? checkedPriorityCB : [],
-      checkedGroundCB.length > 0 ? checkedGroundCB : [],
-      checkedStateCB.length > 0 ? checkedStateCB : []
+      statusCB.flatMap((cb) => (cb.checked ? (cb.value as Status) : [])),
+      priorityCB.flatMap((cb) => (cb.checked ? (cb.value as Priority) : [])),
+      groundCB.flatMap((cb) => (cb.checked ? (cb.value as Ground) : [])),
+      stateCB.flatMap((cb) => (cb.checked ? (cb.value as State) : []))
     );
   };
 
