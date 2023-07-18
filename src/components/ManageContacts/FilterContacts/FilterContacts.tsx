@@ -100,25 +100,17 @@ const FilterContacts = ({ handleAction }: PropTypes) => {
   };
 
   const handleCheckboxes = (id: number) => {
-    setPriorityCB((prevValue) =>
-      prevValue.map((cb) =>
-        cb.id === id ? { ...cb, checked: !cb.checked } : cb
-      )
+    setPriorityCB((prevVal) =>
+      prevVal.map((cb) => (cb.id === id ? { ...cb, checked: !cb.checked } : cb))
     );
-    setGroundCB((prevValue) =>
-      prevValue.map((cb) =>
-        cb.id === id ? { ...cb, checked: !cb.checked } : cb
-      )
+    setGroundCB((prevVal) =>
+      prevVal.map((cb) => (cb.id === id ? { ...cb, checked: !cb.checked } : cb))
     );
-    setStateCB((prevValue) =>
-      prevValue.map((cb) =>
-        cb.id === id ? { ...cb, checked: !cb.checked } : cb
-      )
+    setStateCB((prevVal) =>
+      prevVal.map((cb) => (cb.id === id ? { ...cb, checked: !cb.checked } : cb))
     );
-    setStatusCB((prevValue) =>
-      prevValue.map((cb) =>
-        cb.id === id ? { ...cb, checked: !cb.checked } : cb
-      )
+    setStatusCB((prevVal) =>
+      prevVal.map((cb) => (cb.id === id ? { ...cb, checked: !cb.checked } : cb))
     );
   };
 
