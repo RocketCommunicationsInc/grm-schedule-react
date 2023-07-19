@@ -18,4 +18,5 @@ export const searchKeys = [
   'contactREV',
   'contactSatellite',
   'contactState',
+  'contactStatus'
 ];
