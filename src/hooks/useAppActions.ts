@@ -109,12 +109,15 @@ export const useAppActions = () => {
       const searchedContacts = contacts.filter((contact: any) => {
         if (
           value === 'iron' &&
-          contact.contactName.toString().includes(filter)
+          contact.contactName
+            .toString()
+            .toLowerCase()
+            .includes(filter.toLowerCase())
         ) {
           return true;
         } else if (
           value === 'equipment' &&
-          contact.contactEquipment.toLowerCase().includes(filter)
+          contact.contactEquipment.toLowerCase().includes(filter.toLowerCase())
         ) {
           return true;
         }
