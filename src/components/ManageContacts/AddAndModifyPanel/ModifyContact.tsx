@@ -8,6 +8,7 @@ import {
 } from '@astrouxds/react';
 import EquipmentIcons from 'common/EquipmentIcons/EquipmentIcons';
 import type { DefaultOptions } from 'Types';
+import { capitalize } from 'utils/labels';
 
 type PropTypes = {
   options: DefaultOptions;
@@ -46,11 +47,13 @@ const ModifyContactForm = ({ options, values, setValues }: PropTypes) => {
           size='small'
           onRuxchange={(e) => handleSelect('state', e.target.value)}
         >
-          {options.state.map((state, i) => {
-            const stateCapitalized =
-              state.charAt(0).toUpperCase() + state.slice(1);
-            return <RuxOption key={i} label={stateCapitalized} value={state} />;
-          })}
+          {options.state.map((state, i) => (
+            <RuxOption
+              key={i}
+              label={capitalize(state) as string}
+              value={state}
+            />
+          ))}
         </RuxSelect>
 
         <RuxSelect

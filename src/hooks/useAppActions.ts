@@ -3,7 +3,14 @@ import { useCallback } from 'react';
 import { useAppContext } from 'providers/AppProvider';
 import { randomContacts, randomId, randomInt } from 'utils/random';
 import { setData } from 'utils/setData';
-import { Contact, GenerateOptions } from 'Types';
+import {
+  Contact,
+  GenerateOptions,
+  Ground,
+  Priority,
+  State,
+  Status,
+} from 'Types';
 import { setHhMmSs } from 'utils/date';
 import { searchKeys } from 'data/options';
 import { groupByToMap, setGroup } from 'utils/grouping';
@@ -96,44 +103,26 @@ export const useAppActions = () => {
     dispatch({ type: 'RESET_SELECTED_CONTACT' });
   }, [dispatch]);
 
-  const filterContacts = () => {
-    const filteredContacts = [...state.contacts];
-    dispatch({
-      type: 'FILTER_CONTACTS',
-      payload: { filteredContacts: filteredContacts },
-    });
-  };
-
-  const searchContacts = useCallback(
-    (searchValue: string) => {
-      const contacts = [...state.filteredData];
+  const filterIronAndEqupimentContacts = useCallback(
+    (filter: string, value: 'iron' | 'equipment') => {
+      const contacts = [...state.contacts];
       const searchedContacts = contacts.filter((contact: any) => {
-        let matchedValue = false;
-        for (const key in contact) {
-          //searchKeys are the only keys we want data from
-          if (searchKeys.includes(key)) {
-            let currentValue = '';
-            //converting to string value for searching
-            if (typeof contact[key] === 'string') {
-              currentValue = contact[key].toLowerCase();
-            } else if (
-              contact[key] === contact.contactBeginTimestamp ||
-              contact[key] === contact.contactEndTimestamp ||
-              contact[key] === contact.contactAOS ||
-              contact[key] === contact.contactLOS
-              ) {
-              currentValue = setHhMmSs(contact[key]);
-              console.log(setHhMmSs(contact[key]));
-            } else if (typeof contact[key] === 'number') {
-              currentValue = contact[key].toString();
-            }
-            //comparing the search value
-            if (currentValue.includes(searchValue)) matchedValue = true;
-          }
+        if (
+          value === 'iron' &&
+          contact.contactName
+            .toString()
+            .toLowerCase()
+            .includes(filter.toLowerCase())
+        ) {
+          return true;
+        } else if (
+          value === 'equipment' &&
+          contact.contactEquipment.toLowerCase().includes(filter.toLowerCase())
+        ) {
+          return true;
         }
-        return matchedValue;
+        return false;
       });
-
       const searchedRegionContacts = setGroup(
         groupByToMap(
           [...searchedContacts],
@@ -144,13 +133,104 @@ export const useAppActions = () => {
         type: 'REGION_CONTACTS',
         payload: { searchedRegionContacts: searchedRegionContacts },
       });
-
       dispatch({
         type: 'SEARCHED_CONTACTS',
         payload: { searchedContacts: searchedContacts },
       });
     },
-    [dispatch, state.filteredData]
+    [dispatch, state.contacts]
+  );
+
+  const filterContacts = useCallback(
+    (
+      status: Status[],
+      priority: Priority[],
+      ground: Ground[],
+      cState: State[]
+    ) => {
+      const contacts = [...state.contacts];
+      let filteredContacts: any[] = [...contacts];
+
+      if (status.length > 0) {
+        filteredContacts = filteredContacts.filter((contact) =>
+          status.includes(contact.contactStatus.toLowerCase())
+        );
+      }
+      if (priority.length > 0) {
+        filteredContacts = filteredContacts.filter((contact) =>
+          priority.includes(contact.contactPriority.toLowerCase())
+        );
+      }
+      if (ground.length > 0) {
+        filteredContacts = filteredContacts.filter((contact) =>
+          ground.includes(contact.contactGround.toLowerCase())
+        );
+      }
+      if (cState.length > 0) {
+        filteredContacts = filteredContacts.filter((contact) =>
+          cState.includes(contact.contactState.toLowerCase())
+        );
+      }
+
+      const searchedRegionContacts = setGroup(
+        groupByToMap(
+          [...filteredContacts],
+          (e: { contactGround: Date | number }) => e.contactGround
+        )
+      );
+      dispatch({
+        type: 'REGION_CONTACTS',
+        payload: { searchedRegionContacts: searchedRegionContacts },
+      });
+      dispatch({
+        type: 'SEARCHED_CONTACTS',
+        payload: { searchedContacts: filteredContacts },
+      });
+    },
+    [dispatch, state.contacts]
+  );
+
+  const searchContacts = useCallback(
+    (searchValue: string) => {
+      const contacts = [...state.contacts];
+      const searchedContacts = contacts.filter((contact: any) => {
+        let matchedValue = false;
+        for (const key in contact) {
+          //searchKeys are the only keys we want data from
+          if (searchKeys.includes(key)) {
+            let currentValue = '';
+            if (
+              contact[key] === contact.contactBeginTimestamp ||
+              contact[key] === contact.contactEndTimestamp ||
+              contact[key] === contact.contactAOS ||
+              contact[key] === contact.contactLOS
+            ) {
+              currentValue = setHhMmSs(contact[key]);
+            } else if (contact[key]) {
+              currentValue = contact[key].toString().toLowerCase();
+            }
+            //comparing the search value
+            if (currentValue.includes(searchValue)) matchedValue = true;
+          }
+        }
+        return matchedValue;
+      });
+      const searchedRegionContacts = setGroup(
+        groupByToMap(
+          [...searchedContacts],
+          (e: { contactGround: Date | number }) => e.contactGround
+        )
+      );
+      dispatch({
+        type: 'REGION_CONTACTS',
+        payload: { searchedRegionContacts: searchedRegionContacts },
+      });
+      dispatch({
+        type: 'SEARCHED_CONTACTS',
+        payload: { searchedContacts: searchedContacts },
+      });
+    },
+    [dispatch, state.contacts]
   );
 
   return {
@@ -162,5 +242,6 @@ export const useAppActions = () => {
     setSelectedContact,
     filterContacts,
     searchContacts,
+    filterIronAndEqupimentContacts,
   };
 };
