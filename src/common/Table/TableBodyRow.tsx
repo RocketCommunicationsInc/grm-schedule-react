@@ -11,7 +11,11 @@ type PropTypes = {
 
 const ContactsTable = ({ columnDefs, rowData, onRowClick }: PropTypes) => {
   return (
-    <RuxTableRow key={rowData.id} onClick={onRowClick}>
+    <RuxTableRow
+      key={rowData.id}
+      data-rowDataId={rowData.id}
+      onClick={onRowClick}
+    >
       {columnDefs.map((colDef, index) => {
         const property = colDef.property;
         const cellValue = colDef.valueFn

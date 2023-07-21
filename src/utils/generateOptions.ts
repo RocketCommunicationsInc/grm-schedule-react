@@ -4,8 +4,8 @@ import { getDayOfYear } from './date';
 import { randomContacts, randomIndex, randomInt } from './random';
 import { GenerateOptions } from 'Types';
 
-export const setPassesId = ({ contactSatellite, contactEquipment }: any) => {
-  return `${contactSatellite} ${contactEquipment.split(' ')[1]}`;
+export const setPassesId = ({ satellite, equipment }: any) => {
+  return `${satellite} ${equipment.split(' ')[1]}`;
 };
 
 const unique = (arr: any[]) => [...new Set(arr)];
@@ -62,8 +62,8 @@ export const generateOptions = (modifyOptions: GenerateOptions) => {
           ...configs.slice(1),
         ]
       : configs,
-      state: modifyOptions
+    state: modifyOptions
       ? unique([modifyOptions.state, ...options.state])
-      : options.state
+      : options.state,
   };
 };

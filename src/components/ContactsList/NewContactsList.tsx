@@ -1,10 +1,10 @@
-import { useMemo, useCallback } from 'react';
+import { useMemo } from 'react';
 import { RuxContainer, RuxNotification, RuxButton } from '@astrouxds/react';
 import { useTTCGRMContacts } from '@astrouxds/mock-data';
 import type { Contact } from '@astrouxds/mock-data';
 import type { ColumnDef } from '../../common/Table/Table';
 import Table from '../../common/Table/Table';
-import { determineTimeString, setHhMmSs } from '../../utils/date';
+import { determineTimeString } from '../../utils/date';
 import { searchContacts } from '../../utils/searchContacts';
 
 export function capitalize(str: string) {
@@ -15,12 +15,6 @@ export function capitalize(str: string) {
   );
   return capitalized.join(' ');
 }
-
-type PropTypes = {
-  searchValue: string;
-  setSearchValue: React.Dispatch<React.SetStateAction<string>>;
-  handleAction: (e: any) => void;
-};
 
 const columnDefs: ColumnDef[] = [
   { label: 'Priority', property: 'priority' },
@@ -48,15 +42,33 @@ const columnDefs: ColumnDef[] = [
   },
 ];
 
+type PropTypes = {
+  searchValue: string;
+  setSearchValue: React.Dispatch<React.SetStateAction<string>>;
+  handleAction: (e: any) => void;
+  setSelectedContact: React.Dispatch<React.SetStateAction<Contact | null>>;
+};
+
 const ContactsTable = ({
   searchValue = '',
   setSearchValue,
   handleAction,
+  setSelectedContact,
 }: PropTypes) => {
   const { dataArray: contacts } = useTTCGRMContacts();
 
-  const handleRowClick = (row: any) => {
-    handleAction('details');
+  const handleRowClick = (event: any) => {
+    const closestRow = event.target.closest('rux-table-row');
+    const selectedContact: Contact | null =
+      filteredContacts.find(
+        (contact) => contact.id === closestRow.dataset.rowDataId
+      ) || null;
+    if (selectedContact) {
+      setSelectedContact(selectedContact);
+      handleAction('details');
+    } else {
+      console.log('selected contact does not exist');
+    }
   };
 
   const handleClearFilter = () => {

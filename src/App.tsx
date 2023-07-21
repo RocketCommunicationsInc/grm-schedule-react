@@ -14,6 +14,7 @@ import ManagePanel from './components/ManageContacts/ManagePanel/ManagePanel';
 import FilterContacts from './components/ManageContacts/FilterContacts/FilterContacts';
 import SearchBar from './components/SearchBar/SearchBar';
 import './App.css';
+import type { Contact } from '@astrouxds/mock-data';
 
 import type { Actions } from 'Types';
 
@@ -25,6 +26,7 @@ const App = () => {
   const { resetNotification } = useAppActions();
   const { state } = useAppContext();
   const [searchValue, setSearchValue] = useState<string>('');
+  const [selectedContact, setSelectedContact] = useState<Contact | null>(null);
 
   const handleAction = (action?: Actions) => {
     if (action) {
@@ -44,7 +46,12 @@ const App = () => {
   }
 
   if (action === 'details') {
-    rightPanel = <ContactDetails handleAction={handleAction} />;
+    rightPanel = (
+      <ContactDetails
+        handleAction={handleAction}
+        selectedContact={selectedContact}
+      />
+    );
   }
 
   if (action === 'filter') {
@@ -79,6 +86,7 @@ const App = () => {
                 searchValue={searchValue}
                 setSearchValue={setSearchValue}
                 handleAction={handleAction}
+                setSelectedContact={setSelectedContact}
               />
             ) : (
               <ContactsTimeline handleAction={handleAction} zoom={zoom} />
