@@ -5,6 +5,7 @@ import { randomContacts, randomIndex, randomInt } from './random';
 import { GenerateOptions } from 'Types';
 
 export const setPassesId = ({ satellite, equipment }: any) => {
+  console.log(satellite, equipment);
   return `${satellite} ${equipment.split(' ')[1]}`;
 };
 

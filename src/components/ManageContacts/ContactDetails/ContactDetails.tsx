@@ -8,7 +8,6 @@ import {
 import DeleteConfirmation from '../DeleteContactConfirm/DeleteConfirmation';
 import { useAppActions } from 'hooks/useAppActions';
 import { setHhMmSs } from 'utils/date';
-import { setPassesId } from 'utils/generateOptions';
 import SmallReadOnlyInput from 'common/SmallReadOnlyInput/SmallReadOnlyInput';
 import { Actions } from 'Types';
 import EquipmentIcons from 'common/EquipmentIcons/EquipmentIcons';
@@ -54,7 +53,7 @@ const ContactDetails = ({ handleAction, selectedContact }: PropTypes) => {
     <RuxContainer className='Contact-details'>
       <header slot='header'>
         <RuxStatus status={status} />
-        {setPassesId(selectedContact)}
+        {`${satellite} ${equipment.split(' ')[1]}`}
       </header>
       {pendingDelete ? (
         <DeleteConfirmation
