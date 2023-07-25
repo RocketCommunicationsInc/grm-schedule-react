@@ -1,11 +1,8 @@
-import { useMemo } from 'react';
 import { RuxContainer, RuxNotification, RuxButton } from '@astrouxds/react';
-import { useTTCGRMContacts } from '@astrouxds/mock-data';
 import type { Contact } from '@astrouxds/mock-data';
 import type { ColumnDef } from '../../common/Table/Table';
 import Table from '../../common/Table/Table';
 import { determineTimeString } from '../../utils/date';
-import { searchContacts } from '../../utils/searchContacts';
 
 export function capitalize(str: string) {
   if (!str) return;
@@ -43,6 +40,7 @@ export const columnDefs: ColumnDef[] = [
 ];
 
 type PropTypes = {
+  filteredContacts: Contact[];
   searchValue: string;
   setSearchValue: React.Dispatch<React.SetStateAction<string>>;
   handleAction: (e: any) => void;
@@ -50,13 +48,12 @@ type PropTypes = {
 };
 
 const ContactsTable = ({
+  filteredContacts,
   searchValue = '',
   setSearchValue,
   handleAction,
   setSelectedContact,
 }: PropTypes) => {
-  const { dataArray: contacts } = useTTCGRMContacts();
-
   const handleRowClick = (event: any) => {
     const closestRow = event.target.closest('rux-table-row');
     const selectedContact: Contact | null =
@@ -74,10 +71,6 @@ const ContactsTable = ({
   const handleClearFilter = () => {
     setSearchValue('');
   };
-
-  const filteredContacts = useMemo(() => {
-    return searchContacts(contacts, searchValue, columnDefs);
-  }, [contacts, searchValue]);
 
   return (
     <RuxContainer>

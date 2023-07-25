@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 import { RuxContainer, RuxNotification } from '@astrouxds/react';
-
+import { useTTCGRMContacts } from '@astrouxds/mock-data';
 import { useAppActions } from 'hooks/useAppActions';
 import { useAppContext } from 'providers/AppProvider';
 import GlobalStatusBar from './components/GlobalStatusBar/GlobalStatusBar';
@@ -15,10 +15,13 @@ import FilterContacts from './components/ManageContacts/FilterContacts/FilterCon
 import SearchBar from './components/SearchBar/SearchBar';
 import './App.css';
 import type { Contact } from '@astrouxds/mock-data';
+import { searchContacts } from './utils/searchContacts';
+import { columnDefs } from './components/ContactsTable/ContactsTable';
 
 import type { Actions } from 'Types';
 
 const App = () => {
+  const { dataArray: contacts } = useTTCGRMContacts();
   const [zoom, setZoom] = useState('8');
   const [view, setView] = useState('List');
   const [isOpen, setIsOpen] = useState(false);
@@ -27,6 +30,10 @@ const App = () => {
   const { state } = useAppContext();
   const [searchValue, setSearchValue] = useState<string>('');
   const [selectedContact, setSelectedContact] = useState<Contact | null>(null);
+
+  const filteredContacts = useMemo(() => {
+    return searchContacts(contacts, searchValue, columnDefs);
+  }, [contacts, searchValue]);
 
   const handleAction = (action?: Actions) => {
     if (action) {
@@ -79,10 +86,13 @@ const App = () => {
           <ContactsHeader {...{ isOpen, handleAction }} />
 
           <div className={`App-main__left-panel ${isOpen ? 'isOpen' : ''}`}>
-            <ContactsToolBar {...{ view, setView, setZoom, zoom }} />
+            <ContactsToolBar
+              {...{ filteredContacts, view, setView, setZoom, zoom }}
+            />
 
             {view === 'List' ? (
               <ContactsTable
+                filteredContacts={filteredContacts}
                 searchValue={searchValue}
                 setSearchValue={setSearchValue}
                 handleAction={handleAction}
