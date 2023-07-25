@@ -89,12 +89,7 @@ const App = () => {
                 setSelectedContact={setSelectedContact}
               />
             ) : (
-              <ContactsTimeline
-                selectedContact={selectedContact}
-                searchValue={searchValue}
-                handleAction={handleAction}
-                zoom={zoom}
-              />
+              <ContactsTimeline handleAction={handleAction} zoom={zoom} />
             )}
           </div>
           <aside className={`App-main__right-panel ${isOpen ? 'isOpen' : ''}`}>
