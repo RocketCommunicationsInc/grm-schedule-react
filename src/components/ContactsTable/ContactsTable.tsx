@@ -16,7 +16,7 @@ export function capitalize(str: string) {
   return capitalized.join(' ');
 }
 
-const columnDefs: ColumnDef[] = [
+export const columnDefs: ColumnDef[] = [
   { label: 'Priority', property: 'priority' },
   { label: 'Status', property: 'status' },
   { label: 'IRON', property: 'satellite' },

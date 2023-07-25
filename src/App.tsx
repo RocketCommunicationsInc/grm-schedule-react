@@ -6,7 +6,7 @@ import { useAppContext } from 'providers/AppProvider';
 import GlobalStatusBar from './components/GlobalStatusBar/GlobalStatusBar';
 import ContactsHeader from './components/ContactsHeader/ContactsHeader';
 import ContactsToolBar from './components/ContactsToolbar/ContactsToolbar';
-import ContactsTable from './components/ContactsList/NewContactsList';
+import ContactsTable from './components/ContactsTable/ContactsTable';
 import ContactsTimeline from './components/ContactsTimeline/ContactsTimeline';
 import ContactDetails from './components/ManageContacts/ContactDetails/ContactDetails';
 import ManageContact from './components/ManageContacts/ManageContact';
@@ -89,7 +89,12 @@ const App = () => {
                 setSelectedContact={setSelectedContact}
               />
             ) : (
-              <ContactsTimeline handleAction={handleAction} zoom={zoom} />
+              <ContactsTimeline
+                selectedContact={selectedContact}
+                searchValue={searchValue}
+                handleAction={handleAction}
+                zoom={zoom}
+              />
             )}
           </div>
           <aside className={`App-main__right-panel ${isOpen ? 'isOpen' : ''}`}>

@@ -7,8 +7,8 @@ import { TTCGRMProvider } from '@astrouxds/mock-data';
 import './index.css';
 
 const contactsOptions = {
-  initial: 100,
-  limit: 100,
+  initial: 50,
+  limit: 50,
 };
 
 const root = ReactDOM.createRoot(
