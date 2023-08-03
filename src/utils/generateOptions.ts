@@ -1,7 +1,6 @@
-import data from 'data/contacts.json';
 import { options } from 'data/options';
 import { getDayOfYear } from './date';
-import { randomContacts, randomIndex, randomInt } from './random';
+import { randomIndex, randomInt } from './random';
 import { GenerateOptions } from 'Types';
 import { generateContacts } from '@astrouxds/mock-data';
 
