@@ -1,7 +1,7 @@
 import { useCallback } from 'react';
 
 import { useAppContext } from 'providers/AppProvider';
-import { randomContacts, randomId, randomInt } from 'utils/random';
+import { randomId, randomInt } from 'utils/random';
 import { setData } from 'utils/setData';
 import { GenerateOptions, Ground, State } from 'Types';
 import type { Contact, Priority, Status } from '@astrouxds/mock-data';

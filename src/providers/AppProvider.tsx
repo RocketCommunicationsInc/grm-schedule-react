@@ -1,10 +1,6 @@
 import { createContext, useContext, useEffect, useReducer } from 'react';
-import data from 'data/contacts.json';
-import { options } from 'data/options';
 import { AppReducer } from './AppReducer';
 import { setData } from 'utils/setData';
-import { getDayOfYear } from 'utils/date';
-import { randomIndex, randomInt } from 'utils/random';
 import { useTTCGRMContacts } from '@astrouxds/mock-data';
 
 const AppContext = createContext({});
@@ -33,21 +29,8 @@ const AppProvider = ({ children }: PropTypes) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
 
   useEffect(() => {
-    //   const contacts = contactsData.map((contact) => ({
-    //     ...contact,
-    //     beginTimestamp: contact.beginTimestamp * 1000,
-    //     endTimestamp: contact.endTimestamp * 1000,
-    //     dayOfYear: getDayOfYear(contact.beginTimestamp * 1000),
-    //     equipmentConfig: `Config ${randomInt(1, 5)}`,
-    //     aos: contact.beginTimestamp * 1000,
-    //     los: contact.endTimestamp * 1000,
-    //     mode: options.modes[randomIndex(options.modes)],
-    //     priority: options.priorities[randomIndex(options.priorities)],
-    //     rev: randomInt(1, 9999).toString().padStart(4, '0'),
-    //     state: options.state[randomIndex(options.state)],
-    //   }));
-
     dispatch({ type: 'SET_DATA', payload: setData(contactsData) });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
