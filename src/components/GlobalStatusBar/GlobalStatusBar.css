@@ -1,3 +1,17 @@
 #grm-popup-menu {
   padding-bottom: 1.25rem;
 }
+
+rux-toast-stack {
+  top: 96px;
+}
+
+rux-toast:nth-child(n + 5) {
+  display: none;
+}
+
+rux-menu-item[value='themeToggle'] span {
+  display: flex;
+  gap: var(--spacing-2);
+  align-items: center;
+}
