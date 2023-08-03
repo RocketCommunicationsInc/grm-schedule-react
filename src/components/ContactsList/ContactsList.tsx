@@ -20,9 +20,8 @@ const ContactsList = ({ handleAction }: PropTypes) => {
   const columns = useMemo(() => columnDefs, []);
   const { setSelectedContact } = useAppActions();
   const { state } = useAppContext();
-  const selectedId = state.selectedContact?.contactId;
-  const handleSelected = (row: { contactId: any }) =>
-    row.contactId === selectedId;
+  const selectedId = state.selectedContact?.id;
+  const handleSelected = (row: { id: any }) => row.id === selectedId;
 
   const handleRowClick = (row: any) => {
     setSelectedContact(row);

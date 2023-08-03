@@ -1,36 +1,36 @@
 import { Status } from './commonTypes';
 
-export type Contact = {
-  _id: string;
-  contactId: string;
-  contactStatus: string | Status;
-  contactName: number;
-  contactGround: string;
-  contactSatellite: string;
-  contactEquipment: string;
-  contactState: string;
-  contactStep: string;
-  contactDetail: string;
-  contactBeginTimestamp: number;
-  contactEquipmentConfig: string;
-  contactEndTimestamp: number;
-  contactLatitude: number;
-  contactLongitude: number;
-  contactAzimuth: number;
-  contactElevation: number;
-  contactResolution: string;
-  contactResolutionStatus: string;
-  alerts: [
-    {
-      errorId: string;
-      errorSeverity: string;
-      errorCategory: string;
-      errorMessage: string;
-      longMessage: string;
-      errorTime: number;
-      selected: boolean;
-      new: boolean;
-      expanded: boolean;
-    }
-  ];
-};
+// export type Contact = {
+//   _id: string;
+//   id: string;
+//   status: string | Status;
+//   satellite: number;
+//   ground: string;
+//   name: string;
+//   equipment: string;
+//   state: string;
+//   contactStep: string;
+//   contactDetail: string;
+//   beginTimestamp: number;
+//   equipmentConfig: string;
+//   endTimestamp: number;
+//   contactLatitude: number;
+//   contactLongitude: number;
+//   contactAzimuth: number;
+//   contactElevation: number;
+//   contactResolution: string;
+//   contactResolutionStatus: string;
+//   alerts: [
+//     {
+//       errorId: string;
+//       errorSeverity: string;
+//       errorCategory: string;
+//       errorMessage: string;
+//       longMessage: string;
+//       errorTime: number;
+//       selected: boolean;
+//       new: boolean;
+//       expanded: boolean;
+//     }
+//   ];
+// };

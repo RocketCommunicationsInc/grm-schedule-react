@@ -49,24 +49,24 @@ const ManageContact = ({ action, handleAction }: PropTypes) => {
 
   const handleModify = () => {
     const { aos, los, id } = options.passes[values.pass as any];
-    const contactAOS = new Date(aos).getTime();
-    const contactLOS = new Date(los).getTime();
+    // const aos = new Date(aos).getTime();
+    // const los = new Date(los).getTime();
 
     const modifiedContact = {
       ...selectedContact,
-      contactAOS,
-      contactLOS,
-      contactBeginTimestamp: contactAOS,
-      contactEndTimestamp: contactLOS,
-      contactDOY: values.doy,
-      contactEquipment: values.equipment,
-      contactEquipmentConfig: `Config ${randomInt(1, 5)}`,
-      contactGround: values.ground,
-      contactMode: values.mode,
-      contactName: parseInt(values.iron),
-      contactPriority: values.priority,
-      contactSatellite: id.split(' ')[0],
-      contactState: values.state,
+      aos,
+      los,
+      beginTimestamp: aos,
+      endTimestamp: los,
+      dayOfYear: values.doy,
+      equipment: values.equipment,
+      equipmentConfig: `Config ${randomInt(1, 5)}`,
+      ground: values.ground,
+      mode: values.mode,
+      satellite: parseInt(values.iron),
+      priority: values.priority,
+      name: id.split(' ')[0],
+      state: values.state,
     };
 
     modifyContact(modifiedContact);

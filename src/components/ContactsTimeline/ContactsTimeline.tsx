@@ -13,20 +13,20 @@ import { useAppActions } from 'hooks/useAppActions';
 import { useTracks } from './useTracks';
 import { usePlayhead } from './usePlayhead';
 import './ContactsTimeline.css';
-import type { Contact, Status, Actions } from 'Types';
-
+import type { Status, Actions } from 'Types';
+import type { Contact } from '@astrouxds/mock-data';
 type PropTypes = {
   handleAction: (action: Actions) => void;
   zoom: any;
 };
 
-const setSubLabel = (event: any) => event.contactEquipment.split(' ')[1];
+const setSubLabel = (event: any) => event.equipment.split(' ')[1];
 
 const ContactsTimeline = ({ handleAction, zoom }: PropTypes) => {
   const { setSelectedContact } = useAppActions();
   const { state } = useAppContext();
   const [tracks, setTracks] = useTracks(state.searchedRegionContacts) as any;
-  const selectedId = state.selectedContact?.contactId;
+  const selectedId = state.selectedContact?.id;
 
   const handleClick = (contact: any) => {
     handleAction('details');
@@ -64,29 +64,29 @@ const ContactsTimeline = ({ handleAction, zoom }: PropTypes) => {
                 {!expanded &&
                   events.map(
                     (e: {
-                      contactBeginTimestamp?: any;
-                      contactEndTimestamp?: any;
-                      contactId?: any;
-                      contactName: number;
-                      contactGround: string;
-                      contactStatus?: any;
-                      contactSatellite?: any;
-                      contactEquipment?: string;
+                      beginTimestamp?: any;
+                      endTimestamp?: any;
+                      id?: any;
+                      satellite: number;
+                      ground: string;
+                      status?: any;
+                      name?: any;
+                      equipment?: string;
                     }) => {
-                      const start = new Date(e.contactBeginTimestamp);
-                      const end = new Date(e.contactEndTimestamp);
+                      const start = new Date(e.beginTimestamp);
+                      const end = new Date(e.endTimestamp);
 
                       return (
                         <RuxTimeRegion
-                          key={e.contactId}
+                          key={e.id}
                           start={start.toISOString()}
                           end={end.toISOString()}
-                          status={e.contactStatus}
+                          status={e.status}
                           onClick={() => handleClick(e)}
-                          selected={e.contactId === selectedId}
+                          selected={e.id === selectedId}
                         >
                           <div className='Contacts-timeline__title'>
-                            {e.contactName} {e.contactGround} {setSubLabel(e)}
+                            {e.satellite} {e.ground} {setSubLabel(e)}
                           </div>
                         </RuxTimeRegion>
                       );
@@ -101,20 +101,20 @@ const ContactsTimeline = ({ handleAction, zoom }: PropTypes) => {
                       {subLabel}
                     </div>
                     {subEvents.map((se: Contact) => {
-                      const start = new Date(se.contactBeginTimestamp);
-                      const end = new Date(se.contactEndTimestamp);
+                      const start = new Date(se.beginTimestamp);
+                      const end = new Date(se.endTimestamp);
 
                       return (
                         <RuxTimeRegion
-                          key={se.contactId}
+                          key={se.id}
                           start={start.toISOString()}
                           end={end.toISOString()}
-                          status={se.contactStatus as Status}
+                          status={se.status as Status}
                           onClick={() => handleClick(se)}
-                          selected={se.contactId === selectedId}
+                          selected={se.id === selectedId}
                         >
                           <div className='Contacts-timeline__title'>
-                            {se.contactSatellite} {setSubLabel(se)}
+                            {se.name} {setSubLabel(se)}
                           </div>
                         </RuxTimeRegion>
                       );

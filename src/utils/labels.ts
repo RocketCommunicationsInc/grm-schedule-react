@@ -1,4 +1,4 @@
-import { Contact } from 'Types';
+import { Contact } from '@astrouxds/mock-data';
 
 const setLabelsCount = ({ type, contacts }: any) => {
   switch (type) {
@@ -6,26 +6,26 @@ const setLabelsCount = ({ type, contacts }: any) => {
       return contacts.length;
     }
     case 'upcoming': {
-      const upcoming = contacts.filter((c: { contactState: string }) => {
-        return c.contactState === 'upcoming';
+      const upcoming = contacts.filter((c: { state: string }) => {
+        return c.state === 'upcoming';
       });
       return upcoming.length || 0;
     }
     case 'executing': {
-      const excuting = contacts.filter((c: { contactState: string }) => {
-        return c.contactState === 'executing';
+      const excuting = contacts.filter((c: { state: string }) => {
+        return c.state === 'executing';
       });
       return excuting.length || 0;
     }
     case 'complete': {
-      const complete = contacts.filter((c: { contactState: string }) => {
-        return c.contactState === 'complete';
+      const complete = contacts.filter((c: { state: string }) => {
+        return c.state === 'complete';
       });
       return complete.length;
     }
     case 'failed': {
-      const failed = contacts.filter((c: { contactState: string }) => {
-        return c.contactState === 'failed';
+      const failed = contacts.filter((c: { state: string }) => {
+        return c.state === 'failed';
       });
       return failed.length || 0;
     }

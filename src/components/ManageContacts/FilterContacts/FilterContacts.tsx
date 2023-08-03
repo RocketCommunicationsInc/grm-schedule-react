@@ -10,8 +10,9 @@ import {
 } from '@astrouxds/react';
 import { useAppActions } from 'hooks/useAppActions';
 import './FilterContacts.css';
-import { Ground, Priority, State, Status } from 'Types';
+import { Ground, State } from 'Types';
 import { capitalize } from 'utils/labels';
+import type { Priority, Status } from '@astrouxds/mock-data';
 
 type PropTypes = {
   action?: any;

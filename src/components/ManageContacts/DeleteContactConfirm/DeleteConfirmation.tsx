@@ -17,13 +17,13 @@ const DeleteConfirmation = ({
 }: PropTypes) => {
   const { deleteContact } = useAppActions();
   const {
-    contactName,
-    contactGround,
-    contactDOY,
-    contactBeginTimestamp,
-    contactAOS,
-    contactLOS,
-    contactEndTimestamp,
+    satellite,
+    ground,
+    dayOfYear,
+    beginTimestamp,
+    aos,
+    los,
+    endTimestamp,
   } = contact;
 
   const handleDelete = () => {
@@ -38,18 +38,18 @@ const DeleteConfirmation = ({
         Please confirm if you wish to <strong>DELETE</strong> the following
         contact:
       </p>
-      <SmallReadOnlyInput label='IRON' value={contactName} />
-      <SmallReadOnlyInput label='Ground Station' value={contactGround} />
-      <SmallReadOnlyInput label='DOY' value={contactDOY.toString()} />
+      <SmallReadOnlyInput label='IRON' value={satellite} />
+      <SmallReadOnlyInput label='Ground Station' value={ground} />
+      <SmallReadOnlyInput label='DOY' value={dayOfYear.toString()} />
       <SmallReadOnlyInput
         label='Pre Pass Start'
-        value={setHhMmSs(contactBeginTimestamp)}
+        value={setHhMmSs(beginTimestamp)}
       />
-      <SmallReadOnlyInput label='AOS' value={setHhMmSs(contactAOS)} />
-      <SmallReadOnlyInput label='LOS' value={setHhMmSs(contactLOS)} />
+      <SmallReadOnlyInput label='AOS' value={setHhMmSs(aos)} />
+      <SmallReadOnlyInput label='LOS' value={setHhMmSs(los)} />
       <SmallReadOnlyInput
         label='Post Pass Stop'
-        value={setHhMmSs(contactEndTimestamp)}
+        value={setHhMmSs(endTimestamp)}
       />
       <div>
         <RuxButton secondary onClick={() => setPendingDelete(false)}>

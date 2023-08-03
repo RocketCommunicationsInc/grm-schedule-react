@@ -5,6 +5,7 @@ import { AppReducer } from './AppReducer';
 import { setData } from 'utils/setData';
 import { getDayOfYear } from 'utils/date';
 import { randomIndex, randomInt } from 'utils/random';
+import { useTTCGRMContacts } from '@astrouxds/mock-data';
 
 const AppContext = createContext({});
 
@@ -15,6 +16,8 @@ type PropTypes = {
 };
 
 const AppProvider = ({ children }: PropTypes) => {
+  const { dataArray: contactsData } = useTTCGRMContacts();
+
   const initialState = {
     contacts: [],
     regions: [],
@@ -30,21 +33,21 @@ const AppProvider = ({ children }: PropTypes) => {
   const [state, dispatch] = useReducer(AppReducer, initialState);
 
   useEffect(() => {
-    const contacts = data.map((contact) => ({
-      ...contact,
-      contactBeginTimestamp: contact.contactBeginTimestamp * 1000,
-      contactEndTimestamp: contact.contactEndTimestamp * 1000,
-      contactDOY: getDayOfYear(contact.contactBeginTimestamp * 1000),
-      contactEquipmentConfig: `Config ${randomInt(1, 5)}`,
-      contactAOS: contact.contactBeginTimestamp * 1000,
-      contactLOS: contact.contactEndTimestamp * 1000,
-      contactMode: options.modes[randomIndex(options.modes)],
-      contactPriority: options.priorities[randomIndex(options.priorities)],
-      contactREV: randomInt(1, 9999).toString().padStart(4, '0'),
-      contactState: options.state[randomIndex(options.state)],
-    }));
+    //   const contacts = contactsData.map((contact) => ({
+    //     ...contact,
+    //     beginTimestamp: contact.beginTimestamp * 1000,
+    //     endTimestamp: contact.endTimestamp * 1000,
+    //     dayOfYear: getDayOfYear(contact.beginTimestamp * 1000),
+    //     equipmentConfig: `Config ${randomInt(1, 5)}`,
+    //     aos: contact.beginTimestamp * 1000,
+    //     los: contact.endTimestamp * 1000,
+    //     mode: options.modes[randomIndex(options.modes)],
+    //     priority: options.priorities[randomIndex(options.priorities)],
+    //     rev: randomInt(1, 9999).toString().padStart(4, '0'),
+    //     state: options.state[randomIndex(options.state)],
+    //   }));
 
-    dispatch({ type: 'SET_DATA', payload: setData(contacts.slice(0, 100)) });
+    dispatch({ type: 'SET_DATA', payload: setData(contactsData) });
   }, []);
 
   return (
