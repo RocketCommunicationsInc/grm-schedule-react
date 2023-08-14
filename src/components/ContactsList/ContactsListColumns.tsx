@@ -30,15 +30,15 @@ export const columnDefs = [
   }),
   columnHelper.accessor('contactName', {
     header: 'IRON',
-    style: { minWidth: 68 },
+    style: { minWidth: 68, justifyContent: 'right', marginRight: 50 },
   }),
   columnHelper.accessor('contactGround', {
     header: 'Ground Station',
-    style: { minWidth: 148 },
+    style: { minWidth: 140 },
   }),
   columnHelper.accessor('contactREV', {
     header: 'REV',
-    style: { minWidth: 60 },
+    style: { minWidth: 50, justifyContent: 'right', marginRight: 50 },
   }),
   columnHelper.accessor('contactEquipment', {
     header: 'Equipment String',
@@ -47,30 +47,30 @@ export const columnDefs = [
   columnHelper.accessor('contactState', {
     header: 'State',
     cell: (info) => info.getValue(),
-    style: { minWidth: 120 },
+    style: { minWidth: 80 },
   }),
   columnHelper.accessor('contactDOY', {
     header: 'DOY',
-    style: { minWidth: 60 },
+    style: { minWidth: 50, justifyContent: 'right' },
   }),
   columnHelper.accessor('contactBeginTimestamp', {
     header: 'Start Time',
-    style: { minWidth: 112 },
+    style: { minWidth: 112, justifyContent: 'right' },
     cell: (info) => <TwoDigitTime time={info.getValue()} />,
   }),
   columnHelper.accessor('contactAOS', {
     header: 'AOS',
-    style: { minWidth: 96 },
+    style: { minWidth: 112, justifyContent: 'right' },
     cell: (info) => <TwoDigitTime time={info.getValue()} />,
   }),
   columnHelper.accessor('contactLOS', {
     header: 'LOS',
-    style: { minWidth: 96 },
+    style: { minWidth: 112, justifyContent: 'right' },
     cell: (info) => <TwoDigitTime time={info.getValue()} />,
   }),
   columnHelper.accessor('contactEndTimestamp', {
     header: 'Stop Time',
-    style: { minWidth: 112 },
+    style: { minWidth: 112, justifyContent: 'right' },
     cell: (info) => <TwoDigitTime time={info.getValue()} />,
   }),
 ];
