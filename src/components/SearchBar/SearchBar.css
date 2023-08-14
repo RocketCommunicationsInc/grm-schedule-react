@@ -1,5 +1,5 @@
 .main-search {
-padding-bottom: 1rem;
-width: 14rem;
-margin-left: auto;
+  padding-bottom: var(--spacing-2);
+  width: 14rem;
+  margin-left: auto;
 }
