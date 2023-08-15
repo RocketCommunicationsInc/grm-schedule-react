@@ -15,7 +15,8 @@ body {
 }
 
 .App-main__container {
-  height: calc(100% - 44px);
+  height: calc(100% - 36px);
+  overflow: hidden;
 }
 
 .App-main__container::part(container) {
