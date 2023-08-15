@@ -20,6 +20,6 @@ rux-monitoring-progress-icon::part(monitoring-label) {
   margin-top: var(--spacing-1);
 }
 
-rux-global-status-bar rux-icon {
-  margin-left: var(--spacing-2);
+rux-global-status-bar {
+  padding-right: var(--spacing-4);
 }
