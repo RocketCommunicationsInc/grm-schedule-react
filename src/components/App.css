@@ -3,7 +3,7 @@
   --top-deduction: 6rem;
 
   height: calc(100vh - var(--top-deduction));
-  padding: var(--spacing-4) var(--spacing-6);
+  padding: var(--spacing-3);
 }
 
 body {
@@ -15,7 +15,8 @@ body {
 }
 
 .App-main__container {
-  height: calc(100% - 44px);
+  height: calc(100% - 36px);
+  overflow: hidden;
 }
 
 .App-main__container::part(container) {
