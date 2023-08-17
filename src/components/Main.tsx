@@ -15,55 +15,45 @@ import type { Actions } from 'Types';
 const Main = () => {
   const [zoom, setZoom] = useState('8');
   const [view, setView] = useState('List');
-  const [isOpen, setIsOpen] = useState(false);
   const [action, setAction] = useState<Actions>('');
 
   const handleAction = (action?: Actions) => {
     if (action) {
-      setIsOpen(true);
       setAction(action);
       return;
     }
 
-    setIsOpen(false);
     setAction('');
   };
 
-  let rightPanel = null;
-
-  if (action === 'manage') {
-    rightPanel = <ManagePanel handleAction={handleAction} />;
-  }
-
-  if (action === 'details') {
-    rightPanel = <ContactDetails handleAction={handleAction} />;
-  }
-
-  if (action === 'filter') {
-    rightPanel = <FilterContacts action={action} handleAction={handleAction} />;
-  }
-
-  if (action === 'add' || action === 'modify') {
-    rightPanel = <ManageContact action={action} handleAction={handleAction} />;
-  }
+  const rightPanelMap = {
+    manage: <ManagePanel handleAction={handleAction} />,
+    details: <ContactDetails handleAction={handleAction} />,
+    filter: <FilterContacts action={action} handleAction={handleAction} />,
+    add: <ManageContact action={action} handleAction={handleAction} />,
+    modify: <ManageContact action={action} handleAction={handleAction} />,
+  };
+  const RightPanel = action ? rightPanelMap[action] : null;
 
   return (
     <main className='App-main'>
       <SearchBar />
       <RuxContainer className='App-main__container'>
-        <header slot='header' className='Contacts-header'>
+        <header slot='header'>
           <h2>Contacts</h2>
           <RuxButton
             icon='chevron-right'
             borderless
             onClick={() => handleAction('manage')}
-            disabled={isOpen}
+            disabled={action !== ''}
           >
             Manage Contacts
           </RuxButton>
         </header>
 
-        <div className={`App-main__left-panel ${isOpen ? 'isOpen' : ''}`}>
+        <div
+          className={`App-main__left-panel ${action !== '' ? 'isOpen' : ''}`}
+        >
           <ContactsToolBar {...{ view, setView, setZoom, zoom }} />
 
           {view === 'List' ? (
@@ -72,8 +62,10 @@ const Main = () => {
             <ContactsTimeline handleAction={handleAction} zoom={zoom} />
           )}
         </div>
-        <aside className={`App-main__right-panel ${isOpen ? 'isOpen' : ''}`}>
-          {rightPanel}
+        <aside
+          className={`App-main__right-panel ${action !== '' ? 'isOpen' : ''}`}
+        >
+          {RightPanel}
         </aside>
       </RuxContainer>
     </main>

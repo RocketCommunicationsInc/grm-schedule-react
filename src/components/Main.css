@@ -21,7 +21,7 @@
   height: 100%;
 }
 
-.Contacts-header {
+.App-main__container > header {
   display: flex;
   justify-content: space-between;
 }
