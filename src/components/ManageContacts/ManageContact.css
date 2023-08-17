@@ -98,49 +98,36 @@ form rux-checkbox {
 }
 
 /* PASSES */
-ul {
-  border: 1px solid var(--container-color-border);
-  list-style: none;
-  margin: var(--spacing-0);
-  max-height: 9rem;
-  overflow-y: scroll;
-  padding: var(--spacing-0);
+.pass-plan-wrapper {
+  height: 11rem;
+  overflow-y: auto;
+  border: solid var(--color-palette-neutral-1000) 1px;
   margin-top: var(--spacing-1);
-  position: relative;
 }
 
-ul div[slot='toolbar'] {
-  background-color: var(--color-background-surface-header);
-  padding: var(--spacing-1) var(--spacing-4);
-  position: sticky;
+.pass-plan-wrapper::-webkit-scrollbar-track {
+  margin-top: 40px;
+}
+
+.pass-plan-wrapper rux-table {
+  width: 100%;
+}
+
+rux-container .pass-plan-wrapper {
+  background-color: var(--color-background-base-header);
+}
+
+.pass-plan-wrapper rux-table-header-row {
   top: 0;
+  position: sticky;
+  z-index: 10;
 }
 
-ul div[slot='toolbar'],
-ul li {
-  align-items: center;
-  display: grid;
-  gap: var(--spacing-2);
-  grid-template-columns: 2fr repeat(2, 1fr);
-}
-
-li {
-  font-size: var(--font-size-sm);
-  padding: var(--spacing-2) var(--spacing-4);
-}
-
-li.selected {
+.pass-plan-wrapper rux-table-row.selected {
   background-color: var(--color-background-surface-selected);
   box-shadow: -4px 0 0 0 var(--color-background-interactive-default);
-  margin-left: var(--spacing-1);
-  padding-left: var(--spacing-3);
 }
 
-li:hover {
-  background-color: var(--color-background-surface-hover);
+.pass-plan-wrapper rux-table rux-table-cell:hover {
   cursor: pointer;
-}
-
-li:not(:first-child) {
-  border-top: 1px solid var(--color-background-base-default);
 }

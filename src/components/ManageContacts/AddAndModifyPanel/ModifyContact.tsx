@@ -5,6 +5,12 @@ import {
   RuxInput,
   RuxOption,
   RuxSelect,
+  RuxTable,
+  RuxTableBody,
+  RuxTableCell,
+  RuxTableHeaderCell,
+  RuxTableHeaderRow,
+  RuxTableRow,
 } from '@astrouxds/react';
 import EquipmentIcons from 'common/EquipmentIcons/EquipmentIcons';
 import type { DefaultOptions } from 'Types';
@@ -86,34 +92,42 @@ const ModifyContactForm = ({ options, values, setValues }: PropTypes) => {
         />
 
         <label>Passes ({options.passes.length})</label>
-        <ul>
-          <div slot='toolbar'>
-            <span>Contact</span>
-            <span>AOS</span>
-            <span>LOS</span>
-          </div>
-          {options.passes.map(({ id, aos, los }, i) => (
-            <li
-              key={id + i}
-              className={values.pass === i ? 'selected' : undefined}
-              onClick={() => handleSelectPass(i)}
-            >
-              <span>{id}</span>
-              <RuxDatetime
-                date={aos}
-                hour='2-digit'
-                minute='2-digit'
-                second='2-digit'
-              />
-              <RuxDatetime
-                date={los}
-                hour='2-digit'
-                minute='2-digit'
-                second='2-digit'
-              />
-            </li>
-          ))}
-        </ul>
+        <div className='pass-plan-wrapper'>
+          <RuxTable>
+            <RuxTableHeaderRow>
+              <RuxTableHeaderCell>Contact</RuxTableHeaderCell>
+              <RuxTableHeaderCell>AOS</RuxTableHeaderCell>
+              <RuxTableHeaderCell>LOS</RuxTableHeaderCell>
+            </RuxTableHeaderRow>
+            <RuxTableBody>
+              {options.passes.map(({ id, aos, los }, i) => (
+                <RuxTableRow
+                  key={id + i}
+                  className={values.pass === i ? 'selected' : undefined}
+                  onClick={() => handleSelectPass(i)}
+                >
+                  <RuxTableCell>{id}</RuxTableCell>
+                  <RuxTableCell>
+                    <RuxDatetime
+                      date={aos}
+                      hour='2-digit'
+                      minute='2-digit'
+                      second='2-digit'
+                    />
+                  </RuxTableCell>
+                  <RuxTableCell>
+                    <RuxDatetime
+                      date={los}
+                      hour='2-digit'
+                      minute='2-digit'
+                      second='2-digit'
+                    />
+                  </RuxTableCell>
+                </RuxTableRow>
+              ))}
+            </RuxTableBody>
+          </RuxTable>
+        </div>
 
         <RuxSelect
           label='Command Mode'
