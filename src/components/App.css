@@ -25,6 +25,11 @@ body {
   height: 100%;
 }
 
+.Contacts-header {
+  display: flex;
+  justify-content: space-between;
+}
+
 .App-main__container::part(body) {
   flex-grow: 1;
   display: flex;

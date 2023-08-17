@@ -1,10 +1,9 @@
 import { useState } from 'react';
-import { RuxContainer, RuxNotification } from '@astrouxds/react';
+import { RuxContainer, RuxNotification, RuxButton } from '@astrouxds/react';
 
 import { useAppActions } from 'hooks/useAppActions';
 import { useAppContext } from 'providers/AppProvider';
 import GlobalStatusBar from './GlobalStatusBar/GlobalStatusBar';
-import ContactsHeader from './ContactsHeader/ContactsHeader';
 import ContactsToolBar from './ContactsToolbar/ContactsToolbar';
 import ContactsList from './ContactsList/ContactsList';
 import ContactsTimeline from './ContactsTimeline/ContactsTimeline';
@@ -68,7 +67,17 @@ const App = () => {
       <main className='App-main'>
         <SearchBar />
         <RuxContainer className='App-main__container'>
-          <ContactsHeader {...{ isOpen, handleAction }} />
+          <header slot='header' className='Contacts-header'>
+            <h2>Contacts</h2>
+            <RuxButton
+              icon='chevron-right'
+              borderless
+              onClick={() => handleAction('manage')}
+              disabled={isOpen}
+            >
+              Manage Contacts
+            </RuxButton>
+          </header>
 
           <div className={`App-main__left-panel ${isOpen ? 'isOpen' : ''}`}>
             <ContactsToolBar {...{ view, setView, setZoom, zoom }} />
