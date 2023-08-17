@@ -103,50 +103,14 @@ export const useAppActions = () => {
     dispatch({ type: 'RESET_SELECTED_CONTACT' });
   }, [dispatch]);
 
-  const filterIronAndEqupimentContacts = useCallback(
-    (filter: string, value: 'iron' | 'equipment') => {
-      const contacts = [...state.contacts];
-      const searchedContacts = contacts.filter((contact: any) => {
-        if (
-          value === 'iron' &&
-          contact.contactName
-            .toString()
-            .toLowerCase()
-            .includes(filter.toLowerCase())
-        ) {
-          return true;
-        } else if (
-          value === 'equipment' &&
-          contact.contactEquipment.toLowerCase().includes(filter.toLowerCase())
-        ) {
-          return true;
-        }
-        return false;
-      });
-      const searchedRegionContacts = setGroup(
-        groupByToMap(
-          [...searchedContacts],
-          (e: { contactGround: Date | number }) => e.contactGround
-        )
-      );
-      dispatch({
-        type: 'REGION_CONTACTS',
-        payload: { searchedRegionContacts: searchedRegionContacts },
-      });
-      dispatch({
-        type: 'SEARCHED_CONTACTS',
-        payload: { searchedContacts: searchedContacts },
-      });
-    },
-    [dispatch, state.contacts]
-  );
-
   const filterContacts = useCallback(
     (
       status: Status[],
       priority: Priority[],
       ground: Ground[],
-      cState: State[]
+      cState: State[],
+      ironValue: String,
+      equipmentValue: String
     ) => {
       const contacts = [...state.contacts];
       let filteredContacts: any[] = [...contacts];
@@ -171,6 +135,18 @@ export const useAppActions = () => {
           cState.includes(contact.contactState.toLowerCase())
         );
       }
+
+      //IRON filter and Equipment Filter
+      filteredContacts = filteredContacts.filter((contact)=>{
+      const matchIronValue = contact.contactName.toString()
+      .toLowerCase()
+      .includes(ironValue.toLowerCase())
+
+      const matchEquipmentValue = contact.contactEquipment.toString()
+      .toLowerCase()
+      .includes(equipmentValue.toLowerCase())
+      return (matchIronValue && matchEquipmentValue)
+      })
 
       const searchedRegionContacts = setGroup(
         groupByToMap(
@@ -242,6 +218,5 @@ export const useAppActions = () => {
     setSelectedContact,
     filterContacts,
     searchContacts,
-    filterIronAndEqupimentContacts,
   };
 };
