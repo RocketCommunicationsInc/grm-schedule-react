@@ -75,6 +75,7 @@ const GlobalStatusBar = () => {
             aria-controls='grm-popup-menu'
             slot='trigger'
             size='2rem'
+            className='app-switcher-icon'
           />
 
           <RuxMenu onRuxmenuselected={(e) => menuSelect(e)}>

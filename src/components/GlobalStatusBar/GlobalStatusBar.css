@@ -15,3 +15,15 @@ rux-menu-item[value='themeToggle'] span {
   gap: var(--spacing-2);
   align-items: center;
 }
+
+rux-monitoring-progress-icon::part(monitoring-label) {
+  margin-top: var(--spacing-1);
+}
+
+rux-global-status-bar {
+  padding-right: var(--spacing-3);
+}
+
+.app-switcher-icon:focus {
+  outline-offset: -1px;
+}
