@@ -101,6 +101,8 @@ form rux-checkbox {
 .pass-plan-wrapper {
   height: 11rem;
   overflow-y: auto;
+  border: solid var(--color-palette-neutral-1000) 1px;
+  margin-top: var(--spacing-1);
 }
 
 .pass-plan-wrapper::-webkit-scrollbar-track {
