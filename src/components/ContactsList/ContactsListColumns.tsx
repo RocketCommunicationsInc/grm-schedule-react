@@ -15,12 +15,7 @@ const TwoDigitTime = ({ time }: PropTypes) => (
   />
 );
 
-const sortStatus = (
-  a: number,
-  b: number,
-  columnId: string,
-  sortDirection: string
-) => {
+const sortStatus = (a: number, b: number, columnId: string) => {
   const statusOrder = [
     'off',
     'standby',
@@ -29,15 +24,10 @@ const sortStatus = (
     'serious',
     'critical',
   ];
-  const aVal = a.original[columnId];
-  const bVal = b.original[columnId];
-  const statusAsc = statusOrder.indexOf(aVal);
-  const statusDesc = statusOrder.indexOf(bVal);
-  if (sortDirection !== 'ASC') {
-    return statusAsc - statusDesc;
-  } else {
-    return statusDesc - statusAsc;
-  }
+  const statusAsc = statusOrder.indexOf(a.original[columnId]);
+  const statusDesc = statusOrder.indexOf(b.original[columnId]);
+
+  return statusDesc - statusAsc;
 };
 
 const columnHelper = createColumnHelper<any>();
