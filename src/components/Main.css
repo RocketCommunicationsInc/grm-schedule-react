@@ -6,10 +6,6 @@
   padding: var(--spacing-3);
 }
 
-body {
-  overflow: hidden;
-}
-
 .App-main.notification {
   --top-deduction: 9.25rem;
 }
