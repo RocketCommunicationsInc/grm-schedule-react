@@ -1,5 +1,7 @@
-import { useEffect, useMemo, useState } from 'react';
+import { useMemo, useState } from 'react';
 import {
+  RowData,
+  SortingFn,
   getCoreRowModel,
   getSortedRowModel,
   useReactTable,
@@ -58,28 +60,79 @@ const ContactsList = ({ handleAction }: PropTypes) => {
     return newSortedContacts;
   };
 
+  // const sortStatus: SortingFn<Contact> = (a: any, b: any, columnId: string, sortDirection: string) => {
+  //   const statusOrder = [
+  //     'off',
+  //     'standby',
+  //     'normal',
+  //     'caution',
+  //     'serious',
+  //     'critical',
+  //   ];
+  //   const statusAsc = statusOrder.indexOf(a.contactStatus);
+  //   const statusDesc = statusOrder.indexOf(b.contactStatus);
+  //   //if (!asc) {
+  //     return a.getValue(columnId).value < b.getValue(columnId).value
+  //       ? statusAsc
+  //       : statusDesc;
+  //   //}
+  // };
+
+  const sortStatus: any = (
+    rows: any,
+    columnId: string,
+    sortDirection: string
+  ) => {
+    console.log('hitting');
+    const statusOrder = [
+      'off',
+      'standby',
+      'normal',
+      'caution',
+      'serious',
+      'critical',
+    ];
+    return rows.sort((a: any, b: any) => {
+      const aVal = a.original[columnId];
+      const bVal = b.original[columnId];
+      const statusAsc = statusOrder.indexOf(aVal);
+      const statusDesc = statusOrder.indexOf(bVal);
+      if (sortDirection !== 'ASC') {
+        console.log(statusAsc - statusDesc);
+        return statusAsc - statusDesc;
+      } else {
+        return statusDesc - statusAsc;
+      }
+    });
+  };
+
   const table = useReactTable({
     data: state.searchedContacts,
     columns,
     getCoreRowModel: getCoreRowModel(),
+    enableMultiSort: true,
     getSortedRowModel: getSortedRowModel(),
     sortingFns: {
-      sortStatus: sortContacts,
+      sortStatus: sortStatus,
     },
+    // sortingFns: {
+    //   sortStatus: (a: any, b: any, column: any): number =>
+    //     a.getValue(column).value < b.getValue(column).value ? 1 : -1,
+    // },
   });
 
-  useEffect(() => {
-    if (columns[1].header === 'Status') {
-      sortContacts(state.searchedContacts, sortDirection);
-    }
-  }, [
-    columns,
-    sortDirection,
-    state.searchedContacts,
-    // table.initialState.sorting,
-  ]);
+  // useMemo(() => {
+  //   if (columns[1].header === 'Status') {
+  //     sortContacts(state.searchedContacts, sortDirection);
+  //   }
+  // }, [
+  //   columns,
+  //   sortDirection,
+  //   state.searchedContacts,
+  //   // table.initialState.sorting,
+  // ]);
 
-  console.log(columns[1]);
+  // console.log(columns[1]);
   return (
     <div className='table-wrapper'>
       <AstroReactTableHeader isSortable table={table} />
