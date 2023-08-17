@@ -15,6 +15,31 @@ const TwoDigitTime = ({ time }: PropTypes) => (
   />
 );
 
+const sortStatus = (
+  a: number,
+  b: number,
+  columnId: string,
+  sortDirection: string
+) => {
+  const statusOrder = [
+    'off',
+    'standby',
+    'normal',
+    'caution',
+    'serious',
+    'critical',
+  ];
+  const aVal = a.original[columnId];
+  const bVal = b.original[columnId];
+  const statusAsc = statusOrder.indexOf(aVal);
+  const statusDesc = statusOrder.indexOf(bVal);
+  if (sortDirection !== 'ASC') {
+    return statusAsc - statusDesc;
+  } else {
+    return statusDesc - statusAsc;
+  }
+};
+
 const columnHelper = createColumnHelper<any>();
 
 export const columnDefs = [
@@ -27,7 +52,7 @@ export const columnDefs = [
     header: 'Status',
     cell: (info) => <RuxStatus status={info.getValue()} />,
     style: { minWidth: 65, justifyContent: 'center' },
-    sortType: 'sortStatus',
+    sortingFn: sortStatus,
   }),
   columnHelper.accessor('contactName', {
     header: 'IRON',
