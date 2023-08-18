@@ -137,16 +137,18 @@ export const useAppActions = () => {
       }
 
       //IRON filter and Equipment Filter
-      filteredContacts = filteredContacts.filter((contact)=>{
-      const matchIronValue = contact.contactName.toString()
-      .toLowerCase()
-      .includes(ironValue.toLowerCase())
+      filteredContacts = filteredContacts.filter((contact) => {
+        const matchIronValue = contact.contactName
+          .toString()
+          .toLowerCase()
+          .includes(ironValue.toLowerCase());
 
-      const matchEquipmentValue = contact.contactEquipment.toString()
-      .toLowerCase()
-      .includes(equipmentValue.toLowerCase())
-      return (matchIronValue && matchEquipmentValue)
-      })
+        const matchEquipmentValue = contact.contactEquipment
+          .toString()
+          .toLowerCase()
+          .includes(equipmentValue.toLowerCase());
+        return matchIronValue && matchEquipmentValue;
+      });
 
       const searchedRegionContacts = setGroup(
         groupByToMap(
