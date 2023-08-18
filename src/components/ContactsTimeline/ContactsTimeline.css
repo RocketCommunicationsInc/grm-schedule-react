@@ -35,7 +35,6 @@ rux-timeline {
 
 rux-timeline::part(time-region-container) {
   overflow: initial;
-  height: 100%;
   display: grid;
   grid-template-rows: auto max-content;
 }
