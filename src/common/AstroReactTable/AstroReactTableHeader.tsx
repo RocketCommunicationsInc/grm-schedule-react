@@ -25,16 +25,22 @@ export const AstroReactTableHeader = ({
                 : ''
             }`}
             style={column.columnDef.style}
-            onClick={isSortable ? column.getToggleSortingHandler() : undefined}
           >
-            {flexRender(column.columnDef.header, getContext())}
-
-            {isSortable &&
-              //@ts-expect-error with types
-              {
-                asc: <RuxIcon icon='arrow-drop-up' size='1.5rem' />,
-                desc: <RuxIcon icon='arrow-drop-down' size='1.5rem' />,
-              }[column.getIsSorted()]}
+            <span
+              onClick={
+                isSortable ? column.getToggleSortingHandler() : undefined
+              }
+            >
+              {flexRender(column.columnDef.header, getContext())}
+              <div className='sort-icon'>
+                {isSortable &&
+                  //@ts-expect-error with types
+                  {
+                    asc: <RuxIcon icon='arrow-drop-up' size='1.5rem' />,
+                    desc: <RuxIcon icon='arrow-drop-down' size='1.5rem' />,
+                  }[column.getIsSorted()]}
+              </div>
+            </span>
           </div>
         );
       })}
