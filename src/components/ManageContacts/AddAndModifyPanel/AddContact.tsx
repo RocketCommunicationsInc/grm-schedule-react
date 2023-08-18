@@ -179,7 +179,7 @@ const AddContactForm = ({ options, values, setValues }: PropTypes) => {
           label='Notes'
           name='contactDetail'
           onRuxinput={handleTextArea}
-          value={values.contactDetail}
+          value={values.details}
         />
       </section>
     </form>

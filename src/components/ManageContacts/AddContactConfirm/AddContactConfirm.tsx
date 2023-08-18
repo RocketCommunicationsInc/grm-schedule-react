@@ -1,4 +1,4 @@
-import { RuxButton } from '@astrouxds/react';
+import { RuxButton, RuxTextarea } from '@astrouxds/react';
 import SmallReadOnlyInput from 'common/SmallReadOnlyInput/SmallReadOnlyInput';
 import type { DefaultOptions } from 'Types';
 
@@ -14,6 +14,7 @@ type PropTypes = {
     priority: string;
     mode: string;
     dirty: boolean;
+    details: string;
   };
   options: DefaultOptions;
   handleAdd: () => void;
@@ -32,7 +33,7 @@ const AddContactConfirm = ({
   handleAdd,
   setShowAddConfirm,
 }: PropTypes) => {
-  const { iron, ground, doy } = values;
+  const { iron, ground, doy, details } = values;
   const aos = Intl.DateTimeFormat('default', datetimeFormatOptions)
     .format(new Date(options.passes[values.pass].aos))
     .slice(0, -3);
@@ -51,6 +52,7 @@ const AddContactConfirm = ({
       <SmallReadOnlyInput label='AOS' value={aos} />
       <SmallReadOnlyInput label='LOS' value={los} />
       <SmallReadOnlyInput label='Post Pass Stop' value={los} />
+      <RuxTextarea label='Notes' name='contactDetail' value={details} />
       <div>
         <RuxButton secondary onClick={() => setShowAddConfirm(false)}>
           Cancel
