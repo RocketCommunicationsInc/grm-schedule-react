@@ -42,3 +42,11 @@
 rux-segmented-button {
   margin-right: 1rem;
 }
+
+.no-contacts-found {
+  display: flex;
+  justify-content: center;
+  height: 40%;
+  align-items: center;
+  box-sizing: border-box;
+}

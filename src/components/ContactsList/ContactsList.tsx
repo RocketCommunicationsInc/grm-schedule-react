@@ -40,11 +40,18 @@ const ContactsList = ({ handleAction }: PropTypes) => {
     <div className='table-wrapper'>
       <AstroReactTableHeader isSortable table={table} />
       <div className='Contacts-list'>
-        <AstroReactTable
-          table={table}
-          onRowClick={handleRowClick}
-          setIsSelected={handleSelected}
-        />
+        {state.searchedContacts.length > 0 ? (
+          <AstroReactTable
+            table={table}
+            onRowClick={handleRowClick}
+            setIsSelected={handleSelected}
+          />
+        ) : (
+          <p className='no-contacts-found'>
+            No contacts available. Try changing the duration or filters if
+            applied.
+          </p>
+        )}
       </div>
     </div>
   );
