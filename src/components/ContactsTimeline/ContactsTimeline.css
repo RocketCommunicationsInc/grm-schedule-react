@@ -4,6 +4,7 @@
   gap: var(--spacing-2);
 }
 
+.sub-track,
 .sub-track::part(container),
 .sub-track::part(track-header) {
   background-color: var(--color-background-surface-header);
@@ -34,7 +35,6 @@ rux-timeline {
 
 rux-timeline::part(time-region-container) {
   overflow: initial;
-  height: inherit;
   display: grid;
   grid-template-rows: auto max-content;
 }
