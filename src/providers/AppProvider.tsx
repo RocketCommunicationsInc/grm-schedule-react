@@ -29,6 +29,7 @@ const AppProvider = ({ children }: PropTypes) => {
   };
   const [state, dispatch] = useReducer(AppReducer, initialState);
 
+  //!Could add contact notes in here
   useEffect(() => {
     const contacts = data.map((contact) => ({
       ...contact,

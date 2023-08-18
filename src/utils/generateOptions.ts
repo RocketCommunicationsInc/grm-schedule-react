@@ -62,8 +62,8 @@ export const generateOptions = (modifyOptions: GenerateOptions) => {
           ...configs.slice(1),
         ]
       : configs,
-      state: modifyOptions
+    state: modifyOptions
       ? unique([modifyOptions.state, ...options.state])
-      : options.state
+      : options.state,
   };
 };

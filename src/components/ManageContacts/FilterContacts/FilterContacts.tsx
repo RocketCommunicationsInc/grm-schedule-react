@@ -19,11 +19,7 @@ type PropTypes = {
 };
 
 const FilterContacts = ({ handleAction }: PropTypes) => {
-  const {
-    resetSelectedContact,
-    filterContacts,
-    filterIronAndEqupimentContacts,
-  } = useAppActions();
+  const { resetSelectedContact, filterContacts } = useAppActions();
 
   const [priorityCB, setPriorityCB] = useState([
     { id: 1, checked: false, value: 'high', label: '# High 1 - 66' },
@@ -72,31 +68,37 @@ const FilterContacts = ({ handleAction }: PropTypes) => {
     { id: 15, checked: false, value: 'complete', label: 'Complete' },
     { id: 16, checked: false, value: 'failed', label: 'Failed' },
   ]);
+  const [ironValue, setIronValue] = useState('');
+  const [equipmentValue, setEquipmentValue] = useState('');
 
   const handleClose = () => {
     handleAction();
     resetSelectedContact();
   };
 
-  const handleCheckboxFilter = () => {
+  const handleFilter = () => {
     filterContacts(
       statusCB.flatMap((cb) => (cb.checked ? (cb.value as Status) : [])),
       priorityCB.flatMap((cb) => (cb.checked ? (cb.value as Priority) : [])),
       groundCB.flatMap((cb) => (cb.checked ? (cb.value as Ground) : [])),
-      stateCB.flatMap((cb) => (cb.checked ? (cb.value as State) : []))
+      stateCB.flatMap((cb) => (cb.checked ? (cb.value as State) : [])),
+      ironValue,
+      equipmentValue
     );
   };
 
   useEffect(() => {
-    handleCheckboxFilter();
+    handleFilter();
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [priorityCB, groundCB, stateCB, statusCB]);
+  }, [priorityCB, groundCB, stateCB, statusCB, ironValue, equipmentValue]);
 
   const handleReset = () => {
     setPriorityCB(priorityCB.map((cb) => ({ ...cb, checked: false })));
     setGroundCB(groundCB.map((cb) => ({ ...cb, checked: false })));
     setStateCB(stateCB.map((cb) => ({ ...cb, checked: false })));
     setStatusCB(statusCB.map((cb) => ({ ...cb, checked: false })));
+    setIronValue('');
+    setEquipmentValue('');
   };
 
   const handleCheckboxes = (id: number) => {
@@ -128,7 +130,6 @@ const FilterContacts = ({ handleAction }: PropTypes) => {
         {priorityCB.map(({ id, checked, value, label }) => (
           <RuxCheckbox
             value={value}
-            onRuxinput={handleCheckboxFilter}
             label={label}
             checked={checked}
             onRuxchange={() => handleCheckboxes(id)}
@@ -142,7 +143,6 @@ const FilterContacts = ({ handleAction }: PropTypes) => {
         {statusCB.map(({ id, checked, value, label, status }) => (
           <RuxCheckbox
             value={value}
-            onRuxinput={handleCheckboxFilter}
             label={label}
             checked={checked}
             onRuxchange={() => handleCheckboxes(id)}
@@ -155,20 +155,19 @@ const FilterContacts = ({ handleAction }: PropTypes) => {
       </RuxCheckboxGroup>
 
       <RuxInput
+        id='ironSearch'
         type='search'
         label='IRON'
         placeholder='All IRONs'
         size='small'
-        onRuxinput={(e: any) =>
-          filterIronAndEqupimentContacts(e.target.value, 'iron')
-        }
+        onRuxinput={(e: any) => setIronValue(e.target.value)}
+        value={ironValue}
       />
 
       <RuxCheckboxGroup label='Ground Station'>
         {groundCB.map(({ id, checked, value, label }) => (
           <RuxCheckbox
             value={value}
-            onRuxinput={handleCheckboxFilter}
             label={label}
             checked={checked}
             onRuxchange={() => handleCheckboxes(id)}
@@ -181,7 +180,6 @@ const FilterContacts = ({ handleAction }: PropTypes) => {
         {stateCB.map(({ id, checked, value, label }) => (
           <RuxCheckbox
             value={value}
-            onRuxinput={handleCheckboxFilter}
             label={label}
             checked={checked}
             onRuxchange={() => handleCheckboxes(id)}
@@ -191,13 +189,13 @@ const FilterContacts = ({ handleAction }: PropTypes) => {
       </RuxCheckboxGroup>
 
       <RuxInput
+        id='equipmentSearch'
         type='search'
         label='Equipment String'
         placeholder='All Equipment'
         size='small'
-        onRuxinput={(e: any) =>
-          filterIronAndEqupimentContacts(e.target.value, 'equipment')
-        }
+        onRuxinput={(e: any) => setEquipmentValue(e.target.value)}
+        value={equipmentValue}
       />
     </RuxContainer>
   );
