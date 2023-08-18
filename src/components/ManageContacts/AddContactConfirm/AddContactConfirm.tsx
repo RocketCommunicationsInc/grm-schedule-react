@@ -52,12 +52,7 @@ const AddContactConfirm = ({
       <SmallReadOnlyInput label='AOS' value={aos} />
       <SmallReadOnlyInput label='LOS' value={los} />
       <SmallReadOnlyInput label='Post Pass Stop' value={los} />
-      <RuxTextarea
-        disabled
-        label='Notes'
-        name='contactDetail'
-        value={details}
-      />
+      <RuxTextarea disabled label='Notes' value={details} />
       <div>
         <RuxButton secondary onClick={() => setShowAddConfirm(false)}>
           Cancel
