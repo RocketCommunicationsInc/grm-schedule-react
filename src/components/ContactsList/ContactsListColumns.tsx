@@ -36,25 +36,25 @@ export const columnDefs = [
   columnHelper.accessor('contactPriority', {
     header: 'Priority',
     cell: (info) => info.getValue(),
-    style: { minWidth: 55, maxWidth: 50 },
+    style: { minWidth: 50 },
   }),
   columnHelper.accessor('contactStatus', {
     header: 'Status',
     cell: (info) => <RuxStatus status={info.getValue()} />,
-    style: { minWidth: 65, justifyContent: 'center' },
+    style: { minWidth: 50, justifyContent: 'center' },
     sortingFn: sortStatus,
   }),
   columnHelper.accessor('contactName', {
     header: 'IRON',
-    style: { minWidth: 68, justifyContent: 'right', marginRight: 50 },
+    style: { minWidth: 68, justifyContent: 'right' },
   }),
   columnHelper.accessor('contactGround', {
     header: 'Ground Station',
-    style: { minWidth: 140 },
+    style: { minWidth: 145 },
   }),
   columnHelper.accessor('contactREV', {
     header: 'REV',
-    style: { minWidth: 50, justifyContent: 'right', marginRight: 50 },
+    style: { minWidth: 50, justifyContent: 'right' },
   }),
   columnHelper.accessor('contactEquipment', {
     header: 'Equipment String',
@@ -67,7 +67,7 @@ export const columnDefs = [
   }),
   columnHelper.accessor('contactDOY', {
     header: 'DOY',
-    style: { minWidth: 50, justifyContent: 'right' },
+    style: { minWidth: 58, justifyContent: 'right' },
   }),
   columnHelper.accessor('contactBeginTimestamp', {
     header: 'Start Time',

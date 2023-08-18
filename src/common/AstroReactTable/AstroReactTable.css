@@ -9,13 +9,18 @@
   padding-right: 1rem;
 }
 
-.Astro-react-table__sortable,
+.Astro-react-table__sortable span,
 .Astro-react-table__selectable {
   cursor: pointer;
 }
 
+.Astro-react-table__header rux-icon {
+  vertical-align: middle;
+}
+
 .Astro-react-table__sorted {
   color: var(--color-text-interactive-default);
+  cursor: pointer;
 }
 
 .Astro-react-table__col,
@@ -24,6 +29,21 @@
   display: flex;
   padding: var(--spacing-2);
   text-transform: capitalize;
+}
+
+.sort-icon {
+  width: var(--spacing-050);
+  display: inline-block;
+}
+
+.Astro-react-table__col:nth-of-type(3),
+.Astro-react-table__col:nth-of-type(5) {
+  padding-right: 1.875rem;
+}
+
+.Astro-react-table__cell:nth-of-type(3),
+.Astro-react-table__cell:nth-of-type(5) {
+  padding-right: var(--spacing-8);
 }
 
 .Astro-react-table__row {
