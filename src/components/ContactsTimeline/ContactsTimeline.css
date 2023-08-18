@@ -19,21 +19,41 @@ rux-time-region::part(container) {
 
 .timeline-wrapper {
   position: relative;
-  overflow: auto;
+  overflow: hidden;
   height: calc(100vh - 19.5rem);
   border-top: 2px solid var(--color-background-base-default);
 }
 
 rux-timeline {
-  position: relative;
+  height: 100%;
   display: flex;
+  flex-flow: column;
+  align-content: stretch;
+  overflow: auto;
 }
 
-.timeline-wrapper::-webkit-scrollbar:horizontal {
-  position: sticky;
-  bottom: 0;
+rux-timeline::part(time-region-container) {
+  overflow: initial;
+  height: inherit;
+  display: grid;
+  grid-template-rows: auto max-content;
 }
 
-.timeline-wrapper rux-timeline rux-track::part(container) {
-  width: 100%;
+rux-track {
+  flex-grow: 1;
+  min-width: 100%;
+  border-bottom: 2px solid var(--color-background-base-default);
+  display: block;
+  background-color: var(--color-background-surface-default);
+}
+
+rux-track::part(container) {
+  border-bottom: 0;
+}
+rux-track:nth-last-child(2) {
+  border-bottom: 0;
+}
+
+rux-track[slot='ruler'] {
+  border-top: 2px solid var(--color-background-base-default);
 }
