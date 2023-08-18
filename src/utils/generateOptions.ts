@@ -65,6 +65,6 @@ export const generateOptions = (modifyOptions: GenerateOptions) => {
     state: modifyOptions
       ? unique([modifyOptions.state, ...options.state])
       : options.state,
-    details: [modifyOptions.details],
+    details: modifyOptions ? [modifyOptions.details] : [],
   };
 };

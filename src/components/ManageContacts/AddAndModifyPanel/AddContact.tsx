@@ -177,7 +177,7 @@ const AddContactForm = ({ options, values, setValues }: PropTypes) => {
 
         <RuxTextarea
           label='Notes'
-          name='contactDetail'
+          name='details'
           onRuxinput={handleTextArea}
           value={values.details}
         />
