@@ -58,10 +58,10 @@ const Main = () => {
         >
           <ContactsToolBar {...{ view, setView, setZoom, zoom }} />
           {state.searchedContacts.length <= 0 ? (
-            <p className='no-contacts-found'>
+            <h2 className='no-contacts-found'>
               No contacts available. Try changing the duration or filters if
               applied.
-            </p>
+            </h2>
           ) : view === 'List' ? (
             <ContactsList handleAction={handleAction} />
           ) : (
