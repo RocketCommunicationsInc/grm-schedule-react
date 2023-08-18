@@ -11,11 +11,13 @@ import SearchBar from './SearchBar/SearchBar';
 import './Main.css';
 
 import type { Actions } from 'Types';
+import { useAppContext } from 'providers/AppProvider';
 
 const Main = () => {
   const [zoom, setZoom] = useState('8');
   const [view, setView] = useState('List');
   const [action, setAction] = useState<Actions>('');
+  const { state } = useAppContext();
 
   const handleAction = (action?: Actions) => {
     if (action) {
@@ -55,8 +57,12 @@ const Main = () => {
           className={`App-main__left-panel ${action !== '' ? 'isOpen' : ''}`}
         >
           <ContactsToolBar {...{ view, setView, setZoom, zoom }} />
-
-          {view === 'List' ? (
+          {state.searchedContacts.length <= 0 ? (
+            <h2 className='no-contacts-found'>
+              No contacts available. Try changing the duration or filters if
+              applied.
+            </h2>
+          ) : view === 'List' ? (
             <ContactsList handleAction={handleAction} />
           ) : (
             <ContactsTimeline handleAction={handleAction} zoom={zoom} />
