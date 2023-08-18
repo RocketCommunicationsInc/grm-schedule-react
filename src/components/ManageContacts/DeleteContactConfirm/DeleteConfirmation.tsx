@@ -1,4 +1,4 @@
-import { RuxButton } from '@astrouxds/react';
+import { RuxButton, RuxTextarea } from '@astrouxds/react';
 import { setHhMmSs } from 'utils/date';
 import { useAppActions } from 'hooks/useAppActions';
 import './DeleteConfirmation.css';
@@ -24,6 +24,7 @@ const DeleteConfirmation = ({
     contactAOS,
     contactLOS,
     contactEndTimestamp,
+    contactDetail,
   } = contact;
 
   const handleDelete = () => {
@@ -51,6 +52,7 @@ const DeleteConfirmation = ({
         label='Post Pass Stop'
         value={setHhMmSs(contactEndTimestamp)}
       />
+      <RuxTextarea disabled label='Notes' value={contactDetail} />
       <div>
         <RuxButton secondary onClick={() => setPendingDelete(false)}>
           Cancel
