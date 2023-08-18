@@ -51,7 +51,6 @@ const ModifyContactForm = ({ options, values, setValues }: PropTypes) => {
       dirty: true,
     }));
   };
-  console.log(values, 'values');
 
   return (
     <form>
@@ -162,7 +161,7 @@ const ModifyContactForm = ({ options, values, setValues }: PropTypes) => {
           <RuxCheckbox checked />
         </span>
 
-        <RuxContainer>
+        <RuxContainer className='equipment-config-container'>
           <div slot='header'>Equipment String</div>
           <RuxSelect
             label='Configuration'
