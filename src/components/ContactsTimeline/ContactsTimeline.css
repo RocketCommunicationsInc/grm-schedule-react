@@ -35,6 +35,7 @@ rux-timeline {
 
 rux-timeline::part(time-region-container) {
   overflow: initial;
+  height: 100%;
   display: grid;
   grid-template-rows: auto max-content;
 }
@@ -51,7 +52,7 @@ rux-track::part(container) {
   border-bottom: 0;
 }
 rux-track:nth-last-child(2) {
-  border-bottom: 0;
+  margin-bottom: -2px; /* so the border between this one and the ruler don't sit on each other */
 }
 
 rux-track[slot='ruler'] {
