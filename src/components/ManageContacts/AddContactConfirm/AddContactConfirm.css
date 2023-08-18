@@ -33,3 +33,7 @@
 .add-contact-confirm-wrapper rux-button {
   width: 7.5rem;
 }
+
+.equipment-config-container {
+  margin-bottom: var(--spacing-3);
+}

@@ -4,6 +4,7 @@ import {
   RuxCheckbox,
   RuxContainer,
   RuxStatus,
+  RuxTextarea,
 } from '@astrouxds/react';
 import DeleteConfirmation from '../DeleteContactConfirm/DeleteConfirmation';
 import { useAppContext } from 'providers/AppProvider';
@@ -38,6 +39,7 @@ const ContactDetails = ({ handleAction }: PropTypes) => {
     contactState,
     contactBeginTimestamp,
     contactEndTimestamp,
+    contactDetail,
   } = state.selectedContact;
 
   const contactStateCapitalized =
@@ -90,6 +92,7 @@ const ContactDetails = ({ handleAction }: PropTypes) => {
               <label>{contactEquipment}</label>
               <EquipmentIcons equipmentString={contactEquipment} />
             </RuxContainer>
+            <RuxTextarea disabled label='Notes' value={contactDetail} />
           </form>
           <footer slot='footer'>
             <RuxButton secondary onClick={() => setPendingDelete(true)}>

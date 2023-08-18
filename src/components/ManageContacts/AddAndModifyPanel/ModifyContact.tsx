@@ -11,8 +11,13 @@ import {
   RuxTableHeaderCell,
   RuxTableHeaderRow,
   RuxTableRow,
+  RuxTextarea,
 } from '@astrouxds/react';
 import EquipmentIcons from 'common/EquipmentIcons/EquipmentIcons';
+import {
+  RuxTextareaCustomEvent,
+  RuxInputCustomEvent,
+} from '@astrouxds/astro-web-components/dist/types/components';
 import type { DefaultOptions } from 'Types';
 import { capitalize } from 'utils/labels';
 
@@ -33,6 +38,18 @@ const ModifyContactForm = ({ options, values, setValues }: PropTypes) => {
 
   const handleSelect = (key: string, value: string | string[] | undefined) => {
     setValues((prev: number[]) => ({ ...prev, [key]: value, dirty: true }));
+  };
+
+  const handleTextArea = (
+    e:
+      | RuxTextareaCustomEvent<HTMLRuxTextareaElement>
+      | RuxInputCustomEvent<HTMLRuxInputElement>
+  ) => {
+    setValues((prev: any) => ({
+      ...prev,
+      [e.target.name]: e.target.value,
+      dirty: true,
+    }));
   };
 
   return (
@@ -144,7 +161,7 @@ const ModifyContactForm = ({ options, values, setValues }: PropTypes) => {
           <RuxCheckbox checked />
         </span>
 
-        <RuxContainer>
+        <RuxContainer className='equipment-config-container'>
           <div slot='header'>Equipment String</div>
           <RuxSelect
             label='Configuration'
@@ -159,6 +176,12 @@ const ModifyContactForm = ({ options, values, setValues }: PropTypes) => {
 
           <EquipmentIcons equipmentString={values.equipment} />
         </RuxContainer>
+        <RuxTextarea
+          label='Notes'
+          name='details'
+          onRuxinput={handleTextArea}
+          value={values.details}
+        />
       </section>
     </form>
   );

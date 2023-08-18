@@ -10,6 +10,7 @@ export type GenerateOptions = {
   los: string | number | Date;
   mode: any;
   state: any;
+  details: string;
 };
 
 export type DefaultOptions = {
@@ -22,4 +23,5 @@ export type DefaultOptions = {
   modes: string[];
   configs: any[];
   state: string[];
+  details: string[];
 };

@@ -159,7 +159,7 @@ const AddContactForm = ({ options, values, setValues }: PropTypes) => {
           ))}
         </RuxSelect>
 
-        <RuxContainer>
+        <RuxContainer className='equipment-config-container'>
           <div slot='header'>Equipment String</div>
           <RuxSelect
             label='Configuration'
@@ -177,9 +177,9 @@ const AddContactForm = ({ options, values, setValues }: PropTypes) => {
 
         <RuxTextarea
           label='Notes'
-          name='contactDetail'
+          name='details'
           onRuxinput={handleTextArea}
-          value={values.contactDetail}
+          value={values.details}
         />
       </section>
     </form>

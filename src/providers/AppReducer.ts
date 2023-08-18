@@ -53,6 +53,7 @@ export const AppReducer = (state: any, { type, payload }: any) => {
           los: payload.contactLOS,
           rev: payload.contactREV,
           state: payload.contactState,
+          details: payload.contactDetail,
         },
       };
     }

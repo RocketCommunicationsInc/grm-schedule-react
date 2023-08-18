@@ -25,6 +25,7 @@ const setDefaultValues = (options: DefaultOptions) => ({
   mode: options.modes[0],
   dirty: false,
   state: options.state[0],
+  details: options.details[0],
 });
 
 const ManageContact = ({ action, handleAction }: PropTypes) => {
@@ -67,6 +68,7 @@ const ManageContact = ({ action, handleAction }: PropTypes) => {
       contactPriority: values.priority,
       contactSatellite: id.split(' ')[0],
       contactState: values.state,
+      contactDetail: values.details,
     };
 
     modifyContact(modifiedContact);
