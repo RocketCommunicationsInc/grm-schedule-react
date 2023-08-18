@@ -40,8 +40,6 @@ rux-timeline::part(time-region-container) {
 }
 
 rux-track {
-  flex-grow: 1;
-  min-width: 100%;
   border-bottom: 2px solid var(--color-background-base-default);
   display: block;
   background-color: var(--color-background-surface-default);
