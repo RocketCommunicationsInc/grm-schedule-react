@@ -54,4 +54,5 @@ rux-track:nth-last-child(2) {
 
 rux-track[slot='ruler'] {
   border-top: 2px solid var(--color-background-base-default);
+  box-shadow: rgba(0, 0, 0, 0.45) 0px -4px 4px 1px;
 }
