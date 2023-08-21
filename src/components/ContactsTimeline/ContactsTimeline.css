@@ -4,6 +4,13 @@
   gap: var(--spacing-2);
 }
 
+.Contacts-timeline__title {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
 .sub-track,
 .sub-track::part(container),
 .sub-track::part(track-header) {
