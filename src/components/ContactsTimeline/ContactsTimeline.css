@@ -4,6 +4,14 @@
   gap: var(--spacing-2);
 }
 
+.Contacts-timeline__title {
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.sub-track,
 .sub-track::part(container),
 .sub-track::part(track-header) {
   background-color: var(--color-background-surface-header);
@@ -17,23 +25,46 @@ rux-time-region::part(container) {
   cursor: pointer;
 }
 
+rux-time-region[selected] {
+  position: relative;
+  z-index: 2;
+}
+
 .timeline-wrapper {
   position: relative;
-  overflow: auto;
+  overflow: hidden;
   height: calc(100vh - 19.5rem);
   border-top: 2px solid var(--color-background-base-default);
 }
 
 rux-timeline {
-  position: relative;
+  height: 100%;
   display: flex;
+  flex-flow: column;
+  align-content: stretch;
+  overflow: auto;
 }
 
-.timeline-wrapper::-webkit-scrollbar:horizontal {
-  position: sticky;
-  bottom: 0;
+rux-timeline::part(time-region-container) {
+  overflow: initial;
+  display: grid;
+  grid-template-rows: auto max-content;
 }
 
-.timeline-wrapper rux-timeline rux-track::part(container) {
-  width: 100%;
+rux-track {
+  border-bottom: 2px solid var(--color-background-base-default);
+  display: block;
+  background-color: var(--color-background-surface-default);
+}
+
+rux-track::part(container) {
+  border-bottom: 0;
+}
+rux-track:nth-last-child(2) {
+  margin-bottom: -2px; /* so the border between this one and the ruler don't sit on each other */
+}
+
+rux-track[slot='ruler'] {
+  border-top: 2px solid var(--color-background-base-default);
+  box-shadow: rgba(0, 0, 0, 0.45) 0px -4px 4px 1px;
 }

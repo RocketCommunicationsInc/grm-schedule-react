@@ -16,21 +16,35 @@ import './ContactsTimeline.css';
 import type { Contact, Status, Actions } from 'Types';
 
 type PropTypes = {
-  handleAction: (action: Actions) => void;
+  handleAction: (action?: Actions) => void;
   zoom: any;
 };
 
 const setSubLabel = (event: any) => event.contactEquipment.split(' ')[1];
 
 const ContactsTimeline = ({ handleAction, zoom }: PropTypes) => {
-  const { setSelectedContact } = useAppActions();
+  const { setSelectedContact, resetSelectedContact } = useAppActions();
   const { state } = useAppContext();
   const [tracks, setTracks] = useTracks(state.searchedRegionContacts) as any;
   const selectedId = state.selectedContact?.contactId;
 
   const handleClick = (contact: any) => {
-    handleAction('details');
-    setSelectedContact(contact);
+    if (contact === state.selectedContact) {
+      handleAction();
+      resetSelectedContact();
+    } else {
+      handleAction('details');
+      setSelectedContact(contact);
+    }
+  };
+
+  const handleOffClick = (e: any) => {
+    const target = e.target as HTMLElement;
+    if (target.closest('rux-time-region')) return;
+    if (target.nodeName === 'RUX-TRACK' || target.closest('rux-ruler')) {
+      handleAction();
+      resetSelectedContact();
+    }
   };
 
   return (
@@ -42,6 +56,7 @@ const ContactsTimeline = ({ handleAction, zoom }: PropTypes) => {
         playhead={usePlayhead(state.start)}
         interval='hour'
         zoom={zoom}
+        onClick={(e) => handleOffClick(e)}
       >
         {state.searchedRegionContacts.map(([label, events]: any) => {
           const subRegions = setGroup(groupByToMap(events, setSubLabel));
