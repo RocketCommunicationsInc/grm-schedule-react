@@ -25,6 +25,11 @@ rux-time-region::part(container) {
   cursor: pointer;
 }
 
+rux-time-region[selected] {
+  position: relative;
+  z-index: 2;
+}
+
 .timeline-wrapper {
   position: relative;
   overflow: hidden;
