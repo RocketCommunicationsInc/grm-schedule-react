@@ -46,4 +46,5 @@ rux-checkbox-group:nth-of-type(2) rux-status {
 
 .filter-contact rux-input {
   margin-bottom: 1.5rem;
+  width: 13rem;
 }
