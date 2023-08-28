@@ -20,6 +20,7 @@ import {
 } from '@astrouxds/astro-web-components/dist/types/components';
 import type { DefaultOptions } from 'Types';
 import { capitalize } from 'utils/labels';
+import { addCommaToEquipString } from 'utils/utils';
 
 type PropTypes = {
   options: DefaultOptions;
@@ -172,7 +173,7 @@ const ModifyContactForm = ({ options, values, setValues }: PropTypes) => {
               <RuxOption key={label} label={label} value={value} />
             ))}
           </RuxSelect>
-          <p>{values.equipment}</p>
+          <p>{addCommaToEquipString(values.equipment)}</p>
 
           <EquipmentIcons equipmentString={values.equipment} />
         </RuxContainer>

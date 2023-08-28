@@ -19,3 +19,15 @@ export const setDurationMins = (start: number, end: number) => {
   const diffMins = Math.abs((start - end) / (1000 * 60));
   return `${diffMins}:00`;
 };
+
+export function formatReadableTime(timestamp: Date | number | string) {
+  // assumes timestamp is a UTC Epoch
+  const time = new Date(timestamp);
+
+  return new Date(time).toLocaleTimeString('en-US', {
+    hour: '2-digit',
+    minute: '2-digit',
+    second: '2-digit',
+    hour12: false,
+  });
+}
