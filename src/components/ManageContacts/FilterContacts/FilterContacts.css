@@ -2,6 +2,10 @@
   height: 100%;
 }
 
+.filter-contact::part(body) {
+  padding-left: var(--spacing-8);
+}
+
 .filter-contact::part(container) {
   height: 100%;
   display: flex;
