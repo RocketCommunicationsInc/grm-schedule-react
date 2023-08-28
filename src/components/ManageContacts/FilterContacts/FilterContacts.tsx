@@ -119,7 +119,7 @@ const FilterContacts = ({ handleAction }: PropTypes) => {
   return (
     <RuxContainer className='filter-contact'>
       <header slot='header'>
-        <RuxIcon icon='arrow-back' size='1.5rem' onClick={handleClose} />
+        <RuxIcon icon='chevron-left' size='1.5rem' onClick={handleClose} />
         Filter Contacts
         <RuxButton onClick={handleReset} borderless secondary icon='refresh'>
           Reset Filters
@@ -157,8 +157,7 @@ const FilterContacts = ({ handleAction }: PropTypes) => {
       <RuxInput
         id='ironSearch'
         type='search'
-        label='IRON'
-        placeholder='All IRONs'
+        placeholder='Search All IRONs'
         size='small'
         onRuxinput={(e: any) => setIronValue(e.target.value)}
         value={ironValue}
@@ -191,8 +190,7 @@ const FilterContacts = ({ handleAction }: PropTypes) => {
       <RuxInput
         id='equipmentSearch'
         type='search'
-        label='Equipment String'
-        placeholder='All Equipment'
+        placeholder='Search All Equipment String'
         size='small'
         onRuxinput={(e: any) => setEquipmentValue(e.target.value)}
         value={equipmentValue}

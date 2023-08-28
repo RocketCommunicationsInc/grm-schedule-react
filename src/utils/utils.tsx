@@ -13,3 +13,8 @@ export const addToast = (
     closeAfter: closeAfter,
   });
 };
+
+export const addCommaToEquipString = (equipment: string) => {
+  const equipmentStr = equipment.replace(/(\w+)/g, '$1,');
+  return equipmentStr.replace(/,$/, '');
+};

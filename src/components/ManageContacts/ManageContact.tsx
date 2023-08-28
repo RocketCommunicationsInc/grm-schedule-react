@@ -89,13 +89,13 @@ const ManageContact = ({ action, handleAction }: PropTypes) => {
       <header slot='header'>
         {isAdd ? (
           <RuxIcon
-            icon='arrow-back'
+            icon='chevron-left'
             size='1.5rem'
             onClick={() => handleClose(true)}
           />
         ) : (
           <RuxIcon
-            icon='arrow-back'
+            icon='chevron-left'
             size='1.5rem'
             onClick={() => handleAction('details')}
           />

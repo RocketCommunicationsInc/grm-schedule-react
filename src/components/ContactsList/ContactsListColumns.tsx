@@ -36,12 +36,12 @@ export const columnDefs = [
   columnHelper.accessor('contactPriority', {
     header: 'Priority',
     cell: (info) => info.getValue(),
-    style: { minWidth: 50 },
+    style: { minWidth: 70 },
   }),
   columnHelper.accessor('contactStatus', {
     header: 'Status',
     cell: (info) => <RuxStatus status={info.getValue()} />,
-    style: { minWidth: 50, justifyContent: 'center' },
+    style: { minWidth: 55, justifyContent: 'center' },
     sortingFn: sortStatus,
   }),
   columnHelper.accessor('contactName', {
@@ -50,7 +50,7 @@ export const columnDefs = [
   }),
   columnHelper.accessor('contactGround', {
     header: 'Ground Station',
-    style: { minWidth: 145 },
+    style: { minWidth: 125 },
   }),
   columnHelper.accessor('contactREV', {
     header: 'REV',
@@ -58,7 +58,7 @@ export const columnDefs = [
   }),
   columnHelper.accessor('contactEquipment', {
     header: 'Equipment String',
-    style: { minWidth: 424, flex: 4 },
+    style: { minWidth: 410, flex: 1 },
   }),
   columnHelper.accessor('contactState', {
     header: 'State',
