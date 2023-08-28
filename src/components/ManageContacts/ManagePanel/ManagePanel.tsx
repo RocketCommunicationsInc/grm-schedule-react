@@ -19,11 +19,11 @@ const ManagePanel = ({ handleAction }: PropTypes) => {
     <RuxContainer className='manage-panel'>
       <div onClick={() => handleAction('add')}>
         Add Contact
-        <RuxIcon icon='arrow-right' size='small' />
+        <RuxIcon icon='chevron-right' size='1.5rem' />
       </div>
       <div onClick={() => handleAction('filter')}>
         Filter Contacts
-        <RuxIcon icon='arrow-right' size='small' />
+        <RuxIcon icon='chevron-right' size='1.5rem' />
       </div>
       <footer slot='footer'>
         <RuxButton secondary onClick={handleClose}>

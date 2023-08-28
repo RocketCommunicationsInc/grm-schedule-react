@@ -119,7 +119,7 @@ const FilterContacts = ({ handleAction }: PropTypes) => {
   return (
     <RuxContainer className='filter-contact'>
       <header slot='header'>
-        <RuxIcon icon='arrow-back' size='1.5rem' onClick={handleClose} />
+        <RuxIcon icon='chevron-left' size='1.5rem' onClick={handleClose} />
         Filter Contacts
         <RuxButton onClick={handleReset} borderless secondary icon='refresh'>
           Reset Filters
