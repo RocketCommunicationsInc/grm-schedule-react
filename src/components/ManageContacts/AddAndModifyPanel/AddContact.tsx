@@ -1,6 +1,7 @@
 import {
   RuxContainer,
   RuxDatetime,
+  RuxInput,
   RuxOption,
   RuxSelect,
   RuxTable,
@@ -17,6 +18,8 @@ import {
   RuxInputCustomEvent,
 } from '@astrouxds/astro-web-components/dist/types/components';
 import type { DefaultOptions } from 'Types';
+import { addCommaToEquipString } from 'utils/utils';
+import { formatReadableTime } from 'utils/date';
 
 type PropTypes = {
   options: DefaultOptions;
@@ -123,27 +126,25 @@ const AddContactForm = ({ options, values, setValues }: PropTypes) => {
         <div className='start-stop-time'>
           <div>Pre Pass Start:</div>
           {values.pass !== -1 && options.passes ? (
-            <RuxDatetime
-              date={options?.passes[values.pass].aos}
-              hour='2-digit'
-              minute='2-digit'
-              second='2-digit'
+            <RuxInput
+              value={formatReadableTime(options?.passes[values.pass].aos)}
+              type='time'
+              disabled
             />
           ) : (
-            <span>---</span>
+            <RuxInput type='time' disabled />
           )}
         </div>
         <div className='start-stop-time'>
           <div>Post Pass Stop: </div>
           {values.pass !== -1 && options.passes ? (
-            <RuxDatetime
-              date={options?.passes[values.pass].los}
-              hour='2-digit'
-              minute='2-digit'
-              second='2-digit'
+            <RuxInput
+              value={formatReadableTime(options?.passes[values.pass].los)}
+              type='time'
+              disabled
             />
           ) : (
-            <span>---</span>
+            <RuxInput type='time' disabled />
           )}
         </div>
       </section>
@@ -170,7 +171,7 @@ const AddContactForm = ({ options, values, setValues }: PropTypes) => {
               <RuxOption key={label} label={label} value={value} />
             ))}
           </RuxSelect>
-          <p>{values.equipment}</p>
+          <p>{addCommaToEquipString(values.equipment)}</p>
 
           <EquipmentIcons equipmentString={values.equipment} />
         </RuxContainer>

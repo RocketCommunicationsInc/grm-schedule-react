@@ -15,6 +15,7 @@ import SmallReadOnlyInput from 'common/SmallReadOnlyInput/SmallReadOnlyInput';
 import { Actions } from 'Types';
 import EquipmentIcons from 'common/EquipmentIcons/EquipmentIcons';
 import './ContactDetails.css';
+import { addCommaToEquipString } from 'utils/utils';
 
 type PropTypes = {
   handleAction: (action?: Actions) => void;
@@ -89,7 +90,7 @@ const ContactDetails = ({ handleAction }: PropTypes) => {
             <RuxContainer>
               <div slot='header'>Equipment String</div>
               <SmallReadOnlyInput label='Configuration' value={config} />
-              <label>{contactEquipment}</label>
+              <label>{addCommaToEquipString(contactEquipment)}</label>
               <EquipmentIcons equipmentString={contactEquipment} />
             </RuxContainer>
             <RuxTextarea disabled label='Notes' value={contactDetail} />
