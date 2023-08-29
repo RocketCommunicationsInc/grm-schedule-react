@@ -1,4 +1,5 @@
-import { RuxMonitoringIcon } from '@astrouxds/react';
+import { Fragment } from 'react';
+import { RuxMonitoringIcon, RuxIcon } from '@astrouxds/react';
 
 import './EquipmentIcons.css';
 
@@ -9,14 +10,18 @@ type PropTypes = {
 const EquipmentIcons = ({ equipmentString }: PropTypes) => {
   return (
     <div className='equipment-icons'>
-      {equipmentString.split(' ').map((equipmentSubString: string) => (
-        <RuxMonitoringIcon
-          key={equipmentSubString}
-          status='normal'
-          icon='center-focus-weak'
-          label={equipmentSubString}
-        />
-      ))}
+      {equipmentString
+        .split(' ')
+        .map((equipmentSubString: string, index: number) => (
+          <Fragment key={equipmentSubString}>
+            {index !== 0 && <RuxIcon icon='arrow-right-alt' />}
+            <RuxMonitoringIcon
+              status='normal'
+              icon='center-focus-weak'
+              label={equipmentSubString}
+            />
+          </Fragment>
+        ))}
     </div>
   );
 };
