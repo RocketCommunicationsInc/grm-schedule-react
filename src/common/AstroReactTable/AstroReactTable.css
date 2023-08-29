@@ -18,8 +18,25 @@
   vertical-align: middle;
 }
 
+.Astro-react-table__header .Astro-react-table__col {
+  padding-block: 0;
+}
+
+.Astro-react-table__header .Astro-react-table__col {
+  padding-block: 0;
+}
+.Astro-react-table__header .Astro-react-table__col > span {
+  display: flex;
+  align-items: center;
+  min-height: var(--spacing-8); /* 32px*/
+}
+
+.Astro-react-table__sortable:not(:hover) rux-icon {
+  visibility: hidden;
+}
+
 .Astro-react-table__sorted {
-  color: var(--color-text-interactive-default);
+  color: var(--color-text-primary);
   cursor: pointer;
 }
 
@@ -33,7 +50,6 @@
 
 .sort-icon {
   width: var(--spacing-050);
-  display: inline-block;
 }
 
 .Astro-react-table__col:nth-of-type(3),

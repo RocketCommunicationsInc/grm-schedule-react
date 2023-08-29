@@ -34,6 +34,7 @@ const ContactsList = ({ handleAction }: PropTypes) => {
     columns,
     getCoreRowModel: getCoreRowModel(),
     getSortedRowModel: getSortedRowModel(),
+    enableSortingRemoval: false,
   });
 
   return (
