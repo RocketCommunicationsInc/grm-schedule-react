@@ -82,7 +82,7 @@ const GlobalStatusBar = () => {
             <RuxMenuItem href='https://grm-dashboard-react.netlify.app'>
               GRM Dashboard
             </RuxMenuItem>
-            <RuxMenuItem href='https://grm-equipment-react.netlify.app'>
+            <RuxMenuItem href='https://grm-equipment-react-ts.netlify.app'>
               GRM Equipment Manager
             </RuxMenuItem>
             <RuxMenuItem>GRM Schedule</RuxMenuItem>
