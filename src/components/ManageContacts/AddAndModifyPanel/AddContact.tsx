@@ -12,14 +12,14 @@ import {
   RuxTableRow,
   RuxTextarea,
 } from '@astrouxds/react';
-import EquipmentIcons from 'common/EquipmentIcons/EquipmentIcons';
+import EquipmentIcons from '../../../common/EquipmentIcons/EquipmentIcons';
 import {
   RuxTextareaCustomEvent,
   RuxInputCustomEvent,
 } from '@astrouxds/astro-web-components/dist/types/components';
-import type { DefaultOptions } from 'Types';
-import { addCommaToEquipString } from 'utils/utils';
-import { formatReadableTime } from 'utils/date';
+import type { DefaultOptions } from '../../../Types';
+import { addCommaToEquipString } from '../../../utils/utils';
+import { formatReadableTime } from '../../../utils/date';
 
 type PropTypes = {
   options: DefaultOptions;
@@ -64,7 +64,6 @@ const AddContactForm = ({ options, values, setValues }: PropTypes) => {
             <RuxOption key={iron} label={iron} value={iron} />
           ))}
         </RuxSelect>
-
         <RuxSelect
           label='Ground Station'
           size='small'
@@ -74,7 +73,6 @@ const AddContactForm = ({ options, values, setValues }: PropTypes) => {
             <RuxOption key={ground} label={ground} value={ground} />
           ))}
         </RuxSelect>
-
         <RuxSelect
           label='Priority'
           size='small'
@@ -84,69 +82,72 @@ const AddContactForm = ({ options, values, setValues }: PropTypes) => {
             <RuxOption key={priority} label={priority} value={priority} />
           ))}
         </RuxSelect>
+        {options.passes ? (
+          <>
+            <label>Passes ({options.passes.length})</label>
+            <div className='pass-plan-wrapper'>
+              <RuxTable>
+                <RuxTableHeaderRow>
+                  <RuxTableHeaderCell>Contact</RuxTableHeaderCell>
+                  <RuxTableHeaderCell>AOS</RuxTableHeaderCell>
+                  <RuxTableHeaderCell>LOS</RuxTableHeaderCell>
+                </RuxTableHeaderRow>
+                <RuxTableBody>
+                  {options.passes.map(({ id, aos, los }, i) => (
+                    <RuxTableRow
+                      key={id + i}
+                      className={values.pass === i ? 'selected' : undefined}
+                      onClick={() => handleSelectPass(i)}
+                    >
+                      <RuxTableCell>{id}</RuxTableCell>
+                      <RuxTableCell>
+                        <RuxDatetime
+                          date={aos}
+                          hour='2-digit'
+                          minute='2-digit'
+                          second='2-digit'
+                        />
+                      </RuxTableCell>
+                      <RuxTableCell>
+                        <RuxDatetime
+                          date={los}
+                          hour='2-digit'
+                          minute='2-digit'
+                          second='2-digit'
+                        />
+                      </RuxTableCell>
+                    </RuxTableRow>
+                  ))}
+                </RuxTableBody>
+              </RuxTable>
+            </div>
 
-        <label>Passes ({options.passes.length})</label>
-        <div className='pass-plan-wrapper'>
-          <RuxTable>
-            <RuxTableHeaderRow>
-              <RuxTableHeaderCell>Contact</RuxTableHeaderCell>
-              <RuxTableHeaderCell>AOS</RuxTableHeaderCell>
-              <RuxTableHeaderCell>LOS</RuxTableHeaderCell>
-            </RuxTableHeaderRow>
-            <RuxTableBody>
-              {options.passes.map(({ id, aos, los }, i) => (
-                <RuxTableRow
-                  key={id + i}
-                  className={values.pass === i ? 'selected' : undefined}
-                  onClick={() => handleSelectPass(i)}
-                >
-                  <RuxTableCell>{id}</RuxTableCell>
-                  <RuxTableCell>
-                    <RuxDatetime
-                      date={aos}
-                      hour='2-digit'
-                      minute='2-digit'
-                      second='2-digit'
-                    />
-                  </RuxTableCell>
-                  <RuxTableCell>
-                    <RuxDatetime
-                      date={los}
-                      hour='2-digit'
-                      minute='2-digit'
-                      second='2-digit'
-                    />
-                  </RuxTableCell>
-                </RuxTableRow>
-              ))}
-            </RuxTableBody>
-          </RuxTable>
-        </div>
-
-        <div className='start-stop-time'>
-          <div>Pre Pass Start:</div>
-          {values.pass !== -1 && options.passes ? (
-            <RuxInput
-              value={formatReadableTime(options?.passes[values.pass].aos)}
-              type='time'
-              disabled
-            />
-          ) : (
-            <RuxInput type='time' disabled />
-          )}
-        </div>
-        <div className='start-stop-time'>
-          <div>Post Pass Stop: </div>
-          {values.pass !== -1 && options.passes ? (
-            <RuxInput
-              value={formatReadableTime(options?.passes[values.pass].los)}
-              type='time'
-              disabled
-            />
-          ) : (
-            <RuxInput type='time' disabled />
-          )}
-        </div>
+            <div className='start-stop-time'>
+              <div>Pre Pass Start:</div>
+              {values.pass !== -1 && options.passes ? (
+                <RuxInput
+                  value={formatReadableTime(options?.passes[values.pass].aos)}
+                  type='time'
+                  disabled
+                />
+              ) : (
+                <RuxInput type='time' disabled />
+              )}
+            </div>
+            <div className='start-stop-time'>
+              <div>Post Pass Stop: </div>
+              {values.pass !== -1 && options.passes ? (
+                <RuxInput
+                  value={formatReadableTime(options?.passes[values.pass].los)}
+                  type='time'
+                  disabled
+                />
+              ) : (
+                <RuxInput type='time' disabled />
+              )}
+            </div>
+          </>
+        ) : null}
       </section>
 
       <section>
@@ -160,21 +161,23 @@ const AddContactForm = ({ options, values, setValues }: PropTypes) => {
           ))}
         </RuxSelect>
 
-        <RuxContainer className='equipment-config-container'>
-          <div slot='header'>Equipment String</div>
-          <RuxSelect
-            label='Configuration'
-            size='small'
-            onRuxchange={(e) => handleSelect('equipment', e.target.value)}
-          >
-            {options.configs.map(({ label, value }) => (
-              <RuxOption key={label} label={label} value={value} />
-            ))}
-          </RuxSelect>
-          <p>{addCommaToEquipString(values.equipment)}</p>
+        {values.equipment?.length > 1 ? (
+          <RuxContainer className='equipment-config-container'>
+            <div slot='header'>Equipment String</div>
+            <RuxSelect
+              label='Configuration'
+              size='small'
+              onRuxchange={(e) => handleSelect('equipment', e.target.value)}
+            >
+              {options.configs.map(({ label, value }) => (
+                <RuxOption key={label} label={label} value={value} />
+              ))}
+            </RuxSelect>
+            <p>{addCommaToEquipString(values.equipment)}</p>
 
-          <EquipmentIcons equipmentString={values.equipment} />
-        </RuxContainer>
+            <EquipmentIcons equipmentString={values.equipment} />
+          </RuxContainer>
+        ) : null}
 
         <RuxTextarea
           label='Notes'
