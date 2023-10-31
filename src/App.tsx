@@ -1,7 +1,7 @@
 import { RuxNotification } from '@astrouxds/react';
-
-import { useAppActions } from 'hooks/useAppActions';
-import { useAppContext } from 'providers/AppProvider';
+import React from 'react';
+import { useAppActions } from './hooks/useAppActions';
+import { useAppContext } from './providers/AppProvider';
 import GlobalStatusBar from './components/GlobalStatusBar/GlobalStatusBar';
 import Main from './components/Main';
 import './App.css';
